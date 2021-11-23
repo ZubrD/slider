@@ -1,3 +1,7 @@
+import { Ranger } from './view.js'
+import { Interval } from './view.js'
+import { Button } from './view.js'
+import { Input } from './view.js'
 
 window.onload = sliderInit ()
 
@@ -5,41 +9,37 @@ function sliderInit () {
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
     let counter = 1;
+    let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
     for ( let elem of elements ) {
-      let sub_div = document.createElement('div');
-      sub_div.classList.add('ranger');
-      sub_div.setAttribute ('id', 'r_' + counter);
-      elem.append(sub_div);
+        let ranger = new Ranger();
+        ranger.appendTo(elem)
+        ranger.setAttribute ('id', 'r_' + counter);
 
-      let interval = document.createElement('div');
-      interval.setAttribute('id', 'int_' + counter);
-      interval.classList.add('ranger__interval');
-      sub_div.append(interval);
+        let interval = new Interval();
+        let ranger_div = document.querySelectorAll('.ranger')[i]
+        interval.setAttribute('id', 'int_' + counter);
+        interval.appendTo(ranger_div)
 
-      let button_1 = document.createElement('button');
-      let button_2 = document.createElement('button');
+        let button_1 = new Button();
+        let button_2 = new Button();
 
-      button_1.classList.add('ranger__button');
-      button_2.classList.add('ranger__button');
+        button_1.setAttribute('id', 'b1_' + counter);
+        button_2.setAttribute('id', 'b2_' + counter);
 
-      button_1.setAttribute('id', 'b1_' + counter);
-      button_2.setAttribute('id', 'b2_' + counter);
+        button_1.appendTo(ranger_div);
+        button_2.appendTo(ranger_div);
 
-      sub_div.append(button_1);
-      sub_div.append(button_2);
+        let input_1 = new Input();
+        let input_2 = new Input();
 
-      let input_1 = document.createElement('input');
-      let input_2 = document.createElement('input');
+        input_1.setAttribute('id', 'i1_' + counter);
+        input_2.setAttribute('id', 'i2_' + counter);
 
-      input_1.classList.add('ranger__input');
-      input_2.classList.add('ranger__input');
+        input_1.appendTo(ranger_div);
+        input_2.appendTo(ranger_div);
 
-      input_1.setAttribute('id', 'i1_' + counter);
-      input_2.setAttribute('id', 'i2_' + counter);
-
-      sub_div.append(input_1);
-      sub_div.append(input_2);
-      counter ++;
+        counter ++;
+        i ++;
     }   
   } else {
       alert ('Нужно добавить div с классом zdslider');

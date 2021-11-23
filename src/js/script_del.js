@@ -1,4 +1,3 @@
-import { Ranger } from './view.js'
 
 window.onload = sliderInit ()
 
@@ -7,14 +6,15 @@ function sliderInit () {
   if ( elements.length != 0 ) {
     let counter = 1;
     for ( let elem of elements ) {
-      let ranger = new Ranger();
-      ranger.appendTo(elem)
-      ranger.setAttribute ('id', 'r_' + counter);
+      let sub_div = document.createElement('div');
+      sub_div.classList.add('ranger');
+      sub_div.setAttribute ('id', 'r_' + counter);
+      elem.append(sub_div);
 
       let interval = document.createElement('div');
       interval.setAttribute('id', 'int_' + counter);
       interval.classList.add('ranger__interval');
-      ranger.append(interval);
+      sub_div.append(interval);
 
       let button_1 = document.createElement('button');
       let button_2 = document.createElement('button');
@@ -25,8 +25,8 @@ function sliderInit () {
       button_1.setAttribute('id', 'b1_' + counter);
       button_2.setAttribute('id', 'b2_' + counter);
 
-      ranger.append(button_1);
-      ranger.append(button_2);
+      sub_div.append(button_1);
+      sub_div.append(button_2);
 
       let input_1 = document.createElement('input');
       let input_2 = document.createElement('input');
@@ -37,8 +37,8 @@ function sliderInit () {
       input_1.setAttribute('id', 'i1_' + counter);
       input_2.setAttribute('id', 'i2_' + counter);
 
-      ranger.append(input_1);
-      ranger.append(input_2);
+      sub_div.append(input_1);
+      sub_div.append(input_2);
       counter ++;
     }   
   } else {
