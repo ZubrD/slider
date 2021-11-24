@@ -1,0 +1,46 @@
+body {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.zdslider {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.ranger {
+    width:500px;
+    height:10px;
+    border-radius: 4px;
+    background-color: #ddd;
+
+    &__button {
+        position: absolute;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        cursor: move;
+        transform: translateY(-50%);
+        border: none;
+        border-radius: 50%;
+        background-color: #999;
+    }
+
+    &__interval {
+        position: absolute;
+        height: 5px;
+        width:0px;
+        margin-top:3px;
+        border: none;
+        background-color: #559933;        
+    }
+
+    &__input {
+        margin-top:20px;
+        width: 50px;        
+    }
+}

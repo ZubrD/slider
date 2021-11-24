@@ -1,11 +1,10 @@
-import { Ranger } from './view.js'
-import { Interval } from './view.js'
-import { Button } from './view.js'
-import { Input } from './view.js'
+import { Ranger, Interval, Button, Input } from './view.js'
+import {func_alert} from './func_prim_1.js'
 
 window.onload = sliderInit ()
 
 function sliderInit () {
+  // func_alert()
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
     let counter = 1;
