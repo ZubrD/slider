@@ -76,5 +76,5 @@ export class Input {
 }
 
 export class Config {
-    runner_number = 2
+    runner_number = 1
 }
