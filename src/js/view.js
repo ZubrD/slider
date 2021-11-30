@@ -62,13 +62,16 @@ export class Button {
     }
 }
 
-export class Input {
+export class Scale {
     constructor ( options ) {
-        this.$el = document.createElement ( 'input' )
-        this.$el.classList.add ( 'ranger__input' )
+        this.$el = document.createElement ( 'div' )
+        this.$el.classList.add ( 'ranger__scale' )
     }
     appendTo( parent ) {
         parent.appendChild( this.$el )
+    }
+    appendChild( child ) {
+        this.$el.appendChild ( child )
     }
     setAttribute( attr, number ) {
         this.$el.setAttribute ( attr, number )
@@ -76,5 +79,8 @@ export class Input {
 }
 
 export class Config {
-    runner_number = 1
+    runner_number = 2
+    step = 10
+    min = 0
+    max = 500
 }

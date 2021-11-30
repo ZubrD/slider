@@ -1,25 +1,26 @@
-body {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  min-height: 100vh;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+.zdslider {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
-.zdslider {
+.zdslider-config {
+  width: 400px;
+  height: 100px;
+  border: 1px solid red;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-left: 30px;
+}
+
+.zdslider-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .ranger {
@@ -27,6 +28,7 @@ body {
   height: 10px;
   border-radius: 4px;
   background-color: #ddd;
+  position: relative;
 }
 
 .ranger__button {
@@ -51,8 +53,14 @@ body {
   background-color: #559933;
 }
 
-.ranger__input {
-  margin-top: 20px;
-  width: 50px;
+.ranger__scale {
+  border: 1px solid green;
+  margin-top: 10px;
+  height: 30px;
+  width: 500px;
+}
+
+.ranger__scale-span {
+  margin-right: 20px;
 }
 /*# sourceMappingURL=style.css.map */

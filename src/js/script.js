@@ -1,4 +1,4 @@
-import { Ranger, Interval, Button, Input, Config } from './view.js'
+import { Ranger, Interval, Button, Config, Scale } from './view.js'
 
 window.onload = sliderInit ()
 
@@ -23,6 +23,8 @@ function setStructure (runners) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
+  let config = new Config ()
+  console.log(config.step)
   for ( let elem of elements ) {
       let ranger = new Ranger();
       ranger.appendTo(elem)
@@ -56,14 +58,14 @@ function setStructure (runners) {    /* Структура слайдера */
         button_1.appendTo(ranger_div);
       }
 
-      let input_1 = new Input();
-      let input_2 = new Input();
-
-      input_1.setAttribute('id', 'i1_' + counter);
-      input_2.setAttribute('id', 'i2_' + counter);
-
-      input_1.appendTo(ranger_div);
-      input_2.appendTo(ranger_div);
+      let scale = new Scale ();
+      // for (j = 0; j < 10; j ++) {
+      //   let span = document.createElement ('span')
+      //   span.classList.add ('ranger__scale-span')
+      //   span.innerHTML = j
+      //   scale.appendChild (span)        
+      // }
+      scale.appendTo (elem);
 
       counter ++;
       i ++;
@@ -101,8 +103,9 @@ export function getCoords(elem) {   /* Получение координат э�
 export function mouseDownBtn_1 (event) {
   let config = new Config ()
   let runner_number = config.runner_number
+  let step = config.step
   if ( runner_number == 1 ) {
-    mouseDownBtn_1_Single (event)
+    mouseDownBtn_1_Single (event, step)
   } else if ( runner_number == 2 ) {
     mouseDownBtn_1_Double (event)
   }
@@ -200,7 +203,6 @@ function mouseDownBtn_1_Double (event) {
   let shiftX2 = event.pageX - btn2_coords.left;
 
   document.onmousemove = function (event) {
-      // let left1 = event.pageX - shiftX1 - sler_coords.left;
       let left1 = event.pageX - shiftX1 - sler_coords.left;
       let right1 = sler.offsetWidth - btn1.offsetWidth;
       if (left1 < 0) left1 = 0;                                 
