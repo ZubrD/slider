@@ -1,11 +1,11 @@
 import { Ranger, Interval, Button, Config, Scale } from './view.js'
-
+let config = new Config()
 window.onload = sliderInit ()
 
 function sliderInit () {
 
-  let config = new Config ()
   let runner_number = config.runner_number
+
 
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
@@ -16,6 +16,12 @@ function sliderInit () {
 
   }
 
+  let number_of_inputs = document.querySelectorAll('.zdslider-wrapper')
+  for (let elem of number_of_inputs) {
+
+    elem.addEventListener('click', inputListener)
+  }
+
 }
 
   
@@ -23,36 +29,28 @@ function setStructure (runners) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
-  let config = new Config ()
-  console.log(config.step)
+  
   for ( let elem of elements ) {
       let ranger = new Ranger();
       ranger.appendTo(elem)
-      ranger.setAttribute ('id', 'r_' + counter);
       ranger.setAttribute ('data-inst', counter);
-      ranger.setAttribute ('data-type', 'ranger');
 
       let interval = new Interval();
       let ranger_div = document.querySelectorAll('.ranger')[i]
-      interval.setAttribute('id', 'int_' + counter);
       interval.setAttribute('data-inst', counter);
-      interval.setAttribute('data-type', 'interval');
       interval.appendTo(ranger_div)
 
       if ( runners == 2 ) {
         let button_1 = new Button();
         let button_2 = new Button();
-        button_1.setAttribute('id', 'b1_' + counter);
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
-        button_2.setAttribute('id', 'b2_' + counter);
         button_2.setAttribute('data-type', 'btn-second');
         button_2.setAttribute('data-inst', counter);
         button_1.appendTo(ranger_div);
         button_2.appendTo(ranger_div);
       } else {
         let button_1 = new Button();
-        button_1.setAttribute('id', 'b1_' + counter);
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
         button_1.appendTo(ranger_div);
@@ -66,7 +64,6 @@ function setStructure (runners) {    /* Структура слайдера */
       //   scale.appendChild (span)        
       // }
       scale.appendTo (elem);
-
       counter ++;
       i ++;
   }
@@ -101,12 +98,14 @@ export function getCoords(elem) {   /* Получение координат э�
 }  
 
 export function mouseDownBtn_1 (event) {
-  let config = new Config ()
   let runner_number = config.runner_number
   let step = config.step
   if ( runner_number == 1 ) {
+    console.log('один')
     mouseDownBtn_1_Single (event, step)
+    
   } else if ( runner_number == 2 ) {
+    console.log('два')
     mouseDownBtn_1_Double (event)
   }
 }
@@ -137,25 +136,19 @@ export function mouseDownBtn_2 (event) {
       if (left1 < 0) left1 = 0;
       if (left1 > right1) left1 = right1;            
        
-      let per_min = 0;
-      let per_max = 0;
-
       if (left1 > left2)
       {
         interval.style.width = (left1-left2) + 'px';
         interval.style.marginLeft = left2 + 'px';       
-        per_min = left2*100/(sler.offsetWidth-btn1.offsetWidth);
-        per_max = left1*100/(sler.offsetWidth-btn1.offsetWidth);
+
       }
       else
       {
         interval.style.width = (left2-left1) + 'px';
         interval.style.marginLeft = left1 + 'px';                
-        per_min = left1*100/(sler.offsetWidth-btn1.offsetWidth);
-        per_max = left2*100/(sler.offsetWidth-btn1.offsetWidth);
+
       }
-      //   inpt1.value= (parseInt(min)+Math.round((max-min)*per_min/100));
-      //   inpt2.value= (parseInt(min)+Math.round((max-min)*per_max/100)); 
+
   }
 
   document.onmouseup = function() {
@@ -180,7 +173,7 @@ function mouseDownBtn_1_Single (event) {
       if (left1 > right1) left1 = right1;         
       btn1.style.marginLeft = left1 + 'px'
       interval.style.width = left1 + 'px'
-      console.log('let left1 (', left1,') = ', event.pageX, ' - ', shiftX1, ' - ', sler_coords.left)           
+      // console.log('let left1 (', left1,') = ', event.pageX, ' - ', shiftX1, ' - ', sler_coords.left)           
   }
 
   document.onmouseup = function() {
@@ -208,7 +201,7 @@ function mouseDownBtn_1_Double (event) {
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1;         
       btn1.style.marginLeft = left1 + 'px'
-      console.log('let left1 (', left1,') = ', event.pageX, ' - ', shiftX1, ' - ', sler_coords.left)           
+      // console.log('let left1 (', left1,') = ', event.pageX, ' - ', shiftX1, ' - ', sler_coords.left)           
 
       shiftX2 = event.pageX - btn2_coords.left; 
       let left2 = event.pageX - shiftX2 - sler_coords.left;
@@ -216,27 +209,18 @@ function mouseDownBtn_1_Double (event) {
       if (left2 < 0) left2 = 0;
       if (left2 > right2) left2 = right2; 
        
-      let per_min = 0;
-      let per_max = 0;
-
       if (left1 > left2)
       {
         interval.style.width = (left1-left2) + 'px';
         interval.style.marginLeft = left2 + 'px';
-         
-        per_min = left2*100/(sler.offsetWidth-btn1.offsetWidth);
-        per_max = left1*100/(sler.offsetWidth-btn1.offsetWidth);
+
       }
       else
       {
         interval.style.width = (left2-left1) + 'px';
         interval.style.marginLeft = left1 + 'px';                
-        
-        per_min = left1*100/(sler.offsetWidth-btn1.offsetWidth);
-        per_max = left2*100/(sler.offsetWidth-btn1.offsetWidth);
+
       }
-      //   inpt1.value= (parseInt(min)+Math.round((max-min)*per_min/100));
-      //   inpt2.value= (parseInt(min)+Math.round((max-min)*per_max/100)); 
   }
 
   document.onmouseup = function() {
@@ -244,21 +228,38 @@ function mouseDownBtn_1_Double (event) {
   };  
 }
 
-// function sliderPositioning (runners) {   /* Первоначальное размещение слайдера */
-//   let elements = document.querySelectorAll('.zdslider');
-//   let i = 0
-//   for (let elem of elements) {
-//     let ranger = document.querySelectorAll('.ranger')[i]
-//     let interval = document.querySelectorAll('.ranger__interval')[i]
-//     let button_1 = document.querySelectorAll('[data-type="btn-first"]')[i] 
-//     button_1.style.marginLeft = '0px';
-//     interval.style.width = (ranger.offsetWidth-button_1.offsetWidth) + 'px';  
-//     let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
-//     button_2.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 'px';         
- 
+function inputListener (event) {
+  let {run} = event.target.dataset 
+  let {inst} = event.target.dataset
+  if ( run && event.target.checked) {
+    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
+    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
+    config.runner_number = 1
 
-//     i ++
-//   }  
-// }
+    let zdslider = document.querySelectorAll('.zdslider')[inst-1]
+    let ranger = new Ranger();
+    ranger.appendTo(zdslider)
+    ranger.setAttribute ('data-inst', inst);
+    let ranger_div = document.querySelectorAll('.ranger')[inst-1]
+
+    let interval = new Interval();
+    interval.setAttribute('data-inst', inst);
+    interval.appendTo(ranger_div)
+
+    let button_1 = new Button();
+    button_1.setAttribute('data-type', 'btn-first');
+    button_1.setAttribute('data-inst', inst);
+    button_1.appendTo(ranger_div);
+
+    let scale = new Scale()
+    scale.appendTo (zdslider)    
+
+    let interval_div = document.querySelectorAll('.ranger__interval')[inst-1]
+    let button_1_div = document.querySelectorAll('[data-type="btn-first"]')[inst-1] 
+    interval_div.style.width = (ranger_div.offsetWidth) + 'px';
+    button_1_div.style.marginLeft = (ranger_div.offsetWidth-button_1_div.offsetWidth) +  'px';
+    console.log(ranger_div)
+  }
+}
 
 

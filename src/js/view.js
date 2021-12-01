@@ -4,6 +4,7 @@ export class Ranger {
     constructor ( options ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger' )
+        this.$el.setAttribute('data-type', 'ranger')
 
     }
     appendTo ( parent ) {
@@ -21,6 +22,7 @@ export class Interval {
     constructor ( options ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger__interval' )
+        this.$el.setAttribute('data-type', 'interval')
     }
     appendTo ( parent ) {
         parent.appendChild ( this.$el )
@@ -83,4 +85,20 @@ export class Config {
     step = 10
     min = 0
     max = 500
+}
+
+export class Panel {
+    constructor () {
+        this.$runners_check = document.querySelector('.zdslider-config')
+
+        this.#setup()
+    }
+    #setup() {
+        this.clickHandler = this.clickHandler.bind( this )        /* Только для местных функций */
+        this.$runners_check.addEventListener( 'click', this.clickHandler )
+    }
+    clickHandler(event) {
+        let { run } = event.target.dataset 
+        console.log(run)
+    }
 }
