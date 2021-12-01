@@ -1,9 +1,9 @@
 import { Ranger, Interval, Button, Config, Scale } from './view.js'
-let config = new Config()
+
 window.onload = sliderInit ()
 
 function sliderInit () {
-
+  let config = new Config()
   let runner_number = config.runner_number
 
 
@@ -34,6 +34,7 @@ function setStructure (runners) {    /* Структура слайдера */
       let ranger = new Ranger();
       ranger.appendTo(elem)
       ranger.setAttribute ('data-inst', counter);
+      ranger.setAttribute ('data-runners', runners);
 
       let interval = new Interval();
       let ranger_div = document.querySelectorAll('.ranger')[i]
@@ -98,14 +99,10 @@ export function getCoords(elem) {   /* Получение координат э�
 }  
 
 export function mouseDownBtn_1 (event) {
-  let runner_number = config.runner_number
-  let step = config.step
+  let runner_number = event.target.parentNode.dataset.runners
   if ( runner_number == 1 ) {
-    console.log('один')
-    mouseDownBtn_1_Single (event, step)
-    
+    mouseDownBtn_1_Single (event)
   } else if ( runner_number == 2 ) {
-    console.log('два')
     mouseDownBtn_1_Double (event)
   }
 }
@@ -113,9 +110,9 @@ export function mouseDownBtn_1 (event) {
 export function mouseDownBtn_2 (event) {
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
-  let interval = document.querySelectorAll('.ranger__interval')[sler_number-1]     
-  let btn1 = document.querySelectorAll('[data-type="btn-first"]')[sler_number-1]
-  let btn2 = document.querySelectorAll('[data-type="btn-second"]')[sler_number-1]
+  let interval = sler.querySelector('.ranger__interval')     
+  let btn1 = sler.querySelector('[data-type="btn-first"]')
+  let btn2 = sler.querySelector('[data-type="btn-second"]')
 
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
@@ -140,15 +137,12 @@ export function mouseDownBtn_2 (event) {
       {
         interval.style.width = (left1-left2) + 'px';
         interval.style.marginLeft = left2 + 'px';       
-
       }
       else
       {
         interval.style.width = (left2-left1) + 'px';
         interval.style.marginLeft = left1 + 'px';                
-
       }
-
   }
 
   document.onmouseup = function() {
@@ -159,8 +153,8 @@ export function mouseDownBtn_2 (event) {
 function mouseDownBtn_1_Single (event) {
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
-  let interval = document.querySelectorAll('.ranger__interval')[sler_number-1]     
-  let btn1 = document.querySelectorAll('[data-type="btn-first"]')[sler_number-1]
+  let interval = sler.querySelector('.ranger__interval')     
+  let btn1 = sler.querySelector('[data-type="btn-first"]')
 
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
@@ -184,9 +178,9 @@ function mouseDownBtn_1_Single (event) {
 function mouseDownBtn_1_Double (event) {
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
-  let interval = document.querySelectorAll('.ranger__interval')[sler_number-1]     
-  let btn1 = document.querySelectorAll('[data-type="btn-first"]')[sler_number-1]
-  let btn2 = document.querySelectorAll('[data-type="btn-second"]')[sler_number-1]
+  let interval = sler.querySelector('.ranger__interval')     
+  let btn1 = sler.querySelector('[data-type="btn-first"]')
+  let btn2 = sler.querySelector('[data-type="btn-second"]')
 
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
@@ -213,13 +207,11 @@ function mouseDownBtn_1_Double (event) {
       {
         interval.style.width = (left1-left2) + 'px';
         interval.style.marginLeft = left2 + 'px';
-
       }
       else
       {
         interval.style.width = (left2-left1) + 'px';
         interval.style.marginLeft = left1 + 'px';                
-
       }
   }
 
@@ -229,18 +221,20 @@ function mouseDownBtn_1_Double (event) {
 }
 
 function inputListener (event) {
-  let {run} = event.target.dataset 
-  let {inst} = event.target.dataset
+  let { run } = event.target.dataset 
+  let { inst } = event.target.dataset
+
   if ( run && event.target.checked) {
+
     event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
     event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
-    config.runner_number = 1
 
     let zdslider = document.querySelectorAll('.zdslider')[inst-1]
     let ranger = new Ranger();
     ranger.appendTo(zdslider)
     ranger.setAttribute ('data-inst', inst);
-    let ranger_div = document.querySelectorAll('.ranger')[inst-1]
+    ranger.setAttribute ('data-runners', 1);
+    let ranger_div = zdslider.querySelector('.ranger')
 
     let interval = new Interval();
     interval.setAttribute('data-inst', inst);
@@ -254,11 +248,46 @@ function inputListener (event) {
     let scale = new Scale()
     scale.appendTo (zdslider)    
 
-    let interval_div = document.querySelectorAll('.ranger__interval')[inst-1]
-    let button_1_div = document.querySelectorAll('[data-type="btn-first"]')[inst-1] 
+    let interval_div = ranger_div.querySelector('.ranger__interval')
+    let button_1_div = ranger_div.querySelector('[data-type="btn-first"]') 
     interval_div.style.width = (ranger_div.offsetWidth) + 'px';
     button_1_div.style.marginLeft = (ranger_div.offsetWidth-button_1_div.offsetWidth) +  'px';
-    console.log(ranger_div)
+
+  } else if ( run && (!event.target.checked)) {
+
+    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
+    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
+
+    let zdslider = document.querySelectorAll('.zdslider')[inst-1]
+    let ranger = new Ranger();
+    ranger.appendTo(zdslider)
+    ranger.setAttribute ('data-inst', inst);
+    ranger.setAttribute ('data-runners', 2);
+    let ranger_div = zdslider.querySelector('.ranger')
+
+    let interval = new Interval();
+    interval.setAttribute('data-inst', inst);
+    interval.appendTo(ranger_div)
+
+    let button_1 = new Button();
+    let button_2 = new Button();
+    button_1.setAttribute('data-type', 'btn-first');
+    button_1.setAttribute('data-inst', inst);
+    button_1.appendTo(ranger_div);
+    button_2.setAttribute('data-type', 'btn-second');
+    button_2.setAttribute('data-inst', inst);
+    button_2.appendTo(ranger_div);
+    
+    let scale = new Scale()
+    scale.appendTo (zdslider) 
+
+    let interval_div = ranger_div.querySelector('.ranger__interval')
+    let button_1_div = ranger_div.querySelector('[data-type="btn-first"]') 
+    let button_2_div = ranger_div.querySelector('[data-type="btn-second"]') 
+    interval_div.style.width = (ranger_div.offsetWidth) + 'px';  
+    button_1_div.style.marginLeft = '0px';
+    button_2_div.style.marginLeft = (ranger_div.offsetWidth-button_1_div.offsetWidth) + 'px';     
+
   }
 }
 
