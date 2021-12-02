@@ -5,12 +5,16 @@ window.onload = sliderInit ()
 function sliderInit () {
   let config = new Config()
   let runner_number = config.runner_number
-
+  let min = config.min
+  let max = config.max
+  let step = config.step
+  let scale_arr = makeScale (min, max, step)
+  
 
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
 
-    setStructure( runner_number )  /* Создание структуры слайдера */
+    setStructure( runner_number, scale_arr )  /* Создание структуры слайдера */
 
     sliderPositioning ( runner_number )  /* Первоначальное размещение слайдера */
 
@@ -25,7 +29,7 @@ function sliderInit () {
 }
 
   
-function setStructure (runners) {    /* Структура слайдера */
+function setStructure (runners, scale_arr) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
@@ -58,13 +62,14 @@ function setStructure (runners) {    /* Структура слайдера */
       }
 
       let scale = new Scale ();
-      // for (j = 0; j < 10; j ++) {
-      //   let span = document.createElement ('span')
-      //   span.classList.add ('ranger__scale-span')
-      //   span.innerHTML = j
-      //   scale.appendChild (span)        
-      // }
+      for (let el of scale_arr) {
+        let span = document.createElement ('span')
+        span.classList.add ('ranger__scale-span')
+        span.innerHTML = el
+        scale.appendChild (span)
+      }
       scale.appendTo (elem);
+
       counter ++;
       i ++;
   }
@@ -77,7 +82,7 @@ function sliderPositioning (runners) {   /* Первоначальное раз�
     let ranger = document.querySelectorAll('.ranger')[i]
     let interval = document.querySelectorAll('.ranger__interval')[i]
     let button_1 = document.querySelectorAll('[data-type="btn-first"]')[i] 
-    interval.style.width = (ranger.offsetWidth) + 'px';     
+    interval.style.width = (ranger.offsetWidth) + 'px';  
     if ( runners == 1 ) {
       button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) +  'px';
     } 
@@ -220,7 +225,7 @@ function mouseDownBtn_1_Double (event) {
   };  
 }
 
-function inputListener (event) {
+function inputListener (event) {    /* Переключение количества ползунков через панель */
   let { run } = event.target.dataset 
   let { inst } = event.target.dataset
 
@@ -287,8 +292,68 @@ function inputListener (event) {
     interval_div.style.width = (ranger_div.offsetWidth) + 'px';  
     button_1_div.style.marginLeft = '0px';
     button_2_div.style.marginLeft = (ranger_div.offsetWidth-button_1_div.offsetWidth) + 'px';     
-
   }
 }
+
+function makeScale (min, max, step) {     /* Массив значений для шкалы по умолчанию */
+  let step_arr = []
+  let dividers_arr = []
+  let maximus = 0
+  let iteration = 0
+  let item = 0
+  if ( step > 0) {
+    let range = max - min
+    for (let i = 2; i < range/2; i ++){   /* Получаю массив делителей без остатка */
+      if ( range % i ) {
+       
+      } else {
+        dividers_arr.push(i)
+      }
+    }
+    if (dividers_arr.length > 0) {
+      for ( let el of dividers_arr) {     /* Определяю наибольшее число меньше 10 */
+        if ( el < 10) {
+          maximus = el
+        } else {
+          break
+        }
+      }
+    } else {
+      return step_arr = [min, max]
+    }
+
+    iteration = range / maximus
+    item = min
+    step_arr.push(min)
+    for ( let i = 0; i < maximus; i ++) {   /* Массив значений шкалы */
+      item = item + iteration
+      step_arr.push(item)
+    }
+  } else {
+    step_arr = [min, max]
+  }
+  return step_arr
+}
+
+// function makeScale (min, max, step) {
+//   let scale_arr = [min, max]
+//   if ( step > 0) {
+//     scale_arr = []
+//     scale_arr.push(min)
+//     let limit = min
+//     while ( limit < max ) {
+//       limit += step
+//       if ( limit > max) {
+//         scale_arr.push(max)
+//         break
+//       }
+//       scale_arr.push(limit)
+//     }
+//     if ( limit < max) {
+//       scale_arr.push(max)
+//     }
+//   } 
+//   return scale_arr
+// }
 
 

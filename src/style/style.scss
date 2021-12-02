@@ -44,12 +44,14 @@
     }
 
     &__scale {
-        border: 1px solid green;
+        // border: 1px solid green;
         margin-top:10px;
         height: 30px;
-        width: 500px;   
+        width: 500px; 
+        display: flex;  
+        justify-content: space-between;
         &-span {
-            margin-right: 20px;
+            // border: 1px solid gray
         }      
     }
 }
