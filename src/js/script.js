@@ -230,16 +230,16 @@ function inputListener (event) {    /* Переключение количест
   let { inst } = event.target.dataset
 
   if ( run && event.target.checked) {
-
-    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
     event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
 
     let zdslider = document.querySelectorAll('.zdslider')[inst-1]
+    let scale_div = document.querySelectorAll('.ranger__scale')[inst-1]
     let ranger = new Ranger();
     ranger.appendTo(zdslider)
     ranger.setAttribute ('data-inst', inst);
     ranger.setAttribute ('data-runners', 1);
     let ranger_div = zdslider.querySelector('.ranger')
+    zdslider.insertBefore(ranger_div, scale_div)
 
     let interval = new Interval();
     interval.setAttribute('data-inst', inst);
@@ -250,9 +250,6 @@ function inputListener (event) {    /* Переключение количест
     button_1.setAttribute('data-inst', inst);
     button_1.appendTo(ranger_div);
 
-    let scale = new Scale()
-    scale.appendTo (zdslider)    
-
     let interval_div = ranger_div.querySelector('.ranger__interval')
     let button_1_div = ranger_div.querySelector('[data-type="btn-first"]') 
     interval_div.style.width = (ranger_div.offsetWidth) + 'px';
@@ -261,14 +258,15 @@ function inputListener (event) {    /* Переключение количест
   } else if ( run && (!event.target.checked)) {
 
     event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
-    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
 
     let zdslider = document.querySelectorAll('.zdslider')[inst-1]
+    let scale_div = document.querySelectorAll('.ranger__scale')[inst-1]
     let ranger = new Ranger();
     ranger.appendTo(zdslider)
     ranger.setAttribute ('data-inst', inst);
     ranger.setAttribute ('data-runners', 2);
     let ranger_div = zdslider.querySelector('.ranger')
+    zdslider.insertBefore(ranger_div, scale_div)
 
     let interval = new Interval();
     interval.setAttribute('data-inst', inst);
@@ -282,9 +280,6 @@ function inputListener (event) {    /* Переключение количест
     button_2.setAttribute('data-type', 'btn-second');
     button_2.setAttribute('data-inst', inst);
     button_2.appendTo(ranger_div);
-    
-    let scale = new Scale()
-    scale.appendTo (zdslider) 
 
     let interval_div = ranger_div.querySelector('.ranger__interval')
     let button_1_div = ranger_div.querySelector('[data-type="btn-first"]') 
