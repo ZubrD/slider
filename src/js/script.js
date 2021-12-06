@@ -314,8 +314,8 @@ function checkRunnersListener (event) {    /* Переключение коли�
 function makeScale (min, max, step) {     /* Массив значений для шкалы по умолчанию */
   let step_arr = []
   let dividers_arr = []
-  let iteration_arr = []
-  let iter = 0
+  let iteration_arr = []  /* Массив размера шага */
+  let iter = 0            /* Член масива размеров шага */
   let maximus = 0
   let iteration = 0
   let item = 0
@@ -363,10 +363,11 @@ function makeScale (min, max, step) {     /* Массив значений дл�
 function changeMinListener ( event ) {
    let min = Number ( event.target.value )
    let max_input = event.target.parentNode.querySelector('.zdslider-config__max')
-   let max = Number (max_input.value)
+   let max = Number ( max_input.value )
    let step = 1                                   /* Указал произвольный шаг */
    let new_scale_arr = makeScale ( min, max, step )
    let current_inst = event.target.parentNode.dataset.inst
+   max_input.setAttribute('min', min)           /* Ограничитель, чтобы max не превышал min */
    reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
 }
 
@@ -377,14 +378,15 @@ function changeMaxListener ( event ) {
    let step = 1                                   /* Указал произвольный шаг */
    let new_scale_arr = makeScale ( min, max, step )
    let current_inst = event.target.parentNode.dataset.inst
+   min_input.setAttribute('max', max)     /* Ограничитель, чтобы min не превышал max */
    reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
 }
 
 function reScale ( new_scale_arr, current_inst ) {
   let scale_arr = new_scale_arr[0]
   let current_ranger = document.querySelectorAll('.ranger__scale')
-  for (let elem of current_ranger) {
-    if (elem.dataset.inst == current_inst) {
+  for ( let elem of current_ranger ) {
+    if ( elem.dataset.inst == current_inst ) {
       let parent = elem.parentNode
 
       elem.remove()
