@@ -82,9 +82,9 @@ export class Scale {
 
 export class Config {
     runner_number = 2
-    step = 4
-    min = 0
-    max = 1000
+    step = 1
+    min = 1
+    max = 100
 }
 
 export class Panel {

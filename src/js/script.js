@@ -8,13 +8,17 @@ function sliderInit () {
   let min = config.min
   let max = config.max
   let step = config.step
-  let scale_arr = makeScale (min, max, step)
-  
 
+  let scale_arrs = makeScale (min, max, step)
+  console.log('Это ',scale_arrs.length)
+  let scale_arr = scale_arrs [ 0 ]        /* Массив значений шкалы */
+  let scale_dividers = scale_arrs [ 1 ]   /* Массив целых делителей диапазона шкалы */
+
+   
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
 
-    setStructure( runner_number, scale_arr )  /* Создание структуры слайдера */
+    setStructure ( runner_number, min, max, scale_arr )  /* Создание структуры слайдера */
 
     sliderPositioning ( runner_number )  /* Первоначальное размещение слайдера */
 
@@ -23,13 +27,13 @@ function sliderInit () {
   let number_of_inputs = document.querySelectorAll('.zdslider-wrapper')
   for (let elem of number_of_inputs) {
 
-    elem.addEventListener('click', inputListener)
+    elem.addEventListener('click', checkRunnersListener)
   }
 
 }
 
   
-function setStructure (runners, scale_arr) {    /* Структура слайдера */
+function setStructure (runners, min, max, scale_arr) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
@@ -62,17 +66,30 @@ function setStructure (runners, scale_arr) {    /* Структура слайд
       }
 
       let scale = new Scale ();
-      for (let el of scale_arr) {
-        let span = document.createElement ('span')
-        span.classList.add ('ranger__scale-span')
+      scale.setAttribute ( 'data-inst', counter )
+      scale.setAttribute ( 'data-min', scale_arr [0] )
+      scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
+      scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
+      for ( let el of scale_arr ) {
+        let span = document.createElement ( 'span' )
+        span.classList.add ( 'ranger__scale-span' )
         span.innerHTML = el
-        scale.appendChild (span)
+        scale.appendChild ( span )
       }
-      scale.appendTo (elem);
+      scale.appendTo ( elem );
+      
+
+      let conf_input = document.querySelectorAll('.zdslider-config__min')[i]
+      conf_input.setAttribute ( 'data-min', min )   
+      conf_input.setAttribute ( 'data-max', max )   
+      
+      conf_input.value = min 
+      conf_input.addEventListener ( 'change', changeMinListeneer )
 
       counter ++;
       i ++;
   }
+  // console.log(document.querySelectorAll('.ranger__scale')[1].dataset.scale)
 }
 
 function sliderPositioning (runners) {   /* Первоначальное размещение слайдера */
@@ -172,7 +189,6 @@ function mouseDownBtn_1_Single (event) {
       if (left1 > right1) left1 = right1;         
       btn1.style.marginLeft = left1 + 'px'
       interval.style.width = left1 + 'px'
-      // console.log('let left1 (', left1,') = ', event.pageX, ' - ', shiftX1, ' - ', sler_coords.left)           
   }
 
   document.onmouseup = function() {
@@ -200,7 +216,6 @@ function mouseDownBtn_1_Double (event) {
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1;         
       btn1.style.marginLeft = left1 + 'px'
-      // console.log('let left1 (', left1,') = ', event.pageX, ' - ', shiftX1, ' - ', sler_coords.left)           
 
       shiftX2 = event.pageX - btn2_coords.left; 
       let left2 = event.pageX - shiftX2 - sler_coords.left;
@@ -225,7 +240,7 @@ function mouseDownBtn_1_Double (event) {
   };  
 }
 
-function inputListener (event) {    /* Переключение количества ползунков через панель */
+function checkRunnersListener (event) {    /* Переключение количества ползунков через панель */
   let { run } = event.target.dataset 
   let { inst } = event.target.dataset
 
@@ -298,7 +313,7 @@ function makeScale (min, max, step) {     /* Массив значений дл�
   let item = 0
   if ( step > 0) {
     let range = max - min
-    for (let i = 2; i < range/2; i ++){   /* Получаю массив делителей без остатка */
+    for ( let i = 2; i < range/2 + 1; i ++){   /* Получаю массив делителей без остатка */
       if ( range % i ) {
        
       } else {
@@ -306,7 +321,7 @@ function makeScale (min, max, step) {     /* Массив значений дл�
       }
     }
     if (dividers_arr.length > 0) {
-      for ( let el of dividers_arr) {     /* Определяю наибольшее число меньше 10 */
+      for ( let el of dividers_arr) { /* Определяю наибольшее количество интервалов меньше 10 */
         if ( el < 10) {
           maximus = el
         } else {
@@ -314,9 +329,9 @@ function makeScale (min, max, step) {     /* Массив значений дл�
         }
       }
     } else {
-      return step_arr = [min, max]
+      step_arr = [min, max]
+      return [step_arr, dividers_arr]
     }
-
     iteration = range / maximus
     item = min
     step_arr.push(min)
@@ -327,28 +342,47 @@ function makeScale (min, max, step) {     /* Массив значений дл�
   } else {
     step_arr = [min, max]
   }
-  return step_arr
+  return [step_arr, dividers_arr]
 }
 
-// function makeScale (min, max, step) {
-//   let scale_arr = [min, max]
-//   if ( step > 0) {
-//     scale_arr = []
-//     scale_arr.push(min)
-//     let limit = min
-//     while ( limit < max ) {
-//       limit += step
-//       if ( limit > max) {
-//         scale_arr.push(max)
-//         break
-//       }
-//       scale_arr.push(limit)
-//     }
-//     if ( limit < max) {
-//       scale_arr.push(max)
-//     }
-//   } 
-//   return scale_arr
-// }
+
+function changeMinListeneer ( event ) {
+   let min = Number ( event.target.value )
+   let max = Number ( event.target.dataset.max )
+   let step = 1                                   /* Указал произвольный шаг */
+   let new_scale_arr = makeScale ( min, max, step )
+   let current_inst = event.target.parentNode.dataset.inst
+   reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
+}
+
+function reScale ( new_scale_arr, current_inst ) {
+  let scale_arr = new_scale_arr[0]
+  let current_ranger = document.querySelectorAll('.ranger__scale')
+  for (let elem of current_ranger) {
+    if (elem.dataset.inst == current_inst) {
+      let parent = elem.parentNode
+      console.log(elem)
+      console.log(elem.parentNode)
+      console.log(scale_arr)
+      elem.remove()
+
+      let scale = new Scale ();
+      scale.setAttribute ( 'data-inst', current_inst )
+      scale.setAttribute ( 'data-min', scale_arr [0] )
+      scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
+      scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
+      for ( let el of scale_arr ) {
+        let span = document.createElement ( 'span' )
+        span.classList.add ( 'ranger__scale-span' )
+        span.innerHTML = el
+        scale.appendChild ( span )
+      }
+      scale.appendTo ( parent );
+
+    }
+  }
+  
+}
+
 
 
