@@ -83,7 +83,7 @@ export class Scale {
 export class Config {
     runner_number = 2
     step = 1
-    min = 1
+    min = 5
     max = 100
 }
 
