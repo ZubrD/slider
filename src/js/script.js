@@ -314,6 +314,8 @@ function checkRunnersListener (event) {    /* Переключение коли�
 function makeScale (min, max, step) {     /* Массив значений для шкалы по умолчанию */
   let step_arr = []
   let dividers_arr = []
+  let iteration_arr = []
+  let iter = 0
   let maximus = 0
   let iteration = 0
   let item = 0
@@ -326,19 +328,25 @@ function makeScale (min, max, step) {     /* Массив значений дл�
         dividers_arr.push(i)
       }
     }
+    // console.log('dividers_arr: ', dividers_arr)
     if (dividers_arr.length > 0) {
       for ( let el of dividers_arr) { /* Определяю наибольшее количество интервалов меньше 10 */
         if ( el < 10) {
           maximus = el
+          iter = range / maximus
+          iteration_arr.push(iter)    /* Массив размеров шага шкалы */
         } else {
           break
         }
       }
     } else {
       step_arr = [min, max]
-      return [step_arr, dividers_arr]
+      return [step_arr, dividers_arr, iteration_arr]
     }
+    // console.log('maximus: ', maximus)
     iteration = range / maximus
+    // console.log('iteration: ', iteration)
+    // console.log('iteration_arr: ', iteration_arr)
     item = min
     step_arr.push(min)
     for ( let i = 0; i < maximus; i ++) {   /* Массив значений шкалы */
@@ -348,7 +356,7 @@ function makeScale (min, max, step) {     /* Массив значений дл�
   } else {
     step_arr = [min, max]
   }
-  return [step_arr, dividers_arr]
+  return [step_arr, dividers_arr, iteration_arr]
 }
 
 
