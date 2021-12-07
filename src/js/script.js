@@ -68,7 +68,7 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       scale.setAttribute ( 'data-inst', counter )
       scale.setAttribute ( 'data-min', scale_arr [0] )
       scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
-      scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
+      scale.setAttribute ( 'data-scale', scale_arr )  
       for ( let el of scale_arr ) {
         let span = document.createElement ( 'span' )
         span.classList.add ( 'ranger__scale-span' )
@@ -100,7 +100,7 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       if ( iterations_arr.length != 0 ) {
         conf_input_step.setAttribute ('max', iterations_arr[0])
         conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
-      } else {    
+      } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
         conf_input_step.disabled = true
       }
 
@@ -382,6 +382,22 @@ function changeMinListener ( event ) {
    let max = Number ( max_input.value )
    let step = 1                                   /* Указал произвольный шаг */
    let new_scale_arr = makeScale ( min, max, step )
+
+   let conf_input_step = event.target.parentNode.querySelector('.zdslider-config__step')
+   let iterations_arr = new_scale_arr[2]
+   let iteration = new_scale_arr[1]
+   conf_input_step.setAttribute ('data-steps', iterations_arr)
+   conf_input_step.setAttribute ('data-iteration', iteration)
+   conf_input_step.setAttribute ('data-current', iteration)
+   if ( iterations_arr.length != 0 ) {
+    conf_input_step.disabled = false 
+    conf_input_step.setAttribute ('max', iterations_arr[0])
+    conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
+  } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
+    conf_input_step.disabled = true
+  }
+  conf_input_step.value = conf_input_step.dataset.iteration
+
    let current_inst = event.target.parentNode.dataset.inst
    max_input.setAttribute('min', min)           /* Ограничитель, чтобы max не превышал min */
    reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
@@ -393,6 +409,22 @@ function changeMaxListener ( event ) {
    let max = Number ( event.target.value )
    let step = 1                                   /* Указал произвольный шаг */
    let new_scale_arr = makeScale ( min, max, step )
+
+   let conf_input_step = event.target.parentNode.querySelector('.zdslider-config__step')
+   let iterations_arr = new_scale_arr[2]
+   let iteration = new_scale_arr[1]
+   conf_input_step.setAttribute ('data-steps', iterations_arr)
+   conf_input_step.setAttribute ('data-iteration', iteration)
+   conf_input_step.setAttribute ('data-current', iteration)
+   if ( iterations_arr.length != 0 ) {
+    conf_input_step.disabled = false 
+    conf_input_step.setAttribute ('max', iterations_arr[0])
+    conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
+  } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
+    conf_input_step.disabled = true
+  }
+  conf_input_step.value = conf_input_step.dataset.iteration
+   
    let current_inst = event.target.parentNode.dataset.inst
    min_input.setAttribute('max', max)     /* Ограничитель, чтобы min не превышал max */
    reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
@@ -400,21 +432,19 @@ function changeMaxListener ( event ) {
 
 function changeStepListener ( event ) {
   let val = event.target.value
-  let current = Number(event.target.dataset.current)
+  let current = Number ( event.target.dataset.current )
 
   let arr = event.target.dataset.steps.split(',')
   let arr_number = arr.map(parseFloat)
-  let current_index = arr_number.indexOf(current)   /* Индекс текущего шага шкалы в массиве */
+  let current_index = arr_number.indexOf ( current )   /* Индекс текущего шага шкалы в массиве */
 
-  if (current < val) {
+  if ( current < val ) {
 
-      console.log('вверх')
       event.target.dataset.current = arr_number[current_index - 1]
       event.target.value = arr_number[current_index - 1]
 
-  } else if (current > val) {
+  } else if ( current > val ) {
 
-    console.log('вниз')
     event.target.dataset.current = arr_number[current_index + 1]
     event.target.value = arr_number[current_index + 1]
 
