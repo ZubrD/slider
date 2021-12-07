@@ -96,8 +96,14 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       conf_input_step.setAttribute ('data-steps', iterations_arr)
       conf_input_step.setAttribute ('data-iteration', iteration)
       conf_input_step.setAttribute ('data-current', iteration)
-      conf_input_step.setAttribute ('max', iterations_arr[0])
-      conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
+      
+      if ( iterations_arr.length != 0 ) {
+        conf_input_step.setAttribute ('max', iterations_arr[0])
+        conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
+      } else {    
+        conf_input_step.disabled = true
+      }
+
       conf_input_step.value = conf_input_step.dataset.iteration
 
       conf_input_step.addEventListener('input', changeStepListener)
