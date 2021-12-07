@@ -96,9 +96,11 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       conf_input_step.setAttribute ('data-steps', iterations_arr)
       conf_input_step.setAttribute ('data-iteration', iteration)
       conf_input_step.setAttribute ('data-current', iteration)
+      conf_input_step.setAttribute ('max', iterations_arr[0])
+      conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
       conf_input_step.value = conf_input_step.dataset.iteration
 
-      conf_input_step.addEventListener('change', changeStepListener)
+      conf_input_step.addEventListener('input', changeStepListener)
 
       counter ++;
       i ++;
@@ -392,15 +394,25 @@ function changeMaxListener ( event ) {
 
 function changeStepListener ( event ) {
   let val = event.target.value
-  let current = event.target.dataset.current
+  let current = Number(event.target.dataset.current)
+
   let arr = event.target.dataset.steps.split(',')
   let arr_number = arr.map(parseFloat)
+  let current_index = arr_number.indexOf(current)   /* Индекс текущего шага шкалы в массиве */
+
   if (current < val) {
-    console.log('вверх')
+
+      console.log('вверх')
+      event.target.dataset.current = arr_number[current_index - 1]
+      event.target.value = arr_number[current_index - 1]
+
   } else if (current > val) {
+
     console.log('вниз')
+    event.target.dataset.current = arr_number[current_index + 1]
+    event.target.value = arr_number[current_index + 1]
+
   }
-  event.target.dataset.current = val
 }
 
 function reScale ( new_scale_arr, current_inst ) {
