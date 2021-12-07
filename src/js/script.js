@@ -11,13 +11,13 @@ function sliderInit () {
 
   let scale_arrs = makeScale (min, max, step)
   let scale_arr = scale_arrs [ 0 ]        /* Массив значений шкалы */
-  let scale_dividers = scale_arrs [ 1 ]   /* Массив целых делителей диапазона шкалы */
-
+  let iteration = scale_arrs [ 1 ]
+  let iterations_arr = scale_arrs [ 2 ]
    
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
 
-    setStructure ( runner_number, min, max, scale_arr )  /* Создание структуры слайдера */
+    setStructure ( runner_number, min, max, scale_arr, iteration, iterations_arr )  /* Создание структуры слайдера */
 
     sliderPositioning ( runner_number )  /* Первоначальное размещение слайдера */
 
@@ -32,7 +32,7 @@ function sliderInit () {
 }
 
   
-function setStructure (runners, min, max, scale_arr) {    /* Структура слайдера */
+function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
@@ -90,7 +90,15 @@ function setStructure (runners, min, max, scale_arr) {    /* Структура 
       conf_input_max.setAttribute ( 'data-max', max )   
       
       conf_input_max.value = max 
-      conf_input_max.addEventListener ( 'change', changeMaxListener )      
+      conf_input_max.addEventListener ( 'change', changeMaxListener )
+      
+      let conf_input_step = document.querySelectorAll('.zdslider-config__step')[i]
+      conf_input_step.setAttribute ('data-steps', iterations_arr)
+      conf_input_step.setAttribute ('data-iteration', iteration)
+      conf_input_step.setAttribute ('data-current', iteration)
+      conf_input_step.value = conf_input_step.dataset.iteration
+
+      conf_input_step.addEventListener('change', changeStepListener)
 
       counter ++;
       i ++;
@@ -341,7 +349,7 @@ function makeScale (min, max, step) {     /* Массив значений дл�
       }
     } else {
       step_arr = [min, max]
-      return [step_arr, dividers_arr, iteration_arr]
+      return [step_arr, iteration, iteration_arr]
     }
     // console.log('maximus: ', maximus)
     iteration = range / maximus
@@ -356,7 +364,7 @@ function makeScale (min, max, step) {     /* Массив значений дл�
   } else {
     step_arr = [min, max]
   }
-  return [step_arr, dividers_arr, iteration_arr]
+  return [step_arr, iteration, iteration_arr]
 }
 
 
@@ -380,6 +388,19 @@ function changeMaxListener ( event ) {
    let current_inst = event.target.parentNode.dataset.inst
    min_input.setAttribute('max', max)     /* Ограничитель, чтобы min не превышал max */
    reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
+}
+
+function changeStepListener ( event ) {
+  let val = event.target.value
+  let current = event.target.dataset.current
+  let arr = event.target.dataset.steps.split(',')
+  let arr_number = arr.map(parseFloat)
+  if (current < val) {
+    console.log('вверх')
+  } else if (current > val) {
+    console.log('вниз')
+  }
+  event.target.dataset.current = val
 }
 
 function reScale ( new_scale_arr, current_inst ) {

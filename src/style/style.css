@@ -17,15 +17,6 @@
   /* Chrome, Safari, Edge, Opera */
 }
 
-.zdslider-config__step::-webkit-outer-spin-button, .zdslider-config__step::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.zdslider-config__step {
-  -moz-appearance: textfield;
-}
-
 .zdslider-config__check-runners {
   display: block;
 }
