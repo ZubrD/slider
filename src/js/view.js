@@ -84,7 +84,7 @@ export class Config {
     runner_number = 2
     step = 1
     min = 13
-    max = 100
+    max = 101
 }
 
 export class Panel {

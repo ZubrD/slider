@@ -359,8 +359,12 @@ function makeScale (min, max, step) {     /* Массив значений дл�
       step_arr = [min, max]
       return [step_arr, iteration, iteration_arr]
     }
-    // console.log('maximus: ', maximus)
+    
     iteration = range / maximus
+    if ( step > 1 ) {                         /* Переопределение - этот участок кода */
+      iteration = step                        /* применяется при изменении размера */
+      maximus = range / iteration             /* шага через панель */
+    }
     // console.log('iteration: ', iteration)
     // console.log('iteration_arr: ', iteration_arr)
     item = min
@@ -377,26 +381,14 @@ function makeScale (min, max, step) {     /* Массив значений дл�
 
 
 function changeMinListener ( event ) {
+   let parent = event.target.parentNode
    let min = Number ( event.target.value )
-   let max_input = event.target.parentNode.querySelector('.zdslider-config__max')
+   let max_input = parent.querySelector('.zdslider-config__max')
    let max = Number ( max_input.value )
    let step = 1                                   /* Указал произвольный шаг */
    let new_scale_arr = makeScale ( min, max, step )
 
-   let conf_input_step = event.target.parentNode.querySelector('.zdslider-config__step')
-   let iterations_arr = new_scale_arr[2]
-   let iteration = new_scale_arr[1]
-   conf_input_step.setAttribute ('data-steps', iterations_arr)
-   conf_input_step.setAttribute ('data-iteration', iteration)
-   conf_input_step.setAttribute ('data-current', iteration)
-   if ( iterations_arr.length != 0 ) {
-    conf_input_step.disabled = false 
-    conf_input_step.setAttribute ('max', iterations_arr[0])
-    conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
-  } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
-    conf_input_step.disabled = true
-  }
-  conf_input_step.value = conf_input_step.dataset.iteration
+   modifyScaleInput ( parent, new_scale_arr )
 
    let current_inst = event.target.parentNode.dataset.inst
    max_input.setAttribute('min', min)           /* Ограничитель, чтобы max не превышал min */
@@ -404,26 +396,14 @@ function changeMinListener ( event ) {
 }
 
 function changeMaxListener ( event ) {
-   let min_input = event.target.parentNode.querySelector('.zdslider-config__min')
+   let parent = event.target.parentNode
+   let min_input = parent.querySelector('.zdslider-config__min')
    let min = Number ( min_input.value )
    let max = Number ( event.target.value )
    let step = 1                                   /* Указал произвольный шаг */
    let new_scale_arr = makeScale ( min, max, step )
 
-   let conf_input_step = event.target.parentNode.querySelector('.zdslider-config__step')
-   let iterations_arr = new_scale_arr[2]
-   let iteration = new_scale_arr[1]
-   conf_input_step.setAttribute ('data-steps', iterations_arr)
-   conf_input_step.setAttribute ('data-iteration', iteration)
-   conf_input_step.setAttribute ('data-current', iteration)
-   if ( iterations_arr.length != 0 ) {
-    conf_input_step.disabled = false 
-    conf_input_step.setAttribute ('max', iterations_arr[0])
-    conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
-  } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
-    conf_input_step.disabled = true
-  }
-  conf_input_step.value = conf_input_step.dataset.iteration
+  modifyScaleInput ( parent, new_scale_arr )
    
    let current_inst = event.target.parentNode.dataset.inst
    min_input.setAttribute('max', max)     /* Ограничитель, чтобы min не превышал max */
@@ -431,6 +411,13 @@ function changeMaxListener ( event ) {
 }
 
 function changeStepListener ( event ) {
+  let parent = event.target.parentNode
+  let min_input = parent.querySelector('.zdslider-config__min')
+  let max_input = parent.querySelector('.zdslider-config__max')
+
+  let min = Number ( min_input.value )
+  let max = Number ( max_input.value )
+
   let val = event.target.value
   let current = Number ( event.target.dataset.current )
 
@@ -449,6 +436,13 @@ function changeStepListener ( event ) {
     event.target.value = arr_number[current_index + 1]
 
   }
+
+  let current_inst = event.target.parentNode.dataset.inst
+  let step = Number ( event.target.value )    /* val после изменения на значение из массива */
+  // console.log('min: ', min, 'max: ', max, 'step: ', step, 'inst: ', current_inst)
+  let new_scale_arr = makeScale ( min, max, step )
+  // console.log(new_scale_arr)
+  reScale ( new_scale_arr, current_inst )    /* Перестроение шкалы по новому значению шага */
 }
 
 function reScale ( new_scale_arr, current_inst ) {
@@ -472,11 +466,27 @@ function reScale ( new_scale_arr, current_inst ) {
         scale.appendChild ( span )
       }
       scale.appendTo ( parent );
-
     }
   }
   
 }
 
 
+
+function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение инпута переключения шага  */
+  let conf_input_step = parent.querySelector('.zdslider-config__step')
+  let iterations_arr = new_scale_arr[2]
+  let iteration = new_scale_arr[1]
+  conf_input_step.setAttribute ('data-steps', iterations_arr)
+  conf_input_step.setAttribute ('data-iteration', iteration)
+  conf_input_step.setAttribute ('data-current', iteration)
+  if ( iterations_arr.length != 0 ) {
+   conf_input_step.disabled = false 
+   conf_input_step.setAttribute ('max', iterations_arr[0])
+   conf_input_step.setAttribute ('min', iterations_arr[iterations_arr.length - 1])
+ } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
+   conf_input_step.disabled = true
+ }
+ conf_input_step.value = conf_input_step.dataset.iteration
+}
 
