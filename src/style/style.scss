@@ -38,13 +38,14 @@
     &__button {
         position: absolute;
         top: 50%;
-        width: 20px;
-        height: 20px;
+        width: 10px;
+        height: 25px;
         cursor: move;
         transform: translateY(-50%);
         border: none;
-        border-radius: 50%;
+        // border-radius: 50%;
         background-color: #999;
+        z-index: 10;
     }
 
     &__interval {
@@ -64,9 +65,46 @@
         display: flex;  
         justify-content: space-between;
         &-span {
-            // border: 1px solid gray
+            border: 1px solid gray;
+            position: relative;
+            // &:first-child {
+            //     &::after {
+            //         position: absolute;
+            //         content: '';
+            //         width: 5px;
+            //         height: 20px;
+            //         background-color: red;
+            //         top: -25px;
+            //         left: -1px;                    
+            //     }
+            // }
+            // &:last-child {
+            //     &::after {
+            //         position: absolute;
+            //         content: '';
+            //         width: 5px;
+            //         height: 20px;
+            //         background-color: red;
+            //         top: -25px;
+            //         left: 21px;                    
+            //     }
+            // }            
+            // &::after {
+            //     position: absolute;
+            //     content: '';
+            //     width: 5px;
+            //     height: 20px;
+            //     background-color: red;
+            //     top: -25px;
+            //     left: 8px;
+
+            // }
         }      
     }
+}
+
+.probka {
+    width: 100px;
 }
 
 

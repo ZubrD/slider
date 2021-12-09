@@ -39,14 +39,14 @@
 .ranger__button {
   position: absolute;
   top: 50%;
-  width: 20px;
-  height: 20px;
+  width: 10px;
+  height: 25px;
   cursor: move;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   border: none;
-  border-radius: 50%;
   background-color: #999;
+  z-index: 10;
 }
 
 .ranger__interval {
@@ -68,5 +68,14 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.ranger__scale-span {
+  border: 1px solid gray;
+  position: relative;
+}
+
+.probka {
+  width: 100px;
 }
 /*# sourceMappingURL=style.css.map */

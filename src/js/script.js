@@ -66,9 +66,9 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
 
       let scale = new Scale ();
       scale.setAttribute ( 'data-inst', counter )
-      scale.setAttribute ( 'data-min', scale_arr [0] )
-      scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
-      scale.setAttribute ( 'data-scale', scale_arr )  
+      // scale.setAttribute ( 'data-min', scale_arr [0] )
+      // scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
+      // scale.setAttribute ( 'data-scale', scale_arr )  
       for ( let el of scale_arr ) {
         let span = document.createElement ( 'span' )
         span.classList.add ( 'ranger__scale-span' )
@@ -123,7 +123,7 @@ function sliderPositioning (runners) {   /* Первоначальное раз�
     let button_1 = document.querySelectorAll('[data-type="btn-first"]')[i] 
     interval.style.width = (ranger.offsetWidth) + 'px';  
     if ( runners == 1 ) {
-      button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) +  'px';
+      button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
     } 
     if ( runners == 2 ) {
       button_1.style.marginLeft = '0px';
@@ -206,12 +206,46 @@ function mouseDownBtn_1_Single (event) {
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;
-      let right1 = sler.offsetWidth - btn1.offsetWidth;
+      // let right1 = sler.offsetWidth - btn1.offsetWidth;
+      let right1 = sler.offsetWidth;
       if (left1 < 0) left1 = 0;                                 
-      if (left1 > right1) left1 = right1;         
-      btn1.style.marginLeft = left1 + 'px'
-      interval.style.width = left1 + 'px'
+      if (left1 > right1) left1 = right1;
+      let min = 13
+      let max = 101 
+      let interv = 490 / 8
+      let discret_arr = []
+      let arr_count = 0
+      discret_arr.push(0)
+      for (let i = 0; i < 8; i ++) {
+          arr_count = arr_count + interv
+          discret_arr.push(arr_count)
+      }
+      let range = discret_arr[1] - discret_arr[0]
+      let integ = Math.floor(left1)
+      for (let num of discret_arr) {
+        if (integ < (num + range / 2) && integ > (num - range / 2) ) {
+            btn1.style.marginLeft = num + 'px'  /* -10 это чтобы не было скачка ползунка вперёд */
+            interval.style.width = num  + 'px'           
+
+        
+        }
+      }     
+     
+      // if (left1 < 0) left1 = -2;                                 
+      // if (left1 > right1) left1 = right1;    
+      // btn1.style.marginLeft = left1 + 'px'
+      // interval.style.width = left1 + 'px'  
+      // console.log(left1/2) 
+
   }
+//   document.onmousemove = function (event) {
+//     let left1 = event.pageX - shiftX1 - sler_coords.left;
+//     let right1 = sler.offsetWidth - btn1.offsetWidth;
+//     if (left1 < 0) left1 = 0;                                 
+//     if (left1 > right1) left1 = right1;         
+//     btn1.style.marginLeft = left1 + 'px'
+//     interval.style.width = left1 + 'px'
+// }
 
   document.onmouseup = function() {
       document.onmousemove = document.onmouseup = null;
@@ -234,14 +268,16 @@ function mouseDownBtn_1_Double (event) {
 
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;
-      let right1 = sler.offsetWidth - btn1.offsetWidth;
+      // let right1 = sler.offsetWidth - btn1.offsetWidth;
+      let right1 = sler.offsetWidth;
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1;         
       btn1.style.marginLeft = left1 + 'px'
 
       shiftX2 = event.pageX - btn2_coords.left; 
       let left2 = event.pageX - shiftX2 - sler_coords.left;
-      let right2 = sler.offsetWidth - btn2.offsetWidth;
+      // let right2 = sler.offsetWidth - btn2.offsetWidth;
+      let right2 = sler.offsetWidth;
       if (left2 < 0) left2 = 0;
       if (left2 > right2) left2 = right2; 
        
@@ -456,8 +492,8 @@ function reScale ( new_scale_arr, current_inst ) {
 
       let scale = new Scale ();
       scale.setAttribute ( 'data-inst', current_inst )
-      scale.setAttribute ( 'data-min', scale_arr [0] )
-      scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
+      // scale.setAttribute ( 'data-min', scale_arr [0] )
+      // scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
       // scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
       for ( let el of scale_arr ) {
         let span = document.createElement ( 'span' )
