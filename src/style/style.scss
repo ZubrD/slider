@@ -101,6 +101,15 @@
             // }
         }      
     }
+    &__scale-division {
+        position: absolute;
+        // border: 1px solid green;
+        margin-top:-70px;
+        height: 30px;
+        width: 500px; 
+        display: flex;  
+        justify-content: space-between;        
+    }
 }
 
 .probka {

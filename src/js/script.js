@@ -1,4 +1,4 @@
-import { Ranger, Interval, Button, Config, Scale } from './view.js'
+import { Ranger, Interval, Button, Config, Scale, Division } from './view.js'
 
 window.onload = sliderInit ()
 
@@ -64,6 +64,19 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
         button_1.appendTo(ranger_div);
       }
 
+
+      let division = new Division ();
+      division.setAttribute ('data-inst', counter)
+
+      for ( let el of scale_arr ) {
+        let span = document.createElement ( 'span' )
+        span.classList.add ( 'ranger__scale-division-span' )
+        span.innerHTML = el
+        division.appendChild ( span )
+      }
+      division.appendTo ( elem );  
+
+
       let scale = new Scale ();
       scale.setAttribute ( 'data-inst', counter )
       // scale.setAttribute ( 'data-min', scale_arr [0] )
@@ -76,6 +89,8 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
         scale.appendChild ( span )
       }
       scale.appendTo ( elem );
+
+    
       
 
       let conf_input_min = document.querySelectorAll('.zdslider-config__min')[i]
@@ -212,11 +227,11 @@ function mouseDownBtn_1_Single (event) {
       if (left1 > right1) left1 = right1;
       let min = 13
       let max = 101 
-      let interv = 490 / 8
+      let interv = 490 / 4
       let discret_arr = []
       let arr_count = 0
       discret_arr.push(0)
-      for (let i = 0; i < 8; i ++) {
+      for (let i = 0; i < 4; i ++) {
           arr_count = arr_count + interv
           discret_arr.push(arr_count)
       }
@@ -526,3 +541,4 @@ function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение и
  conf_input_step.value = conf_input_step.dataset.iteration
 }
 
+// min - 14, max - 235 - получается Infinity, 9.12.2021

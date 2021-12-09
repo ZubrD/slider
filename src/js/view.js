@@ -64,10 +64,27 @@ export class Button {
     }
 }
 
+
 export class Scale {
     constructor ( options ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger__scale' )
+    }
+    appendTo( parent ) {
+        parent.appendChild( this.$el )
+    }
+    appendChild( child ) {
+        this.$el.appendChild ( child )
+    }
+    setAttribute( attr, number ) {
+        this.$el.setAttribute ( attr, number )
+    }
+}
+
+export class Division {
+    constructor ( options ) {
+        this.$el = document.createElement ( 'div' )
+        this.$el.classList.add ( 'ranger__scale-division' )
     }
     appendTo( parent ) {
         parent.appendChild( this.$el )
