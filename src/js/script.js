@@ -1,4 +1,5 @@
 import { Ranger, Interval, Button, Config, Scale, Division } from './view.js'
+import { changeMinListener, changeMaxListener, changeStepListener, checkRunnersListener } from './listeners.js'
 
 window.onload = sliderInit ()
 
@@ -7,12 +8,14 @@ function sliderInit () {
   let runner_number = config.runner_number
   let min = config.min
   let max = config.max
-  let step = config.step
+  // let step = config.step
+  let step = 1
 
   let scale_arrs = makeScale (min, max, step)
   let scale_arr = scale_arrs [ 0 ]        /* Массив значений шкалы */
   let iteration = scale_arrs [ 1 ]
   let iterations_arr = scale_arrs [ 2 ]
+
    
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
@@ -23,9 +26,8 @@ function sliderInit () {
 
   }
 
-  let number_of_inputs = document.querySelectorAll('.zdslider-wrapper')
-  for (let elem of number_of_inputs) {
-
+  let number_of_sliders = document.querySelectorAll('.zdslider-config')
+  for (let elem of number_of_sliders) {
     elem.addEventListener('click', checkRunnersListener)
   }
 
@@ -42,6 +44,7 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       ranger.appendTo(elem)
       ranger.setAttribute ('data-inst', counter);
       ranger.setAttribute ('data-runners', runners);
+      ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
 
       let interval = new Interval();
       let ranger_div = document.querySelectorAll('.ranger')[i]
@@ -90,8 +93,6 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       }
       scale.appendTo ( elem );
 
-    
-      
 
       let conf_input_min = document.querySelectorAll('.zdslider-config__min')[i]
       conf_input_min.setAttribute ( 'data-min', min )   
@@ -126,7 +127,6 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       counter ++;
       i ++;
   }
-  // console.log(document.querySelectorAll('.ranger__scale')[1].dataset.scale)
 }
 
 function sliderPositioning (runners) {   /* Первоначальное размещение слайдера */
@@ -157,226 +157,7 @@ export function getCoords(elem) {   /* Получение координат э�
   };
 }  
 
-export function mouseDownBtn_1 (event) {
-  let runner_number = event.target.parentNode.dataset.runners
-  if ( runner_number == 1 ) {
-    mouseDownBtn_1_Single (event)
-  } else if ( runner_number == 2 ) {
-    mouseDownBtn_1_Double (event)
-  }
-}
 
-export function mouseDownBtn_2 (event) {
-  let sler_number = event.target.dataset.inst
-  let sler = document.querySelectorAll('.ranger')[sler_number-1]
-  let interval = sler.querySelector('.ranger__interval')     
-  let btn1 = sler.querySelector('[data-type="btn-first"]')
-  let btn2 = sler.querySelector('[data-type="btn-second"]')
-
-  let sler_coords = getCoords(sler)
-  let btn1_coords = getCoords(btn1)
-  let btn2_coords = getCoords(btn2)
-  let shiftX1 = event.pageX - btn1_coords.left;
-  let shiftX2 = event.pageX - btn2_coords.left;
-
-  document.onmousemove = function (event) {
-      let left2 = event.pageX - shiftX2 - sler_coords.left;
-      let right2 = sler.offsetWidth - btn2.offsetWidth;
-      if (left2 < 0) left2 = 0;                                 
-      if (left2 > right2) left2 = right2;         
-      btn2.style.marginLeft = left2 + 'px'
-
-      shiftX1 = event.pageX - btn1_coords.left; 
-      let left1 = event.pageX - shiftX1 - sler_coords.left;
-      let right1 = sler.offsetWidth - btn1.offsetWidth;
-      if (left1 < 0) left1 = 0;
-      if (left1 > right1) left1 = right1;            
-       
-      if (left1 > left2)
-      {
-        interval.style.width = (left1-left2) + 'px';
-        interval.style.marginLeft = left2 + 'px';       
-      }
-      else
-      {
-        interval.style.width = (left2-left1) + 'px';
-        interval.style.marginLeft = left1 + 'px';                
-      }
-  }
-
-  document.onmouseup = function() {
-      document.onmousemove = document.onmouseup = null;
-  };
-}
-
-function mouseDownBtn_1_Single (event) {
-  let sler_number = event.target.dataset.inst
-  let sler = document.querySelectorAll('.ranger')[sler_number-1]
-  let interval = sler.querySelector('.ranger__interval')     
-  let btn1 = sler.querySelector('[data-type="btn-first"]')
-
-  let sler_coords = getCoords(sler)
-  let btn1_coords = getCoords(btn1)
-  let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
-                                                /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
-  document.onmousemove = function (event) {
-      let left1 = event.pageX - shiftX1 - sler_coords.left;
-      // let right1 = sler.offsetWidth - btn1.offsetWidth;
-      let right1 = sler.offsetWidth;
-      if (left1 < 0) left1 = 0;                                 
-      if (left1 > right1) left1 = right1;
-      let min = 13
-      let max = 101 
-      let interv = 490 / 8
-      let discret_arr = []
-      let arr_count = 0
-      discret_arr.push(0)
-      for (let i = 0; i < 8; i ++) {
-          arr_count = arr_count + interv
-          discret_arr.push(arr_count)
-      }
-      let range = discret_arr[1] - discret_arr[0]
-      let integ = Math.floor(left1)
-      for (let num of discret_arr) {
-        if (integ < (num + range / 2) && integ > (num - range / 2) ) {
-            btn1.style.marginLeft = num + 'px'  /* -10 это чтобы не было скачка ползунка вперёд */
-            interval.style.width = num  + 'px'           
-
-        
-        }
-      }     
-     
-      // if (left1 < 0) left1 = -2;                                 
-      // if (left1 > right1) left1 = right1;    
-      // btn1.style.marginLeft = left1 + 'px'
-      // interval.style.width = left1 + 'px'  
-      // console.log(left1/2) 
-
-  }
-//   document.onmousemove = function (event) {
-//     let left1 = event.pageX - shiftX1 - sler_coords.left;
-//     let right1 = sler.offsetWidth - btn1.offsetWidth;
-//     if (left1 < 0) left1 = 0;                                 
-//     if (left1 > right1) left1 = right1;         
-//     btn1.style.marginLeft = left1 + 'px'
-//     interval.style.width = left1 + 'px'
-// }
-
-  document.onmouseup = function() {
-      document.onmousemove = document.onmouseup = null;
-  };  
-}
-
-function mouseDownBtn_1_Double (event) {
-  let sler_number = event.target.dataset.inst
-  let sler = document.querySelectorAll('.ranger')[sler_number-1]
-  let interval = sler.querySelector('.ranger__interval')     
-  let btn1 = sler.querySelector('[data-type="btn-first"]')
-  let btn2 = sler.querySelector('[data-type="btn-second"]')
-
-  let sler_coords = getCoords(sler)
-  let btn1_coords = getCoords(btn1)
-  let btn2_coords = getCoords(btn2)
-  let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
-                                                /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
-  let shiftX2 = event.pageX - btn2_coords.left;
-
-  document.onmousemove = function (event) {
-      let left1 = event.pageX - shiftX1 - sler_coords.left;
-      // let right1 = sler.offsetWidth - btn1.offsetWidth;
-      let right1 = sler.offsetWidth;
-      if (left1 < 0) left1 = 0;                                 
-      if (left1 > right1) left1 = right1;         
-      btn1.style.marginLeft = left1 + 'px'
-
-      shiftX2 = event.pageX - btn2_coords.left; 
-      let left2 = event.pageX - shiftX2 - sler_coords.left;
-      // let right2 = sler.offsetWidth - btn2.offsetWidth;
-      let right2 = sler.offsetWidth;
-      if (left2 < 0) left2 = 0;
-      if (left2 > right2) left2 = right2; 
-       
-      if (left1 > left2)
-      {
-        interval.style.width = (left1-left2) + 'px';
-        interval.style.marginLeft = left2 + 'px';
-      }
-      else
-      {
-        interval.style.width = (left2-left1) + 'px';
-        interval.style.marginLeft = left1 + 'px';                
-      }
-  }
-
-  document.onmouseup = function() {
-      document.onmousemove = document.onmouseup = null;
-  };  
-}
-
-function checkRunnersListener (event) {    /* Переключение количества ползунков через панель */
-  let { run } = event.target.dataset 
-  let { inst } = event.target.dataset
-
-  if ( run && event.target.checked) {
-    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
-
-    let zdslider = document.querySelectorAll('.zdslider')[inst-1]
-    let scale_div = document.querySelectorAll('.ranger__scale')[inst-1]
-    let ranger = new Ranger();
-    ranger.appendTo(zdslider)
-    ranger.setAttribute ('data-inst', inst);
-    ranger.setAttribute ('data-runners', 1);
-    let ranger_div = zdslider.querySelector('.ranger')
-    zdslider.insertBefore(ranger_div, scale_div)
-
-    let interval = new Interval();
-    interval.setAttribute('data-inst', inst);
-    interval.appendTo(ranger_div)
-
-    let button_1 = new Button();
-    button_1.setAttribute('data-type', 'btn-first');
-    button_1.setAttribute('data-inst', inst);
-    button_1.appendTo(ranger_div);
-
-    let interval_div = ranger_div.querySelector('.ranger__interval')
-    let button_1_div = ranger_div.querySelector('[data-type="btn-first"]') 
-    interval_div.style.width = (ranger_div.offsetWidth) + 'px';
-    button_1_div.style.marginLeft = (ranger_div.offsetWidth-button_1_div.offsetWidth) +  'px';
-
-  } else if ( run && (!event.target.checked)) {
-
-    event.target.parentNode.parentNode.childNodes[1].firstChild.remove()
-
-    let zdslider = document.querySelectorAll('.zdslider')[inst-1]
-    let scale_div = document.querySelectorAll('.ranger__scale')[inst-1]
-    let ranger = new Ranger();
-    ranger.appendTo(zdslider)
-    ranger.setAttribute ('data-inst', inst);
-    ranger.setAttribute ('data-runners', 2);
-    let ranger_div = zdslider.querySelector('.ranger')
-    zdslider.insertBefore(ranger_div, scale_div)
-
-    let interval = new Interval();
-    interval.setAttribute('data-inst', inst);
-    interval.appendTo(ranger_div)
-
-    let button_1 = new Button();
-    let button_2 = new Button();
-    button_1.setAttribute('data-type', 'btn-first');
-    button_1.setAttribute('data-inst', inst);
-    button_1.appendTo(ranger_div);
-    button_2.setAttribute('data-type', 'btn-second');
-    button_2.setAttribute('data-inst', inst);
-    button_2.appendTo(ranger_div);
-
-    let interval_div = ranger_div.querySelector('.ranger__interval')
-    let button_1_div = ranger_div.querySelector('[data-type="btn-first"]') 
-    let button_2_div = ranger_div.querySelector('[data-type="btn-second"]') 
-    interval_div.style.width = (ranger_div.offsetWidth) + 'px';  
-    button_1_div.style.marginLeft = '0px';
-    button_2_div.style.marginLeft = (ranger_div.offsetWidth-button_1_div.offsetWidth) + 'px';     
-  }
-}
 
 function makeScale (min, max, step) {     /* Массив значений для шкалы по умолчанию */
   let step_arr = []
@@ -431,82 +212,19 @@ function makeScale (min, max, step) {     /* Массив значений дл�
 }
 
 
-function changeMinListener ( event ) {
-   let parent = event.target.parentNode
-   let min = Number ( event.target.value )
-   let max_input = parent.querySelector('.zdslider-config__max')
-   let max = Number ( max_input.value )
-   let step = 1                                   /* Указал произвольный шаг */
-   let new_scale_arr = makeScale ( min, max, step )
-
-   modifyScaleInput ( parent, new_scale_arr )
-
-   let current_inst = event.target.parentNode.dataset.inst
-   max_input.setAttribute('min', min)           /* Ограничитель, чтобы max не превышал min */
-   reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
-}
-
-function changeMaxListener ( event ) {
-   let parent = event.target.parentNode
-   let min_input = parent.querySelector('.zdslider-config__min')
-   let min = Number ( min_input.value )
-   let max = Number ( event.target.value )
-   let step = 1                                   /* Указал произвольный шаг */
-   let new_scale_arr = makeScale ( min, max, step )
-
-  modifyScaleInput ( parent, new_scale_arr )
-   
-   let current_inst = event.target.parentNode.dataset.inst
-   min_input.setAttribute('max', max)     /* Ограничитель, чтобы min не превышал max */
-   reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
-}
-
-function changeStepListener ( event ) {
-  let parent = event.target.parentNode
-  let min_input = parent.querySelector('.zdslider-config__min')
-  let max_input = parent.querySelector('.zdslider-config__max')
-
-  let min = Number ( min_input.value )
-  let max = Number ( max_input.value )
-
-  let val = event.target.value
-  let current = Number ( event.target.dataset.current )
-
-  let arr = event.target.dataset.steps.split(',')
-  let arr_number = arr.map(parseFloat)
-  let current_index = arr_number.indexOf ( current )   /* Индекс текущего шага шкалы в массиве */
-
-  if ( current < val ) {
-
-      event.target.dataset.current = arr_number[current_index - 1]
-      event.target.value = arr_number[current_index - 1]
-
-  } else if ( current > val ) {
-
-    event.target.dataset.current = arr_number[current_index + 1]
-    event.target.value = arr_number[current_index + 1]
-
-  }
-
-  let current_inst = event.target.parentNode.dataset.inst
-  let step = Number ( event.target.value )    /* val после изменения на значение из массива */
-  // console.log('min: ', min, 'max: ', max, 'step: ', step, 'inst: ', current_inst)
-  let new_scale_arr = makeScale ( min, max, step )
-  // console.log(new_scale_arr)
-  reScale ( new_scale_arr, current_inst )    /* Перестроение шкалы по новому значению шага */
-}
-
-function reScale ( new_scale_arr, current_inst ) {
+export function reScale ( new_scale_arr, current_inst ) {
   let scale_arr = new_scale_arr[0]
   let parents = document.querySelectorAll('.zdslider')
   for ( let parent of parents ) {
     if ( parent.dataset.inst == current_inst ) {
 
+      let current_ranger = parent.querySelector('.ranger')
       let current_scale = parent.querySelector('.ranger__scale')
       let current_division = parent.querySelector('.ranger__scale-division')
       current_scale.remove()
       current_division.remove()
 
+      current_ranger.setAttribute('data-scale_length', scale_arr.length)    /* Для дискретного перемещения */
       let division = new Division ();
       division.setAttribute ('data-inst', current_inst)
       for ( let el of scale_arr ) {
@@ -530,35 +248,8 @@ function reScale ( new_scale_arr, current_inst ) {
   
 }
 
-// function reScale ( new_scale_arr, current_inst ) {
-//   let scale_arr = new_scale_arr[0]
-//   let current_ranger = document.querySelectorAll('.ranger__scale')
-//   for ( let elem of current_ranger ) {
-//     if ( elem.dataset.inst == current_inst ) {
-//       let parent = elem.parentNode
 
-//       elem.remove()
-
-//       let scale = new Scale ();
-//       scale.setAttribute ( 'data-inst', current_inst )
-//       // scale.setAttribute ( 'data-min', scale_arr [0] )
-//       // scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
-//       // scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
-//       for ( let el of scale_arr ) {
-//         let span = document.createElement ( 'span' )
-//         span.classList.add ( 'ranger__scale-span' )
-//         span.innerHTML = el
-//         scale.appendChild ( span )
-//       }
-//       scale.appendTo ( parent );
-//     }
-//   }
-  
-// }
-
-
-
-function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение инпута переключения шага  */
+export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение инпута переключения шага  */
   let conf_input_step = parent.querySelector('.zdslider-config__step')
   let iterations_arr = new_scale_arr[2]
   let iteration = new_scale_arr[1]
@@ -576,3 +267,5 @@ function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение и
 }
 
 // min - 14, max - 235 - получается Infinity, 9.12.2021
+
+

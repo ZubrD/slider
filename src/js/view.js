@@ -1,4 +1,4 @@
-import { mouseDownBtn_1, mouseDownBtn_2 } from './script.js'
+import { mouseDownBtn_1, mouseDownBtn_2 } from './mouse.js'
 
 export class Ranger {
     constructor ( options ) {
@@ -98,9 +98,9 @@ export class Division {
 }
 
 export class Config {
-    runner_number = 1
-    step = 1
-    min = 13
+    runner_number = 2
+    // step = 1
+    min = 16
     max = 101
 }
 
