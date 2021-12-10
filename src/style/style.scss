@@ -58,7 +58,6 @@
     }
 
     &__scale {
-        // border: 1px solid green;
         margin-top:10px;
         height: 30px;
         width: 500px; 
@@ -103,12 +102,16 @@
     }
     &__scale-division {
         position: absolute;
-        // border: 1px solid green;
-        margin-top:-70px;
+        margin-top:-14px;
         height: 30px;
         width: 500px; 
         display: flex;  
-        justify-content: space-between;        
+        justify-content: space-between; 
+        &-span {
+            width: 2px;
+            height: 20px;
+            background-color: salmon;
+        }       
     }
 }
 

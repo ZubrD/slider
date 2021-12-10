@@ -71,7 +71,7 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
       for ( let el of scale_arr ) {
         let span = document.createElement ( 'span' )
         span.classList.add ( 'ranger__scale-division-span' )
-        span.innerHTML = el
+        // span.innerHTML = el
         division.appendChild ( span )
       }
       division.appendTo ( elem );  
@@ -227,11 +227,11 @@ function mouseDownBtn_1_Single (event) {
       if (left1 > right1) left1 = right1;
       let min = 13
       let max = 101 
-      let interv = 490 / 4
+      let interv = 490 / 8
       let discret_arr = []
       let arr_count = 0
       discret_arr.push(0)
-      for (let i = 0; i < 4; i ++) {
+      for (let i = 0; i < 8; i ++) {
           arr_count = arr_count + interv
           discret_arr.push(arr_count)
       }
@@ -498,18 +498,26 @@ function changeStepListener ( event ) {
 
 function reScale ( new_scale_arr, current_inst ) {
   let scale_arr = new_scale_arr[0]
-  let current_ranger = document.querySelectorAll('.ranger__scale')
-  for ( let elem of current_ranger ) {
-    if ( elem.dataset.inst == current_inst ) {
-      let parent = elem.parentNode
+  let parents = document.querySelectorAll('.zdslider')
+  for ( let parent of parents ) {
+    if ( parent.dataset.inst == current_inst ) {
 
-      elem.remove()
+      let current_scale = parent.querySelector('.ranger__scale')
+      let current_division = parent.querySelector('.ranger__scale-division')
+      current_scale.remove()
+      current_division.remove()
+
+      let division = new Division ();
+      division.setAttribute ('data-inst', current_inst)
+      for ( let el of scale_arr ) {
+        let span = document.createElement ( 'span' )
+        span.classList.add ( 'ranger__scale-division-span' )
+        division.appendChild ( span )
+      }
+      division.appendTo ( parent );  
 
       let scale = new Scale ();
       scale.setAttribute ( 'data-inst', current_inst )
-      // scale.setAttribute ( 'data-min', scale_arr [0] )
-      // scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
-      // scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
       for ( let el of scale_arr ) {
         let span = document.createElement ( 'span' )
         span.classList.add ( 'ranger__scale-span' )
@@ -521,6 +529,32 @@ function reScale ( new_scale_arr, current_inst ) {
   }
   
 }
+
+// function reScale ( new_scale_arr, current_inst ) {
+//   let scale_arr = new_scale_arr[0]
+//   let current_ranger = document.querySelectorAll('.ranger__scale')
+//   for ( let elem of current_ranger ) {
+//     if ( elem.dataset.inst == current_inst ) {
+//       let parent = elem.parentNode
+
+//       elem.remove()
+
+//       let scale = new Scale ();
+//       scale.setAttribute ( 'data-inst', current_inst )
+//       // scale.setAttribute ( 'data-min', scale_arr [0] )
+//       // scale.setAttribute ( 'data-max', scale_arr [ scale_arr.length - 1 ] )
+//       // scale.setAttribute ( 'data-scale', scale_arr )  /* Не пригодилось, может удалить */
+//       for ( let el of scale_arr ) {
+//         let span = document.createElement ( 'span' )
+//         span.classList.add ( 'ranger__scale-span' )
+//         span.innerHTML = el
+//         scale.appendChild ( span )
+//       }
+//       scale.appendTo ( parent );
+//     }
+//   }
+  
+// }
 
 
 
