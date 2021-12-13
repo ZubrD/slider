@@ -97,20 +97,8 @@ export function mouseDownBtn_1 (event) {
           btn1.style.marginLeft = left1 + 'px'
           interval.style.width = left1 + 'px'  
       }
-  
-      
-
-  
     }
-  //   document.onmousemove = function (event) {
-  //     let left1 = event.pageX - shiftX1 - sler_coords.left;
-  //     let right1 = sler.offsetWidth - btn1.offsetWidth;
-  //     if (left1 < 0) left1 = 0;                                 
-  //     if (left1 > right1) left1 = right1;         
-  //     btn1.style.marginLeft = left1 + 'px'
-  //     interval.style.width = left1 + 'px'
-  // }
-  
+
     document.onmouseup = function() {
         document.onmousemove = document.onmouseup = null;
     };  
@@ -122,6 +110,11 @@ export function mouseDownBtn_1 (event) {
     let interval = sler.querySelector('.ranger__interval')     
     let btn1 = sler.querySelector('[data-type="btn-first"]')
     let btn2 = sler.querySelector('[data-type="btn-second"]')
+
+    let discrete_status = event.target.parentNode.dataset.discrete
+    let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+    console.log(interval_number)
+    console.log(discrete_status)
   
     let sler_coords = getCoords(sler)
     let btn1_coords = getCoords(btn1)
@@ -131,30 +124,69 @@ export function mouseDownBtn_1 (event) {
     let shiftX2 = event.pageX - btn2_coords.left;
   
     document.onmousemove = function (event) {
-        let left1 = event.pageX - shiftX1 - sler_coords.left;
-        // let right1 = sler.offsetWidth - btn1.offsetWidth;
+        let left1 = event.pageX - shiftX1 - sler_coords.left;       
         let right1 = sler.offsetWidth - 12;
-        if (left1 < 0) left1 = 0;                                 
-        if (left1 > right1) left1 = right1;         
-        btn1.style.marginLeft = left1 + 'px'
-  
         shiftX2 = event.pageX - btn2_coords.left; 
         let left2 = event.pageX - shiftX2 - sler_coords.left;
-        // let right2 = sler.offsetWidth - btn2.offsetWidth;
         let right2 = sler.offsetWidth;
-        if (left2 < 0) left2 = 0;
-        if (left2 > right2) left2 = right2; 
-         
-        if (left1 > left2)
-        {
-          interval.style.width = (left1-left2) + 'px';
-          interval.style.marginLeft = left2 + 'px';
-        }
-        else
-        {
-          interval.style.width = (left2-left1) + 'px';
-          interval.style.marginLeft = left1 + 'px';                
-        }
+
+        if (discrete_status == 'yes') {
+          if (left1 < 0) left1 = 0;                                 
+          if (left1 > right1) left1 = right1;
+  
+          let interv = 490 / interval_number
+          let discret_arr = []
+          let arr_count = 0
+          discret_arr.push(0)
+          for (let i = 0; i < interval_number; i ++) {
+              arr_count = arr_count + interv
+              discret_arr.push(arr_count)
+          }
+          let range = discret_arr[1] - discret_arr[0]
+          let integ = Math.floor(left1)
+
+          for (let num of discret_arr) {
+            if (integ < (num + range / 2) && integ > (num - range / 2) ) {
+                if (num > left2)
+                {
+                  interval.style.width = (num-left2) + 'px';
+                  interval.style.marginLeft = left2 + 'px';
+                }
+                else
+                {
+                  interval.style.width = (left2-num) + 'px';
+                  interval.style.marginLeft = num + 'px';                
+                }
+                btn1.style.marginLeft = num + 'px'  
+        
+            }
+          }           
+        } else if ( discrete_status == 'no' ) {
+
+            if (left1 < 0) left1 = 0;                                 
+            if (left1 > right1) left1 = right1;         
+            btn1.style.marginLeft = left1 + 'px'
+      
+            shiftX2 = event.pageX - btn2_coords.left; 
+            let left2 = event.pageX - shiftX2 - sler_coords.left;
+            let right2 = sler.offsetWidth;
+            if (left2 < 0) left2 = 0;
+            if (left2 > right2) left2 = right2; 
+            
+            if (left1 > left2)
+            {
+              interval.style.width = (left1-left2) + 'px';
+              interval.style.marginLeft = left2 + 'px';
+            }
+            else
+            {
+              interval.style.width = (left2-left1) + 'px';
+              interval.style.marginLeft = left1 + 'px';                
+            }
+ 
+        }        
+        
+
     }
   
     document.onmouseup = function() {
