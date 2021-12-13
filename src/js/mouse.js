@@ -57,43 +57,49 @@ export function mouseDownBtn_1 (event) {
     let sler = document.querySelectorAll('.ranger')[sler_number-1]
     let interval = sler.querySelector('.ranger__interval')     
     let btn1 = sler.querySelector('[data-type="btn-first"]')
+
+    let input_discrete_parent = document.querySelectorAll('.zdslider-config')[sler_number-1]
+    let discrete_div = input_discrete_parent.querySelector('.zdslider-config__check-discete')
+    let discrete_div_status = discrete_div.dataset.discrete
+    
   
     let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
-  
+    // console.log(event.target.parentNode)
     let sler_coords = getCoords(sler)
     let btn1_coords = getCoords(btn1)
     let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                   /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
+    // console.log(interval_number)                                              
     document.onmousemove = function (event) {
-  
         let left1 = event.pageX - shiftX1 - sler_coords.left;
-        console.log(event.target.parentNode)
+        
         // let right1 = sler.offsetWidth - btn1.offsetWidth;
         let right1 = sler.offsetWidth - 10;
-        // if (left1 < 0) left1 = 0;                                 
-        // if (left1 > right1) left1 = right1;
-  
-        // let interv = 490 / interval_number
-        // let discret_arr = []
-        // let arr_count = 0
-        // discret_arr.push(0)
-        // for (let i = 0; i < interval_number; i ++) {
-        //     arr_count = arr_count + interv
-        //     discret_arr.push(arr_count)
-        // }
-        // let range = discret_arr[1] - discret_arr[0]
-        // let integ = Math.floor(left1)
-        // for (let num of discret_arr) {
-        //   if (integ < (num + range / 2) && integ > (num - range / 2) ) {
-        //       btn1.style.marginLeft = num + 'px'  
-        //       interval.style.width = num  + 'px'           
-        //   }
-        // }     
-       
+
         if (left1 < 0) left1 = 0;                                 
-        if (left1 > right1) left1 = right1;    
-        btn1.style.marginLeft = left1 + 'px'
-        interval.style.width = left1 + 'px'  
+        if (left1 > right1) left1 = right1;
+  
+        let interv = 490 / interval_number
+        let discret_arr = []
+        let arr_count = 0
+        discret_arr.push(0)
+        for (let i = 0; i < interval_number; i ++) {
+            arr_count = arr_count + interv
+            discret_arr.push(arr_count)
+        }
+        let range = discret_arr[1] - discret_arr[0]
+        let integ = Math.floor(left1)
+        for (let num of discret_arr) {
+          if (integ < (num + range / 2) && integ > (num - range / 2) ) {
+              btn1.style.marginLeft = num + 'px'  
+              interval.style.width = num  + 'px'           
+          }
+        }     
+       
+        // if (left1 < 0) left1 = 0;                                 
+        // if (left1 > right1) left1 = right1;    
+        // btn1.style.marginLeft = left1 + 'px'
+        // interval.style.width = left1 + 'px'  
   
     }
   //   document.onmousemove = function (event) {

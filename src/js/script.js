@@ -1,5 +1,5 @@
 import { Ranger, Interval, Button, Config, Scale, Division } from './view.js'
-import { changeMinListener, changeMaxListener, changeStepListener, checkRunnersListener } from './listeners.js'
+import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from './listeners.js'
 
 window.onload = sliderInit ()
 
@@ -10,6 +10,7 @@ function sliderInit () {
   let max = config.max
   // let step = config.step
   let step = 1
+  let discrete = config.discrete
 
   let scale_arrs = makeScale (min, max, step)
   let scale_arr = scale_arrs [ 0 ]        /* Массив значений шкалы */
@@ -20,7 +21,7 @@ function sliderInit () {
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
 
-    setStructure ( runner_number, min, max, scale_arr, iteration, iterations_arr )  /* Создание структуры слайдера */
+    setStructure ( runner_number, min, max, discrete, scale_arr, iteration, iterations_arr )  /* Создание структуры слайдера */
 
     sliderPositioning ( runner_number )  /* Первоначальное размещение слайдера */
 
@@ -28,13 +29,13 @@ function sliderInit () {
 
   let number_of_sliders = document.querySelectorAll('.zdslider-config')
   for (let elem of number_of_sliders) {
-    elem.addEventListener('click', checkRunnersListener)
+    elem.addEventListener('click', allChecksListener)  /* Слушатель переключателей */
   }
 
 }
 
   
-function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) {    /* Структура слайдера */
+function setStructure (runners, min, max, discrete, scale_arr, iteration, iterations_arr) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
@@ -56,8 +57,10 @@ function setStructure (runners, min, max, scale_arr, iteration, iterations_arr) 
         let button_2 = new Button();
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
+        // button_1.setAttribute('data-discrete', discrete);
         button_2.setAttribute('data-type', 'btn-second');
         button_2.setAttribute('data-inst', counter);
+        // button_2.setAttribute('data-discrete', discrete);
         button_1.appendTo(ranger_div);
         button_2.appendTo(ranger_div);
       } else {
@@ -159,7 +162,7 @@ export function getCoords(elem) {   /* Получение координат э�
 
 
 
-function makeScale (min, max, step) {     /* Массив значений для шкалы по умолчанию */
+export function makeScale (min, max, step) {     /* Массив значений для шкалы по умолчанию */
   let step_arr = []
   let dividers_arr = []
   let iteration_arr = []  /* Массив размера шага */

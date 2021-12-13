@@ -1,14 +1,22 @@
-import { reScale, modifyScaleInput } from './script.js'
+import { makeScale, reScale, modifyScaleInput } from './script.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
 
-export function checkRunnersListener (event) {    /* Переключение количества ползунков через панель */
+export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
     let { run } = event.target.dataset 
     let { inst } = event.target.dataset
+    let { discrete } = event.target.dataset
   
     if ( run && event.target.checked) {
       oneRunner(event, inst)
     } else if ( run && (!event.target.checked)) {
       twoRunners (event, inst)  
+    }
+
+
+    if ( discrete && event.target.checked ) {
+        event.target.setAttribute('data-discrete', 'yes')
+    } else if ( discrete && !event.target.checked ) {
+        event.target.setAttribute('data-discrete', 'no')
     }
   }
 
