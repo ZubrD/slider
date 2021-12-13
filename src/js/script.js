@@ -45,6 +45,7 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
       ranger.appendTo(elem)
       ranger.setAttribute ('data-inst', counter);
       ranger.setAttribute ('data-runners', runners);
+      ranger.setAttribute ('data-discrete', discrete);
       ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
 
       let interval = new Interval();
