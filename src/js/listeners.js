@@ -5,18 +5,17 @@ export function allChecksListener (event) {    /* Переключение ко�
     let { run } = event.target.dataset 
     let { inst } = event.target.dataset
     let { discrete } = event.target.dataset
-  
     if ( run && event.target.checked) {
       oneRunner(event, inst)
     } else if ( run && (!event.target.checked)) {
       twoRunners (event, inst)  
     }
 
-
+    let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
     if ( discrete && event.target.checked ) {
-        event.target.setAttribute('data-discrete', 'yes')
+        ranger.setAttribute('data-discrete', 'yes')
     } else if ( discrete && !event.target.checked ) {
-        event.target.setAttribute('data-discrete', 'no')
+        ranger.setAttribute('data-discrete', 'no')       
     }
   }
 

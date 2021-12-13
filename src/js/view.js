@@ -5,6 +5,7 @@ export class Ranger {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger' )
         this.$el.setAttribute('data-type', 'ranger')
+        this.$el.setAttribute('data-discrete', 'no')
 
     }
     appendTo ( parent ) {
