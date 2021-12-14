@@ -58,10 +58,10 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
         let button_2 = new Button();
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
-        // button_1.setAttribute('data-discrete', discrete);
+        button_1.setAttribute('data-tip', '1');
         button_2.setAttribute('data-type', 'btn-second');
         button_2.setAttribute('data-inst', counter);
-        // button_2.setAttribute('data-discrete', discrete);
+        button_2.setAttribute('data-tip', '2');
         button_1.appendTo(ranger_div);
         button_2.appendTo(ranger_div);
       } else {

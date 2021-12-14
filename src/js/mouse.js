@@ -192,7 +192,8 @@ function mouseDownBtn_1_Double (event) {
                 interval.style.width = (left2-num) + 'px';
                 interval.style.marginLeft = num + 'px';                
               }
-              btn1.style.marginLeft = num + 'px'  
+              btn1.style.marginLeft = num + 'px' 
+              btn1.dataset.tip = num 
           }
         }           
       } else if ( discrete_status == 'no' ) {

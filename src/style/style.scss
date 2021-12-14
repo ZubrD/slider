@@ -1,6 +1,6 @@
 
 .zdslider {
-    padding-top: 20px;
+    padding-top: 80px;
     padding-bottom: 20px;
     align-self: center;
     &-config {
@@ -46,6 +46,18 @@
         // border-radius: 50%;
         background-color: #999;
         z-index: 10;
+        &::after {
+            // display: none;
+            width: 30px;
+            height: 30px;
+            content: attr(data-tip);
+            box-sizing: border-box;
+            padding-top: 7px;
+            border: 1px solid green;
+            top: -35px;
+            left: -10px;
+            position: absolute;
+        }
     }
 
     &__interval {
