@@ -16,11 +16,15 @@ export function mouseDownBtn_2 (event) {
   let btn1 = sler.querySelector('[data-type="btn-first"]')
   let btn2 = sler.querySelector('[data-type="btn-second"]')
 
+  let discrete_status = event.target.parentNode.dataset.discrete
+  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let btn2_coords = getCoords(btn2)
   let shiftX1 = event.pageX - btn1_coords.left;
   let shiftX2 = event.pageX - btn2_coords.left;
+
 
   document.onmousemove = function (event) {
       let left2 = event.pageX - shiftX2 - sler_coords.left;
@@ -35,16 +39,48 @@ export function mouseDownBtn_2 (event) {
       if (left1 < 0) left1 = 0;
       if (left1 > right1) left1 = right1;            
         
-      if (left1 > left2)
-      {
-        interval.style.width = (left1-left2) + 'px';
-        interval.style.marginLeft = left2 + 'px';       
+      let interv = 490 / interval_number
+      let discret_arr = []
+      let arr_count = 0
+      discret_arr.push(0)
+      for (let i = 0; i < interval_number; i ++) {
+          arr_count = arr_count + interv
+          discret_arr.push(arr_count)
       }
-      else
-      {
-        interval.style.width = (left2-left1) + 'px';
-        interval.style.marginLeft = left1 + 'px';                
-      }
+      let range = discret_arr[1] - discret_arr[0]
+      let integ = Math.floor(left2)
+     
+      if (discrete_status == 'yes') {
+        for (let num of discret_arr) {
+          if (integ >= (num - range / 2) && integ < (num + range / 2) ) {
+              if ( num < left1 ) 
+              {
+                interval.style.width = (left1-num) + 'px';
+                interval.style.marginLeft = num + 'px';
+              }
+              else
+              {
+                interval.style.width = (num-left1) + 'px';
+                interval.style.marginLeft = left1 + 'px';                
+              }
+              btn2.style.marginLeft = num + 'px'  
+      
+          }
+        }           
+      } else if ( discrete_status == 'no' ) {
+          if (left1 > left2)
+          {
+            interval.style.width = (left1-left2) + 'px';
+            interval.style.marginLeft = left2 + 'px';       
+          }
+          else
+          {
+            interval.style.width = (left2-left1) + 'px';
+            interval.style.marginLeft = left1 + 'px';                
+          }
+      }   
+
+
   }
 
   document.onmouseup = function() {
@@ -128,25 +164,26 @@ function mouseDownBtn_1_Double (event) {
       let left2 = event.pageX - shiftX2 - sler_coords.left;
       let right2 = sler.offsetWidth;
 
+      if (left1 < 0) left1 = 0;                                 
+      if (left1 > right1) left1 = right1; 
+
+      let interv = 490 / interval_number
+      let discret_arr = []
+      let arr_count = 0
+      discret_arr.push(0)
+      for (let i = 0; i < interval_number; i ++) {
+          arr_count = arr_count + interv
+          discret_arr.push(arr_count)
+      }
+      let range = discret_arr[1] - discret_arr[0]
+      let integ = Math.floor(left1)
+
       if (discrete_status == 'yes') {
-        if (left1 < 0) left1 = 0;                                 
-        if (left1 > right1) left1 = right1;
-
-        let interv = 490 / interval_number
-        let discret_arr = []
-        let arr_count = 0
-        discret_arr.push(0)
-        for (let i = 0; i < interval_number; i ++) {
-            arr_count = arr_count + interv
-            discret_arr.push(arr_count)
-        }
-        let range = discret_arr[1] - discret_arr[0]
-        let integ = Math.floor(left1)
-
         for (let num of discret_arr) {
           if (integ < (num + range / 2) && integ > (num - range / 2) ) {
               if (num > left2)
               {
+                
                 interval.style.width = (num-left2) + 'px';
                 interval.style.marginLeft = left2 + 'px';
               }
@@ -156,13 +193,10 @@ function mouseDownBtn_1_Double (event) {
                 interval.style.marginLeft = num + 'px';                
               }
               btn1.style.marginLeft = num + 'px'  
-      
           }
         }           
       } else if ( discrete_status == 'no' ) {
-
-          if (left1 < 0) left1 = 0;                                 
-          if (left1 > right1) left1 = right1;         
+       
           btn1.style.marginLeft = left1 + 'px'
     
           shiftX2 = event.pageX - btn2_coords.left; 

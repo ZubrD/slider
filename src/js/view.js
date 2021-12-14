@@ -102,7 +102,7 @@ export class Config {
     // step = 1
     min = 16
     max = 101
-    discrete = 'yes'
+    discrete = 'no'
 }
 
 export class Panel {
