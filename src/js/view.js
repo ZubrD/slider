@@ -100,8 +100,8 @@ export class Division {
 export class Config {
     runner_number = 2
     // step = 1
-    min = 16
-    max = 101
+    min = 50
+    max = 100
     discrete = 'no'
 }
 

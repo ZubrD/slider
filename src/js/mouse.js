@@ -124,7 +124,9 @@ function mouseDownBtn_1_Single (event) {
       for (let num of discret_arr) {
         if (integ < (num + range / 2) && integ > (num - range / 2) ) {
             btn1.style.marginLeft = num + 'px'  
-            interval.style.width = num  + 'px'           
+            interval.style.width = num  + 'px' 
+            
+            // btn1.dataset.tip =  forTip(configMin, configMax, num)   /* Значение над бегууном */
         }
       }           
     } else if ( discrete_status == 'no' ) {
@@ -150,6 +152,8 @@ function mouseDownBtn_1_Double (event) {
   let discrete_status = event.target.parentNode.dataset.discrete
   let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
 
+  let target = event.target     /* Для надписи над бегуном */
+  
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let btn2_coords = getCoords(btn2)
@@ -179,11 +183,11 @@ function mouseDownBtn_1_Double (event) {
       let integ = Math.floor(left1)
 
       if (discrete_status == 'yes') {
+        
         for (let num of discret_arr) {
           if (integ < (num + range / 2) && integ > (num - range / 2) ) {
               if (num > left2)
               {
-                
                 interval.style.width = (num-left2) + 'px';
                 interval.style.marginLeft = left2 + 'px';
               }
@@ -192,13 +196,17 @@ function mouseDownBtn_1_Double (event) {
                 interval.style.width = (left2-num) + 'px';
                 interval.style.marginLeft = num + 'px';                
               }
-              btn1.style.marginLeft = num + 'px' 
-              btn1.dataset.tip = num 
+              btn1.style.marginLeft = num + 'px'  
+
+              btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
+    
           }
         }           
       } else if ( discrete_status == 'no' ) {
        
           btn1.style.marginLeft = left1 + 'px'
+
+          btn1.dataset.tip =  forTip(target, left1)   /* Значение над бегуном */
     
           shiftX2 = event.pageX - btn2_coords.left; 
           let left2 = event.pageX - shiftX2 - sler_coords.left;
@@ -214,7 +222,8 @@ function mouseDownBtn_1_Double (event) {
           else
           {
             interval.style.width = (left2-left1) + 'px';
-            interval.style.marginLeft = left1 + 'px';                
+            interval.style.marginLeft = left1 + 'px';
+        
           }
       }        
   }
@@ -222,4 +231,14 @@ function mouseDownBtn_1_Double (event) {
   document.onmouseup = function() {
       document.onmousemove = document.onmouseup = null;
   };  
+}
+
+function forTip (target, coord) {
+  let configParent = target.parentNode.parentNode.parentNode.childNodes[3]  /* Для надписи над бегуном */
+  let configInput = configParent.querySelector('.zdslider-config__min')
+  let configMin = Number(configInput.dataset.min)
+  let configMax = Number(configInput.dataset.max)
+  let raschet =  Math.floor(((configMax - configMin) / 490 ) * coord) + configMin
+  // if (raschet > max) raschet = max 
+  return raschet 
 }
