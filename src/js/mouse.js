@@ -16,6 +16,8 @@ export function mouseDownBtn_2 (event) {
   let btn1 = sler.querySelector('[data-type="btn-first"]')
   let btn2 = sler.querySelector('[data-type="btn-second"]')
 
+  let target = event.target     /* Для надписи над бегуном */
+
   let discrete_status = event.target.parentNode.dataset.discrete
   let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
 
@@ -63,11 +65,13 @@ export function mouseDownBtn_2 (event) {
                 interval.style.width = (num-left1) + 'px';
                 interval.style.marginLeft = left1 + 'px';                
               }
-              btn2.style.marginLeft = num + 'px'  
-      
+              btn2.style.marginLeft = num + 'px' 
+
+              btn2.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
           }
         }           
       } else if ( discrete_status == 'no' ) {
+          btn2.dataset.tip =  forTip(target, left2)   /* Значение над бегуном */
           if (left1 > left2)
           {
             interval.style.width = (left1-left2) + 'px';
@@ -95,6 +99,7 @@ function mouseDownBtn_1_Single (event) {
   let btn1 = sler.querySelector('[data-type="btn-first"]')
   let discrete_status = event.target.parentNode.dataset.discrete
   
+  let target = event.target     /* Для надписи над бегуном */
 
   let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
   let sler_coords = getCoords(sler)
@@ -125,15 +130,18 @@ function mouseDownBtn_1_Single (event) {
         if (integ < (num + range / 2) && integ > (num - range / 2) ) {
             btn1.style.marginLeft = num + 'px'  
             interval.style.width = num  + 'px' 
+
+            btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
             
-            // btn1.dataset.tip =  forTip(configMin, configMax, num)   /* Значение над бегууном */
         }
       }           
     } else if ( discrete_status == 'no' ) {
         if (left1 < 0) left1 = 0;                                 
         if (left1 > right1) left1 = right1;    
         btn1.style.marginLeft = left1 + 'px'
-        interval.style.width = left1 + 'px'  
+        interval.style.width = left1 + 'px'
+        
+        btn1.dataset.tip =  forTip(target, left1)   /* Значение над бегуном */
     }
   }
 
@@ -199,8 +207,11 @@ function mouseDownBtn_1_Double (event) {
               btn1.style.marginLeft = num + 'px'  
 
               btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
+              console.log(num)
     
           }
+
+          // btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
         }           
       } else if ( discrete_status == 'no' ) {
        

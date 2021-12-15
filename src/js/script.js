@@ -46,6 +46,7 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
       ranger.setAttribute ('data-inst', counter);
       ranger.setAttribute ('data-runners', runners);
       ranger.setAttribute ('data-discrete', discrete);
+      ranger.setAttribute ('data-tip', 'no');
       ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
 
       let interval = new Interval();
@@ -61,13 +62,14 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
         button_1.setAttribute('data-tip', min);
         button_2.setAttribute('data-type', 'btn-second');
         button_2.setAttribute('data-inst', counter);
-        // button_2.setAttribute('data-tip', max);
+        button_2.setAttribute('data-tip', max);
         button_1.appendTo(ranger_div);
         button_2.appendTo(ranger_div);
       } else {
         let button_1 = new Button();
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
+        button_1.setAttribute('data-tip',max);
         button_1.appendTo(ranger_div);
       }
 

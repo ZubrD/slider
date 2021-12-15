@@ -8,7 +8,7 @@
 
 .zdslider-config {
   width: 200px;
-  height: 100px;
+  height: 150px;
   border: 1px solid red;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -46,6 +46,21 @@
 }
 
 .ranger__button::after {
+  display: none;
+  width: 30px;
+  height: 30px;
+  content: attr(data-tip);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-top: 7px;
+  border: 1px solid green;
+  top: -35px;
+  left: -10px;
+  position: absolute;
+}
+
+.ranger__button-tip::after {
+  display: block;
   width: 30px;
   height: 30px;
   content: attr(data-tip);

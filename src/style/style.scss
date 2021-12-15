@@ -5,7 +5,7 @@
     align-self: center;
     &-config {
         width: 200px;
-        height: 100px;
+        height: 150px;
         border: 1px solid red;
         align-self: center;
         margin-left: 30px;
@@ -47,7 +47,21 @@
         background-color: #999;
         z-index: 10;
         &::after {
-            // display: none;
+            display: none;
+            width: 30px;
+            height: 30px;
+            content: attr(data-tip);
+            box-sizing: border-box;
+            padding-top: 7px;
+            border: 1px solid green;
+            top: -35px;
+            left: -10px;
+            position: absolute;
+        }
+    }
+    &__button-tip {
+        &::after {
+            display: block;
             width: 30px;
             height: 30px;
             content: attr(data-tip);

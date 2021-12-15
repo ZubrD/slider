@@ -1,10 +1,12 @@
 import { makeScale, reScale, modifyScaleInput } from './script.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
+import { showTip, hideTip } from './tipToggler.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
-    let { run } = event.target.dataset 
     let { inst } = event.target.dataset
+    let { run } = event.target.dataset 
     let { discrete } = event.target.dataset
+    let { tip } = event.target.dataset
     if ( run && event.target.checked) {
       oneRunner(event, inst)
     } else if ( run && (!event.target.checked)) {
@@ -16,6 +18,12 @@ export function allChecksListener (event) {    /* Переключение ко�
         ranger.setAttribute('data-discrete', 'yes')
     } else if ( discrete && !event.target.checked ) {
         ranger.setAttribute('data-discrete', 'no')       
+    }
+
+    if ( tip && event.target.checked ) {
+      showTip(event)
+    } else if ( tip && !event.target.checked ) {
+      hideTip()
     }
   }
 
@@ -83,3 +91,4 @@ export function allChecksListener (event) {    /* Переключение ко�
    // console.log(new_scale_arr)
    reScale ( new_scale_arr, current_inst )    /* Перестроение шкалы по новому значению шага */
  }
+
