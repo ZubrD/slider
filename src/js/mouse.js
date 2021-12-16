@@ -244,10 +244,9 @@ function forTip (target, coord) {
   let configParent = target.parentNode.parentNode.parentNode.childNodes[3]  /* Для надписи над бегуном */
   let configInputMin = configParent.querySelector('.zdslider-config__min')
   let configInputMax = configParent.querySelector('.zdslider-config__max')
-  // console.log(configInputMin)
   let configMin = Number(configInputMin.dataset.min)
   let configMax = Number(configInputMax.dataset.max)
-  let raschet =  Math.floor(((configMax - configMin) / 490 ) * coord) + configMin
-  // if (raschet > max) raschet = max 
-  return raschet 
+  let raschet =  Math.floor(((configMax - configMin) / 490 ) * (coord + 2)) + configMin /* coord + 2 при максимальном значении даст 490 */
+  /* Если так не сделать, то при крайнем правом положении бегуна, значение в ярлыке будет меньше максимального значения шкалы */
+  return raschet                                                         
 }
