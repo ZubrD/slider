@@ -207,11 +207,7 @@ function mouseDownBtn_1_Double (event) {
               btn1.style.marginLeft = num + 'px'  
 
               btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
-              console.log(num)
-    
           }
-
-          // btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
         }           
       } else if ( discrete_status == 'no' ) {
        
@@ -246,9 +242,11 @@ function mouseDownBtn_1_Double (event) {
 
 function forTip (target, coord) {
   let configParent = target.parentNode.parentNode.parentNode.childNodes[3]  /* Для надписи над бегуном */
-  let configInput = configParent.querySelector('.zdslider-config__min')
-  let configMin = Number(configInput.dataset.min)
-  let configMax = Number(configInput.dataset.max)
+  let configInputMin = configParent.querySelector('.zdslider-config__min')
+  let configInputMax = configParent.querySelector('.zdslider-config__max')
+  // console.log(configInputMin)
+  let configMin = Number(configInputMin.dataset.min)
+  let configMax = Number(configInputMax.dataset.max)
   let raschet =  Math.floor(((configMax - configMin) / 490 ) * coord) + configMin
   // if (raschet > max) raschet = max 
   return raschet 

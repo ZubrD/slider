@@ -34,6 +34,9 @@ export function allChecksListener (event) {    /* Переключение ко�
     let max = Number ( max_input.value )
     let step = 1                                   /* Указал произвольный шаг */
     let new_scale_arr = makeScale ( min, max, step )
+
+    event.target.setAttribute('data-min', min)
+    event.target.setAttribute('data-max', max)
  
     modifyScaleInput ( parent, new_scale_arr )
  
@@ -49,8 +52,11 @@ export function allChecksListener (event) {    /* Переключение ко�
     let max = Number ( event.target.value )
     let step = 1                                   /* Указал произвольный шаг */
     let new_scale_arr = makeScale ( min, max, step ) /* получение массивов */
+
+    event.target.setAttribute('data-min', min)
+    event.target.setAttribute('data-max', max)
  
-   modifyScaleInput ( parent, new_scale_arr )
+    modifyScaleInput ( parent, new_scale_arr )
     
     let current_inst = event.target.parentNode.dataset.inst
     min_input.setAttribute('max', max)     /* Ограничитель, чтобы min не превышал max */
