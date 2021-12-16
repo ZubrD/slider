@@ -1,16 +1,19 @@
-import { makeScale, reScale, modifyScaleInput } from './script.js'
+import { makeScale, reScale, modifyScaleInput } from './scale.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
 import { showTip, hideTip } from './tipToggler.js'
+import { toHorizontal, toVertical } from './orientation.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
     let { inst } = event.target.dataset
     let { run } = event.target.dataset 
     let { discrete } = event.target.dataset
     let { tip } = event.target.dataset
+    let { orient } = event.target.dataset
+
     if ( run && event.target.checked) {
-      oneRunner(event, inst)
+      oneRunner ( event, inst )
     } else if ( run && (!event.target.checked)) {
-      twoRunners (event, inst)  
+      twoRunners ( event, inst )  
     }
 
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
@@ -21,9 +24,15 @@ export function allChecksListener (event) {    /* Переключение ко�
     }
 
     if ( tip && event.target.checked ) {
-      showTip(event)
+      showTip ( event )
     } else if ( tip && !event.target.checked ) {
-      hideTip()
+      hideTip ( event )
+    }
+
+    if ( orient && event.target.checked ) {
+      toVertical ( event )
+    } else if ( orient && !event.target.checked ) {
+      toHorizontal ( event )
     }
   }
 

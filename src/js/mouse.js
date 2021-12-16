@@ -1,11 +1,12 @@
-import { getCoords, } from './script.js'
+import { getCoords, } from './scale.js'
+import { forTip } from './tipToggler.js'
 
 export function mouseDownBtn_1 (event) {
     let runner_number = event.target.parentNode.dataset.runners
     if ( runner_number == 1 ) {
-      mouseDownBtn_1_Single (event)
+      mouseDownBtn_1_Single (event)       /* если один бегун */
     } else if ( runner_number == 2 ) {
-      mouseDownBtn_1_Double (event)
+      mouseDownBtn_1_Double (event)       /* первый бегун (левый) если бегунов два */
     }
   }
   
@@ -27,7 +28,6 @@ export function mouseDownBtn_2 (event) {
   let shiftX1 = event.pageX - btn1_coords.left;
   let shiftX2 = event.pageX - btn2_coords.left;
 
-
   document.onmousemove = function (event) {
       let left2 = event.pageX - shiftX2 - sler_coords.left;
       let right2 = sler.offsetWidth - btn2.offsetWidth;
@@ -40,15 +40,9 @@ export function mouseDownBtn_2 (event) {
       let right1 = sler.offsetWidth - btn1.offsetWidth;
       if (left1 < 0) left1 = 0;
       if (left1 > right1) left1 = right1;            
-        
-      let interv = 490 / interval_number
-      let discret_arr = []
-      let arr_count = 0
-      discret_arr.push(0)
-      for (let i = 0; i < interval_number; i ++) {
-          arr_count = arr_count + interv
-          discret_arr.push(arr_count)
-      }
+
+      let discret_arr = discreteArray (interval_number)
+
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(left2)
      
@@ -83,8 +77,6 @@ export function mouseDownBtn_2 (event) {
             interval.style.marginLeft = left1 + 'px';                
           }
       }   
-
-
   }
 
   document.onmouseup = function() {
@@ -108,22 +100,14 @@ function mouseDownBtn_1_Single (event) {
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   document.onmousemove = function (event) {
     let left1 = event.pageX - shiftX1 - sler_coords.left;
-    
-    // let right1 = sler.offsetWidth - btn1.offsetWidth;
-    let right1 = sler.offsetWidth - 12;
+    let right1 = sler.offsetWidth - 12;   /* 12 - это ширина бегуна + ширина риски */
 
     if (discrete_status == 'yes') {
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1;
 
-      let interv = 490 / interval_number
-      let discret_arr = []
-      let arr_count = 0
-      discret_arr.push(0)
-      for (let i = 0; i < interval_number; i ++) {
-          arr_count = arr_count + interv
-          discret_arr.push(arr_count)
-      }
+      let discret_arr = discreteArray (interval_number)
+
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(left1)
       for (let num of discret_arr) {
@@ -171,7 +155,7 @@ function mouseDownBtn_1_Double (event) {
 
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;       
-      let right1 = sler.offsetWidth - 12;
+      let right1 = sler.offsetWidth - 12;     /* 12 - это ширина бегуна + ширина риски */
       shiftX2 = event.pageX - btn2_coords.left; 
       let left2 = event.pageX - shiftX2 - sler_coords.left;
       let right2 = sler.offsetWidth;
@@ -179,14 +163,8 @@ function mouseDownBtn_1_Double (event) {
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1; 
 
-      let interv = 490 / interval_number
-      let discret_arr = []
-      let arr_count = 0
-      discret_arr.push(0)
-      for (let i = 0; i < interval_number; i ++) {
-          arr_count = arr_count + interv
-          discret_arr.push(arr_count)
-      }
+      let discret_arr = discreteArray (interval_number)
+
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(left1)
 
@@ -240,13 +218,14 @@ function mouseDownBtn_1_Double (event) {
   };  
 }
 
-function forTip (target, coord) {
-  let configParent = target.parentNode.parentNode.parentNode.childNodes[3]  /* Для надписи над бегуном */
-  let configInputMin = configParent.querySelector('.zdslider-config__min')
-  let configInputMax = configParent.querySelector('.zdslider-config__max')
-  let configMin = Number(configInputMin.dataset.min)
-  let configMax = Number(configInputMax.dataset.max)
-  let raschet =  Math.floor(((configMax - configMin) / 490 ) * (coord + 2)) + configMin /* coord + 2 при максимальном значении даст 490 */
-  /* Если так не сделать, то при крайнем правом положении бегуна, значение в ярлыке будет меньше максимального значения шкалы */
-  return raschet                                                         
+function discreteArray (interval_number) {
+  let interv = 490 / interval_number
+  let discret_arr = []
+  let arr_count = 0
+  discret_arr.push(0)
+  for (let i = 0; i < interval_number; i ++) {
+      arr_count = arr_count + interv
+      discret_arr.push(arr_count)
+  }
+  return discret_arr
 }
