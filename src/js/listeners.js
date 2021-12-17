@@ -1,7 +1,7 @@
 import { makeScale, reScale, modifyScaleInput } from './scale.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
 import { showTip, hideTip } from './tipToggler.js'
-import { toHorizontal, toVertical } from './orientation.js'
+import { toHorizontal, toVertical } from './orientToggler.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
     let { inst } = event.target.dataset

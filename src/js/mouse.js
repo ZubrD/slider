@@ -40,7 +40,7 @@ export function mouseDownBtn_2 (event) {
       let right1 = sler.offsetWidth - btn1.offsetWidth;
       if (left1 < 0) left1 = 0;
       if (left1 > right1) left1 = right1;            
-
+      
       let discret_arr = discreteArray (interval_number)
 
       let range = discret_arr[1] - discret_arr[0]
@@ -100,7 +100,7 @@ function mouseDownBtn_1_Single (event) {
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   document.onmousemove = function (event) {
     let left1 = event.pageX - shiftX1 - sler_coords.left;
-    let right1 = sler.offsetWidth - 12;   /* 12 - это ширина бегуна + ширина риски */
+    let right1 = sler.offsetWidth - btn1.offsetWidth;   /* 12 - это ширина бегуна */
 
     if (discrete_status == 'yes') {
       if (left1 < 0) left1 = 0;                                 
@@ -152,10 +152,11 @@ function mouseDownBtn_1_Double (event) {
   let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   let shiftX2 = event.pageX - btn2_coords.left;
+  console.log(btn1.offsetWidth)
 
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;       
-      let right1 = sler.offsetWidth - 12;     /* 12 - это ширина бегуна + ширина риски */
+      let right1 = sler.offsetWidth - btn1.offsetWidth;  
       shiftX2 = event.pageX - btn2_coords.left; 
       let left2 = event.pageX - shiftX2 - sler_coords.left;
       let right2 = sler.offsetWidth;
@@ -219,8 +220,8 @@ function mouseDownBtn_1_Double (event) {
 }
 
 function discreteArray (interval_number) {
-  let interv = 490 / interval_number
-  let discret_arr = []
+  let interv = 488 / interval_number   /* 488 = ширина слайдера - ширина бегуна */
+  let discret_arr = []            /* если не указать абсолютное значение, бегун будет колебаться */
   let arr_count = 0
   discret_arr.push(0)
   for (let i = 0; i < interval_number; i ++) {

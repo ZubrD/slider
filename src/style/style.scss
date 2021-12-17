@@ -1,3 +1,4 @@
+$ranger-width: 500px;
 
 .zdslider {
     padding-top: 80px;
@@ -9,15 +10,6 @@
         border: 1px solid red;
         align-self: center;
         margin-left: 30px;
-        /* Chrome, Safari, Edge, Opera */
-        // &__step::-webkit-outer-spin-button, &__step::-webkit-inner-spin-button {
-        //     -webkit-appearance: none;
-        //     margin: 0;
-        // }
-        // /* Firefox */
-        // &__step {
-        //    -moz-appearance: textfield; 
-        // }
     }
     &-wrapper {
         display: flex;
@@ -26,7 +18,7 @@
 }
 
 .ranger {
-    width:500px;
+    width: $ranger-width;
     height:10px;
     border-radius: 4px;
     background-color: #ddd;
@@ -82,7 +74,7 @@
     &__scale {
         margin-top:10px;
         height: 30px;
-        width: 500px; 
+        width: $ranger-width; 
         display: flex;  
         justify-content: space-between;
         &-span {
@@ -94,7 +86,7 @@
         position: absolute;
         margin-top:-14px;
         height: 30px;
-        width: 500px; 
+        width: $ranger-width; 
         display: flex;  
         justify-content: space-between; 
         &-span {
@@ -105,10 +97,29 @@
     }
 }
 
+.zdslider-vert {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    align-self: center;
+    display: flex;
+    &-config {
+        width: 200px;
+        height: 150px;
+        border: 1px solid red;
+        align-self: center;
+        margin-left: 30px;
+    }
+    &-wrapper {
+        display: flex;
+        margin-bottom: 20px;
+    }
+}
+
 
 .ranger-vert {
     width:10px;
-    height:500px;
+    height: $ranger-width;
     border-radius: 4px;
     background-color: #ddd;
     position: relative;
@@ -153,18 +164,20 @@
 
     &__interval {
         position: absolute;
-        height: 5px;
-        width:0px;
+        height: 0px;
+        width: 5px;
         margin-top:3px;
         border: none;
         background-color: #559933;        
     }
 
     &__scale {
-        margin-top:10px;
-        height: 30px;
-        width: 500px; 
-        display: flex;  
+        margin-top: 0px;
+        margin-left: 10px;
+        height: $ranger-width;
+        width: 30px; 
+        display: flex;
+        flex-direction: column;  
         justify-content: space-between;
         &-span {
             border: 1px solid gray;
@@ -173,17 +186,18 @@
     }
     &__scale-division {
         position: absolute;
-        margin-top:-14px;
-        height: 30px;
-        width: 500px; 
+        flex-direction: column;
+        margin-top: 0px;
+        margin-left: -5px;
+        height: $ranger-width;
+        width: 30px; 
         display: flex;  
         justify-content: space-between; 
         &-span {
-            width: 2px;
-            height: 20px;
+            width: 20px;
+            height: 2px;
             background-color: salmon;
         }       
     }
 }
-
 
