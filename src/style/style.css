@@ -155,9 +155,9 @@
 
 .ranger-vert__button {
   position: absolute;
-  top: 50%;
-  width: 10px;
-  height: 25px;
+  left: -7px;
+  width: 25px;
+  height: 10px;
   cursor: move;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
@@ -212,9 +212,9 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -228,9 +228,9 @@
 .ranger-vert__scale-division {
   position: absolute;
   -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
   margin-top: 0px;
   margin-left: -5px;
   height: 500px;

@@ -1,11 +1,16 @@
 import { mouseDownBtn_1, mouseDownBtn_2 } from './mouse.js'
+import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from './mouseVert.js'
 
 export class Ranger {
-    constructor ( options ) {
+    constructor ( orientation ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger' )
         this.$el.setAttribute('data-type', 'ranger')
-
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert' )
+        }
     }
     appendTo ( parent ) {
         parent.appendChild ( this.$el )
@@ -19,10 +24,15 @@ export class Ranger {
 }
 
 export class Interval {
-    constructor ( options ) {
+    constructor ( orientation ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger__interval' )
         this.$el.setAttribute('data-type', 'interval')
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert__interval' )
+        }
     }
     appendTo ( parent ) {
         parent.appendChild ( this.$el )
@@ -36,9 +46,14 @@ export class Interval {
 }
 
 export class Button {
-    constructor ( options ) {
+    constructor ( orientation ) {
         this.$el = document.createElement( 'button' )
         this.$el.classList.add( 'ranger__button' )
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert__button' )
+        }
 
         this.#setup()
     }
@@ -56,19 +71,33 @@ export class Button {
 
     clickHandler ( event ) {
        const { type } = event.target.dataset
-        if ( type === 'btn-first' ) {
-            mouseDownBtn_1( event )
-        } else if (type === 'btn-second') {
-            mouseDownBtn_2( event )
-        }
+       const { orientation } = event.target.parentNode.parentNode.dataset
+       if ( orientation == 'horizontal') {
+            if ( type === 'btn-first' ) {
+                mouseDownBtn_1( event )
+            } else if (type === 'btn-second') {
+                mouseDownBtn_2( event )
+            }        
+       } else if ( orientation == 'vertical' ) {
+            if ( type === 'btn-first' ) {
+                mouseVertDownBtn_1( event )
+            } else if (type === 'btn-second') {
+                mouseVertDownBtn_2( event )
+            }             
+       }
     }
 }
 
 
 export class Scale {
-    constructor ( options ) {
+    constructor ( orientation ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger__scale' )
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert__scale' )
+        }
     }
     appendTo( parent ) {
         parent.appendChild( this.$el )
@@ -81,11 +110,63 @@ export class Scale {
     }
 }
 
+export class ScaleSpan {
+    constructor ( orientation ) {
+        this.$el = document.createElement ( 'span' )
+        this.$el.classList.add ( 'ranger__scale-span' )
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert__scale-span' )
+        }
+    }
+
+    appendTo( parent ) {
+        parent.appendChild( this.$el )
+    }
+    appendChild( child ) {
+        this.$el.appendChild ( child )
+    }
+    setAttribute( attr, number ) {
+        this.$el.setAttribute ( attr, number )
+    }
+    inner_HTML(child) {
+        this.$el.innerHTML = child
+    }
+}
+
 export class Division {
-    constructor ( options ) {
+    constructor ( orientation ) {
         this.$el = document.createElement ( 'div' )
         this.$el.classList.add ( 'ranger__scale-division' )
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert__scale-division' )
+        }
     }
+    appendTo( parent ) {
+        parent.appendChild( this.$el )
+    }
+    appendChild( child ) {
+        this.$el.appendChild ( child )
+    }
+    setAttribute( attr, number ) {
+        this.$el.setAttribute ( attr, number )
+    }
+}
+
+export class DivisionSpan {
+    constructor ( orientation ) {
+        this.$el = document.createElement ( 'span' )
+        this.$el.classList.add ( 'ranger__scale-division-span' )
+        if ( orientation == 'horizontal' ) {
+            
+        } else if ( orientation == 'vertical' ) {
+            this.$el.classList.add ( 'ranger-vert__scale-division' )
+        }
+    }
+
     appendTo( parent ) {
         parent.appendChild( this.$el )
     }
@@ -103,6 +184,7 @@ export class Config {
     min = 0
     max = 100
     discrete = 'no'
+    orientation= 'horizontal'
 }
 
 export class Panel {

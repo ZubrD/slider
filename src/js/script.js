@@ -1,4 +1,4 @@
-import { Ranger, Interval, Button, Config, Scale, Division } from './view.js'
+import { Ranger, Interval, Button, Config, Scale, ScaleSpan, Division, DivisionSpan } from './view.js'
 import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from './listeners.js'
 import { makeScale } from './scale.js'
 
@@ -12,6 +12,7 @@ function sliderInit () {
   // let step = config.step
   let step = 1
   let discrete = config.discrete
+  let orientation = config.orientation
 
   let scale_arrs = makeScale (min, max, step)
   let scale_arr = scale_arrs [ 0 ]        /* Массив значений шкалы */
@@ -22,7 +23,7 @@ function sliderInit () {
   let elements = document.querySelectorAll('.zdslider');
   if ( elements.length != 0 ) {
 
-    setStructure ( runner_number, min, max, discrete, scale_arr, iteration, iterations_arr )  /* Создание структуры слайдера */
+    setStructure ( runner_number, min, max, discrete, orientation, scale_arr, iteration, iterations_arr )  /* Создание структуры слайдера */
 
     sliderPositioning ( runner_number )  /* Первоначальное размещение слайдера */
 
@@ -36,13 +37,21 @@ function sliderInit () {
 }
 
   
-function setStructure (runners, min, max, discrete, scale_arr, iteration, iterations_arr) {    /* Структура слайдера */
+function setStructure (runners, min, max, discrete, orientation, scale_arr, iteration, iterations_arr) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
   
   for ( let elem of elements ) {
-      let ranger = new Ranger();
+      elem.setAttribute('data-inst', counter)
+      elem.setAttribute ('data-orientation', orientation);
+      if ( orientation == 'horizontal' ) {
+            
+      } else if ( orientation == 'vertical' ) {
+          elem.classList.add ( 'zdslider-vert' )
+      }
+
+      let ranger = new Ranger( orientation );
       ranger.appendTo(elem)
       ranger.setAttribute ('data-inst', counter);
       ranger.setAttribute ('data-runners', runners);
@@ -50,14 +59,14 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
       ranger.setAttribute ('data-tip', 'no');
       ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
 
-      let interval = new Interval();
+      let interval = new Interval( orientation );
       let ranger_div = document.querySelectorAll('.ranger')[i]
       interval.setAttribute('data-inst', counter);
       interval.appendTo(ranger_div)
 
       if ( runners == 2 ) {
-        let button_1 = new Button();
-        let button_2 = new Button();
+        let button_1 = new Button( orientation );
+        let button_2 = new Button( orientation );
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
         button_1.setAttribute('data-tip', min);
@@ -67,7 +76,7 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
         button_1.appendTo(ranger_div);
         button_2.appendTo(ranger_div);
       } else {
-        let button_1 = new Button();
+        let button_1 = new Button( orientation );
         button_1.setAttribute('data-type', 'btn-first');
         button_1.setAttribute('data-inst', counter);
         button_1.setAttribute('data-tip',max);
@@ -75,26 +84,23 @@ function setStructure (runners, min, max, discrete, scale_arr, iteration, iterat
       }
 
 
-      let division = new Division ();
+      let division = new Division ( orientation );
       division.setAttribute ('data-inst', counter)
 
       for ( let el of scale_arr ) {
-        let span = document.createElement ( 'span' )
-        span.classList.add ( 'ranger__scale-division-span' )
-        // span.innerHTML = el
-        division.appendChild ( span )
+        let span = new DivisionSpan ( orientation )
+        span.appendTo ( division )
       }
       division.appendTo ( elem );  
 
 
-      let scale = new Scale ();
+      let scale = new Scale ( orientation );
       scale.setAttribute ( 'data-inst', counter )
 
       for ( let el of scale_arr ) {
-        let span = document.createElement ( 'span' )
-        span.classList.add ( 'ranger__scale-span' )
-        span.innerHTML = el
-        scale.appendChild ( span )
+        let span = new ScaleSpan ( orientation )
+        span.appendTo ( scale )
+        span.inner_HTML ( el )
       }
       scale.appendTo ( elem );
 

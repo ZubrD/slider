@@ -126,9 +126,9 @@ $ranger-width: 500px;
 
     &__button {
         position: absolute;
-        top: 50%;
-        width: 10px;
-        height: 25px;
+        left: -7px;
+        width: 25px;
+        height: 10px;
         cursor: move;
         transform: translateY(-50%);
         border: none;
@@ -177,7 +177,7 @@ $ranger-width: 500px;
         height: $ranger-width;
         width: 30px; 
         display: flex;
-        flex-direction: column;  
+        flex-direction: column-reverse;  
         justify-content: space-between;
         &-span {
             border: 1px solid gray;
@@ -186,7 +186,7 @@ $ranger-width: 500px;
     }
     &__scale-division {
         position: absolute;
-        flex-direction: column;
+        flex-direction: column-reverse;
         margin-top: 0px;
         margin-left: -5px;
         height: $ranger-width;

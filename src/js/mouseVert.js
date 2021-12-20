@@ -1,16 +1,17 @@
 import { getCoords, } from './scale.js'
 import { forTip } from './tipToggler.js'
+import { discreteArray } from './mouse.js'
 
-export function mouseDownBtn_1 (event) {
+export function mouseVertDownBtn_1 (event) {
     let runner_number = event.target.parentNode.dataset.runners
     if ( runner_number == 1 ) {
-      mouseDownBtn_1_Single (event)       /* если один бегун */
+      mouseVertDownBtn_1_Single (event)       /* если один бегун */
     } else if ( runner_number == 2 ) {
-      mouseDownBtn_1_Double (event)       /* первый бегун (левый) если бегунов два */
+      mouseVertDownBtn_1_Double (event)       /* первый бегун (левый) если бегунов два */
     }
   }
   
-export function mouseDownBtn_2 (event) {
+export function mouseVertDownBtn_2 (event) {
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
   let interval = sler.querySelector('.ranger__interval')     
@@ -84,8 +85,7 @@ export function mouseDownBtn_2 (event) {
   };
 }
   
-function mouseDownBtn_1_Single (event) {
-  // console.log('dfdfdfdf')
+function mouseVertDownBtn_1_Single (event) {
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
   let interval = sler.querySelector('.ranger__interval')     
@@ -135,7 +135,7 @@ function mouseDownBtn_1_Single (event) {
   };  
 }
   
-function mouseDownBtn_1_Double (event) {
+function mouseVertDownBtn_1_Double (event) {
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
   let interval = sler.querySelector('.ranger__interval')     
@@ -155,7 +155,7 @@ function mouseDownBtn_1_Double (event) {
   let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   let shiftX2 = event.pageX - btn2_coords.left;
-  // console.log(btn1.offsetWidth)
+  console.log(btn1.offsetWidth)
 
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;       
@@ -222,14 +222,3 @@ function mouseDownBtn_1_Double (event) {
   };  
 }
 
-export function discreteArray (interval_number) {
-  let interv = 488 / interval_number   /* 488 = ширина слайдера - ширина бегуна */
-  let discret_arr = []            /* если не указать абсолютное значение, бегун будет колебаться */
-  let arr_count = 0
-  discret_arr.push(0)
-  for (let i = 0; i < interval_number; i ++) {
-      arr_count = arr_count + interv
-      discret_arr.push(arr_count)
-  }
-  return discret_arr
-}
