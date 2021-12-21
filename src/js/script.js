@@ -25,7 +25,7 @@ function sliderInit () {
 
     setStructure ( runner_number, min, max, discrete, orientation, scale_arr, iteration, iterations_arr )  /* Создание структуры слайдера */
 
-    sliderPositioning ( runner_number )  /* Первоначальное размещение слайдера */
+    sliderPositioning ( runner_number, orientation )  /* Первоначальное размещение слайдера */
 
   }
 
@@ -140,21 +140,35 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
   }
 }
 
-function sliderPositioning (runners) {   /* Первоначальное размещение слайдера */
+function sliderPositioning ( runners, orientation ) {   /* Первоначальное размещение слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let i = 0
   for (let elem of elements) {
     let ranger = document.querySelectorAll('.ranger')[i]
     let interval = document.querySelectorAll('.ranger__interval')[i]
     let button_1 = document.querySelectorAll('[data-type="btn-first"]')[i] 
-    interval.style.width = (ranger.offsetWidth) + 'px';  
+    if ( orientation == 'horizontal' ) {
+      interval.style.width = (ranger.offsetWidth) + 'px';
+    } else if ( orientation == 'vertical' ) {
+      interval.style.height = (ranger.offsetHeight) - 2 + 'px';   /* 2 - это ширина риски шкалы */
+    } 
     if ( runners == 1 ) {
-      button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
+      if ( orientation == 'horizontal' ) {
+        button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
+      } else if (orientation == 'vertical') {
+        button_1.style.marginTop = 5 + 'px';
+      }
     } 
     if ( runners == 2 ) {
-      button_1.style.marginLeft = '0px';
-      let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
-      button_2.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 'px';   
+      if ( orientation == 'horizontal' ) {
+        button_1.style.marginLeft = '0px';
+        let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
+        button_2.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 'px'; 
+      } else if ( orientation == 'vertical' ) {
+        button_1.style.marginTop = ranger.offsetHeight + 'px';
+        let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
+        button_2.style.marginTop = 0 + 'px';
+      }
     }
     i ++
   }  

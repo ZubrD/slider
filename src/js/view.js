@@ -163,7 +163,7 @@ export class DivisionSpan {
         if ( orientation == 'horizontal' ) {
             
         } else if ( orientation == 'vertical' ) {
-            this.$el.classList.add ( 'ranger-vert__scale-division' )
+            this.$el.classList.add ( 'ranger-vert__scale-division-span' )
         }
     }
 
@@ -184,7 +184,8 @@ export class Config {
     min = 0
     max = 100
     discrete = 'no'
-    orientation= 'horizontal'
+    orientation= 'vertical'
+    // orientation= 'horizontal'
 }
 
 export class Panel {
