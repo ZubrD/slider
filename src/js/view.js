@@ -81,6 +81,7 @@ export class Button {
        } else if ( orientation == 'vertical' ) {
             if ( type === 'btn-first' ) {
                 mouseVertDownBtn_1( event )
+                // console.log(event.target)
             } else if (type === 'btn-second') {
                 mouseVertDownBtn_2( event )
             }             
@@ -180,7 +181,6 @@ export class DivisionSpan {
 
 export class Config {
     runner_number = 2
-    // step = 1
     min = 0
     max = 100
     discrete = 'no'

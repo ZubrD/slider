@@ -27,6 +27,7 @@ export function mouseDownBtn_2 (event) {
   let btn2_coords = getCoords(btn2)
   let shiftX1 = event.pageX - btn1_coords.left;
   let shiftX2 = event.pageX - btn2_coords.left;
+  console.log(event.pageX, btn1_coords.left)
 
   document.onmousemove = function (event) {
       let left2 = event.pageX - shiftX2 - sler_coords.left;

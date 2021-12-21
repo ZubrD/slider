@@ -26,26 +26,27 @@ export function mouseVertDownBtn_2 (event) {
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let btn2_coords = getCoords(btn2)
-  let shiftX1 = event.pageX - btn1_coords.left;
-  let shiftX2 = event.pageX - btn2_coords.left;
+  let shiftY1 = event.pageY - btn1_coords.top;
+  let shiftY2 = event.pageY - btn2_coords.top;
 
   document.onmousemove = function (event) {
-      let left2 = event.pageX - shiftX2 - sler_coords.left;
-      let right2 = sler.offsetWidth - btn2.offsetWidth;
-      if (left2 < 0) left2 = 0;                                 
-      if (left2 > right2) left2 = right2;         
-      btn2.style.marginLeft = left2 + 'px'
+      let top2 = event.pageY - shiftY2 - sler_coords.top;
+      let down2 = sler.offsetHeight - btn2.offsetHeight;
+      if (top2 < 0) top2 = 0;                                 
+      if (top2 > down2) top2 = down2;         
+      btn2.style.marginTop = top2 + 'px'
+      console.log(top2)
 
-      shiftX1 = event.pageX - btn1_coords.left; 
-      let left1 = event.pageX - shiftX1 - sler_coords.left;
-      let right1 = sler.offsetWidth - btn1.offsetWidth;
-      if (left1 < 0) left1 = 0;
-      if (left1 > right1) left1 = right1;            
+      shiftY1 = event.pageY - btn1_coords.top; 
+      let top1 = event.pageY - shiftY1 - sler_coords.top;
+      let down1 = sler.offsetHeight - btn1.offsetHeight;
+      if (top1 < 0) top1 = 0;
+      if (top1 > down1) top1 = down1;            
       
       let discret_arr = discreteArray (interval_number)
 
       let range = discret_arr[1] - discret_arr[0]
-      let integ = Math.floor(left2)
+      let integ = Math.floor(top2)
      
       if (discrete_status == 'yes') {
         for (let num of discret_arr) {
@@ -66,16 +67,16 @@ export function mouseVertDownBtn_2 (event) {
           }
         }           
       } else if ( discrete_status == 'no' ) {
-          btn2.dataset.tip =  forTip(target, left2)   /* Значение над бегуном */
-          if (left1 > left2)
+          btn2.dataset.tip =  forTip(target, top2)   /* Значение над бегуном */
+          if (top1 > top2)
           {
-            interval.style.width = (left1-left2) + 'px';
-            interval.style.marginLeft = left2 + 'px';       
+            interval.style.height = (top1-top2) + 'px';
+            interval.style.marginTop = top2 + 'px';       
           }
           else
           {
-            interval.style.width = (left2-left1) + 'px';
-            interval.style.marginLeft = left1 + 'px';                
+            interval.style.height = (top2-top1) + 'px';
+            interval.style.marginTop = top1 + 'px';                
           }
       }   
   }
@@ -150,68 +151,65 @@ function mouseVertDownBtn_1_Double (event) {
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let btn2_coords = getCoords(btn2)
-  // let move_X = event.pageX
-  // let move_Y = event.pageY
-  let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
+  let shiftY1 = event.pageY - btn1_coords.top; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
-  let shiftX2 = event.pageX - btn2_coords.left;
-  console.log(btn1.offsetWidth)
+  let shiftY2 = event.pageY - btn2_coords.top;
 
   document.onmousemove = function (event) {
-      let left1 = event.pageX - shiftX1 - sler_coords.left;       
-      let right1 = sler.offsetWidth - btn1.offsetWidth;  
-      shiftX2 = event.pageX - btn2_coords.left; 
-      let left2 = event.pageX - shiftX2 - sler_coords.left;
-      let right2 = sler.offsetWidth;
+      let top1 = event.pageY - shiftY1 - sler_coords.top;       
+      let down1 = sler.offsetHeight - btn1.offsetHeight;  
+      shiftY2 = event.pageY - btn2_coords.top; 
+      let top2 = event.pageY - shiftY2 - sler_coords.top;
+      let down2 = sler.offsetHeight;
 
-      if (left1 < 0) left1 = 0;                                 
-      if (left1 > right1) left1 = right1; 
+      if (top1 < 0) top1 = 0;                                 
+      if (top1 > down1) top1 = down1; 
 
       let discret_arr = discreteArray (interval_number)
 
       let range = discret_arr[1] - discret_arr[0]
-      let integ = Math.floor(left1)
+      let integ = Math.floor(top1)
 
       if (discrete_status == 'yes') {
         
         for (let num of discret_arr) {
           if (integ < (num + range / 2) && integ > (num - range / 2) ) {
-              if (num > left2)
+              if (num > top2)
               {
-                interval.style.width = (num-left2) + 'px';
-                interval.style.marginLeft = left2 + 'px';
+                interval.style.height = (num-top2) + 'px';
+                interval.style.marginTop = top2 + 'px';
               }
               else
               {
-                interval.style.width = (left2-num) + 'px';
-                interval.style.marginLeft = num + 'px';                
+                interval.style.height = (top2-num) + 'px';
+                interval.style.marginTop = num + 'px';                
               }
-              btn1.style.marginLeft = num + 'px'  
+              btn1.style.marginTop = num + 'px'  
 
               btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
           }
         }           
       } else if ( discrete_status == 'no' ) {
        
-          btn1.style.marginLeft = left1 + 'px'
+          btn1.style.marginTop = top1 + 'px'
 
-          btn1.dataset.tip =  forTip(target, left1)   /* Значение над бегуном */
+          btn1.dataset.tip =  forTip(target, top1)   /* Значение над бегуном */
     
-          shiftX2 = event.pageX - btn2_coords.left; 
-          let left2 = event.pageX - shiftX2 - sler_coords.left;
-          let right2 = sler.offsetWidth;
-          if (left2 < 0) left2 = 0;
-          if (left2 > right2) left2 = right2; 
+          shiftY2 = event.pageY - btn2_coords.top; 
+          let top2 = event.pageY - shiftY2 - sler_coords.top;
+          let down2 = sler.offsetHeight;
+          if (top2 < 0) top2 = 0;
+          if (top2 > down2) top2 = down2; 
           
-          if (left1 > left2)
+          if (top1 > top2)
           {
-            interval.style.width = (left1-left2) + 'px';
-            interval.style.marginLeft = left2 + 'px';
+            interval.style.height = (top1-top2) + 'px';
+            interval.style.marginTop = top2 + 'px';
           }
           else
           {
-            interval.style.width = (left2-left1) + 'px';
-            interval.style.marginLeft = left1 + 'px';
+            interval.style.height = (top2-top1) + 'px';
+            interval.style.marginTop = top1 + 'px';
         
           }
       }        
