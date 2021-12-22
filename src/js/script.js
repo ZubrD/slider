@@ -150,13 +150,13 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
     if ( orientation == 'horizontal' ) {
       interval.style.width = (ranger.offsetWidth) + 'px';
     } else if ( orientation == 'vertical' ) {
-      interval.style.height = (ranger.offsetHeight) - 2 + 'px';   /* 2 - это ширина риски шкалы */
+      interval.style.height = (ranger.offsetHeight)  + 'px';   /* 2 - это ширина риски шкалы */
     } 
     if ( runners == 1 ) {
       if ( orientation == 'horizontal' ) {
         button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
       } else if (orientation == 'vertical') {
-        button_1.style.marginTop = 5 + 'px';
+        button_1.style.marginTop = 0 + 'px';
       }
     } 
     if ( runners == 2 ) {

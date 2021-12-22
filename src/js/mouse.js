@@ -42,7 +42,7 @@ export function mouseDownBtn_2 (event) {
       if (left1 < 0) left1 = 0;
       if (left1 > right1) left1 = right1;            
       
-      let discret_arr = discreteArray (interval_number)
+      let discret_arr = discreteArray (interval_number, right1)
 
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(left2)
@@ -86,7 +86,6 @@ export function mouseDownBtn_2 (event) {
 }
   
 function mouseDownBtn_1_Single (event) {
-  // console.log('dfdfdfdf')
   let sler_number = event.target.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
   let interval = sler.querySelector('.ranger__interval')     
@@ -108,7 +107,7 @@ function mouseDownBtn_1_Single (event) {
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1;
 
-      let discret_arr = discreteArray (interval_number)
+      let discret_arr = discreteArray (interval_number, right1)
 
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(left1)
@@ -168,7 +167,7 @@ function mouseDownBtn_1_Double (event) {
       if (left1 < 0) left1 = 0;                                 
       if (left1 > right1) left1 = right1; 
 
-      let discret_arr = discreteArray (interval_number)
+      let discret_arr = discreteArray (interval_number, right1)
 
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(left1)
@@ -223,8 +222,8 @@ function mouseDownBtn_1_Double (event) {
   };  
 }
 
-export function discreteArray (interval_number) {
-  let interv = 488 / interval_number   /* 488 = ширина слайдера - ширина бегуна */
+export function discreteArray (interval_number, length) {
+  let interv = length / interval_number   /* 488 = ширина слайдера - ширина бегуна */
   let discret_arr = []            /* если не указать абсолютное значение, бегун будет колебаться */
   let arr_count = 0
   discret_arr.push(0)

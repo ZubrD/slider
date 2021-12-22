@@ -31,19 +31,19 @@ export function mouseVertDownBtn_2 (event) {
 
   document.onmousemove = function (event) {
       let top2 = event.pageY - shiftY2 - sler_coords.top;
-      let down2 = sler.offsetHeight - btn2.offsetHeight;
+      // let down2 = sler.offsetHeight - btn2.offsetHeight;
+      let down2 = sler.offsetHeight;
       if (top2 < 0) top2 = 0;                                 
       if (top2 > down2) top2 = down2;         
       btn2.style.marginTop = top2 + 'px'
-      console.log(top2)
 
       shiftY1 = event.pageY - btn1_coords.top; 
       let top1 = event.pageY - shiftY1 - sler_coords.top;
-      let down1 = sler.offsetHeight - btn1.offsetHeight;
+      // let down1 = sler.offsetHeight - btn1.offsetHeight;
+      let down1 = sler.offsetHeight;
       if (top1 < 0) top1 = 0;
       if (top1 > down1) top1 = down1;            
-      
-      let discret_arr = discreteArray (interval_number)
+      let discret_arr = discreteArray (interval_number, down2)
 
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(top2)
@@ -51,17 +51,17 @@ export function mouseVertDownBtn_2 (event) {
       if (discrete_status == 'yes') {
         for (let num of discret_arr) {
           if (integ >= (num - range / 2) && integ < (num + range / 2) ) {
-              if ( num < left1 ) 
+              if ( num < top1 ) 
               {
-                interval.style.width = (left1-num) + 'px';
-                interval.style.marginLeft = num + 'px';
+                interval.style.height = (top1-num) + 'px';
+                interval.style.marginTop = num + 'px';
               }
               else
               {
-                interval.style.width = (num-left1) + 'px';
-                interval.style.marginLeft = left1 + 'px';                
+                interval.style.height = (num-top1) + 'px';
+                interval.style.marginTop = top1 + 'px';                
               }
-              btn2.style.marginLeft = num + 'px' 
+              btn2.style.marginTop = num + 'px' 
 
               btn2.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
           }
@@ -98,36 +98,38 @@ function mouseVertDownBtn_1_Single (event) {
   let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
-  let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
+  let shiftY1 = event.pageY - btn1_coords.top; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   document.onmousemove = function (event) {
-    let left1 = event.pageX - shiftX1 - sler_coords.left;
-    let right1 = sler.offsetWidth - btn1.offsetWidth;   /* 12 - это ширина бегуна */
+    let top1 = event.pageY - shiftY1 - sler_coords.top;
+    let down1 = sler.offsetHeight ;    /* -5 - чтобы не опускался ниже риски */
 
     if (discrete_status == 'yes') {
-      if (left1 < 0) left1 = 0;                                 
-      if (left1 > right1) left1 = right1;
+      if (top1 < 0) top1 = 0;                                 
+      if (top1 > down1) top1 = down1;
 
-      let discret_arr = discreteArray (interval_number)
+      let discret_arr = discreteArray (interval_number, down1)
 
       let range = discret_arr[1] - discret_arr[0]
-      let integ = Math.floor(left1)
+      let integ = Math.floor(top1)
       for (let num of discret_arr) {
         if (integ < (num + range / 2) && integ > (num - range / 2) ) {
-            btn1.style.marginLeft = num + 'px'  
-            interval.style.width = num  + 'px' 
-
+            btn1.style.marginTop = num + 'px'  
+            interval.style.marginTop =  num + 'px'
+            interval.style.height = sler.offsetHeight - num  + 'px'
+           
             btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
             
         }
       }           
     } else if ( discrete_status == 'no' ) {
-        if (left1 < 0) left1 = 0;                                 
-        if (left1 > right1) left1 = right1;    
-        btn1.style.marginLeft = left1 + 'px'
-        interval.style.width = left1 + 'px'
+        if (top1 < 0) top1 = 0;                                 
+        if (top1 > down1) top1 = down1;    
+        btn1.style.marginTop =  top1 + 'px'
+        interval.style.marginTop =  top1 + 'px'
+        interval.style.height = sler.offsetHeight - top1 + 'px'
         
-        btn1.dataset.tip =  forTip(target, left1)   /* Значение над бегуном */
+        btn1.dataset.tip =  forTip(target, top1)   /* Значение над бегуном */
     }
   }
 
@@ -157,7 +159,8 @@ function mouseVertDownBtn_1_Double (event) {
 
   document.onmousemove = function (event) {
       let top1 = event.pageY - shiftY1 - sler_coords.top;       
-      let down1 = sler.offsetHeight - btn1.offsetHeight;  
+      // let down1 = sler.offsetHeight - btn1.offsetHeight;  
+      let down1 = sler.offsetHeight;  
       shiftY2 = event.pageY - btn2_coords.top; 
       let top2 = event.pageY - shiftY2 - sler_coords.top;
       let down2 = sler.offsetHeight;
@@ -165,7 +168,7 @@ function mouseVertDownBtn_1_Double (event) {
       if (top1 < 0) top1 = 0;                                 
       if (top1 > down1) top1 = down1; 
 
-      let discret_arr = discreteArray (interval_number)
+      let discret_arr = discreteArray (interval_number, down1)
 
       let range = discret_arr[1] - discret_arr[0]
       let integ = Math.floor(top1)
