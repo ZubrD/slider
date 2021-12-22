@@ -150,7 +150,7 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
     if ( orientation == 'horizontal' ) {
       interval.style.width = (ranger.offsetWidth) + 'px';
     } else if ( orientation == 'vertical' ) {
-      interval.style.height = (ranger.offsetHeight)  + 'px';   /* 2 - это ширина риски шкалы */
+      interval.style.height = (ranger.offsetHeight) - 5 + 'px';   /* 5 - это ширина риски шкалы */
     } 
     if ( runners == 1 ) {
       if ( orientation == 'horizontal' ) {

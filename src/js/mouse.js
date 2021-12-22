@@ -150,12 +150,10 @@ function mouseDownBtn_1_Double (event) {
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let btn2_coords = getCoords(btn2)
-  // let move_X = event.pageX
-  // let move_Y = event.pageY
+
   let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   let shiftX2 = event.pageX - btn2_coords.left;
-  // console.log(btn1.offsetWidth)
 
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;       

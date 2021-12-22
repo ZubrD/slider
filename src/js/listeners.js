@@ -9,6 +9,7 @@ export function allChecksListener (event) {    /* Переключение ко�
     let { discrete } = event.target.dataset
     let { tip } = event.target.dataset
     let { orient } = event.target.dataset
+    let orientation = event.target.parentNode.parentNode.childNodes[1].dataset.orientation
 
     if ( run && event.target.checked) {
       oneRunner ( event, inst )
@@ -23,7 +24,7 @@ export function allChecksListener (event) {    /* Переключение ко�
         ranger.setAttribute('data-discrete', 'no')       
     }
 
-    if ( tip && event.target.checked ) {
+    if ( tip && event.target.checked ) {            /* Подписи к бегунам */
       showTip ( event )
     } else if ( tip && !event.target.checked ) {
       hideTip ( event )

@@ -2,8 +2,13 @@ export function showTip (event) {
   let parent = event.target.parentNode.parentNode.childNodes[1]
   let parentRanger = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
+  let orientation = parent.dataset.orientation
   for (let elem of buttons) {
-    elem.classList.add('ranger__button-tip')
+    if ( orientation == 'horizontal' ) {
+      elem.classList.add('ranger__button-tip')
+    } else if ( orientation == 'vertical' ) {
+      elem.classList.add('ranger-vert__button-tip')
+    }
   }
 }
   
@@ -11,8 +16,13 @@ export function hideTip (event) {
   let parent = event.target.parentNode.parentNode.childNodes[1]
   let parentRanger = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
+  let orientation = parent.dataset.orientation
   for (let elem of buttons) {
-    elem.classList.remove('ranger__button-tip')
+    if ( orientation == 'horizontal' ) {
+      elem.classList.remove('ranger__button-tip')
+    } else if ( orientation == 'vertical' ) {
+      elem.classList.remove('ranger-vert__button-tip')
+    }
   }
 }
 
@@ -22,6 +32,12 @@ export function forTip (target, coord) {
   let configInputMax = configParent.querySelector('.zdslider-config__max')
   let configMin = Number(configInputMin.dataset.min)
   let configMax = Number(configInputMax.dataset.max)
-  let raschet =  Math.floor(((configMax - configMin) / 488 ) * (coord)) + configMin
+  let raschet = 0
+  let orientation = target.parentNode.parentNode.dataset.orientation
+  if ( orientation == 'horizontal' ) {
+    raschet =  Math.floor(((configMax - configMin) / 488 ) * (coord)) + configMin
+  } else if ( orientation == 'vertical' ) {
+    raschet =  Math.floor(((configMax - configMin) / 500 ) * (coord)) + configMin
+  } 
   return raschet                                                         
 }
