@@ -18,7 +18,7 @@ export function allChecksListener (event) {    /* Переключение ко�
     }
 
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
-    if ( discrete && event.target.checked ) {
+    if ( discrete && event.target.checked ) {         /* Дискретный / плавный ход */
         ranger.setAttribute('data-discrete', 'yes')
     } else if ( discrete && !event.target.checked ) {
         ranger.setAttribute('data-discrete', 'no')       

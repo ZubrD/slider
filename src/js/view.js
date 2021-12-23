@@ -184,8 +184,8 @@ export class Config {
     min = 10
     max = 1000
     discrete = 'no'
-    orientation= 'vertical'
-    // orientation= 'horizontal'
+    // orientation= 'vertical'
+    orientation= 'horizontal'
 }
 
 export class Panel {
