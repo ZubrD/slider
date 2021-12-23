@@ -63,11 +63,12 @@ export function mouseVertDownBtn_2 (event) {
               }
               btn2.style.marginTop = num + 'px' 
 
-              btn2.dataset.tip =  forTip ( target, num )   /* Значение над бегуном */
+              let coords = sler.offsetHeight - num
+              btn2.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
           }
         }           
       } else if ( discrete_status == 'no' ) {
-          btn2.dataset.tip =  forTip ( target, top2 )   /* Значение над бегуном */
+          
           if (top1 > top2)
           {
             interval.style.height = (top1-top2) + 'px';
@@ -78,6 +79,9 @@ export function mouseVertDownBtn_2 (event) {
             interval.style.height = (top2-top1) + 'px';
             interval.style.marginTop = top1 + 'px';                
           }
+
+          let coords = sler.offsetHeight - top2
+          btn2.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
       }   
   }
 
@@ -118,7 +122,7 @@ function mouseVertDownBtn_1_Single (event) {
             interval.style.marginTop =  num + 'px'
             interval.style.height = sler.offsetHeight - num  + 'px'
 
-            let coords = sler.offsetHeight - num
+            let coords = sler.offsetHeight - num            /* Инвертирование значения */
             btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */            
         }
       }           
@@ -129,7 +133,7 @@ function mouseVertDownBtn_1_Single (event) {
         interval.style.marginTop =  top1 + 'px'
         interval.style.height = sler.offsetHeight - top1 + 'px'
 
-        let coords = sler.offsetHeight - top1
+        let coords = sler.offsetHeight - top1           /* Инвертирование значения */
         btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
     }
   }
@@ -188,16 +192,17 @@ function mouseVertDownBtn_1_Double (event) {
                 interval.style.height = (top2-num) + 'px';
                 interval.style.marginTop = num + 'px';                
               }
-              btn1.style.marginTop = num + 'px'  
+              btn1.style.marginTop = num + 'px' 
 
-              btn1.dataset.tip =  forTip ( target, num )   /* Значение над бегуном */
+              let coords = sler.offsetHeight - num
+              btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
           }
         }           
       } else if ( discrete_status == 'no' ) {
        
           btn1.style.marginTop = top1 + 'px'
 
-          btn1.dataset.tip =  forTip ( target, top1 )   /* Значение над бегуном */
+          
     
           shiftY2 = event.pageY - btn2_coords.top; 
           let top2 = event.pageY - shiftY2 - sler_coords.top;
@@ -214,8 +219,10 @@ function mouseVertDownBtn_1_Double (event) {
           {
             interval.style.height = (top2-top1) + 'px';
             interval.style.marginTop = top1 + 'px';
-        
           }
+
+          let coords = sler.offsetHeight - top1
+          btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
       }        
   }
 
