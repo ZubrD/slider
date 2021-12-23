@@ -12,14 +12,17 @@ export function toVertical (event) {
     ranger__interval.classList.add('ranger-vert__interval')
     ranger_scale.classList.add('ranger-vert__scale')
     ranger_scale_division.classList.add('ranger-vert__scale-division')
-    ranger__interval.style.height = (ranger.offsetHeight) - 5 + 'px';   /* 5 - это ширина риски шкалы */
+
+    ranger__interval.style.height = (ranger.offsetHeight) + 'px';   /* 5 - это ширина риски шкалы */
     ranger__interval.style.width = 5 + 'px'
+    ranger__interval.style.marginLeft = 0 + 'px'
 
     for (let elem of ranger_scale_division_spans) {
         elem.classList.add('ranger-vert__scale-division-span')
     }
     for ( let elem of ranger_buttons) {
         elem.classList.add('ranger-vert__button')
+
         if (ranger_buttons.length == 1) {           /* Количество бегунов */
             elem.style.marginTop = 0 + 'px';
             elem.style.marginLeft = 0 + 'px'
@@ -49,10 +52,28 @@ export function toHorizontal (event)  {
     ranger__interval.classList.remove('ranger-vert__interval')
     ranger_scale.classList.remove('ranger-vert__scale')
     ranger_scale_division.classList.remove('ranger-vert__scale-division')
+
+    ranger__interval.style.width = ranger.offsetWidth + 'px';
+    ranger__interval.style.height = 5 + 'px'
+    ranger__interval.style.marginTop = 0 + 'px'
+
     for (let elem of ranger_scale_division_spans) {
         elem.classList.remove('ranger-vert__scale-division-span')
     } 
     for ( let elem of ranger_buttons) {
         elem.classList.remove('ranger-vert__button')
+
+        if ( ranger_buttons.length == 1 ) {
+            elem.style.marginLeft = (ranger.offsetWidth-elem.offsetWidth) + 2 + 'px';
+            elem.style.marginTop = 0 + 'px'
+        } else if ( ranger_buttons.length == 2 ) {
+            if ( elem.dataset.type == 'btn-first' ) {
+                elem.style.marginLeft = 0 + 'px'
+                elem.style.marginTop = 0 + 'px'
+            } else if ( elem.dataset.type == 'btn-second' ) {
+                elem.style.marginLeft = (ranger.offsetWidth-elem.offsetWidth) + 'px'; 
+                elem.style.marginTop = 0 + 'px'
+            }
+        }
     }       
 }

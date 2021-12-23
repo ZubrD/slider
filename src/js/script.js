@@ -163,7 +163,7 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
       if ( orientation == 'horizontal' ) {
         button_1.style.marginLeft = '0px';
         let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
-        button_2.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 'px'; 
+        button_2.style.marginLeft = (ranger.offsetWidth-button_2.offsetWidth) + 'px'; 
       } else if ( orientation == 'vertical' ) {
         button_1.style.marginTop = ranger.offsetHeight + 'px';
         let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]

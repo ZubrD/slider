@@ -200,6 +200,5 @@ export class Panel {
     }
     clickHandler(event) {
         let { run } = event.target.dataset 
-        console.log(run)
     }
 }
