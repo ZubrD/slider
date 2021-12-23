@@ -62,6 +62,7 @@ export function toHorizontal (event)  {
     } 
     for ( let elem of ranger_buttons) {
         elem.classList.remove('ranger-vert__button')
+        elem.classList.remove('ranger-vert__button-tip')
 
         if ( ranger_buttons.length == 1 ) {
             elem.style.marginLeft = (ranger.offsetWidth-elem.offsetWidth) + 2 + 'px';
