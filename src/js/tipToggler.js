@@ -32,12 +32,10 @@ export function forTip (target, coord) {
   let configInputMax = configParent.querySelector('.zdslider-config__max')
   let configMin = Number(configInputMin.dataset.min)
   let configMax = Number(configInputMax.dataset.max)
-  let raschet = 0
   let orientation = target.parentNode.parentNode.dataset.orientation
   if ( orientation == 'horizontal' ) {
-    raschet =  Math.floor(((configMax - configMin) / 488 ) * (coord)) + configMin
+    return  Math.round(((configMax - configMin) / 488 ) * (coord)) + configMin
   } else if ( orientation == 'vertical' ) {
-    raschet =  Math.floor(((configMax - configMin) / 500 ) * (coord)) + configMin
+    return  Math.round(((configMax - configMin) / 500 ) * (coord)) + configMin
   } 
-  return raschet                                                         
 }

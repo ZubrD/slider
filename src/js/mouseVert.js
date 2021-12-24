@@ -179,7 +179,7 @@ function mouseVertDownBtn_1_Double (event) {
       let integ = Math.floor(top1)
 
       if (discrete_status == 'yes') {
-        
+        let counter = 0
         for (let num of discret_arr) {
           if (integ < (num + range / 2) && integ > (num - range / 2) ) {
               if (num > top2)
@@ -195,8 +195,9 @@ function mouseVertDownBtn_1_Double (event) {
               btn1.style.marginTop = num + 'px' 
 
               let coords = sler.offsetHeight - num
-              btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
+              btn1.dataset.tip = forTip ( target, coords )   /* Значение над бегуном */
           }
+          counter ++
         }           
       } else if ( discrete_status == 'no' ) {
        

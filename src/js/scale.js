@@ -75,11 +75,11 @@ export function reScale ( new_scale_arr, current_inst ) {
             current_scale.remove()
             current_division.remove()
 
-            current_ranger.setAttribute('data-scale_length', scale_arr.length)    /* Для дискретного перемещения */
+            current_ranger.setAttribute( 'data-scale_length', scale_arr.length )    /* Для дискретного перемещения */
             
             let division = new Division ( orientation );
             division.appendTo ( parent ); 
-            division.setAttribute ('data-inst', current_inst)
+            division.setAttribute ( 'data-inst', current_inst )
 
             for ( let el of scale_arr ) {
                 let span = new DivisionSpan ( orientation )

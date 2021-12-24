@@ -153,7 +153,7 @@ function mouseDownBtn_1_Double (event) {
   let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
   let shiftX2 = event.pageX - btn2_coords.left;
-
+  
   document.onmousemove = function (event) {
       let left1 = event.pageX - shiftX1 - sler_coords.left;       
       let right1 = sler.offsetWidth - btn1.offsetWidth;  
@@ -170,7 +170,8 @@ function mouseDownBtn_1_Double (event) {
       let integ = Math.floor(left1)
 
       if (discrete_status == 'yes') {
-        
+
+        let counter = 0         /* Счётчик для перехода по массиву подписей */
         for (let num of discret_arr) {
           if (integ < (num + range / 2) && integ > (num - range / 2) ) {
               if (num > left2)
@@ -187,6 +188,7 @@ function mouseDownBtn_1_Double (event) {
 
               btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
           }
+          counter ++
         }           
       } else if ( discrete_status == 'no' ) {
        
@@ -220,8 +222,8 @@ function mouseDownBtn_1_Double (event) {
 }
 
 export function discreteArray (interval_number, length) {
-  let interv = length / interval_number   /* 488 = ширина слайдера - ширина бегуна */
-  let discret_arr = []            /* если не указать абсолютное значение, бегун будет колебаться */
+  let interv = length / interval_number   /* если не указать абсолютное значение, бегун будет колебаться */
+  let discret_arr = []            
   let arr_count = 0
   discret_arr.push(0)
   for (let i = 0; i < interval_number; i ++) {
