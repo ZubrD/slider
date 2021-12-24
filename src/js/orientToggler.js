@@ -1,3 +1,5 @@
+import { hideTip } from './tipToggler.js'
+
 export function toVertical (event) {
     let zdslider = event.target.parentNode.parentNode.childNodes[1]
     let ranger = zdslider.querySelector('.ranger')
@@ -13,9 +15,14 @@ export function toVertical (event) {
     ranger_scale.classList.add('ranger-vert__scale')
     ranger_scale_division.classList.add('ranger-vert__scale-division')
 
-    ranger__interval.style.height = (ranger.offsetHeight) + 'px';   /* 5 - это ширина риски шкалы */
+    ranger__interval.style.height = (ranger.offsetHeight) + 'px';   
     ranger__interval.style.width = 5 + 'px'
     ranger__interval.style.marginLeft = 0 + 'px'
+
+    hideTip ( event )                           /* Сброс флага ярлыка */
+    let config = event.target.parentNode
+    let tip = config.querySelector('.zdslider-config__check-tip')
+    tip.checked = false
 
     for (let elem of ranger_scale_division_spans) {
         elem.classList.add('ranger-vert__scale-division-span')
@@ -52,6 +59,11 @@ export function toHorizontal (event)  {
     ranger__interval.classList.remove('ranger-vert__interval')
     ranger_scale.classList.remove('ranger-vert__scale')
     ranger_scale_division.classList.remove('ranger-vert__scale-division')
+
+    hideTip ( event )                           /* Сброс флага ярлыка */
+    let config = event.target.parentNode
+    let tip = config.querySelector('.zdslider-config__check-tip')
+    tip.checked = false
 
     ranger__interval.style.width = ranger.offsetWidth + 'px';
     ranger__interval.style.height = 5 + 'px'

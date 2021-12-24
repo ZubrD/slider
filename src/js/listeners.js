@@ -30,7 +30,7 @@ export function allChecksListener (event) {    /* Переключение ко�
       hideTip ( event )
     }
 
-    if ( orient && event.target.checked ) {
+    if ( orient && event.target.checked ) {         /* Смена ориентации */
       toVertical ( event )
     } else if ( orient && !event.target.checked ) {
       toHorizontal ( event )
