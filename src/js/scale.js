@@ -1,4 +1,4 @@
-import { Scale, Division} from './view.js'
+import { Scale, Division, DivisionSpan, ScaleSpan} from './view.js'
 
 export function getCoords(elem) {   /* Получение координат элементов слайдера */
     let coords = elem.getBoundingClientRect();
@@ -68,31 +68,34 @@ export function reScale ( new_scale_arr, current_inst ) {
     for ( let parent of parents ) {
         if ( parent.dataset.inst == current_inst ) {
 
-        let current_ranger = parent.querySelector('.ranger')
-        let current_scale = parent.querySelector('.ranger__scale')
-        let current_division = parent.querySelector('.ranger__scale-division')
-        current_scale.remove()
-        current_division.remove()
+            let current_ranger = parent.querySelector('.ranger')
+            let current_scale = parent.querySelector('.ranger__scale')
+            let current_division = parent.querySelector('.ranger__scale-division')
+            let orientation = parent.dataset.orientation
+            current_scale.remove()
+            current_division.remove()
 
-        current_ranger.setAttribute('data-scale_length', scale_arr.length)    /* Для дискретного перемещения */
-        let division = new Division ();
-        division.setAttribute ('data-inst', current_inst)
-        for ( let el of scale_arr ) {
-            let span = document.createElement ( 'span' )
-            span.classList.add ( 'ranger__scale-division-span' )
-            division.appendChild ( span )
-        }
-        division.appendTo ( parent );  
+            current_ranger.setAttribute('data-scale_length', scale_arr.length)    /* Для дискретного перемещения */
+            
+            let division = new Division ( orientation );
+            division.appendTo ( parent ); 
+            division.setAttribute ('data-inst', current_inst)
 
-        let scale = new Scale ();
-        scale.setAttribute ( 'data-inst', current_inst )
-        for ( let el of scale_arr ) {
-            let span = document.createElement ( 'span' )
-            span.classList.add ( 'ranger__scale-span' )
-            span.innerHTML = el
-            scale.appendChild ( span )
-        }
-        scale.appendTo ( parent );
+            for ( let el of scale_arr ) {
+                let span = new DivisionSpan ( orientation )
+                span.appendTo ( division )
+            }
+
+            let scale = new Scale ( orientation );
+            scale.appendTo ( parent );
+            scale.setAttribute ( 'data-inst', current_inst )
+            
+            for ( let el of scale_arr ) {
+                let span = new ScaleSpan ( orientation )
+                span.appendTo ( scale )
+                span.inner_HTML ( el )
+            }
+        
         }
     }
 }
