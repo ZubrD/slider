@@ -1,6 +1,6 @@
 import { makeScale, reScale, modifyScaleInput } from './scale.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
-import { showTip, hideTip } from './tipToggler.js'
+import { showTip, hideTip, reValueTip } from './tipToggler.js'
 import { toHorizontal, toVertical } from './orientToggler.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
@@ -47,6 +47,8 @@ export function allChecksListener (event) {    /* Переключение ко�
 
     event.target.setAttribute('data-min', min)
     event.target.setAttribute('data-max', max)
+
+    reValueTip ( event, parent )
  
     modifyScaleInput ( parent, new_scale_arr )
  
@@ -65,6 +67,8 @@ export function allChecksListener (event) {    /* Переключение ко�
 
     event.target.setAttribute('data-min', min)
     event.target.setAttribute('data-max', max)
+
+    reValueTip ( event, parent )
  
     modifyScaleInput ( parent, new_scale_arr )
     

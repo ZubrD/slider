@@ -29,6 +29,7 @@ export function toVertical (event) {
     }
     for ( let elem of ranger_buttons) {
         elem.classList.add('ranger-vert__button')
+        elem.dataset.tip = ''               /* Сброс значений ярлыков */
 
         if (ranger_buttons.length == 1) {           /* Количество бегунов */
             elem.style.marginTop = 0 + 'px';
@@ -75,6 +76,7 @@ export function toHorizontal (event)  {
     for ( let elem of ranger_buttons) {
         elem.classList.remove('ranger-vert__button')
         elem.classList.remove('ranger-vert__button-tip')
+        elem.dataset.tip = ''           /* Сброс значений ярлыков. Новые значения из панели */
 
         if ( ranger_buttons.length == 1 ) {
             elem.style.marginLeft = (ranger.offsetWidth-elem.offsetWidth) + 2 + 'px';

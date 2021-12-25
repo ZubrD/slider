@@ -39,3 +39,29 @@ export function forTip (target, coord) {
     return  Math.round(((configMax - configMin) / 500 ) * (coord)) + configMin
   } 
 }
+
+export function reValueTip ( event, parent ) {     /* Изменение значения атрибута tip  при изменении min, max в панели */
+  let zdslider = parent.parentNode.childNodes[1]
+  let input = parent.querySelector('.zdslider-config__check-tip')
+  input.checked = false
+  // let min_input = parent.querySelector('.zdslider-config__min')
+  // let max_input = parent.querySelector('.zdslider-config__max')  
+  // let min_value = Number(min_input.value)
+  // let max_value = Number(max_input.value)
+  let buttons = zdslider.querySelectorAll('.ranger__button')
+  for ( let elem of buttons ) {
+    elem.dataset.tip = ''
+
+    // if ( buttons.length == 2) {
+    //   let button_1 = zdslider.querySelector('[data-type="btn-first"]')
+    //   let button_2 = zdslider.querySelector('[data-type="btn-second"]')
+
+    //   button_1.dataset.tip = min_value
+    //   button_2.dataset.tip = max_value
+    // } else {
+    //   let button_1 = buttons.querySelector('[data-type="btn-first"]')
+    //   button_1.dataset.tip = max
+    // }
+  }
+  hideTip( event )
+}
