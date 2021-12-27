@@ -28,24 +28,29 @@ export function makeScale (min, max, step) {     /* Массив значени�
         }
         // console.log('dividers_arr: ', dividers_arr)
         if (dividers_arr.length > 0) {
-        for ( let el of dividers_arr) { /* Определяю наибольшее количество интервалов меньше 10 */
-            if ( el < 10) {
-            maximus = el
-            iter = range / maximus
-            iteration_arr.push(iter)    /* Массив размеров шага шкалы */
-            } else {
-            break
+            for ( let el of dividers_arr) { /* Определяю наибольшее количество интервалов меньше 10 */              
+                if ( el < 10) {
+                    maximus = el
+                    iter = range / maximus
+                    iteration_arr.push(iter)    /* Массив размеров шага шкалы */
+                } else {
+                    break
+                }               
             }
-        }
         } else {
-        step_arr = [min, max]
-        return [step_arr, iteration, iteration_arr]
+            step_arr = [min, max]
+            return [step_arr, iteration, iteration_arr]
         }
-        
+        if ( maximus == 0 ) {
+            step_arr = [min, max]
+            return [step_arr, iteration, iteration_arr]
+        }
+        // console.log('range: ', range)
+        // console.log('maximus: ', maximus)
         iteration = range / maximus
-        if ( step > 1 ) {                         /* Переопределение - этот участок кода */
-        iteration = step                        /* применяется при изменении размера */
-        maximus = range / iteration             /* шага через панель */
+        if ( step > 1 ) {                           /* Переопределение - этот участок кода */
+            iteration = step                        /* применяется при изменении размера */
+            maximus = range / iteration             /* шага через панель */
         }
         // console.log('iteration: ', iteration)
         // console.log('iteration_arr: ', iteration_arr)
