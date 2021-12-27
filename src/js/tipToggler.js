@@ -14,6 +14,8 @@ export function showTip (event) {
   
 export function hideTip (event) {
   let parent = event.target.parentNode.parentNode.childNodes[1]
+  let tip = event.target.parentNode.querySelector('.zdslider-config__check-tip')
+  tip.checked = false           /* Сбрасываю флаг надписи */
   let parentRanger = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
   let orientation = parent.dataset.orientation

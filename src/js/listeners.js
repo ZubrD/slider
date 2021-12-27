@@ -13,8 +13,10 @@ export function allChecksListener (event) {    /* Переключение ко�
 
     if ( run && event.target.checked) {
       oneRunner ( event, inst )
+      hideTip (event)         /* Скрываю надписи */
     } else if ( run && (!event.target.checked)) {
-      twoRunners ( event, inst )  
+      twoRunners ( event, inst )
+      hideTip (event)
     }
 
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild

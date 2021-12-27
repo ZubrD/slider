@@ -20,9 +20,6 @@ export function toVertical (event) {
     ranger__interval.style.marginLeft = 0 + 'px'
 
     hideTip ( event )                           /* Сброс флага ярлыка */
-    let config = event.target.parentNode
-    let tip = config.querySelector('.zdslider-config__check-tip')
-    tip.checked = false
 
     for (let elem of ranger_scale_division_spans) {
         elem.classList.add('ranger-vert__scale-division-span')
@@ -62,9 +59,6 @@ export function toHorizontal (event)  {
     ranger_scale_division.classList.remove('ranger-vert__scale-division')
 
     hideTip ( event )                           /* Сброс флага ярлыка */
-    let config = event.target.parentNode
-    let tip = config.querySelector('.zdslider-config__check-tip')
-    tip.checked = false
 
     ranger__interval.style.width = ranger.offsetWidth + 'px';
     ranger__interval.style.height = 5 + 'px'

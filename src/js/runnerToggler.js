@@ -1,4 +1,5 @@
 import { Button } from './view.js'
+import { reValueTip } from './tipToggler.js'
 
 export function oneRunner (event) {
     let zdslider = event.target.parentNode.parentNode.childNodes[1]
