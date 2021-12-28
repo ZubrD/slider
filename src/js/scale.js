@@ -41,7 +41,7 @@ export function makeScale (min, max, step) {     /* Массив значени�
             step_arr = [min, max]
             return [step_arr, iteration, iteration_arr]
         }
-        if ( maximus == 0 ) {
+        if ( maximus == 0 ) {           /* Иначе iteration = Infinity */
             step_arr = [min, max]
             return [step_arr, iteration, iteration_arr]
         }
@@ -123,4 +123,3 @@ export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменен
     conf_input_step.value = conf_input_step.dataset.iteration
 }
   
-  // min - 14, max - 235 - получается Infinity, 9.12.2021

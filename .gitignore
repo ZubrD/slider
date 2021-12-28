@@ -3,3 +3,5 @@ check.html
 src/style/check.css
 src/style/check.scss
 src/style/check.css.map
+coverage/
+/node_modules

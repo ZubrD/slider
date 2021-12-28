@@ -181,8 +181,8 @@ export class DivisionSpan {
 
 export class Config {
     runner_number = 2
-    min = 14
-    max = 235
+    min = 10
+    max = 150
     discrete = 'no'
     // orientation= 'vertical'
     orientation= 'horizontal'

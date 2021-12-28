@@ -173,3 +173,4 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
     i ++
   }  
 }
+
