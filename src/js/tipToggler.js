@@ -14,7 +14,6 @@ export function showTip (event) {
   
 export function hideTip (event) {
   let parent = event.target.parentNode.parentNode.childNodes[1]
-  // let tip = event.target.parentNode.querySelector('.zdslider-config__check-tip')
   let tip = event.target.parentNode.querySelector('.zdslider-panel__check-tip')
   tip.checked = false           /* Сбрасываю флаг надписи */
   let parentRanger = parent.querySelector('.ranger')
@@ -31,9 +30,7 @@ export function hideTip (event) {
 
 export function forTip (target, coord) {
   let configParent = target.parentNode.parentNode.parentNode.childNodes[3]  /* Для надписи над бегуном */
-  // let configInputMin = configParent.querySelector('.zdslider-config__min')
   let configInputMin = configParent.querySelector('.zdslider-panel__min')
-  // let configInputMax = configParent.querySelector('.zdslider-config__max')
   let configInputMax = configParent.querySelector('.zdslider-panel__max')
   let configMin = Number(configInputMin.dataset.min)
   let configMax = Number(configInputMax.dataset.max)
@@ -51,7 +48,6 @@ export function forTip (target, coord) {
 export function reValueTip ( event, parent ) {     /* Изменение значения атрибута tip  при изменении min, max в панели */
   // let zdslider = parent.parentNode.childNodes[1]
   let zdslider = parent.parentNode
-  // let input = parent.querySelector('.zdslider-config__check-tip')
   let input = parent.querySelector('.zdslider-panel__check-tip')
   input.checked = false
 

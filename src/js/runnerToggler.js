@@ -1,4 +1,4 @@
-import { Button } from './view.js'
+import { Button } from './model.js'
 import { reValueTip } from './tipToggler.js'
 
 export function oneRunner (event) {

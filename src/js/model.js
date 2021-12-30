@@ -178,18 +178,8 @@ export class DivisionSpan {
     }
 }
 
-export class Config {
-    runner_number = 2
-    min = 10
-    max = 150
-    discrete = 'no'
-    // orientation= 'vertical'
-    orientation= 'horizontal'
-}
-
 export class Panel {
     constructor () {
-        // this.$runners_check = document.querySelector('.zdslider-config')
         this.$runners_check = document.querySelector('.zdslider-panel')
 
         this.#setup()
@@ -200,5 +190,22 @@ export class Panel {
     }
     clickHandler(event) {
         let { run } = event.target.dataset 
+    }
+}
+
+export class Settings {
+    constructor () {
+        this.$el = document.createElement ( 'div' )
+        this.$el.classList.add ( 'zdslider-config' )
+    }
+
+    appendTo( parent ) {
+        parent.appendChild( this.$el )
+    }
+    appendChild( child ) {
+        this.$el.appendChild ( child )
+    }
+    setAttribute( attr, number ) {
+        this.$el.setAttribute ( attr, number )
     }
 }

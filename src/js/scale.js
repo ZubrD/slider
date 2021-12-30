@@ -1,4 +1,4 @@
-import { Scale, Division, DivisionSpan, ScaleSpan} from './view.js'
+import { Scale, Division, DivisionSpan, ScaleSpan} from './model.js'
 
 export function getCoords(elem) {   /* Получение координат элементов слайдера */
     let coords = elem.getBoundingClientRect();
@@ -107,7 +107,6 @@ export function reScale ( new_scale_arr, current_inst ) {
   
   
 export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение инпута переключения шага  */
-    // let conf_input_step = parent.querySelector('.zdslider-config__step')
     let conf_input_step = parent.querySelector('.zdslider-panel__step')
     let iterations_arr = new_scale_arr[2]
     let iteration = new_scale_arr[1]
