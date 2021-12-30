@@ -107,7 +107,8 @@ export function reScale ( new_scale_arr, current_inst ) {
   
   
 export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменение инпута переключения шага  */
-    let conf_input_step = parent.querySelector('.zdslider-config__step')
+    // let conf_input_step = parent.querySelector('.zdslider-config__step')
+    let conf_input_step = parent.querySelector('.zdslider-panel__step')
     let iterations_arr = new_scale_arr[2]
     let iteration = new_scale_arr[1]
     conf_input_step.setAttribute ('data-steps', iterations_arr)
@@ -123,3 +124,9 @@ export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменен
     conf_input_step.value = conf_input_step.dataset.iteration
 }
   
+export function summa (a, b) {
+    return a + b
+}
+
+// let a = summa(3, 23)
+// console.log(a)

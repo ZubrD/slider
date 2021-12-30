@@ -29,7 +29,8 @@ function sliderInit () {
 
   }
 
-  let number_of_sliders = document.querySelectorAll('.zdslider-config')
+  // let number_of_sliders = document.querySelectorAll('.zdslider-config')
+  let number_of_sliders = document.querySelectorAll('.zdslider-panel')
   for (let elem of number_of_sliders) {
     elem.addEventListener('click', allChecksListener)  /* Слушатель переключателей */
   }
@@ -105,21 +106,24 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
       scale.appendTo ( elem );
 
 
-      let conf_input_min = document.querySelectorAll('.zdslider-config__min')[i]
+      // let conf_input_min = document.querySelectorAll('.zdslider-config__min')[i]
+      let conf_input_min = document.querySelectorAll('.zdslider-panel__min')[i]
       conf_input_min.setAttribute ( 'data-min', min )   
       conf_input_min.setAttribute ( 'data-max', max )   
       
       conf_input_min.value = min 
       conf_input_min.addEventListener ( 'change', changeMinListener )
 
-      let conf_input_max = document.querySelectorAll('.zdslider-config__max')[i]
+      // let conf_input_max = document.querySelectorAll('.zdslider-config__max')[i]
+      let conf_input_max = document.querySelectorAll('.zdslider-panel__max')[i]
       conf_input_max.setAttribute ( 'data-min', min )   
       conf_input_max.setAttribute ( 'data-max', max )   
       
       conf_input_max.value = max 
       conf_input_max.addEventListener ( 'change', changeMaxListener )
       
-      let conf_input_step = document.querySelectorAll('.zdslider-config__step')[i]
+      // let conf_input_step = document.querySelectorAll('.zdslider-config__step')[i]
+      let conf_input_step = document.querySelectorAll('.zdslider-panel__step')[i]
       conf_input_step.setAttribute ('data-steps', iterations_arr)
       conf_input_step.setAttribute ('data-iteration', iteration)
       conf_input_step.setAttribute ('data-current', iteration)

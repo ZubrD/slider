@@ -81,7 +81,6 @@ export class Button {
        } else if ( orientation == 'vertical' ) {
             if ( type === 'btn-first' ) {
                 mouseVertDownBtn_1( event )
-                // console.log(event.target)
             } else if (type === 'btn-second') {
                 mouseVertDownBtn_2( event )
             }             
@@ -190,7 +189,8 @@ export class Config {
 
 export class Panel {
     constructor () {
-        this.$runners_check = document.querySelector('.zdslider-config')
+        // this.$runners_check = document.querySelector('.zdslider-config')
+        this.$runners_check = document.querySelector('.zdslider-panel')
 
         this.#setup()
     }

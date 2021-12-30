@@ -21,7 +21,7 @@ export function allChecksListener (event) {    /* Переключение ко�
 
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
     if ( discrete && event.target.checked ) {         /* Дискретный / плавный ход */
-        ranger.setAttribute('data-discrete', 'yes')
+        ranger.setAttribute('data-discrete', 'yes')   
     } else if ( discrete && !event.target.checked ) {
         ranger.setAttribute('data-discrete', 'no')       
     }
@@ -42,7 +42,8 @@ export function allChecksListener (event) {    /* Переключение ко�
   export function changeMinListener ( event ) {
     let parent = event.target.parentNode
     let min = Number ( event.target.value )
-    let max_input = parent.querySelector('.zdslider-config__max')
+    // let max_input = parent.querySelector('.zdslider-config__max')
+    let max_input = parent.querySelector('.zdslider-panel__max')
     let max = Number ( max_input.value )
     let step = 1                                   /* Указал произвольный шаг */
     let new_scale_arr = makeScale ( min, max, step )
@@ -61,7 +62,8 @@ export function allChecksListener (event) {    /* Переключение ко�
  
  export function changeMaxListener ( event ) {
     let parent = event.target.parentNode
-    let min_input = parent.querySelector('.zdslider-config__min')
+    // let min_input = parent.querySelector('.zdslider-config__min')
+    let min_input = parent.querySelector('.zdslider-panel__min')
     let min = Number ( min_input.value )
     let max = Number ( event.target.value )
     let step = 1                                   /* Указал произвольный шаг */
@@ -81,8 +83,10 @@ export function allChecksListener (event) {    /* Переключение ко�
  
  export function changeStepListener ( event ) {
    let parent = event.target.parentNode
-   let min_input = parent.querySelector('.zdslider-config__min')
-   let max_input = parent.querySelector('.zdslider-config__max')
+  //  let min_input = parent.querySelector('.zdslider-config__min')
+   let min_input = parent.querySelector('.zdslider-panel__min')
+  //  let max_input = parent.querySelector('.zdslider-config__max')
+   let max_input = parent.querySelector('.zdslider-panel__max')
  
    let min = Number ( min_input.value )
    let max = Number ( max_input.value )
