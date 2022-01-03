@@ -1,7 +1,7 @@
 import { makeScale, reScale, modifyScaleInput } from './scale.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
 import { showTip, hideTip, reValueTip } from './tipToggler.js'
-import { toHorizontal, toVertical } from './orientToggler.js'
+import { toHorizontal, toVertical, orientationToggler } from './orientToggler.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
     let { inst } = event.target.dataset
@@ -9,7 +9,6 @@ export function allChecksListener (event) {    /* Переключение ко�
     let { discrete } = event.target.dataset
     let { tip } = event.target.dataset
     let { orient } = event.target.dataset
-    let orientation = event.target.parentNode.parentNode.childNodes[1].dataset.orientation
 
     if ( run && event.target.checked) {
       oneRunner ( event, inst )
@@ -20,6 +19,7 @@ export function allChecksListener (event) {    /* Переключение ко�
     }
 
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
+    let config = event.target.parentNode.parentNode.querySelector('.zdslider-config')
     if ( discrete && event.target.checked ) {         /* Дискретный / плавный ход */
         ranger.setAttribute('data-discrete', 'yes')   
     } else if ( discrete && !event.target.checked ) {
@@ -33,9 +33,15 @@ export function allChecksListener (event) {    /* Переключение ко�
     }
 
     if ( orient && event.target.checked ) {         /* Смена ориентации */
-      toVertical ( event )
-    } else if ( orient && !event.target.checked ) {
-      toHorizontal ( event )
+      config.dataset.orientation = 'vertical'     /* Передача в конфиг флага ориентации */
+      let orientation = config.dataset.orientation /*  Извлечение из конфига флага ориентации */
+      // toVertical ( event, orientation )
+      orientationToggler ( event, orientation )
+    } else if ( orient && ( event.target.checked == false ) ) {
+      config.dataset.orientation = 'horizontal'
+      let orientation = config.dataset.orientation 
+      // toHorizontal ( event )
+      orientationToggler ( event, orientation )      
     }
   }
 
