@@ -1,15 +1,16 @@
 import { Button } from './model.js'
 import { reValueTip } from './tipToggler.js'
 
-export function oneRunner (event) {
-    let zdslider = event.target.parentNode.parentNode.childNodes[1]
-    let orientation = zdslider.dataset.orientation
+export function oneRunner ( event ) {
+    let config = event.target.parentNode.parentNode.querySelector('.zdslider-config')
+    let orientation = config.dataset.orientation
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
     let interval = ranger.querySelector('.ranger__interval')
     let button_1 = ranger.querySelector('[data-type="btn-first"]')   
     let button_2 = ranger.querySelector('[data-type="btn-second"]') 
 
-    ranger.setAttribute ('data-runners', 1);
+    config.dataset.runners = '1'
+    
     button_1.setAttribute('data-tip', '')     /* Обнуляю надпись над бегуном */
     button_2.remove()   
 
@@ -27,17 +28,21 @@ export function oneRunner (event) {
   }
   
 export function twoRunners (event, inst) {
-    let zdslider = event.target.parentNode.parentNode.childNodes[1]
-    let orientation = zdslider.dataset.orientation
+    let config = event.target.parentNode.parentNode.querySelector('.zdslider-config')
+    let orientation = config.dataset.orientation
     let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
-    ranger.setAttribute('data-runners', 2)
+
+    config.dataset.runners = '2'
+
     let button_1 = ranger.querySelector('[data-type="btn-first"]')
     button_1.setAttribute('data-tip', '')         /* Обнуляю надпись над бегуном */
+
     let second_button = new Button ()
     second_button.setAttribute('data-type', 'btn-second');
     second_button.setAttribute('data-inst', inst);
     second_button.setAttribute('data-tip', '');     /* Обнуляю надпись над бегуном */
     second_button.appendTo(ranger)
+
     let button_2 = ranger.querySelector('[data-type="btn-second"]')
     let interval = ranger.querySelector('.ranger__interval')
 

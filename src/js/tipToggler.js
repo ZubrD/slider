@@ -1,8 +1,7 @@
-export function showTip (event) {
-  let parent = event.target.parentNode.parentNode.childNodes[1]
+export function showTip ( event, orientation ) {
+  let parent = event.target.parentNode.parentNode.querySelector('.zdslider')
   let parentRanger = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
-  let orientation = parent.dataset.orientation
   for (let elem of buttons) {
     if ( orientation == 'horizontal' ) {
       elem.classList.add('ranger__button-tip')
@@ -12,13 +11,12 @@ export function showTip (event) {
   }
 }
   
-export function hideTip (event) {
-  let parent = event.target.parentNode.parentNode.childNodes[1]
+export function hideTip ( event, orientation ) {
+  let parent = event.target.parentNode.parentNode.querySelector('.zdslider')
   let tip = event.target.parentNode.querySelector('.zdslider-panel__check-tip')
   tip.checked = false           /* Сбрасываю флаг надписи */
   let parentRanger = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
-  let orientation = parent.dataset.orientation
   for (let elem of buttons) {
     if ( orientation == 'horizontal' ) {
       elem.classList.remove('ranger__button-tip')
@@ -29,18 +27,19 @@ export function hideTip (event) {
 }
 
 export function forTip (target, coord) {
-  let configParent = target.parentNode.parentNode.parentNode.childNodes[3]  /* Для надписи над бегуном */
-  let configInputMin = configParent.querySelector('.zdslider-panel__min')
-  let configInputMax = configParent.querySelector('.zdslider-panel__max')
-  let configMin = Number(configInputMin.dataset.min)
-  let configMax = Number(configInputMax.dataset.max)
-  let ranger_height = target.parentNode.offsetHeight
-  let orientation = target.parentNode.parentNode.dataset.orientation
+  const config = target.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
+  const configParent = target.parentNode.parentNode.parentNode.querySelector('.zdslider-panel')  /* Для надписи над бегуном */
+  const configInputMin = configParent.querySelector('.zdslider-panel__min')
+  const configInputMax = configParent.querySelector('.zdslider-panel__max')
+  const configMin = Number(configInputMin.dataset.min)
+  const configMax = Number(configInputMax.dataset.max)
+  const ranger_height = target.parentNode.offsetHeight
+  const ranger_width = target.parentNode.offsetWidth
+  let orientation = config.dataset.orientation
   if ( orientation == 'horizontal' ) {
-    return  Math.round(((configMax - configMin) / 488 ) * (coord)) + configMin
+    return  Math.round(((configMax - configMin) / (ranger_width - 12) ) * (coord)) + configMin    
   } else if ( orientation == 'vertical' ) {
     // return  Math.round(((configMax - configMin) / 500 ) * (coord)) + configMin
-    console.log(ranger_height)
     return  Math.round(((configMax - configMin) / ranger_height ) * (coord)) + configMin
   } 
 }

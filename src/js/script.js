@@ -44,8 +44,6 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
   
   for ( let elem of elements ) {
-      elem.setAttribute('data-inst', counter)
-      elem.setAttribute ('data-orientation', orientation);
       if ( orientation == 'horizontal' ) {
             
       } else if ( orientation == 'vertical' ) {
@@ -54,39 +52,27 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
 
       let ranger = new Ranger( orientation );
       ranger.appendTo(elem)
-      ranger.setAttribute ('data-inst', counter);
-      ranger.setAttribute ('data-runners', runners);
-      ranger.setAttribute ('data-discrete', discrete);
-      ranger.setAttribute ('data-tip', 'no');
       ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
 
       let interval = new Interval( orientation );
       let ranger_div = document.querySelectorAll('.ranger')[i]
-      interval.setAttribute('data-inst', counter);
       interval.appendTo(ranger_div)
 
       if ( runners == 2 ) {
         let button_1 = new Button( orientation );
         let button_2 = new Button( orientation );
         button_1.setAttribute('data-type', 'btn-first');
-        button_1.setAttribute('data-inst', counter);
-        button_1.setAttribute('data-tip', min);
         button_2.setAttribute('data-type', 'btn-second');
-        button_2.setAttribute('data-inst', counter);
-        button_2.setAttribute('data-tip', max);
         button_1.appendTo(ranger_div);
         button_2.appendTo(ranger_div);
       } else {
         let button_1 = new Button( orientation );
         button_1.setAttribute('data-type', 'btn-first');
-        button_1.setAttribute('data-inst', counter);
-        button_1.setAttribute('data-tip',max);
         button_1.appendTo(ranger_div);
       }
 
 
       let division = new Division ( orientation );
-      division.setAttribute ('data-inst', counter)
 
       for ( let el of scale_arr ) {
         let span = new DivisionSpan ( orientation )
@@ -96,7 +82,6 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
 
 
       let scale = new Scale ( orientation );
-      scale.setAttribute ( 'data-inst', counter )
 
       for ( let el of scale_arr ) {
         let span = new ScaleSpan ( orientation )
@@ -106,6 +91,7 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
       scale.appendTo ( elem );
 
       let settings = new Settings ()      /* Слой для обмена данными между Моделью и Контроллером, */
+      settings.setAttribute('data-inst', counter)
       settings.setAttribute('data-runners', runners)  /* Моделью и Представлением */
       settings.setAttribute('data-min', min)
       settings.setAttribute('data-max', max)

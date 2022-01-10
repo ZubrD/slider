@@ -71,7 +71,8 @@ export class Button {
 
     clickHandler ( event ) {
        const { type } = event.target.dataset
-       const { orientation } = event.target.parentNode.parentNode.dataset
+    //    const { orientation } = event.target.parentNode.parentNode.dataset
+       const { orientation } = event.target.parentNode.parentNode.parentNode.querySelector('.zdslider-config').dataset
        if ( orientation == 'horizontal') {
             if ( type === 'btn-first' ) {
                 mouseDownBtn_1( event )

@@ -70,8 +70,10 @@ export function makeScale (min, max, step) {     /* Массив значени�
 export function reScale ( new_scale_arr, current_inst ) {
     let scale_arr = new_scale_arr[0]
     let parents = document.querySelectorAll('.zdslider')
+
     for ( let parent of parents ) {
-        if ( parent.dataset.inst == current_inst ) {
+        let config = parent.parentNode.querySelector('.zdslider-config')
+        if ( config.dataset.inst == current_inst ) {
 
             let current_ranger = parent.querySelector('.ranger')
             let current_scale = parent.querySelector('.ranger__scale')
@@ -84,7 +86,6 @@ export function reScale ( new_scale_arr, current_inst ) {
             
             let division = new Division ( orientation );
             division.appendTo ( parent ); 
-            division.setAttribute ( 'data-inst', current_inst )
 
             for ( let el of scale_arr ) {
                 let span = new DivisionSpan ( orientation )
@@ -93,7 +94,6 @@ export function reScale ( new_scale_arr, current_inst ) {
 
             let scale = new Scale ( orientation );
             scale.appendTo ( parent );
-            scale.setAttribute ( 'data-inst', current_inst )
             
             for ( let el of scale_arr ) {
                 let span = new ScaleSpan ( orientation )
