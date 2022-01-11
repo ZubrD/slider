@@ -65,11 +65,14 @@ export function mouseDownBtn_2 (event) {
               }
               btn2.style.marginLeft = num + 'px' 
 
-              btn2.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
+              config.dataset.btn2_tip = forTip(target, num)     /* Передача значения в конфиг */
+              btn2.dataset.tip = config.dataset.btn2_tip        /* Значение над бегуном */
           }
         }           
       } else if ( discrete_status == 'no' ) {
-          btn2.dataset.tip =  forTip(target, left2)   /* Значение над бегуном */
+
+          config.dataset.btn2_tip = forTip(target, left2)     /* Передача значения в конфиг */
+          btn2.dataset.tip = config.dataset.btn2_tip          /* Значение над бегуном */
           if (left1 > left2)
           {
             interval.style.width = (left1-left2) + 'px';
@@ -122,8 +125,8 @@ function mouseDownBtn_1_Single (event) {
             btn1.style.marginLeft = num + 'px'  
             interval.style.width = num  + 'px' 
 
-            btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
-            
+            config.dataset.btn1_tip = forTip(target, num)     /* Передача значения в конфиг */
+            btn1.dataset.tip = config.dataset.btn1_tip        /* Значение над бегуном */
         }
       }           
     } else if ( discrete_status == 'no' ) {
@@ -132,7 +135,8 @@ function mouseDownBtn_1_Single (event) {
         btn1.style.marginLeft = left1 + 'px'
         interval.style.width = left1 + 'px'
         
-        btn1.dataset.tip =  forTip(target, left1)   /* Значение над бегуном */
+        config.dataset.btn1_tip = forTip(target, left1)     /* Передача значения в конфиг */
+        btn1.dataset.tip = config.dataset.btn1_tip          /* Значение над бегуном */
     }
   }
 
@@ -195,7 +199,8 @@ function mouseDownBtn_1_Double (event) {
               }
               btn1.style.marginLeft = num + 'px'  
 
-              btn1.dataset.tip =  forTip(target, num)   /* Значение над бегуном */
+              config.dataset.btn1_tip = forTip(target, num)     /* Передача значения в конфиг */
+              btn1.dataset.tip = config.dataset.btn1_tip        /* Извлечение из конфига значения над бегуном */
           }
           counter ++
         }           
@@ -203,7 +208,8 @@ function mouseDownBtn_1_Double (event) {
        
           btn1.style.marginLeft = left1 + 'px'
 
-          btn1.dataset.tip =  forTip(target, left1)   /* Значение над бегуном */
+          config.dataset.btn1_tip = forTip(target, left1)     /* Передача значения в конфиг */
+          btn1.dataset.tip = config.dataset.btn1_tip          /* Значение над бегуном */
     
           shiftX2 = event.pageX - btn2_coords.left; 
           let left2 = event.pageX - shiftX2 - sler_coords.left;

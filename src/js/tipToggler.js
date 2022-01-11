@@ -28,18 +28,14 @@ export function hideTip ( event, orientation ) {
 
 export function forTip (target, coord) {
   const config = target.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
-  const configParent = target.parentNode.parentNode.parentNode.querySelector('.zdslider-panel')  /* Для надписи над бегуном */
-  const configInputMin = configParent.querySelector('.zdslider-panel__min')
-  const configInputMax = configParent.querySelector('.zdslider-panel__max')
-  const configMin = Number(configInputMin.dataset.min)
-  const configMax = Number(configInputMax.dataset.max)
+  const configMin = Number(config.dataset.min)
+  const configMax = Number(config.dataset.max)
   const ranger_height = target.parentNode.offsetHeight
   const ranger_width = target.parentNode.offsetWidth
-  let orientation = config.dataset.orientation
+  const orientation = config.dataset.orientation
   if ( orientation == 'horizontal' ) {
     return  Math.round(((configMax - configMin) / (ranger_width - 12) ) * (coord)) + configMin    
   } else if ( orientation == 'vertical' ) {
-    // return  Math.round(((configMax - configMin) / 500 ) * (coord)) + configMin
     return  Math.round(((configMax - configMin) / ranger_height ) * (coord)) + configMin
   } 
 }
