@@ -78,7 +78,7 @@ export function reScale ( new_scale_arr, current_inst ) {
             let current_ranger = parent.querySelector('.ranger')
             let current_scale = parent.querySelector('.ranger__scale')
             let current_division = parent.querySelector('.ranger__scale-division')
-            let orientation = parent.dataset.orientation
+            let orientation = config.dataset.orientation
             current_scale.remove()
             current_division.remove()
 
