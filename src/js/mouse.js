@@ -24,7 +24,7 @@ export function mouseDownBtn_2 (event) {
 
   // let discrete_status = event.target.parentNode.dataset.discrete   /* Замена на конфиг */
   let discrete_status = config.dataset.discrete
-  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+  let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
 
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
@@ -103,7 +103,7 @@ function mouseDownBtn_1_Single (event) {
   
   let target = event.target     /* Для надписи над бегуном */
 
-  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+  let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
@@ -155,7 +155,7 @@ function mouseDownBtn_1_Double (event) {
 
   // let discrete_status = event.target.parentNode.dataset.discrete
   let discrete_status = config.dataset.discrete
-  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+  let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
 
   let target = event.target     /* Для надписи над бегуном */
   

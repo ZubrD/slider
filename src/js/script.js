@@ -52,7 +52,7 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
 
       let ranger = new Ranger( orientation );
       ranger.appendTo(elem)
-      ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
+      // ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
 
       let interval = new Interval( orientation );
       let ranger_div = document.querySelectorAll('.ranger')[i]

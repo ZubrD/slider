@@ -23,7 +23,7 @@ export function mouseVertDownBtn_2 (event) {
   let target = event.target     /* Для надписи над бегуном */
 
   let discrete_status = config.dataset.discrete
-  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+  let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
 
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
@@ -106,7 +106,7 @@ function mouseVertDownBtn_1_Single (event) {
   
   let target = event.target     /* Для надписи над бегуном */
 
-  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+  let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
   let sler_coords = getCoords(sler)
   let btn1_coords = getCoords(btn1)
   let shiftY1 = event.pageY - btn1_coords.top; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
@@ -163,7 +163,7 @@ function mouseVertDownBtn_1_Double (event) {
   let btn2 = sler.querySelector('[data-type="btn-second"]')
 
   let discrete_status = config.dataset.discrete
-  let interval_number = event.target.parentNode.dataset.scale_length - 1  /* Для дискретного перемещения */
+  let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
 
   let target = event.target     /* Для надписи над бегуном */
   

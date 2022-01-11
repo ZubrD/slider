@@ -81,8 +81,9 @@ export function reScale ( new_scale_arr, current_inst ) {
             let orientation = config.dataset.orientation
             current_scale.remove()
             current_division.remove()
-
-            current_ranger.setAttribute( 'data-scale_length', scale_arr.length )    /* Для дискретного перемещения */
+            
+            config.dataset.scale_length = scale_arr.length                          /* Для дискретного перемещения */
+            // current_ranger.setAttribute( 'data-scale_length', scale_arr.length )    /* Для дискретного перемещения */
             
             let division = new Division ( orientation );
             division.appendTo ( parent ); 
