@@ -11,18 +11,15 @@ export function showTip ( event, orientation ) {
   }
 }
   
-export function hideTip ( event, orientation ) {
+export function hideTip ( event ) {
   let parent = event.target.parentNode.parentNode.querySelector('.zdslider')
   let tip = event.target.parentNode.querySelector('.zdslider-panel__check-tip')
   tip.checked = false           /* Сбрасываю флаг надписи */
   let parentRanger = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
-  for (let elem of buttons) {
-    if ( orientation == 'horizontal' ) {
-      elem.classList.remove('ranger__button-tip')
-    } else if ( orientation == 'vertical' ) {
-      elem.classList.remove('ranger-vert__button-tip')
-    }
+  for (let elem of buttons) {     /* Удаляю стили ярлыков */
+    elem.classList.remove('ranger__button-tip')
+    elem.classList.remove('ranger-vert__button-tip')
   }
 }
 
