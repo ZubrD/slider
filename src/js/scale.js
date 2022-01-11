@@ -13,7 +13,7 @@ export function makeScale (min, max, step) {     /* Массив значени�
     let step_arr = []
     let dividers_arr = []
     let iteration_arr = []  /* Массив размера шага */
-    let iter = 0            /* Член масива размеров шага */
+    let iter = 0            /* Член массива размеров шага */
     let maximus = 0
     let iteration = 0
     let item = 0
@@ -124,9 +124,9 @@ export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменен
     conf_input_step.value = conf_input_step.dataset.iteration
 }
   
-export function summa (a, b) {
-    return a + b
+export function clickMouse (event) {
+    let elem = getCoords(event.target)
+    let clickCoords = event.pageX
+    let btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
+    btn1.style.marginLeft = clickCoords - elem.left + 'px'
 }
-
-// let a = summa(3, 23)
-// console.log(a)

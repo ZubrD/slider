@@ -13,7 +13,6 @@ export function mouseDownBtn_1 (event) {
   
 export function mouseDownBtn_2 (event) {
   let config = event.target.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
-  // let sler_number = event.target.dataset.inst                    /* Замена на конфиг */
   let sler_number = config.dataset.inst
   let sler = document.querySelectorAll('.ranger')[sler_number-1]
   let interval = sler.querySelector('.ranger__interval')     
@@ -22,7 +21,6 @@ export function mouseDownBtn_2 (event) {
 
   let target = event.target     /* Для надписи над бегуном */
 
-  // let discrete_status = event.target.parentNode.dataset.discrete   /* Замена на конфиг */
   let discrete_status = config.dataset.discrete
   let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
 
@@ -98,7 +96,6 @@ function mouseDownBtn_1_Single (event) {
   let interval = sler.querySelector('.ranger__interval')     
   let btn1 = sler.querySelector('[data-type="btn-first"]')
 
-  // let discrete_status = event.target.parentNode.dataset.discrete
   let discrete_status = config.dataset.discrete
   
   let target = event.target     /* Для надписи над бегуном */
@@ -153,7 +150,6 @@ function mouseDownBtn_1_Double (event) {
   let btn1 = sler.querySelector('[data-type="btn-first"]')
   let btn2 = sler.querySelector('[data-type="btn-second"]')
 
-  // let discrete_status = event.target.parentNode.dataset.discrete
   let discrete_status = config.dataset.discrete
   let interval_number = config.dataset.scale_length - 1  /* Для дискретного перемещения */
 

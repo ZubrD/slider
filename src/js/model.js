@@ -1,5 +1,6 @@
 import { mouseDownBtn_1, mouseDownBtn_2 } from './mouse.js'
 import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from './mouseVert.js'
+import { clickMouse } from './scale.js'
 
 export class Ranger {
     constructor ( orientation ) {
@@ -21,6 +22,7 @@ export class Ranger {
     append ( child ) {
         this.$el.append ( child )
     }
+    
 }
 
 export class Interval {
@@ -43,6 +45,8 @@ export class Interval {
     append ( child ) {
         this.$el.append( child )
     }
+
+    
 }
 
 export class Button {
@@ -71,7 +75,6 @@ export class Button {
 
     clickHandler ( event ) {
        const { type } = event.target.dataset
-    //    const { orientation } = event.target.parentNode.parentNode.dataset
        const { orientation } = event.target.parentNode.parentNode.parentNode.querySelector('.zdslider-config').dataset
        if ( orientation == 'horizontal') {
             if ( type === 'btn-first' ) {
@@ -145,6 +148,8 @@ export class Division {
         } else if ( orientation == 'vertical' ) {
             this.$el.classList.add ( 'ranger-vert__scale-division' )
         }
+
+        this.#setup()
     }
     appendTo( parent ) {
         parent.appendChild( this.$el )
@@ -155,6 +160,14 @@ export class Division {
     setAttribute( attr, number ) {
         this.$el.setAttribute ( attr, number )
     }
+
+    #setup() {
+        this.clickHandler = this.clickHandler.bind( this )        /* Только для местных функций */
+        this.$el.addEventListener( 'click', this.clickHandler )
+    }
+    clickHandler ( event ) {
+        clickMouse( event )
+     }
 }
 
 export class DivisionSpan {
