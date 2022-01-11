@@ -66,7 +66,9 @@ export function mouseVertDownBtn_2 (event) {
               btn2.style.marginTop = num + 'px' 
 
               let coords = sler.offsetHeight - num
-              btn2.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
+
+              config.dataset.btn2_tip = forTip( target, coords )     /* Передача значения в конфиг */
+              btn2.dataset.tip = config.dataset.btn2_tip             /* Значение над бегуном */
           }
         }           
       } else if ( discrete_status == 'no' ) {
@@ -83,7 +85,9 @@ export function mouseVertDownBtn_2 (event) {
           }
 
           let coords = sler.offsetHeight - top2
-          btn2.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
+
+          config.dataset.btn2_tip = forTip( target, coords )     /* Передача значения в конфиг */
+          btn2.dataset.tip = config.dataset.btn2_tip             /* Значение над бегуном */
       }   
   }
 
@@ -126,7 +130,9 @@ function mouseVertDownBtn_1_Single (event) {
             interval.style.height = sler.offsetHeight - num  + 'px'
 
             let coords = sler.offsetHeight - num            /* Инвертирование значения */
-            btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */            
+
+            config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
+            btn1.dataset.tip = config.dataset.btn1_tip             /* Значение над бегуном */            
         }
       }           
     } else if ( discrete_status == 'no' ) {
@@ -137,7 +143,9 @@ function mouseVertDownBtn_1_Single (event) {
         interval.style.height = sler.offsetHeight - top1 + 'px'
 
         let coords = sler.offsetHeight - top1           /* Инвертирование значения */
-        btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
+
+        config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
+        btn1.dataset.tip = config.dataset.btn1_tip            /* Значение над бегуном */
     }
   }
 
@@ -199,7 +207,9 @@ function mouseVertDownBtn_1_Double (event) {
               btn1.style.marginTop = num + 'px' 
 
               let coords = sler.offsetHeight - num
-              btn1.dataset.tip = forTip ( target, coords )   /* Значение над бегуном */
+
+              config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
+              btn1.dataset.tip = config.dataset.btn1_tip             /* Значение над бегуном */
           }
           counter ++
         }           
@@ -227,7 +237,9 @@ function mouseVertDownBtn_1_Double (event) {
           }
 
           let coords = sler.offsetHeight - top1
-          btn1.dataset.tip =  forTip ( target, coords )   /* Значение над бегуном */
+
+          config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
+          btn1.dataset.tip = config.dataset.btn1_tip             /* Значение над бегуном */
       }        
   }
 
