@@ -2,6 +2,7 @@ import { makeScale, reScale, modifyScaleInput } from './scale.js'
 import { oneRunner, twoRunners } from './runnerToggler.js'
 import { showTip, hideTip, reValueTip } from './tipToggler.js'
 import { orientationToggler } from './orientToggler.js'
+import { resetBtnCoord } from './mouse.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
     let { run } = event.target.dataset 
@@ -17,9 +18,11 @@ export function allChecksListener (event) {    /* Переключение ко�
     if ( run && event.target.checked) {
       oneRunner ( event, instant )
       hideTip (event)         /* Скрываю надписи */
+      resetBtnCoord ( event )
     } else if ( run && (!event.target.checked)) {
       twoRunners ( event, instant )
       hideTip (event)
+      resetBtnCoord ( event )
     }
 
     if ( discrete && event.target.checked ) {         /* Дискретный / плавный ход */

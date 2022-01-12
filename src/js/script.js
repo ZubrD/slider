@@ -99,6 +99,8 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
       settings.setAttribute('data-orientation', orientation)
       settings.setAttribute('data-tip', 'no')
       settings.setAttribute('data-scale_length', scale_arr.length) /* Для дискретного перемещения */
+      settings.setAttribute('data-btn1_coord', 0) /* Координаты первого бегуна */
+      settings.setAttribute('data-btn2_coord', ranger_div.offsetWidth) /* Координаты первого бегуна */
       settings.appendTo ( elem.parentNode )
 
       let conf_input_min = document.querySelectorAll('.zdslider-panel__min')[i]
