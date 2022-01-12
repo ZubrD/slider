@@ -126,23 +126,30 @@ export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменен
   
 export function clickMouse (event) {
     let division = event.target.parentNode.parentNode.querySelector('.ranger__scale-division')
+
     if ( event.target == division) {        /* Если клик на риску то будет ошибка */
                                             /* Этот блок только если клик был на .ranger__scale-division */
-        let buttonsNumber = event.target.parentNode.parentNode.querySelector('.zdslider-config').dataset.runners
-        let btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
-        let btn2 = event.target.parentNode.querySelector('[data-type="btn-second"]')
-        let division_coord = getCoords(event.target)
-        let halfWidth = btn1.offsetWidth / 2                /* Половина ширины бегуна */  
+        const buttonsNumber = event.target.parentNode.parentNode.querySelector('.zdslider-config').dataset.runners
+        const btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
+        const btn2 = event.target.parentNode.querySelector('[data-type="btn-second"]')
+        const interval = event.target.parentNode.querySelector('.ranger__interval')
+
+        const division_coord = getCoords(event.target)
+        const halfWidth = btn1.offsetWidth / 2                /* Половина ширины бегуна */  
         let divisionLeft  
+
         if ( event.clientX < event.pageX ) { /* Если левый край слайдера выходит за пределы страницы при увеличении масштаба */
             divisionLeft = event.pageX - event.clientX + division_coord.left
         } else {
             divisionLeft = division_coord.left
         } 
-        let left1 = event.pageX - divisionLeft - halfWidth
-        let right1 = division.offsetWidth - btn1.offsetWidth 
-        if (left1 < 0) left1 = 0;               /* Чтобы бегун не выходил за границу слева */                          
-        if (left1 > right1) left1 = right1;     /* Чтобы бегун не выходил за границу справа */                          
+
+        let left = event.pageX - divisionLeft - halfWidth
+        let right = division.offsetWidth - btn1.offsetWidth 
+
+        if (left < 0) left = 0;               /* Чтобы бегун не выходил за границу слева */                          
+        if (left > right) left = right;     /* Чтобы бегун не выходил за границу справа */  
+
         if ( buttonsNumber == 1 ) {
             // let btn1_coord = getCoords(btn1)
             // let shiftX1 = event.pageX - btn1_coord.left  
@@ -152,13 +159,22 @@ export function clickMouse (event) {
             // console.log(event.clientX)
             // console.log(event.pageX-event.clientX)
 
-            btn1.style.marginLeft = left1 + 'px' 
+            btn1.style.marginLeft = left + 'px'
+            interval.style.width = left + 'px'
         } else if ( buttonsNumber == 2 ) {
-            if ( left1 < ( division.offsetWidth / 2 ) ) {
-               btn1.style.marginLeft = left1 + 'px'
+            let left1
+            let left2
+            if ( left < ( division.offsetWidth / 2 ) ) {
+                left1 = left
+                btn1.style.marginLeft = left1 + 'px'
             } else {
-               btn2.style.marginLeft = left1 + 'px'
+                left2 = left
+                btn2.style.marginLeft = left2 + 'px'
             }
+
+            // interval.style.width = (left2-left1) + 'px';
+            // interval.style.marginLeft = left1 + 'px'; 
+
         }
     }
 }
