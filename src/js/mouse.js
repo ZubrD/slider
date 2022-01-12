@@ -105,8 +105,10 @@ function mouseDownBtn_1_Single (event) {
   let btn1_coords = getCoords(btn1)
   let shiftX1 = event.pageX - btn1_coords.left; /* Если не учитывать, то будет при первом перемещении бегунка скачок на эту величину */
                                                 /* Это смещение клика от левого края бегунка, изменяется от 0 до ширины бегунка 20 */
+  // console.log(shiftX1, event.pageX, btn1_coords.left)                                                
   document.onmousemove = function (event) {
     let left1 = event.pageX - shiftX1 - sler_coords.left;
+    console.log(event.pageX, "-", '(', event.pageX, '-', btn1_coords.left, ')', '-', sler_coords.left)
     let right1 = sler.offsetWidth - btn1.offsetWidth;   /* 12 - это ширина бегуна */
 
     if (discrete_status == 'yes') {

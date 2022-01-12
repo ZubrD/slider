@@ -125,8 +125,28 @@ export function modifyScaleInput ( parent, new_scale_arr ) {   /* Изменен
 }
   
 export function clickMouse (event) {
-    let elem = getCoords(event.target)
-    let clickCoords = event.pageX
-    let btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
-    btn1.style.marginLeft = clickCoords - elem.left + 'px'
+    let division = event.target.parentNode.parentNode.querySelector('.ranger__scale-division') 
+    if ( event.target == division) {        /* Если клик на риску то будет ошибка */
+                                            /* Этот блок только если клик был на .ranger__scale-division */
+        let btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
+        let division_coord = getCoords(event.target)  
+        // let btn1_coord = getCoords(btn1)
+        // let shiftX1 = event.pageX - btn1_coord.left  
+        // console.log(shiftX1, event.pageX, btn1_coord.left)      
+        let halfWidth = btn1.offsetWidth / 2                /* Половина ширины бегуна */
+        let divisionLeft
+        if ( event.clientX < event.pageX ) {        /* Если левый край слайдера выходит за пределы страницы */
+            divisionLeft = event.pageX - event.clientX + division_coord.left
+        } else {
+            divisionLeft = division_coord.left
+        }
+        let left1 = event.pageX - divisionLeft - halfWidth
+        let right1 = division.offsetWidth - btn1.offsetWidth
+        console.log(event.pageX, division_coord.left, halfWidth)
+        console.log(event.clientX)
+        console.log(event.pageX-event.clientX)
+        if (left1 < 0) left1 = 0;               /* Чтобы бегун не выходил за границу слева */                          
+        if (left1 > right1) left1 = right1;     /* Чтобы бегун не выходил за границу справа */
+        btn1.style.marginLeft = left1 + 'px'        
+    }
 }
