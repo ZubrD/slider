@@ -260,6 +260,7 @@ export function clickMouse (event) {
       const btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
       const btn2 = event.target.parentNode.querySelector('[data-type="btn-second"]')
       const interval = event.target.parentNode.querySelector('.ranger__interval')
+      const target = event.target.parentNode.querySelector('.ranger__button')
 
       const division_coord = getCoords(event.target)
       const halfWidth = btn1.offsetWidth / 2                /* Половина ширины бегуна */  
@@ -288,6 +289,11 @@ export function clickMouse (event) {
 
           btn1.style.marginLeft = left + 'px'
           interval.style.width = left + 'px'
+
+          
+          config.dataset.btn1_tip = forTip(target, left)     /* Передача значения в конфиг */
+          btn1.dataset.tip = config.dataset.btn1_tip          /* Значение над бегуном */
+
       } else if ( buttonsNumber == 2 ) {
           let left1 = config.dataset.btn1_coord
           let left2 = config.dataset.btn2_coord
@@ -296,10 +302,16 @@ export function clickMouse (event) {
               left1 = left
               config.dataset.btn1_coord = left            /* Передача текущей координаты в конфиг */
               btn1.style.marginLeft = left1 + 'px'
+
+              config.dataset.btn1_tip = forTip(target, left)     /* Передача значения в конфиг */
+              btn1.dataset.tip = config.dataset.btn1_tip          /* Значение над бегуном */
           } else {
               left2 = left
               config.dataset.btn2_coord = left
               btn2.style.marginLeft = left2 + 'px'
+
+              config.dataset.btn2_tip = forTip(target, left)     /* Передача значения в конфиг */
+              btn2.dataset.tip = config.dataset.btn2_tip          /* Значение над бегуном */
           }
 
           interval.style.width = (left2-left1) + 'px';
