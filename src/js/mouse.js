@@ -250,80 +250,16 @@ export function discreteArray (interval_number, length) {
   return discret_arr
 }
 
-export function clickMouse (event) {
-  let division = event.target.parentNode.parentNode.querySelector('.ranger__scale-division')
-
-  if ( event.target == division) {        /* Если клик на риску то будет ошибка */
-                                          /* Этот блок только если клик был на .ranger__scale-division */
-      const config = event.target.parentNode.parentNode.querySelector('.zdslider-config')
-      const buttonsNumber = config.dataset.runners
-      const btn1 = event.target.parentNode.querySelector('[data-type="btn-first"]')
-      const btn2 = event.target.parentNode.querySelector('[data-type="btn-second"]')
-      const interval = event.target.parentNode.querySelector('.ranger__interval')
-      const target = event.target.parentNode.querySelector('.ranger__button')
-
-      const division_coord = getCoords(event.target)
-      const halfWidth = btn1.offsetWidth / 2                /* Половина ширины бегуна */  
-      let divisionLeft  
-
-      if ( event.clientX < event.pageX ) { /* Если левый край слайдера выходит за пределы страницы при увеличении масштаба */
-          divisionLeft = event.pageX - event.clientX + division_coord.left
-      } else {
-          divisionLeft = division_coord.left
-      } 
-
-      let left = event.pageX - divisionLeft - halfWidth
-      let right = division.offsetWidth - btn1.offsetWidth 
-
-      if (left < 0) left = 0;               /* Чтобы бегун не выходил за границу слева */                          
-      if (left > right) left = right;     /* Чтобы бегун не выходил за границу справа */  
-
-      if ( buttonsNumber == 1 ) {
-          // let btn1_coord = getCoords(btn1)
-          // let shiftX1 = event.pageX - btn1_coord.left  
-          // console.log(shiftX1, event.pageX, btn1_coord.left)      
-
-          // console.log(event.pageX, division_coord.left, halfWidth)
-          // console.log(event.clientX)
-          // console.log(event.pageX-event.clientX)
-
-          btn1.style.marginLeft = left + 'px'
-          interval.style.width = left + 'px'
-
-          
-          config.dataset.btn1_tip = forTip(target, left)     /* Передача значения в конфиг */
-          btn1.dataset.tip = config.dataset.btn1_tip          /* Значение над бегуном */
-
-      } else if ( buttonsNumber == 2 ) {
-          let left1 = config.dataset.btn1_coord
-          let left2 = config.dataset.btn2_coord
-
-          if ( left < ( division.offsetWidth / 2 ) ) {
-              left1 = left
-              config.dataset.btn1_coord = left            /* Передача текущей координаты в конфиг */
-              btn1.style.marginLeft = left1 + 'px'
-
-              config.dataset.btn1_tip = forTip(target, left)     /* Передача значения в конфиг */
-              btn1.dataset.tip = config.dataset.btn1_tip          /* Значение над бегуном */
-          } else {
-              left2 = left
-              config.dataset.btn2_coord = left
-              btn2.style.marginLeft = left2 + 'px'
-
-              config.dataset.btn2_tip = forTip(target, left)     /* Передача значения в конфиг */
-              btn2.dataset.tip = config.dataset.btn2_tip          /* Значение над бегуном */
-          }
-
-          interval.style.width = (left2-left1) + 'px';
-          interval.style.marginLeft = left1 + 'px'; 
-
-      }
-  }
-}
 
 export function resetBtnCoord ( event ) {
   const config = event.target.parentNode.parentNode.querySelector('.zdslider-config')
   const ranger = event.target.parentNode.parentNode.querySelector('.ranger')
+  const orientation = config.dataset.orientation
   config.dataset.btn1_coord = 0
-  config.dataset.btn2_coord = ranger.offsetWidth
+  if ( orientation == 'horizontal' ) {
+    config.dataset.btn2_coord = ranger.offsetWidth
+  } else if ( orientation == 'vertical' ) {
+    config.dataset.btn2_coord = ranger.offsetHeight
+  }
+  
 }

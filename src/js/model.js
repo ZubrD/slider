@@ -1,6 +1,6 @@
 import { mouseDownBtn_1, mouseDownBtn_2 } from './mouse.js'
 import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from './mouseVert.js'
-import { clickMouse } from './mouse.js'
+import { clickMouse } from './mouseClick.js'
 
 export class Ranger {
     constructor ( orientation ) {

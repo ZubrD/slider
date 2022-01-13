@@ -67,6 +67,7 @@ export function mouseVertDownBtn_2 (event) {
 
               let coords = sler.offsetHeight - num
 
+              config.dataset.btn2_coord = coords
               config.dataset.btn2_tip = forTip( target, coords )     /* Передача значения в конфиг */
               btn2.dataset.tip = config.dataset.btn2_tip             /* Значение над бегуном */
           }
@@ -86,6 +87,7 @@ export function mouseVertDownBtn_2 (event) {
 
           let coords = sler.offsetHeight - top2
 
+          config.dataset.btn2_coord = coords
           config.dataset.btn2_tip = forTip( target, coords )     /* Передача значения в конфиг */
           btn2.dataset.tip = config.dataset.btn2_tip             /* Значение над бегуном */
       }   
@@ -131,6 +133,7 @@ function mouseVertDownBtn_1_Single (event) {
 
             let coords = sler.offsetHeight - num            /* Инвертирование значения */
 
+            config.dataset.btn1_coord = coords
             config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
             btn1.dataset.tip = config.dataset.btn1_tip             /* Значение над бегуном */            
         }
@@ -144,6 +147,7 @@ function mouseVertDownBtn_1_Single (event) {
 
         let coords = sler.offsetHeight - top1           /* Инвертирование значения */
 
+        config.btn1_coord = coords
         config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
         btn1.dataset.tip = config.dataset.btn1_tip            /* Значение над бегуном */
     }
@@ -208,6 +212,7 @@ function mouseVertDownBtn_1_Double (event) {
 
               let coords = sler.offsetHeight - num
 
+              config.dataset.btn1_coord = coords
               config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
               btn1.dataset.tip = config.dataset.btn1_tip             /* Значение над бегуном */
           }
@@ -238,6 +243,7 @@ function mouseVertDownBtn_1_Double (event) {
 
           let coords = sler.offsetHeight - top1
 
+          config.dataset.btn1_coord = coords
           config.dataset.btn1_tip = forTip( target, coords )     /* Передача значения в конфиг */
           btn1.dataset.tip = config.dataset.btn1_tip             /* Значение над бегуном */
       }        

@@ -43,10 +43,12 @@ export function allChecksListener (event) {    /* Переключение ко�
       config.dataset.orientation = 'vertical'     /* Передача в конфиг флага ориентации */
       orientation = config.dataset.orientation /*  Извлечение из конфига флага ориентации */
       orientationToggler ( event, orientation )
+      resetBtnCoord ( event )
     } else if ( orient && ( event.target.checked == false ) ) {
       config.dataset.orientation = 'horizontal'
       orientation = config.dataset.orientation 
-      orientationToggler ( event, orientation )      
+      orientationToggler ( event, orientation ) 
+      resetBtnCoord ( event )     
     }
 }
 
