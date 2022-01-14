@@ -3,6 +3,7 @@ import { oneRunner, twoRunners } from './runnerToggler.js'
 import { showTip, hideTip, reValueTip } from './tipToggler.js'
 import { orientationToggler } from './orientToggler.js'
 import { resetBtnCoord } from './mouse.js'
+import { getCoords } from './scale.js'
 
 export function allChecksListener (event) {    /* Переключение количества ползунков через панель */
     let { run } = event.target.dataset 
@@ -130,3 +131,12 @@ export function changeStepListener ( event ) {
   reScale ( new_scale_arr, current_inst )    /* Перестроение шкалы по новому значению шага */
 }
 
+window.addEventListener('resize', function () {             /* Сдвиг бегунов при изменении размера окна */
+  let ranger = document.body.querySelector('.ranger')
+  let btn1 = document.body.querySelector('[data-type="btn-first"]')
+  let btn2 = document.body.querySelector('[data-type="btn-second"]')
+  let btn1_coords = getCoords(btn1)
+  let btn2_coords = getCoords(btn2)
+  // console.log(ranger.offsetWidth)
+  console.log(btn1_coords.left)
+})

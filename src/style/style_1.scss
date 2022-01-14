@@ -1,9 +1,12 @@
-$ranger-width: 500px;
+$ranger-width: 1100px;
 
 .zdslider {
+    max-width: $ranger-width;
     padding-top: 80px;
     padding-bottom: 20px;
     align-self: center;
+    position: relative;
+    margin-right: 300px;            /* Потом убрать */
     &-panel {
         width: 200px;
         height: 150px;
@@ -12,13 +15,13 @@ $ranger-width: 500px;
         margin-left: 30px;
     }
     &-wrapper {
-        display: flex;
+        // display: flex;           /* Флекс мешает сжиматься слайдеру */
         margin-bottom: 20px;
     }
 }
 
 .ranger {
-    width: $ranger-width;
+    width: 100%;
     height:10px;
     border-radius: 4px;
     background-color: #ddd;
@@ -74,7 +77,7 @@ $ranger-width: 500px;
     &__scale {
         margin-top:10px;
         height: 30px;
-        width: $ranger-width; 
+        width: 100%; 
         display: flex;  
         justify-content: space-between;
         &-span {
@@ -86,7 +89,7 @@ $ranger-width: 500px;
         position: absolute;
         margin-top:-14px;
         height: 30px;
-        width: $ranger-width; 
+        width: 100%; 
         display: flex;  
         justify-content: space-between; 
         &-span {
@@ -203,3 +206,22 @@ $ranger-width: 500px;
     }
 }
 
+.block {
+    border: 1px dashed green;
+    max-width: 1100px;
+    height: 300px;
+    margin-right: 300px;
+}
+
+.subblock {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;    
+}
+.square {
+    min-width: 100px;
+    height: 100%;
+    background-color: rgb(105, 208, 255);
+    
+    border: 1px solid black;
+}

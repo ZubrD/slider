@@ -1,6 +1,6 @@
 import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings } from './model.js'
 import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from './listeners.js'
-import { makeScale } from './scale.js'
+import { getCoords, makeScale } from './scale.js'
 import { Config } from './config.js'
 
 window.onload = sliderInit ()
@@ -56,6 +56,7 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
 
       let interval = new Interval( orientation );
       let ranger_div = document.querySelectorAll('.ranger')[i]
+
       interval.appendTo(ranger_div)
 
       if ( runners == 2 ) {
@@ -101,6 +102,7 @@ function setStructure (runners, min, max, discrete, orientation, scale_arr, iter
       settings.setAttribute('data-scale_length', scale_arr.length) /* Для дискретного перемещения */
       settings.setAttribute('data-btn1_coord', 0) /* Координаты первого бегуна */
       settings.setAttribute('data-btn2_coord', ranger_div.offsetWidth) /* Координаты первого бегуна */
+
       settings.appendTo ( elem.parentNode )
 
       let conf_input_min = document.querySelectorAll('.zdslider-panel__min')[i]
@@ -153,6 +155,7 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
     if ( runners == 1 ) {
       if ( orientation == 'horizontal' ) {
         button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
+        initialButtonPosition(i, runners)
       } else if (orientation == 'vertical') {
         button_1.style.marginTop = 0 + 'px';
       }
@@ -162,6 +165,7 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
         button_1.style.marginLeft = '0px';
         let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
         button_2.style.marginLeft = (ranger.offsetWidth-button_2.offsetWidth) + 'px'; 
+        initialButtonPosition(i, runners)                    /* Исходные позиции бегунов сохраняю в конфиге */
       } else if ( orientation == 'vertical' ) {
         button_1.style.marginTop = ranger.offsetHeight + 'px';
         let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i]
@@ -172,3 +176,15 @@ function sliderPositioning ( runners, orientation ) {   /* Первоначал�
   }  
 }
 
+function initialButtonPosition (i, runners) {
+  let config = document.querySelectorAll('.zdslider-config')[i]
+  let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i]
+  let initBtn1Pos = getCoords(btn1)
+  config.dataset.btn1_init_pos = initBtn1Pos.left
+
+  if ( runners == 2 ) {
+    let btn2 = document.querySelectorAll('[data-type="btn-second"]')[i]
+    let initBtn2Pos = getCoords(btn2)
+    config.dataset.btn2_init_pos = initBtn2Pos.left
+  }
+}
