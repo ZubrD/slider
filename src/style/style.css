@@ -1,9 +1,14 @@
+@charset "UTF-8";
 .zdslider {
+  max-width: 1100px;
   padding-top: 80px;
   padding-bottom: 20px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  position: relative;
+  margin-right: 300px;
+  /* Потом убрать */
 }
 
 .zdslider-panel {
@@ -17,14 +22,11 @@
 }
 
 .zdslider-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   margin-bottom: 20px;
 }
 
 .ranger {
-  width: 500px;
+  width: 100%;
   height: 10px;
   border-radius: 4px;
   background-color: #ddd;
@@ -84,7 +86,7 @@
 .ranger__scale {
   margin-top: 10px;
   height: 30px;
-  width: 500px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -102,7 +104,7 @@
   position: absolute;
   margin-top: -14px;
   height: 30px;
-  width: 500px;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -148,7 +150,7 @@
 
 .ranger-vert {
   width: 10px;
-  height: 500px;
+  height: 1100px;
   border-radius: 4px;
   background-color: #ddd;
   position: relative;
@@ -208,7 +210,7 @@
 .ranger-vert__scale {
   margin-top: 0px;
   margin-left: 10px;
-  height: 500px;
+  height: 1100px;
   width: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -235,7 +237,7 @@
           flex-direction: column-reverse;
   margin-top: 0px;
   margin-left: -5px;
-  height: 500px;
+  height: 1100px;
   width: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -249,5 +251,29 @@
   width: 20px;
   height: 2px;
   background-color: salmon;
+}
+
+.block {
+  border: 1px dashed green;
+  max-width: 1100px;
+  height: 300px;
+  margin-right: 300px;
+}
+
+.subblock {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.square {
+  min-width: 100px;
+  height: 100%;
+  background-color: #69d0ff;
+  border: 1px solid black;
 }
 /*# sourceMappingURL=style.css.map */

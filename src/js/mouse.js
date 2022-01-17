@@ -37,6 +37,7 @@ export function mouseDownBtn_2 (event) {
       if (left2 > right2) left2 = right2;         
       btn2.style.marginLeft = left2 + 'px'
       config.dataset.btn2_coord = left2
+      config.dataset.btn2_init_pos = left2
 
       shiftX1 = event.pageX - btn1_coords.left; 
       let left1 = event.pageX - shiftX1 - sler_coords.left;
@@ -64,6 +65,7 @@ export function mouseDownBtn_2 (event) {
               }
               btn2.style.marginLeft = num + 'px'
               config.dataset.btn2_coord = num 
+              config.dataset.btn2_init_pos = num
 
               config.dataset.btn2_tip = forTip(target, num)     /* Передача значения в конфиг */
               btn2.dataset.tip = config.dataset.btn2_tip        /* Значение над бегуном */
@@ -258,6 +260,7 @@ export function resetBtnCoord ( event ) {
   config.dataset.btn1_coord = 0
   if ( orientation == 'horizontal' ) {
     config.dataset.btn2_coord = ranger.offsetWidth
+    config.dataset.btn2_init_pos = ranger.offsetWidth
   } else if ( orientation == 'vertical' ) {
     config.dataset.btn2_coord = ranger.offsetHeight
   }
