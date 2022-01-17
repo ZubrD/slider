@@ -132,11 +132,19 @@ export function changeStepListener ( event ) {
 }
 
 window.addEventListener('resize', function () {             /* Сдвиг бегунов при изменении размера окна */
+  let config = document.body.querySelector('.zdslider-config')
   let ranger = document.body.querySelector('.ranger')
+  let interval = document.body.querySelector('.ranger__interval')
   let btn1 = document.body.querySelector('[data-type="btn-first"]')
   let btn2 = document.body.querySelector('[data-type="btn-second"]')
-  let btn1_coords = getCoords(btn1)
-  let btn2_coords = getCoords(btn2)
-  // console.log(ranger.offsetWidth)
-  console.log(btn1_coords.left)
+
+  let btn1InitPos = config.dataset.btn1_init_pos
+  let btn2InitPos = config.dataset.btn2_init_pos
+  if ( ranger.offsetWidth == btn2InitPos || ranger.offsetWidth < btn2InitPos) {
+    config.dataset.btn2_init_pos = ranger.offsetWidth - btn2.offsetWidth
+    btn2.style.marginLeft = config.dataset.btn2_init_pos + 'px'
+    console.log(btn2.style.marginLeft)
+    interval.style.width = config.dataset.btn2_init_pos + 'px'
+  }
+  // console.log(interval)
 })
