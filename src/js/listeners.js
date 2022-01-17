@@ -140,13 +140,15 @@ window.addEventListener('resize', function () {             /* Сдвиг бег
 
   let btn1InitPos = config.dataset.btn1_init_pos
   let btn2InitPos = config.dataset.btn2_init_pos
-  if ( ranger.offsetWidth == btn2InitPos || ranger.offsetWidth < btn2InitPos) {
+  if ( ranger.offsetWidth == btn2InitPos || ranger.offsetWidth < btn2InitPos ||
+     ranger.offsetWidth == btn1InitPos || ranger.offsetWidth < btn1InitPos) {
     config.dataset.btn2_init_pos = ranger.offsetWidth - btn2.offsetWidth
     btn1.style.marginLeft = 0 + 'px'
     btn2.style.marginLeft = config.dataset.btn2_init_pos + 'px'
-    interval.style.marginLeft = config.dataset.btn1_init_pos + 'px'
+    // interval.style.marginLeft = config.dataset.btn1_init_pos + 'px'
+    interval.style.marginLeft = 0 + 'px'
     interval.style.width = config.dataset.btn2_init_pos + 'px'
-    console.log(interval.style.width)
+    console.log(btn1InitPos)
   }
   // console.log(interval)
 })
