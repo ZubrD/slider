@@ -1,4 +1,5 @@
-import { Scale, Division, DivisionSpan, ScaleSpan } from './model.js';
+// import { Scale, Division, DivisionSpan, ScaleSpan} from './model.js'
+import { Scale, Division, DivisionSpan, ScaleSpan } from '../js/model.js';
 export function getCoords(elem) {
     let coords = elem.getBoundingClientRect();
     return {
@@ -70,14 +71,14 @@ export function reScale(new_scale_arr, current_inst) {
     let parents = document.querySelectorAll('.zdslider');
     for (let parent of parents) {
         let config = parent.parentNode.querySelector('.zdslider-config');
-        if (config.dataset.inst == current_inst) {
+        if (Number(config.dataset.inst) == current_inst) {
             let current_ranger = parent.querySelector('.ranger');
             let current_scale = parent.querySelector('.ranger__scale');
             let current_division = parent.querySelector('.ranger__scale-division');
             let orientation = config.dataset.orientation;
             current_scale.remove();
             current_division.remove();
-            config.dataset.scale_length = scale_arr.length; /* Для дискретного перемещения */
+            config.dataset.scale_length = String(scale_arr.length); /* Для дискретного перемещения */
             // current_ranger.setAttribute( 'data-scale_length', scale_arr.length )    /* Для дискретного перемещения */
             let division = new Division(orientation);
             division.appendTo(parent);
@@ -99,13 +100,13 @@ export function modifyScaleInput(parent, new_scale_arr) {
     let conf_input_step = parent.querySelector('.zdslider-panel__step');
     let iterations_arr = new_scale_arr[2];
     let iteration = new_scale_arr[1];
-    conf_input_step.setAttribute('data-steps', iterations_arr);
-    conf_input_step.setAttribute('data-iteration', iteration);
-    conf_input_step.setAttribute('data-current', iteration);
+    conf_input_step.setAttribute('data-steps', String(iterations_arr));
+    conf_input_step.setAttribute('data-iteration', String(iteration));
+    conf_input_step.setAttribute('data-current', String(iteration));
     if (iterations_arr.length != 0) {
         conf_input_step.disabled = false;
-        conf_input_step.setAttribute('max', iterations_arr[0]);
-        conf_input_step.setAttribute('min', iterations_arr[iterations_arr.length - 1]);
+        conf_input_step.setAttribute('max', String(iterations_arr[0]));
+        conf_input_step.setAttribute('min', String(iterations_arr[iterations_arr.length - 1]));
     }
     else { /* Если интервалов для шкалы нет, то делаю инпут неактивным */
         conf_input_step.disabled = true;
