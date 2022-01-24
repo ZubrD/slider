@@ -7,11 +7,12 @@
     "moduleResolution": "node"
   },
   "include": [
-    // "./src/ts/showElement.ts",
-    // "./src/ts/oneRunner.ts",
-    // "./src/ts/runnerToggler.ts",
-    // "./src/ts/config.ts",
+    "./src/ts/showElement.ts",
+    "./src/ts/oneRunner.ts",
+    "./src/ts/runnerToggler.ts",
+    "./src/ts/config.ts",
     "./src/ts/listeners.ts",
+    "./src/ts/model.ts",
   ],
   "exclude": [
     "ind.ts"
