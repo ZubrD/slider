@@ -13,6 +13,8 @@
     "./src/ts/config.ts",
     "./src/ts/listeners.ts",
     "./src/ts/model.ts",
+    "./src/ts/mouse.ts",
+    "./src/ts/scale.ts",
   ],
   "exclude": [
     "ind.ts"
