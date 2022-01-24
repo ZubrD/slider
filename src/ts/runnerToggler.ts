@@ -1,4 +1,5 @@
-import { Button } from './model.js'
+// import { Button } from './model.js'
+import { Button } from '../js/model.js'
 
 export function oneRunner ( event: KeyboardEvent ) {
   let elem = event.target as HTMLElement

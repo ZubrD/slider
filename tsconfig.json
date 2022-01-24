@@ -3,7 +3,8 @@
     "target": "es6",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
     "module": "es6",                                /* Specify what module code is generated. */
     "outDir": "./src/js",                                   /* Specify an output folder for all emitted files. */
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   },
   "include": [
     // "./src/ts/showElement.ts",

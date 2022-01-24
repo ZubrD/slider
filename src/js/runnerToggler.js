@@ -1,4 +1,5 @@
-import { Button } from './model.js';
+// import { Button } from './model.js'
+import { Button } from '../js/model.js';
 export function oneRunner(event) {
     var _a, _b;
     let elem = event.target;

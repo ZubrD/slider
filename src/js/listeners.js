@@ -1,8 +1,12 @@
-import { makeScale, reScale, modifyScaleInput } from './scale.js';
+// import { makeScale, reScale, modifyScaleInput } from './scale.js'
+// import { showTip, hideTip, reValueTip } from './tipToggler.js'
+// import { orientationToggler } from './orientToggler.js'
+// import { resetBtnCoord } from './mouse.js'
+import { makeScale, reScale, modifyScaleInput } from '../js/scale.js';
 import { oneRunner, twoRunners } from './runnerToggler.js';
-import { showTip, hideTip, reValueTip } from './tipToggler.js';
-import { orientationToggler } from './orientToggler.js';
-import { resetBtnCoord } from './mouse.js';
+import { showTip, hideTip, reValueTip } from '../js/tipToggler.js';
+import { orientationToggler } from '../js/orientToggler.js';
+import { resetBtnCoord } from '../js/mouse.js';
 export function allChecksListener(event) {
     let elem = event.target; /* HTMLInputElement - т.к. метода checked нет для HTMLElement */
     let { run } = elem.dataset;
