@@ -15,6 +15,7 @@
     "./src/ts/model.ts",
     "./src/ts/mouse.ts",
     "./src/ts/scale.ts",
+    "./src/ts/mouseClick.ts",
   ],
   "exclude": [
     "ind.ts"
