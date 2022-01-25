@@ -17,6 +17,7 @@
     "./src/ts/scale.ts",
     "./src/ts/mouseClick.ts",
     "./src/ts/mouseVert.ts",
+    "./src/ts/orientToggler.ts",
   ],
   "exclude": [
     "ind.ts"
