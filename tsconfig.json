@@ -19,6 +19,7 @@
     "./src/ts/mouseVert.ts",
     "./src/ts/orientToggler.ts",
     "./src/ts/script.ts",
+    "./src/ts/tipToggler.ts",
   ],
   "exclude": [
     "ind.ts"
