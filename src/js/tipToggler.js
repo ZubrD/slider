@@ -1,16 +1,24 @@
-export function showTip(event, orientation) {
-    let elem = event.target;
+export function showTip(elem, orientation) {
+    console.log(elem)
+    
+    // let elem = event.target;
     let parent = elem.parentNode.parentNode.querySelector('.zdslider');
     let parentRanger = parent.querySelector('.ranger');
     let buttons = parentRanger.querySelectorAll('.ranger__button');
     for (let elem of buttons) {
         if (orientation == 'horizontal') {
             elem.classList.add('ranger__button-tip');
+
+            let length = elem.classList.length          /* Для теста */
+            return elem.classList[ length - 1 ]
         }
         else if (orientation == 'vertical') {
             elem.classList.add('ranger-vert__button-tip');
+
+            let length = elem.classList.length          /* Для теста */
+            return elem.classList[ length - 1 ]
         }
-    }
+    }    
 }
 export function hideTip(event) {
     let elem = event.target;

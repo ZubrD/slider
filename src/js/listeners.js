@@ -37,7 +37,8 @@ export function allChecksListener(event) {
         config.dataset.discrete = 'no';
     }
     if (tip && elem.checked) { /* Подписи к бегунам */
-        showTip(event, orientation);
+        let elem = event.target
+        showTip(elem, orientation);
     }
     else if (tip && !elem.checked) {
         hideTip(event, orientation);
