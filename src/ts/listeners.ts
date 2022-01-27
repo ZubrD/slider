@@ -23,11 +23,11 @@ export function allChecksListener (event: KeyboardEvent) {    /* Переклю�
 
     if ( run && elem.checked) {
       oneRunner ( event )
-      hideTip (event)         /* Скрываю надписи */
+      hideTip ( elem)         /* Скрываю надписи */
       resetBtnCoord ( event )
     } else if ( run && (!elem.checked)) {
       twoRunners ( event, instant )
-      hideTip (event)
+      hideTip ( elem )
       resetBtnCoord ( event )
     }
 
@@ -40,9 +40,10 @@ export function allChecksListener (event: KeyboardEvent) {    /* Переклю�
     }
 
     if ( tip && elem.checked ) {            /* Подписи к бегунам */
-      showTip ( event, orientation )
+      let element = event.target
+      showTip ( element, orientation )
     } else if ( tip && !elem.checked ) {
-      hideTip ( event, orientation)
+      hideTip ( elem, orientation)
     }
 
     if ( orient && elem.checked ) {         /* Смена ориентации */

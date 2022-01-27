@@ -107,10 +107,9 @@ function setStructure(runners, min, max, discrete, orientation, scale_arr, itera
         conf_input_step.value = conf_input_step.dataset.iteration;
         conf_input_step.addEventListener('input', changeStepListener);
         counter++;
-        i++;     
+        i++;
     }
 }
-
 function sliderPositioning(runners, orientation) {
     let elements = document.querySelectorAll('.zdslider');
     let i = 0;

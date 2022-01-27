@@ -1,5 +1,4 @@
-export function showTip(elem, orientation) {   
-    // let elem = event.target;
+export function showTip(elem, orientation) {
     let parent = elem.parentNode.parentNode.querySelector('.zdslider');
     let parentRanger = parent.querySelector('.ranger');
     let buttons = parentRanger.querySelectorAll('.ranger__button');
@@ -10,12 +9,11 @@ export function showTip(elem, orientation) {
         else if (orientation == 'vertical') {
             elem.classList.add('ranger-vert__button-tip');
         }
-    }    
+    }
 }
-export function hideTip(element) {
-    // let elem = event.target;
-    let parent = element.parentNode.parentNode.querySelector('.zdslider');
-    let tip = element.parentNode.querySelector('.zdslider-panel__check-tip');
+export function hideTip(elem) {
+    let parent = elem.parentNode.parentNode.querySelector('.zdslider');
+    let tip = elem.parentNode.querySelector('.zdslider-panel__check-tip');
     tip.checked = false; /* Сбрасываю флаг надписи */
     let parentRanger = parent.querySelector('.ranger');
     let buttons = parentRanger.querySelectorAll('.ranger__button');
@@ -47,5 +45,6 @@ export function reValueTip(event, parent) {
     for (let elem of buttons) {
         elem.dataset.tip = '';
     }
-    hideTip(event);
+    let element = event.target;
+    hideTip(element);
 }

@@ -1,5 +1,4 @@
-export function showTip ( event: MouseEvent, orientation: string ) {
-  let elem = event.target as HTMLElement
+export function showTip ( elem: HTMLElement, orientation: string ) {
   let parent: HTMLElement = elem.parentNode.parentNode.querySelector('.zdslider')
   let parentRanger: HTMLElement = parent.querySelector('.ranger')
   let buttons = parentRanger.querySelectorAll('.ranger__button')
@@ -12,8 +11,7 @@ export function showTip ( event: MouseEvent, orientation: string ) {
   }
 }
   
-export function hideTip ( event: MouseEvent ) {
-  let elem = event.target as HTMLElement
+export function hideTip ( elem: HTMLElement ) {
   let parent: HTMLElement = elem.parentNode.parentNode.querySelector('.zdslider')
   let tip: HTMLInputElement = elem.parentNode.querySelector('.zdslider-panel__check-tip')
   tip.checked = false           /* Сбрасываю флаг надписи */
@@ -49,5 +47,6 @@ export function reValueTip ( event: MouseEvent, parent: HTMLElement ) {     /* �
   for ( let elem of buttons ) {
     ( elem as HTMLElement ).dataset.tip = ''
   }
-  hideTip( event )
+  let element = event.target as HTMLElement
+  hideTip( element )
 }

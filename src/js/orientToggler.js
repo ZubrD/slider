@@ -3,6 +3,7 @@ import { hideTip } from '../js/tipToggler.js';
 export function orientationToggler(event, orientation) {
     let elem = event.target;
     let zdslider = elem.parentNode.parentNode.childNodes[1];
+    // zdslider.dataset.orientation = orientation                          /* ЭТОГО БЫТЬ НЕ ДОЛЖНО!!!!!! ВСЁ - В КОНФИГ!!!!! */
     let ranger = zdslider.querySelector('.ranger');
     let ranger__interval = zdslider.querySelector('.ranger__interval');
     let ranger_scale = zdslider.querySelector('.ranger__scale');

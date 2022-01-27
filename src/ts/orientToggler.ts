@@ -15,7 +15,7 @@ export function orientationToggler ( event: MouseEvent, orientation: string ) {
     let ranger_scale_division_spans = zdslider.querySelectorAll('.ranger__scale-division-span')
     let ranger_buttons = zdslider.querySelectorAll('.ranger__button')
 
-    hideTip ( event )                           /* Сброс флага ярлыка */
+    hideTip ( elem )                           /* Сброс флага ярлыка */
 
     if ( orientation == 'vertical' ) {
 
