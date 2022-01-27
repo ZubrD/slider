@@ -1,6 +1,4 @@
-export function showTip(elem, orientation) {
-    console.log(elem)
-    
+export function showTip(elem, orientation) {   
     // let elem = event.target;
     let parent = elem.parentNode.parentNode.querySelector('.zdslider');
     let parentRanger = parent.querySelector('.ranger');
@@ -8,22 +6,16 @@ export function showTip(elem, orientation) {
     for (let elem of buttons) {
         if (orientation == 'horizontal') {
             elem.classList.add('ranger__button-tip');
-
-            let length = elem.classList.length          /* Для теста */
-            return elem.classList[ length - 1 ]
         }
         else if (orientation == 'vertical') {
             elem.classList.add('ranger-vert__button-tip');
-
-            let length = elem.classList.length          /* Для теста */
-            return elem.classList[ length - 1 ]
         }
     }    
 }
-export function hideTip(event) {
-    let elem = event.target;
-    let parent = elem.parentNode.parentNode.querySelector('.zdslider');
-    let tip = elem.parentNode.querySelector('.zdslider-panel__check-tip');
+export function hideTip(element) {
+    // let elem = event.target;
+    let parent = element.parentNode.parentNode.querySelector('.zdslider');
+    let tip = element.parentNode.querySelector('.zdslider-panel__check-tip');
     tip.checked = false; /* Сбрасываю флаг надписи */
     let parentRanger = parent.querySelector('.ranger');
     let buttons = parentRanger.querySelectorAll('.ranger__button');
@@ -31,6 +23,7 @@ export function hideTip(event) {
         elem.classList.remove('ranger__button-tip');
         elem.classList.remove('ranger-vert__button-tip');
     }
+    return tip.checked
 }
 export function forTip(target, coord) {
     const config = target.parentNode.parentNode.parentNode.querySelector('.zdslider-config');

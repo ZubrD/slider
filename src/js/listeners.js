@@ -19,13 +19,15 @@ export function allChecksListener(event) {
     let orientation = config.dataset.orientation; /*  Извлечение из конфига флага ориентации */
     let instant = config.dataset.inst; /*  Извлечение из конфига номера экземпляра слайдера */
     if (run && elem.checked) {
+        let element = event.target
         oneRunner(event);
-        hideTip(event); /* Скрываю надписи */
+        hideTip(element); /* Скрываю надписи */
         resetBtnCoord(event);
     }
     else if (run && (!elem.checked)) {
+        let element = event.target
         twoRunners(event, instant);
-        hideTip(event);
+        hideTip(element);
         resetBtnCoord(event);
     }
     if (discrete && elem.checked) { /* Дискретный / плавный ход */
@@ -37,11 +39,12 @@ export function allChecksListener(event) {
         config.dataset.discrete = 'no';
     }
     if (tip && elem.checked) { /* Подписи к бегунам */
-        let elem = event.target
-        showTip(elem, orientation);
+        let element = event.target
+        showTip(element, orientation);
     }
     else if (tip && !elem.checked) {
-        hideTip(event, orientation);
+        let element = event.target
+        hideTip(element, orientation);
     }
     if (orient && elem.checked) { /* Смена ориентации */
         config.dataset.orientation = 'vertical'; /* Передача в конфиг флага ориентации */
