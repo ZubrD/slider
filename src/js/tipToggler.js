@@ -23,7 +23,6 @@ export function hideTip(element) {
         elem.classList.remove('ranger__button-tip');
         elem.classList.remove('ranger-vert__button-tip');
     }
-    return tip.checked
 }
 export function forTip(target, coord) {
     const config = target.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
