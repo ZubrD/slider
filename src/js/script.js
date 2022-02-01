@@ -2,7 +2,7 @@
 // import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from './listeners.js'
 // import { getCoords, makeScale } from './scale.js'
 // import { Config } from './config.js'
-import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings } from '../js/model.js';
+import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings, Panel } from '../js/model.js';
 import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from '../js/listeners.js';
 import { getCoords, makeScale } from '../js/scale.js';
 import { Config } from '../js/config.js';
@@ -83,6 +83,8 @@ function setStructure(runners, min, max, discrete, orientation, scale_arr, itera
         settings.setAttribute('data-btn1_coord', 0); /* Координаты первого бегуна */
         settings.setAttribute('data-btn2_coord', ranger_div.offsetWidth); /* Координаты первого бегуна */
         settings.appendTo(elem.parentNode);
+        let panel = new Panel();
+        panel.appendTo(elem.parentNode);
         let conf_input_min = document.querySelectorAll('.zdslider-panel__min')[i];
         conf_input_min.setAttribute('data-min', String(min));
         conf_input_min.setAttribute('data-max', String(max));
