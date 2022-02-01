@@ -222,38 +222,38 @@ export class Panel {
     $step_label: HTMLElement
     constructor () {
         this.$panel = document.createElement('div')
-        this.$panel.classList.add('zdslider-panel-123')
+        this.$panel.classList.add('zdslider-panel')
        
         this.$run_checkbox = document.createElement('input')
-        this.$run_checkbox.classList.add('zdslider-panel__check-runners-123')
+        this.$run_checkbox.classList.add('zdslider-panel__check-runners')
         this.$run_checkbox.setAttribute('type', 'checkbox')
         this.$run_checkbox.setAttribute('data-run', 'run')
 
         this.$discrete_checkbox = document.createElement('input')
-        this.$discrete_checkbox.classList.add('zdslider-panel__check-discrete-123')
+        this.$discrete_checkbox.classList.add('zdslider-panel__check-discrete')
         this.$discrete_checkbox.setAttribute('type', 'checkbox')
         this.$discrete_checkbox.setAttribute('data-discrete', 'discrete')
 
         this.$tip_checkbox = document.createElement('input')
-        this.$tip_checkbox.classList.add('zdslider-panel__check-tip-123')
+        this.$tip_checkbox.classList.add('zdslider-panel__check-tip')
         this.$tip_checkbox.setAttribute('type', 'checkbox')
         this.$tip_checkbox.setAttribute('data-tip', 'tip')
 
         this.$orient_checkbox = document.createElement('input')
-        this.$orient_checkbox.classList.add('zdslider-panel__check-orient-123')
+        this.$orient_checkbox.classList.add('zdslider-panel__check-orient')
         this.$orient_checkbox.setAttribute('type', 'checkbox')
         this.$orient_checkbox.setAttribute('data-orient', 'orient')
 
         this.$min_number = document.createElement('input')
-        this.$min_number.classList.add('zdslider-panel__min-123')
+        this.$min_number.classList.add('zdslider-panel__min')
         this.$min_number.setAttribute('type', 'number')
 
         this.$max_number = document.createElement('input')
-        this.$max_number.classList.add('zdslider-panel__max-123')
+        this.$max_number.classList.add('zdslider-panel__max')
         this.$max_number.setAttribute('type', 'number')
 
         this.$step_number = document.createElement('input')
-        this.$step_number.classList.add('zdslider-panel__step-123')
+        this.$step_number.classList.add('zdslider-panel__step')
         this.$step_number.setAttribute('type', 'number')
 
         this.$run_label = document.createElement('label')
