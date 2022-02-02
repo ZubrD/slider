@@ -5,16 +5,13 @@ import { hideTip } from '../js/tipToggler.js'
 export function orientationToggler ( event: MouseEvent, orientation: string ) {
     let elem = event.target as HTMLElement
     let zdslider = elem.parentNode.parentNode.childNodes[1] as HTMLElement
-
-    // zdslider.dataset.orientation = orientation                          /* ЭТОГО БЫТЬ НЕ ДОЛЖНО!!!!!! ВСЁ - В КОНФИГ!!!!! */
-    
     let ranger: HTMLElement = zdslider.querySelector('.ranger')
     let ranger__interval: HTMLElement = zdslider.querySelector('.ranger__interval')
     let ranger_scale: HTMLElement = zdslider.querySelector('.ranger__scale')
     let ranger_scale_division: HTMLElement = zdslider.querySelector('.ranger__scale-division')
     let ranger_scale_division_spans = zdslider.querySelectorAll('.ranger__scale-division-span')
     let ranger_buttons = zdslider.querySelectorAll('.ranger__button')
-
+    let config: HTMLElement = elem.parentNode.parentNode.querySelector('.zdslider-config');
     hideTip ( elem )                           /* Сброс флага ярлыка */
 
     if ( orientation == 'vertical' ) {
@@ -27,7 +24,9 @@ export function orientationToggler ( event: MouseEvent, orientation: string ) {
 
         ranger__interval.style.height = (ranger.offsetHeight) + 'px';   
         ranger__interval.style.width = 5 + 'px'
-        ranger__interval.style.marginLeft = 0 + 'px'        
+        ranger__interval.style.marginLeft = 0 + 'px'    
+        config.dataset.width = String ( ranger.offsetWidth )
+        config.dataset.height = String ( ranger.offsetHeight )
         for ( let elem of ranger_scale_division_spans ) {
             elem.classList.add('ranger-vert__scale-division-span')
         }
@@ -49,9 +48,7 @@ export function orientationToggler ( event: MouseEvent, orientation: string ) {
                 }
             }        
         }
-
     } else if ( orientation == 'horizontal' ) {
-
         zdslider.classList.remove('zdslider-vert')
         ranger.classList.remove('ranger-vert')
         ranger__interval.classList.remove('ranger-vert__interval')
@@ -61,7 +58,8 @@ export function orientationToggler ( event: MouseEvent, orientation: string ) {
         ranger__interval.style.width = ranger.offsetWidth + 'px';       /* Переопределение стиля интервала после определения класса */
         ranger__interval.style.height = 5 + 'px'
         ranger__interval.style.marginTop = 0 + 'px'
-
+        config.dataset.width = String ( ranger.offsetWidth )
+        config.dataset.height = String ( ranger.offsetHeight )
         for (let elem of ranger_scale_division_spans) {
             elem.classList.remove('ranger-vert__scale-division-span')
         }

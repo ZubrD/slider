@@ -9,7 +9,7 @@ import { Config } from '../js/config.js'
 
 (<any>window).onload = sliderInit ()
 
-function sliderInit () {
+export function sliderInit () {
   let config = new Config()
   let runner_number: number = config.runner_number
   let min: number = config.min
@@ -185,10 +185,12 @@ function sliderPositioning ( runners: number, orientation: string ) {   /* Пе�
 
 function initialButtonPosition (i: number, runners: number) {
   let config = document.querySelectorAll('.zdslider-config')[i] as HTMLElement
+  let ranger = document.querySelectorAll('.ranger')[i] as HTMLBRElement
   let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i]
   let initBtn1Pos: DOMRect = getCoords(btn1)
   config.dataset.btn1_init_pos = String ( initBtn1Pos.left )
-
+  config.dataset.width = String ( ranger.offsetWidth )
+  config.dataset.height = String ( ranger.offsetHeight )
   if ( runners == 2 ) {
     let btn2 = document.querySelectorAll('[data-type="btn-second"]')[i]
     let initBtn2Pos = getCoords(btn2)

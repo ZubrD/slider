@@ -7,7 +7,7 @@ import { changeMinListener, changeMaxListener, changeStepListener, allChecksList
 import { getCoords, makeScale } from '../js/scale.js';
 import { Config } from '../js/config.js';
 window.onload = sliderInit();
-function sliderInit() {
+export function sliderInit() {
     let config = new Config();
     let runner_number = config.runner_number;
     let min = config.min;
@@ -152,9 +152,12 @@ function sliderPositioning(runners, orientation) {
 }
 function initialButtonPosition(i, runners) {
     let config = document.querySelectorAll('.zdslider-config')[i];
+    let ranger = document.querySelectorAll('.ranger')[i];
     let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i];
     let initBtn1Pos = getCoords(btn1);
     config.dataset.btn1_init_pos = String(initBtn1Pos.left);
+    config.dataset.width = String(ranger.offsetWidth);
+    config.dataset.height = String(ranger.offsetHeight);
     if (runners == 2) {
         let btn2 = document.querySelectorAll('[data-type="btn-second"]')[i];
         let initBtn2Pos = getCoords(btn2);

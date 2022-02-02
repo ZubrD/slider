@@ -3,13 +3,13 @@ import { hideTip } from '../js/tipToggler.js';
 export function orientationToggler(event, orientation) {
     let elem = event.target;
     let zdslider = elem.parentNode.parentNode.childNodes[1];
-    // zdslider.dataset.orientation = orientation                          /* ЭТОГО БЫТЬ НЕ ДОЛЖНО!!!!!! ВСЁ - В КОНФИГ!!!!! */
     let ranger = zdslider.querySelector('.ranger');
     let ranger__interval = zdslider.querySelector('.ranger__interval');
     let ranger_scale = zdslider.querySelector('.ranger__scale');
     let ranger_scale_division = zdslider.querySelector('.ranger__scale-division');
     let ranger_scale_division_spans = zdslider.querySelectorAll('.ranger__scale-division-span');
     let ranger_buttons = zdslider.querySelectorAll('.ranger__button');
+    let config = elem.parentNode.parentNode.querySelector('.zdslider-config');
     hideTip(elem); /* Сброс флага ярлыка */
     if (orientation == 'vertical') {
         zdslider.classList.add('zdslider-vert');
@@ -20,6 +20,8 @@ export function orientationToggler(event, orientation) {
         ranger__interval.style.height = (ranger.offsetHeight) + 'px';
         ranger__interval.style.width = 5 + 'px';
         ranger__interval.style.marginLeft = 0 + 'px';
+        config.dataset.width = String(ranger.offsetWidth);
+        config.dataset.height = String(ranger.offsetHeight);
         for (let elem of ranger_scale_division_spans) {
             elem.classList.add('ranger-vert__scale-division-span');
         }
@@ -51,6 +53,8 @@ export function orientationToggler(event, orientation) {
         ranger__interval.style.width = ranger.offsetWidth + 'px'; /* Переопределение стиля интервала после определения класса */
         ranger__interval.style.height = 5 + 'px';
         ranger__interval.style.marginTop = 0 + 'px';
+        config.dataset.width = String(ranger.offsetWidth);
+        config.dataset.height = String(ranger.offsetHeight);
         for (let elem of ranger_scale_division_spans) {
             elem.classList.remove('ranger-vert__scale-division-span');
         }

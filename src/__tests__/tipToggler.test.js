@@ -6,22 +6,12 @@ import { showTip, hideTip, forTip, toggleTheme } from '../js/tipToggler.js'
 import { sliderInit } from '../js/script.js'
 
 test ('Проверка функции showTip из модуля tipToggler.js', () => {
-    document.body.innerHTML = `
 
-        <div class="zdslider-wrapper">
-            <div class="zdslider"><div class="ranger" data-type="ranger"><div class="ranger__interval" data-type="interval" style="width: 500px;"></div><button class="ranger__button" data-type="btn-first" style="margin-left: 0px;"></button><button class="ranger__button" data-type="btn-second" style="margin-left: 488px;"></button></div><div class="ranger__scale-division"><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span></div><div class="ranger__scale"><span class="ranger__scale-span">10</span><span class="ranger__scale-span">30</span><span class="ranger__scale-span">50</span><span class="ranger__scale-span">70</span><span class="ranger__scale-span">90</span><span class="ranger__scale-span">110</span><span class="ranger__scale-span">130</span><span class="ranger__scale-span">150</span></div></div>
-            <div class="zdslider-panel">
-                <input type="checkbox" class="zdslider-panel__check-runners" data-run="run"><label>Бегуны</label><br>
-                <input type="checkbox" class="zdslider-panel__check-discete" data-discrete="discrete"><lable>Дискретный</lable><br>
-                <input type="checkbox" class="zdslider-panel__check-tip" data-tip="tip"><lable>Ярлык</lable><br>
-                <input type="checkbox" class="zdslider-panel__check-orient" data-orient="orient"><lable>Вертикальный</lable>
-                <input type="number" class="zdslider-panel__min" data-min="10" data-max="150">
-                <input type="number" class="zdslider-panel__max" data-min="10" data-max="150">
-                <input type="number" class="zdslider-panel__step" onkeydown="return false" data-steps="70,35,28,20" data-iteration="20" data-current="20" max="70" min="20">
-            </div>
-        <div class="zdslider-config" data-inst="1" data-runners="2" data-min="10" data-max="150" data-discrete="no" data-orientation="horizontal" data-tip="no" data-scale_length="8" data-btn1_coord="0" data-btn2_coord="500" data-btn1_init_pos="7.986111640930176" data-btn2_init_pos="495.9722595214844"></div></div>
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
 
-  `;
     let element = document.body.querySelector('.zdslider-panel__check-tip')
 
     showTip( element, 'horizontal')                 /* Вызываю в первый раз */
@@ -43,22 +33,11 @@ test ('Проверка функции showTip из модуля tipToggler.js',
 });
 
 test ('Проверка функции hideTip из модуля tipToggler.js', () => {
-    document.body.innerHTML = `
 
-        <div class="zdslider-wrapper">
-            <div class="zdslider"><div class="ranger" data-type="ranger"><div class="ranger__interval" data-type="interval" style="width: 500px;"></div><button class="ranger__button" data-type="btn-first" style="margin-left: 0px;"></button><button class="ranger__button" data-type="btn-second" style="margin-left: 488px;"></button></div><div class="ranger__scale-division"><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span><span class="ranger__scale-division-span"></span></div><div class="ranger__scale"><span class="ranger__scale-span">10</span><span class="ranger__scale-span">30</span><span class="ranger__scale-span">50</span><span class="ranger__scale-span">70</span><span class="ranger__scale-span">90</span><span class="ranger__scale-span">110</span><span class="ranger__scale-span">130</span><span class="ranger__scale-span">150</span></div></div>
-            <div class="zdslider-panel">
-                <input type="checkbox" class="zdslider-panel__check-runners" data-run="run"><label>Бегуны</label><br>
-                <input type="checkbox" class="zdslider-panel__check-discete" data-discrete="discrete"><lable>Дискретный</lable><br>
-                <input type="checkbox" class="zdslider-panel__check-tip" data-tip="tip"><lable>Ярлык</lable><br>
-                <input type="checkbox" class="zdslider-panel__check-orient" data-orient="orient"><lable>Вертикальный</lable>
-                <input type="number" class="zdslider-panel__min" data-min="10" data-max="150">
-                <input type="number" class="zdslider-panel__max" data-min="10" data-max="150">
-                <input type="number" class="zdslider-panel__step" onkeydown="return false" data-steps="70,35,28,20" data-iteration="20" data-current="20" max="70" min="20">
-            </div>
-        <div class="zdslider-config" data-inst="1" data-runners="2" data-min="10" data-max="150" data-discrete="no" data-orientation="horizontal" data-tip="no" data-scale_length="8" data-btn1_coord="0" data-btn2_coord="500" data-btn1_init_pos="7.986111640930176" data-btn2_init_pos="495.9722595214844"></div></div>
-
-  `;
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
 
     let element = document.body.querySelector('.zdslider-panel__check-tip');
 
@@ -70,7 +49,6 @@ test ('Проверка функции hideTip из модуля tipToggler.js',
         expect ( button.classList.contains ( 'ranger__button-tip' ) ).toBe ( false )        
         expect ( button.classList.contains ( 'ranger-vert__button-tip' ) ).toBe ( false )        
     }
-
 });
 
 test ('Проверка функции forTip из модуля tipToggler.js', () => {
@@ -78,33 +56,18 @@ test ('Проверка функции forTip из модуля tipToggler.js', 
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
     document.body.appendChild(zdslider)
-    let structur = sliderInit()
-    zdslider.appendChild(structur)
-    let element = document.body.querySelector('.zdslider')
-    console.log(element.classList[0])
+    sliderInit()
 
-    // let root = document.body
-    // root.classList.add('root_class')
-    // let fake = document.createElement('div')
-    // fake.classList.add('frdt')
-    // root.appendChild(fake)
+    let config = document.body.querySelector('.zdslider-config')
+    config.dataset.width = 500
 
-    // console.log(fake.parentNode.classList[0])
+    let element = document.body.querySelector('.ranger__button');
 
-    // let element = document.body.querySelector('.ranger__button');
-    // let config = document.body.querySelector('.zdslider-config');
-    // const orientation = config.dataset.orientation;
-    // let list = config.dataset
+    expect ( forTip (element, 50 ) ).toBe ( 24 )
 
-    // console.log('ranger_width = ', list.ranger_width)
-    // console.log (forTip ( element, 3 ))
+    config.dataset.orientation = 'vertical'
+    config.dataset.height = 500
 
-    // expect ( forTip (element, 3 ) ).toBe ( -25 )
-
-    // element = document.body.querySelector('.ranger-vert__button');
-    // console.log(element.classList[0])
-    // config.dataset.orientation = 'vertical'
-    // expect ( forTip (element, 3 ) ).toBe ( 150 )
-
+    expect ( forTip (element, 3 ) ).toBe ( 11 )
 });
 

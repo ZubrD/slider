@@ -26,8 +26,10 @@ export function forTip(target, coord) {
     const config = target.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
     const configMin = Number(config.dataset.min);
     const configMax = Number(config.dataset.max);
-    const ranger_height = target.parentNode.offsetHeight;
-    const ranger_width = target.parentNode.offsetWidth;
+    // const ranger_height: number = ( target.parentNode as HTMLElement).offsetHeight
+    // const ranger_width: number = ( target.parentNode as HTMLElement ).offsetWidth
+    const ranger_height = Number(config.dataset.height);
+    const ranger_width = Number(config.dataset.width);
     const orientation = config.dataset.orientation;
     if (orientation == 'horizontal') {
         return Math.round(((configMax - configMin) / (ranger_width - 12)) * (coord)) + configMin;
