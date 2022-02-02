@@ -39,9 +39,9 @@ export function forTip ( target: HTMLElement, coord: number ) {
   } 
 }
 
-export function reValueTip ( event: MouseEvent, parent: HTMLElement ) {     /* Изменение значения атрибута tip  при изменении min, max в панели */
-  // let zdslider = parent.parentNode.childNodes[1]
-  let zdslider = parent.parentNode as HTMLElement
+export function reValueTip ( element: HTMLElement ) {     /* Изменение значения атрибута tip  при изменении min, max в панели */
+  let parent = element.parentNode.parentNode as HTMLElement
+  let zdslider: HTMLElement = parent.querySelector('.zdslider');
   let input = parent.querySelector('.zdslider-panel__check-tip') as HTMLInputElement
   input.checked = false
 
@@ -49,6 +49,5 @@ export function reValueTip ( event: MouseEvent, parent: HTMLElement ) {     /* �
   for ( let elem of buttons ) {
     ( elem as HTMLElement ).dataset.tip = ''
   }
-  let element = event.target as HTMLElement
   hideTip( element )
 }

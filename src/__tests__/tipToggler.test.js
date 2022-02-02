@@ -71,3 +71,20 @@ test ('Проверка функции forTip из модуля tipToggler.js', 
     expect ( forTip (element, 3 ) ).toBe ( 11 )
 });
 
+test ('Проверка функции reValueTip из модуля tipToggler.js', () => {
+
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
+
+    let config = document.body.querySelector('.zdslider-config')
+    config.dataset.width = 500
+
+    let element = document.body.querySelector('.zdslider-panel__check-tip');
+    console.log(element.classList[0])
+
+    // expect ( forTip (element, 50 ) ).toBe ( 24 )
+
+});
+

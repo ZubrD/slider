@@ -72,7 +72,7 @@ export function changeMinListener ( event: KeyboardEvent ) {
   config.dataset.min = String ( min )    /* Передаю в конфиг */
   config.dataset.max = String ( max )
 
-  reValueTip ( event, parent )
+  reValueTip ( elem )
 
   modifyScaleInput ( parent, new_scale_arr )
 
@@ -94,7 +94,7 @@ export function changeMaxListener ( event: KeyboardEvent ) {
   config.dataset.min = String ( min )    /* Передаю в конфиг */
   config.dataset.max = String ( max )
 
-  reValueTip ( event, parent )
+  reValueTip ( elem )
 
   modifyScaleInput ( parent, new_scale_arr )
   

@@ -38,15 +38,14 @@ export function forTip(target, coord) {
         return Math.round(((configMax - configMin) / ranger_height) * (coord)) + configMin;
     }
 }
-export function reValueTip(event, parent) {
-    // let zdslider = parent.parentNode.childNodes[1]
-    let zdslider = parent.parentNode;
+export function reValueTip(element) {
+    let parent = element.parentNode.parentNode;
+    let zdslider = parent.querySelector('.zdslider');
     let input = parent.querySelector('.zdslider-panel__check-tip');
     input.checked = false;
     let buttons = zdslider.querySelectorAll('.ranger__button');
     for (let elem of buttons) {
         elem.dataset.tip = '';
     }
-    let element = event.target;
     hideTip(element);
 }
