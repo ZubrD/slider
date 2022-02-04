@@ -12,6 +12,6 @@ export let configObj = {
     min: 10 as number,
     max: 150 as number,
     discrete: 'no' as string,
-    // orientation: = 'vertical' as string
+    // orientation: 'vertical'
     orientation: 'horizontal' as string
 }

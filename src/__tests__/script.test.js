@@ -35,6 +35,17 @@ test ('Проверка наличия zdslider (script.js)', () => {
     expect ( zdslider.classList.contains ( 'zdslider' ) ).toBe ( true )
 });
 
+test ('Проверка наличия zdslider-vert (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.orientation = 'vertical'
+    sliderInit()
+
+    expect ( zdslider.classList.contains ( 'zdslider-vert' ) ).toBe ( true )
+});
+
 test ('Проверка наличия экземпляра класса Ranger (script.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
@@ -81,4 +92,97 @@ test ('Проверка наличия одного бегуна (script.js)', (
     
     let button_1 = document.body.querySelector('[data-type="btn-first"]')
     expect ( button_1.dataset.type ).toBe( 'btn-first' )
+});
+
+test ('Проверка наличия экземпляра класса Division (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
+    
+    let division = document.body.querySelector('.ranger__scale-division')
+    expect ( division.classList.contains('ranger__scale-division') ).toBe( true )
+});
+
+test ('Проверка количества делений шкалы (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.min = 16
+    sliderInit()
+    
+    let divisions = document.body.querySelectorAll('.ranger__scale-division-span')
+    expect ( divisions.length ).toBe( 3 )
+});
+
+test ('Проверка количества подписей делений шкалы (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.min = 9
+    sliderInit()
+    
+    let scale_spans = document.body.querySelectorAll('.ranger__scale-span')
+    expect ( scale_spans.length ).toBe( 4 )
+});
+
+test ('Проверка наличия экземпляра класса Settings (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
+    
+    let settings = document.body.querySelector('.zdslider-config')
+    expect ( settings.classList.contains('zdslider-config') ).toBe( true )
+});
+
+test ('Проверка наличия экземпляра класса Panel (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
+    
+    let panel = document.body.querySelector('.zdslider-panel')
+    expect ( panel.classList.contains('zdslider-panel') ).toBe( true )
+});
+
+test ('Проверка активного состояния инпута для шага (есть интервалы) (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.min = 10
+    sliderInit()
+    
+    let panel = document.body.querySelector('.zdslider-panel__step')
+    expect ( panel.disabled ).toBe( false )
+});
+
+test ('Проверка неактивного состояния инпута для шага (нет интервалов) (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.min = 11
+    sliderInit()
+    
+    let panel = document.body.querySelector('.zdslider-panel__step')
+    expect ( panel.disabled ).toBe( true )
+});
+
+test ('Проверка ширины интервала (script.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    sliderInit()
+    
+    let interval = document.body.querySelector('.ranger__interval')
+    console.log(interval.style.width)
+    // expect ( panel.disabled ).toBe( true )
 });

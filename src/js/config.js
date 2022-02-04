@@ -13,6 +13,6 @@ export let configObj = {
     min: 10,
     max: 150,
     discrete: 'no',
-    // orientation: = 'vertical' as string
+    // orientation: 'vertical'
     orientation: 'horizontal'
 };

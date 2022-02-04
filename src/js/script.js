@@ -82,6 +82,10 @@ export function setStructure(runners, min, max, discrete, orientation, scale_arr
         settings.setAttribute('data-scale_length', scale_arr.length); /* Для дискретного перемещения */
         settings.setAttribute('data-btn1_coord', 0); /* Координаты первого бегуна */
         settings.setAttribute('data-btn2_coord', ranger_div.offsetWidth); /* Координаты первого бегуна */
+        settings.setAttribute('data-width', String(ranger_div.offsetWidth));
+        settings.setAttribute('data-height', String(ranger_div.offsetHeight));
+        let button_1_div = document.querySelectorAll('[data-type="btn-first"]')[i];
+        settings.setAttribute('data-button_width', String(button_1_div.offsetWidth));
         settings.appendTo(elem.parentNode);
         let panel = new Panel();
         panel.appendTo(elem.parentNode);
@@ -119,15 +123,19 @@ export function sliderPositioning(runners, orientation) {
         let ranger = document.querySelectorAll('.ranger')[i];
         let interval = document.querySelectorAll('.ranger__interval')[i];
         let button_1 = document.querySelectorAll('[data-type="btn-first"]')[i];
+        let config = document.querySelectorAll('.zdslider-config')[i];
         if (orientation == 'horizontal') {
-            interval.style.width = (ranger.offsetWidth) + 'px';
+            // interval.style.width = (ranger.offsetWidth) + 'px';
+            interval.style.width = (config.dataset.width) + 'px';
         }
         else if (orientation == 'vertical') {
-            interval.style.height = (ranger.offsetHeight) - 5 + 'px'; /* 5 - это ширина риски шкалы */
+            // interval.style.height = (ranger.offsetHeight) - 5 + 'px';   /* 5 - это ширина риски шкалы */
+            interval.style.height = Number(config.dataset.height) - 5 + 'px'; /* 5 - это ширина риски шкалы */
         }
         if (runners == 1) {
             if (orientation == 'horizontal') {
-                button_1.style.marginLeft = (ranger.offsetWidth - button_1.offsetWidth) + 2 + 'px';
+                // button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
+                button_1.style.marginLeft = (Number(config.dataset.width) - Number(config.dataset.button_width)) + 2 + 'px';
                 initialButtonPosition(i, runners);
             }
             else if (orientation == 'vertical') {
@@ -138,11 +146,13 @@ export function sliderPositioning(runners, orientation) {
             if (orientation == 'horizontal') {
                 button_1.style.marginLeft = '0px';
                 let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i];
-                button_2.style.marginLeft = (ranger.offsetWidth - button_2.offsetWidth) + 'px';
+                // button_2.style.marginLeft = (ranger.offsetWidth-button_2.offsetWidth) + 'px'; 
+                button_2.style.marginLeft = (Number(config.dataset.width) - Number(config.dataset.button_width)) + 'px';
                 initialButtonPosition(i, runners); /* Исходные позиции бегунов сохраняю в конфиге */
             }
             else if (orientation == 'vertical') {
-                button_1.style.marginTop = ranger.offsetHeight + 'px';
+                // button_1.style.marginTop = ranger.offsetHeight + 'px';
+                button_1.style.marginTop = config.dataset.height + 'px';
                 let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i];
                 button_2.style.marginTop = 0 + 'px';
             }
