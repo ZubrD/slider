@@ -5,18 +5,18 @@
 import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings, Panel } from '../js/model.js'
 import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from '../js/listeners.js'
 import { getCoords, makeScale } from '../js/scale.js'
-import { Config } from '../js/config.js'
+import { Config, configObj } from '../js/config.js'
 
 (<any>window).onload = sliderInit ()
 
 export function sliderInit () {
-  let config = new Config()
-  let runner_number: number = config.runner_number
-  let min: number = config.min
-  let max: number = config.max
+  // let config = new Config()
+  let runner_number: number = configObj.runner_number
+  let min: number = configObj.min
+  let max: number = configObj.max
   let step: number = 1
-  let discrete: string = config.discrete
-  let orientation: string = config.orientation
+  let discrete: string = configObj.discrete
+  let orientation: string = configObj.orientation
 
   let scale_arrs = makeScale (min, max, step)
   let scale_arr = scale_arrs [ 0 ] as number[]        /* Массив значений шкалы */
@@ -41,7 +41,7 @@ export function sliderInit () {
 }
 
   
-function setStructure (runners: number, min: number, max: number, discrete: string, orientation: string, scale_arr: number[], iteration: number, iterations_arr: number[]) {    /* Структура слайдера */
+export function setStructure (runners: number, min: number, max: number, discrete: string, orientation: string, scale_arr: number[], iteration: number, iterations_arr: number[]) {    /* Структура слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let counter: number = 1     /* Счётчик количества слайдеров для создания атрибутов */
   let i = 0;         /*  Счётчик цикла для опр-я номера ranger в массиве */
@@ -147,7 +147,7 @@ function setStructure (runners: number, min: number, max: number, discrete: stri
   }
 }
 
-function sliderPositioning ( runners: number, orientation: string ) {   /* Первоначальное размещение слайдера */
+export function sliderPositioning ( runners: number, orientation: string ) {   /* Первоначальное размещение слайдера */
   let elements = document.querySelectorAll('.zdslider');
   let i = 0
   for (let elem of elements) {
@@ -183,7 +183,7 @@ function sliderPositioning ( runners: number, orientation: string ) {   /* Пе�
   }  
 }
 
-function initialButtonPosition (i: number, runners: number) {
+export function initialButtonPosition (i: number, runners: number) {
   let config = document.querySelectorAll('.zdslider-config')[i] as HTMLElement
   let ranger = document.querySelectorAll('.ranger')[i] as HTMLBRElement
   let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i]

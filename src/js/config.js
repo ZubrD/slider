@@ -8,3 +8,11 @@ export class Config {
         this.orientation = 'horizontal';
     }
 }
+export let configObj = {
+    runner_number: 2,
+    min: 10,
+    max: 150,
+    discrete: 'no',
+    // orientation: = 'vertical' as string
+    orientation: 'horizontal'
+};

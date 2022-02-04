@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { showTip, hideTip, forTip, toggleTheme } from '../js/tipToggler.js'
+import { showTip, hideTip, forTip, reValueTip } from '../js/tipToggler.js'
 import { sliderInit } from '../js/script.js'
 
 test ('Проверка функции showTip из модуля tipToggler.js', () => {
@@ -78,13 +78,27 @@ test ('Проверка функции reValueTip из модуля tipToggler.j
     document.body.appendChild(zdslider)
     sliderInit()
 
-    let config = document.body.querySelector('.zdslider-config')
-    config.dataset.width = 500
+    let element = document.body.querySelector('.zdslider-panel__min');
+    let input = document.body.querySelector('.zdslider-panel__check-tip');
+    input.checked = true        /* Сначала эмулирую постановку флажка, при вызове функции он снимается */
+    reValueTip(element)
 
-    let element = document.body.querySelector('.zdslider-panel__check-tip');
-    console.log(element.classList[0])
+    expect ( input.checked ).toBe ( false )
 
-    // expect ( forTip (element, 50 ) ).toBe ( 24 )
+    /* ///////////////////////////////////////////////////////////////////////////////////////////////  */
 
+    let buttons = document.body.querySelectorAll('.ranger__button');
+     for (let elem of buttons) {
+        elem.dataset.tip = '123';   /* Сначала присваиваю некое значение, вызов функции его удаляет */
+    }
+
+    reValueTip(element)
+    for (let elem of buttons) {
+        expect ( elem.dataset.tip ).toBe ( '' )
+    }
+
+    /* ///////////////////////////////////////////////////////////////////////////////////////////////  */
+
+    /* Проверить факт вызова функции */
 });
 

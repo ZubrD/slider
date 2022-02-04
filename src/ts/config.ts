@@ -6,3 +6,12 @@ export class Config {
     // orientation: string = 'vertical'
     orientation: string = 'horizontal'
 }
+
+export let configObj = {
+    runner_number: 2 as number,
+    min: 10 as number,
+    max: 150 as number,
+    discrete: 'no' as string,
+    // orientation: = 'vertical' as string
+    orientation: 'horizontal' as string
+}

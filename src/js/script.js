@@ -5,16 +5,16 @@
 import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings, Panel } from '../js/model.js';
 import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from '../js/listeners.js';
 import { getCoords, makeScale } from '../js/scale.js';
-import { Config } from '../js/config.js';
+import { configObj } from '../js/config.js';
 window.onload = sliderInit();
 export function sliderInit() {
-    let config = new Config();
-    let runner_number = config.runner_number;
-    let min = config.min;
-    let max = config.max;
+    // let config = new Config()
+    let runner_number = configObj.runner_number;
+    let min = configObj.min;
+    let max = configObj.max;
     let step = 1;
-    let discrete = config.discrete;
-    let orientation = config.orientation;
+    let discrete = configObj.discrete;
+    let orientation = configObj.orientation;
     let scale_arrs = makeScale(min, max, step);
     let scale_arr = scale_arrs[0]; /* Массив значений шкалы */
     let iteration = scale_arrs[1];
@@ -29,7 +29,7 @@ export function sliderInit() {
         elem.addEventListener('click', allChecksListener); /* Слушатель переключателей */
     }
 }
-function setStructure(runners, min, max, discrete, orientation, scale_arr, iteration, iterations_arr) {
+export function setStructure(runners, min, max, discrete, orientation, scale_arr, iteration, iterations_arr) {
     let elements = document.querySelectorAll('.zdslider');
     let counter = 1; /* Счётчик количества слайдеров для создания атрибутов */
     let i = 0; /*  Счётчик цикла для опр-я номера ranger в массиве */
@@ -112,7 +112,7 @@ function setStructure(runners, min, max, discrete, orientation, scale_arr, itera
         i++;
     }
 }
-function sliderPositioning(runners, orientation) {
+export function sliderPositioning(runners, orientation) {
     let elements = document.querySelectorAll('.zdslider');
     let i = 0;
     for (let elem of elements) {
@@ -150,7 +150,7 @@ function sliderPositioning(runners, orientation) {
         i++;
     }
 }
-function initialButtonPosition(i, runners) {
+export function initialButtonPosition(i, runners) {
     let config = document.querySelectorAll('.zdslider-config')[i];
     let ranger = document.querySelectorAll('.ranger')[i];
     let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i];
