@@ -68,7 +68,9 @@ export function changeMinListener(event) {
     config.dataset.min = String(min); /* Передаю в конфиг */
     config.dataset.max = String(max);
     reValueTip(elem);
-    modifyScaleInput(parent, new_scale_arr);
+    let iteration = new_scale_arr[1];
+    let iterations_arr = new_scale_arr[2];
+    modifyScaleInput(parent, iteration, iterations_arr);
     let current_inst = config.dataset.inst; /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
     max_input.setAttribute('min', String(min)); /* Ограничитель, чтобы max не превышал min */
     reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению min */
@@ -85,7 +87,9 @@ export function changeMaxListener(event) {
     config.dataset.min = String(min); /* Передаю в конфиг */
     config.dataset.max = String(max);
     reValueTip(elem);
-    modifyScaleInput(parent, new_scale_arr);
+    let iteration = new_scale_arr[1];
+    let iterations_arr = new_scale_arr[2];
+    modifyScaleInput(parent, iteration, iterations_arr);
     let current_inst = config.dataset.inst;
     min_input.setAttribute('max', String(max)); /* Ограничитель, чтобы min не превышал max */
     reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению min */

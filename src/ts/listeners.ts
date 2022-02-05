@@ -74,7 +74,9 @@ export function changeMinListener ( event: KeyboardEvent ) {
 
   reValueTip ( elem )
 
-  modifyScaleInput ( parent, new_scale_arr )
+  let iteration = new_scale_arr[1]
+  let iterations_arr = new_scale_arr[2]
+  modifyScaleInput ( parent, iteration, iterations_arr )
 
   let current_inst: string = config.dataset.inst          /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
   max_input.setAttribute('min', String ( min ))           /* Ограничитель, чтобы max не превышал min */
@@ -96,7 +98,9 @@ export function changeMaxListener ( event: KeyboardEvent ) {
 
   reValueTip ( elem )
 
-  modifyScaleInput ( parent, new_scale_arr )
+  let iteration = new_scale_arr[1]
+  let iterations_arr = new_scale_arr[2]
+  modifyScaleInput ( parent, iteration, iterations_arr )
   
   let current_inst = config.dataset.inst
   min_input.setAttribute('max', String ( max ))     /* Ограничитель, чтобы min не превышал max */

@@ -58,4 +58,6 @@ test ('Проверка reScale() (scale.js)', () => {
 
     sliderInit()
     reScale([12, 35, 58, 81, 104, 127, 150], 1)
+    let division_spans = document.body.querySelectorAll('.ranger__scale-division-span')
+    expect ( division_spans.length ).toBe( 7 )
 });
