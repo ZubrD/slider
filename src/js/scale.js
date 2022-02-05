@@ -66,8 +66,7 @@ export function makeScale(min, max, step) {
     }
     return [step_arr, iteration, iteration_arr];
 }
-export function reScale(new_scale_arr, current_inst) {
-    let scale_arr = new_scale_arr[0];
+export function reScale(scale_arr, current_inst) {
     let parents = document.querySelectorAll('.zdslider');
     for (let parent of parents) {
         let config = parent.parentNode.querySelector('.zdslider-config');

@@ -78,7 +78,7 @@ export function changeMinListener ( event: KeyboardEvent ) {
 
   let current_inst: string = config.dataset.inst          /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
   max_input.setAttribute('min', String ( min ))           /* Ограничитель, чтобы max не превышал min */
-  reScale ( new_scale_arr, current_inst )                 /* Перестроение шкалы по новому значению min */
+  reScale ( new_scale_arr[0], current_inst )                 /* Перестроение шкалы по новому значению min */
 }
  
 export function changeMaxListener ( event: KeyboardEvent ) {
@@ -100,7 +100,7 @@ export function changeMaxListener ( event: KeyboardEvent ) {
   
   let current_inst = config.dataset.inst
   min_input.setAttribute('max', String ( max ))     /* Ограничитель, чтобы min не превышал max */
-  reScale ( new_scale_arr, current_inst )      /* Перестроение шкалы по новому значению min */
+  reScale ( new_scale_arr[0], current_inst )      /* Перестроение шкалы по новому значению min */
 }
  
 export function changeStepListener ( event: KeyboardEvent ) {
@@ -135,7 +135,7 @@ export function changeStepListener ( event: KeyboardEvent ) {
   let current_inst = config.dataset.inst
   let step = Number ( elem.value )    /* val после изменения на значение из массива */
   let new_scale_arr = makeScale ( min, max, step )
-  reScale ( new_scale_arr, current_inst )    /* Перестроение шкалы по новому значению шага */
+  reScale ( new_scale_arr[0], current_inst )    /* Перестроение шкалы по новому значению шага */
 }
 
 window.addEventListener('resize', function () {             /* Сдвиг бегунов при изменении размера окна */

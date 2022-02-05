@@ -68,8 +68,7 @@ export function makeScale ( min: number, max: number, step: number ) {     /* М
 }
   
   
-export function reScale ( new_scale_arr: number[][], current_inst: number ) {
-    let scale_arr: number[] = new_scale_arr[0]
+export function reScale ( scale_arr: number[], current_inst: number ) {
     let parents = document.querySelectorAll('.zdslider')
 
     for ( let parent of parents ) {

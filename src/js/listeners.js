@@ -71,7 +71,7 @@ export function changeMinListener(event) {
     modifyScaleInput(parent, new_scale_arr);
     let current_inst = config.dataset.inst; /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
     max_input.setAttribute('min', String(min)); /* Ограничитель, чтобы max не превышал min */
-    reScale(new_scale_arr, current_inst); /* Перестроение шкалы по новому значению min */
+    reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению min */
 }
 export function changeMaxListener(event) {
     let elem = event.target;
@@ -88,7 +88,7 @@ export function changeMaxListener(event) {
     modifyScaleInput(parent, new_scale_arr);
     let current_inst = config.dataset.inst;
     min_input.setAttribute('max', String(max)); /* Ограничитель, чтобы min не превышал max */
-    reScale(new_scale_arr, current_inst); /* Перестроение шкалы по новому значению min */
+    reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению min */
 }
 export function changeStepListener(event) {
     let elem = event.target;
@@ -114,7 +114,7 @@ export function changeStepListener(event) {
     let current_inst = config.dataset.inst;
     let step = Number(elem.value); /* val после изменения на значение из массива */
     let new_scale_arr = makeScale(min, max, step);
-    reScale(new_scale_arr, current_inst); /* Перестроение шкалы по новому значению шага */
+    reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению шага */
 }
 window.addEventListener('resize', function () {
     let config = document.body.querySelector('.zdslider-config');
