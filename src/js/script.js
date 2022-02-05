@@ -162,12 +162,12 @@ export function sliderPositioning(runners, orientation) {
 }
 export function initialButtonPosition(i, runners) {
     let config = document.querySelectorAll('.zdslider-config')[i];
-    let ranger = document.querySelectorAll('.ranger')[i];
+    // let ranger = document.querySelectorAll('.ranger')[i] as HTMLBRElement
     let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i];
     let initBtn1Pos = getCoords(btn1);
     config.dataset.btn1_init_pos = String(initBtn1Pos.left);
-    config.dataset.width = String(ranger.offsetWidth);
-    config.dataset.height = String(ranger.offsetHeight);
+    // config.dataset.width = String ( ranger.offsetWidth )
+    // config.dataset.height = String ( ranger.offsetHeight )
     if (runners == 2) {
         let btn2 = document.querySelectorAll('[data-type="btn-second"]')[i];
         let initBtn2Pos = getCoords(btn2);
