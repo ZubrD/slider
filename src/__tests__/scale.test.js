@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { makeScale, reScale } from '../js/scale.js'
+import { makeScale, reScale, modifyScaleInput } from '../js/scale.js'
 import { configObj } from '../js/config.js';
 import { sliderInit } from '../js/script.js'
 
@@ -60,4 +60,38 @@ test ('Проверка reScale() (scale.js)', () => {
     reScale([12, 35, 58, 81, 104, 127, 150], 1)
     let division_spans = document.body.querySelectorAll('.ranger__scale-division-span')
     expect ( division_spans.length ).toBe( 7 )
+});
+
+test ('Проверка modifyScaleInput() если iterations_arr != 0 (scale.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+
+    sliderInit()
+    let parent = document.body.querySelector('.zdslider-panel')
+    let iteration = 23
+    let iterations_arr = [69, 46, 23]
+    modifyScaleInput(parent, iteration, iterations_arr)
+
+    let conf_input_step = document.body.querySelector('.zdslider-panel__step');
+
+    expect ( conf_input_step.disabled ).toBe( false )
+});
+
+test ('Проверка modifyScaleInput() если iterations_arr == 0 (scale.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+
+    sliderInit()
+    let parent = document.body.querySelector('.zdslider-panel')
+    let iteration = 0
+    let iterations_arr = []
+    modifyScaleInput(parent, iteration, iterations_arr)
+
+    let conf_input_step = document.body.querySelector('.zdslider-panel__step');
+
+    expect ( conf_input_step.disabled ).toBe( true )
 });

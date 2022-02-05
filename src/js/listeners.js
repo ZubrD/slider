@@ -70,6 +70,7 @@ export function changeMinListener(event) {
     reValueTip(elem);
     let iteration = new_scale_arr[1];
     let iterations_arr = new_scale_arr[2];
+    console.log(iteration, iterations_arr)
     modifyScaleInput(parent, iteration, iterations_arr);
     let current_inst = config.dataset.inst; /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
     max_input.setAttribute('min', String(min)); /* Ограничитель, чтобы max не превышал min */

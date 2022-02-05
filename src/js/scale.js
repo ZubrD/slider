@@ -97,8 +97,6 @@ export function reScale(scale_arr, current_inst) {
 }
 export function modifyScaleInput(parent, iteration, iterations_arr) {
     let conf_input_step = parent.querySelector('.zdslider-panel__step');
-    // let iterations_arr: number[] = new_scale_arr[2]
-    // let iteration: number[] = new_scale_arr[1]
     conf_input_step.setAttribute('data-steps', String(iterations_arr));
     conf_input_step.setAttribute('data-iteration', String(iteration));
     conf_input_step.setAttribute('data-current', String(iteration));
