@@ -1,8 +1,7 @@
 // import { hideTip } from './tipToggler.js'
 import { hideTip } from '../js/tipToggler.js';
-export function orientationToggler(event, orientation) {
-    let elem = event.target;
-    let zdslider = elem.parentNode.parentNode.childNodes[1];
+export function orientationToggler(elem, orientation) {
+    let zdslider = elem.parentNode.parentNode.querySelector('.zdslider');
     let ranger = zdslider.querySelector('.ranger');
     let ranger__interval = zdslider.querySelector('.ranger__interval');
     let ranger_scale = zdslider.querySelector('.ranger__scale');

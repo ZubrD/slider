@@ -2,9 +2,8 @@
 import { hideTip } from '../js/tipToggler.js'
 
 
-export function orientationToggler ( event: MouseEvent, orientation: string ) {
-    let elem = event.target as HTMLElement
-    let zdslider = elem.parentNode.parentNode.childNodes[1] as HTMLElement
+export function orientationToggler ( elem: HTMLElement, orientation: string ) {
+    let zdslider = elem.parentNode.parentNode.querySelector('.zdslider') as HTMLElement
     let ranger: HTMLElement = zdslider.querySelector('.ranger')
     let ranger__interval: HTMLElement = zdslider.querySelector('.ranger__interval')
     let ranger_scale: HTMLElement = zdslider.querySelector('.ranger__scale')

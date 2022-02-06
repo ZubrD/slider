@@ -22,11 +22,11 @@ export function allChecksListener (event: KeyboardEvent) {    /* Переклю�
     let instant: string = config.dataset.inst /*  Извлечение из конфига номера экземпляра слайдера */ 
 
     if ( run && elem.checked) {
-      oneRunner ( event )
+      oneRunner ( elem )
       hideTip ( elem)         /* Скрываю надписи */
       resetBtnCoord ( event )
     } else if ( run && (!elem.checked)) {
-      twoRunners ( event, instant )
+      twoRunners ( elem, instant )
       hideTip ( elem )
       resetBtnCoord ( event )
     }
@@ -49,12 +49,12 @@ export function allChecksListener (event: KeyboardEvent) {    /* Переклю�
     if ( orient && elem.checked ) {         /* Смена ориентации */
       config.dataset.orientation = 'vertical'     /* Передача в конфиг флага ориентации */
       orientation = config.dataset.orientation /*  Извлечение из конфига флага ориентации */
-      orientationToggler ( event, orientation )
+      orientationToggler ( elem, orientation )
       resetBtnCoord ( event )
     } else if ( orient && ( elem.checked == false ) ) {
       config.dataset.orientation = 'horizontal'
       orientation = config.dataset.orientation 
-      orientationToggler ( event, orientation ) 
+      orientationToggler ( elem, orientation ) 
       resetBtnCoord ( event )     
     }
 }

@@ -1,8 +1,7 @@
 // import { Button } from './model.js'
 import { Button } from '../js/model.js';
-export function oneRunner(event) {
+export function oneRunner(elem) {
     var _a, _b;
-    let elem = event.target;
     let config = (_b = (_a = elem.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.querySelector('.zdslider-config');
     let orientation = config.dataset.orientation;
     let ranger = elem.parentNode.parentNode.querySelector('.ranger');
@@ -24,9 +23,8 @@ export function oneRunner(event) {
         button_1.style.marginTop = 0 + 'px';
     }
 }
-export function twoRunners(event, inst) {
+export function twoRunners(elem, inst) {
     var _a, _b;
-    let elem = event.target;
     let config = (_b = (_a = elem.parentNode) === null || _a === void 0 ? void 0 : _a.parentNode) === null || _b === void 0 ? void 0 : _b.querySelector('.zdslider-config');
     let orientation = config.dataset.orientation;
     let ranger = elem.parentNode.parentNode.querySelector('.ranger');

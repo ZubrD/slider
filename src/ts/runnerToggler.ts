@@ -1,8 +1,7 @@
 // import { Button } from './model.js'
 import { Button } from '../js/model.js'
 
-export function oneRunner ( event: KeyboardEvent ) {
-  let elem = event.target as HTMLElement
+export function oneRunner ( elem: HTMLElement ) {
   let config: HTMLElement = elem.parentNode?.parentNode?.querySelector('.zdslider-config')
   let orientation: string = config.dataset.orientation
   let ranger: HTMLElement = elem.parentNode.parentNode.querySelector('.ranger')
@@ -28,8 +27,7 @@ export function oneRunner ( event: KeyboardEvent ) {
   }
 }
   
-export function twoRunners (event: KeyboardEvent, inst: string) {
-    let elem = event.target as HTMLElement
+export function twoRunners (elem: HTMLElement, inst: string) {
     let config: HTMLElement = elem.parentNode?.parentNode?.querySelector('.zdslider-config')
     let orientation: string = config.dataset.orientation
     let ranger: HTMLElement = elem.parentNode.parentNode.querySelector('.ranger')

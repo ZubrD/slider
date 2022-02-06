@@ -19,12 +19,12 @@ export function allChecksListener(event) {
     let orientation = config.dataset.orientation; /*  Извлечение из конфига флага ориентации */
     let instant = config.dataset.inst; /*  Извлечение из конфига номера экземпляра слайдера */
     if (run && elem.checked) {
-        oneRunner(event);
+        oneRunner(elem);
         hideTip(elem); /* Скрываю надписи */
         resetBtnCoord(event);
     }
     else if (run && (!elem.checked)) {
-        twoRunners(event, instant);
+        twoRunners(elem, instant);
         hideTip(elem);
         resetBtnCoord(event);
     }
@@ -46,13 +46,13 @@ export function allChecksListener(event) {
     if (orient && elem.checked) { /* Смена ориентации */
         config.dataset.orientation = 'vertical'; /* Передача в конфиг флага ориентации */
         orientation = config.dataset.orientation; /*  Извлечение из конфига флага ориентации */
-        orientationToggler(event, orientation);
+        orientationToggler(elem, orientation);
         resetBtnCoord(event);
     }
     else if (orient && (elem.checked == false)) {
         config.dataset.orientation = 'horizontal';
         orientation = config.dataset.orientation;
-        orientationToggler(event, orientation);
+        orientationToggler(elem, orientation);
         resetBtnCoord(event);
     }
 }
@@ -70,7 +70,6 @@ export function changeMinListener(event) {
     reValueTip(elem);
     let iteration = new_scale_arr[1];
     let iterations_arr = new_scale_arr[2];
-    console.log(iteration, iterations_arr)
     modifyScaleInput(parent, iteration, iterations_arr);
     let current_inst = config.dataset.inst; /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
     max_input.setAttribute('min', String(min)); /* Ограничитель, чтобы max не превышал min */
