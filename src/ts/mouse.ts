@@ -95,7 +95,8 @@ export function mouseDownBtn_2 ( event: MouseEvent ) {
   };
 }
   
-function mouseDownBtn_1_Single ( event: MouseEvent) {
+export function mouseDownBtn_1_Single ( event: MouseEvent) {
+  console.log('Вызов из mouseDownBtn_1_Single'); /* Убирать нельзя - это для тестирования !!! */
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
@@ -151,7 +152,8 @@ function mouseDownBtn_1_Single ( event: MouseEvent) {
   };  
 }
   
-function mouseDownBtn_1_Double ( event: MouseEvent ) {
+export function mouseDownBtn_1_Double ( event: MouseEvent ) {
+  console.log('Вызов из mouseDownBtn_1_Double')   /* Убирать нельзя - это для тестирования !!! */
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
