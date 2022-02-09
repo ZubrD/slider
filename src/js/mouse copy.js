@@ -32,15 +32,10 @@ export function mouseDownBtn_2(event) {
     document.onmousemove = function (event) {
         let left2 = event.pageX - shiftX2 - sler_coords.left;
         let right2 = sler.offsetWidth - btn2.offsetWidth;
-        if (localStorage.test) {
-            left2 = Number(localStorage.left2_1);
-        }
+        if (localStorage.test) { left2 = Number (localStorage.left2_1); }
         if (left2 < 0)
             left2 = 0;
-        if (localStorage.test) {
-            left2 = Number(localStorage.left2_2);
-            right2 = Number(localStorage.right2_1);
-        }
+        if (localStorage.test) { left2 = Number (localStorage.left2_2); right2 = Number (localStorage.right2_1)}
         if (left2 > right2)
             left2 = right2;
         btn2.style.marginLeft = left2 + 'px';
@@ -49,15 +44,10 @@ export function mouseDownBtn_2(event) {
         shiftX1 = event.pageX - btn1_coords.left;
         let left1 = event.pageX - shiftX1 - sler_coords.left;
         let right1 = sler.offsetWidth - btn1.offsetWidth;
-        if (localStorage.test) {
-            left1 = Number(localStorage.left1_1);
-        }
+        if (localStorage.test) { left1 = Number (localStorage.left1_1);}
         if (left1 < 0)
             left1 = 0;
-        if (localStorage.test) {
-            left1 = Number(localStorage.left1_2);
-            right1 = Number(localStorage.right1_1);
-        }
+        if (localStorage.test) { left1 = Number (localStorage.left1_2); right1 = Number (localStorage.right1_1)}
         if (left1 > right1)
             left1 = right1;
         let discret_arr = discreteArray(interval_number, right1);
@@ -65,20 +55,16 @@ export function mouseDownBtn_2(event) {
         let integ = Math.floor(left2);
         if (discrete_status == 'yes') {
             for (let num of discret_arr) {
+                // if (localStorage.test) { integ = localStorage.integ; num= localStorage.num; range= localStorage.range }
                 if (integ >= (num - range / 2) && integ < (num + range / 2)) {
-                    if (localStorage.test) {
-                        num = localStorage.num_1;
-                        left1 = localStorage.left1_1;
-                    }
+                    // console.log('integ=', integ, 'num=', num, 'range=', range)
+                    if (localStorage.test) { num = localStorage.num_1; left1 = localStorage.left1_1;}
                     if (num < left1) {
                         interval.style.width = (left1 - num) + 'px';
                         interval.style.marginLeft = num + 'px';
                     }
-                    if (localStorage.test) {
-                        num = localStorage.num_2;
-                        left1 = localStorage.left1_2;
-                    }
-                    if (num >= left1) {
+                    if (localStorage.test) { num = localStorage.num_2; left1 = localStorage.left1_2;}
+                    if (num > left1) {
                         interval.style.width = (num - left1) + 'px';
                         interval.style.marginLeft = left1 + 'px';
                     }
@@ -93,10 +79,7 @@ export function mouseDownBtn_2(event) {
         else if (discrete_status == 'no') {
             config.dataset.btn2_tip = forTip(elem, left2); /* Передача значения в конфиг */
             btn2.dataset.tip = config.dataset.btn2_tip; /* Значение над бегуном */
-            if (localStorage.test) {
-                left1 = localStorage.left1_1;
-                left2 = localStorage.left2_1;
-            }
+            if (localStorage.test) { left1 = localStorage.left1_1; left2 = localStorage.left2_1;}
             if (left1 > left2) {
                 interval.style.width = (left1 - left2) + 'px';
                 interval.style.marginLeft = left2 + 'px';
@@ -129,15 +112,10 @@ export function mouseDownBtn_1_Single(event) {
         let left1 = event.pageX - shiftX1 - sler_coords.left;
         let right1 = sler.offsetWidth - btn1.offsetWidth; /* 12 - это ширина бегуна */
         if (discrete_status == 'yes') {
-            if (localStorage.test) {
-                left1 = localStorage.left1_1;
-            }
+            if (localStorage.test) { left1 = localStorage.left1_1; }
             if (left1 < 0)
                 left1 = 0;
-            if (localStorage.test) {
-                left1 = Number(localStorage.left1_2);
-                right1 = Number(localStorage.right1_1);
-            }
+            if (localStorage.test) { left1 = Number (localStorage.left1_2); right1 = Number (localStorage.right1_1) }
             if (left1 > right1)
                 left1 = right1;
             let discret_arr = discreteArray(interval_number, right1);
@@ -155,15 +133,10 @@ export function mouseDownBtn_1_Single(event) {
             }
         }
         else if (discrete_status == 'no') {
-            if (localStorage.test) {
-                left1 = Number(localStorage.left1_1);
-            }
+            if (localStorage.test) { left1 = Number (localStorage.left1_1) }
             if (left1 < 0)
                 left1 = 0;
-            if (localStorage.test) {
-                left1 = Number(localStorage.left1_2);
-                right1 = Number(localStorage.right1_1);
-            }
+            if (localStorage.test) { left1 = Number (localStorage.left1_2); right1 = Number (localStorage.right1_1) }
             if (left1 > right1)
                 left1 = right1;
             btn1.style.marginLeft = left1 + 'px';
@@ -201,14 +174,10 @@ export function mouseDownBtn_1_Double(event) {
         shiftX2 = event.pageX - btn2_coords.left;
         let left2 = event.pageX - shiftX2 - sler_coords.left;
         let right2 = sler.offsetWidth;
-        if (localStorage.test) {
-            left1 = localStorage.left1_1;
-        }
+        if (localStorage.test) {left1 = localStorage.left1_1 }
         if (left1 < 0)
             left1 = 0;
-        if (localStorage.test) {
-            left1 = localStorage.left1_2;
-        }
+        if (localStorage.test) {left1 = localStorage.left1_2 }    
         if (left1 > right1)
             left1 = right1;
         let discret_arr = discreteArray(interval_number, right1);
@@ -217,25 +186,16 @@ export function mouseDownBtn_1_Double(event) {
         if (discrete_status == 'yes') {
             let counter = 0; /* Счётчик для перехода по массиву подписей */
             for (let num of discret_arr) {
-                if (localStorage.test) {
-                    integ = localStorage.integ;
-                    num = localStorage.num;
-                    range = localStorage.range;
-                }
+                if (localStorage.test) { integ = localStorage.integ; num= localStorage.num; range= localStorage.range }
                 if (integ < (num + range / 2) && integ > (num - range / 2)) {
-                    if (localStorage.test) {
-                        num = Number(localStorage.num_2);
-                        left2 = Number(localStorage.left2);
-                    }
+                    // console.log('integ=', integ, 'num=', num, 'range=', range, 'left2=', left2) 
+                    if (localStorage.test) { num= Number (localStorage.num_2); left2= Number (localStorage.left2) }
                     if (num > left2) {
                         interval.style.width = (num - left2) + 'px';
                         interval.style.marginLeft = left2 + 'px';
                     }
-                    if (localStorage.test) {
-                        num = Number(localStorage.num);
-                        left2 = Number(localStorage.left2);
-                    }
-                    if (num <= left2) {
+                    if (localStorage.test) { num= Number (localStorage.num); left2= Number (localStorage.left2) }
+                    if (num < left2) {
                         interval.style.width = (left2 - num) + 'px';
                         interval.style.marginLeft = num + 'px';
                     }
@@ -257,21 +217,13 @@ export function mouseDownBtn_1_Double(event) {
             shiftX2 = event.pageX - btn2_coords.left;
             let left2 = event.pageX - shiftX2 - sler_coords.left;
             let right2 = sler.offsetWidth;
-            if (localStorage.test) {
-                left2 = Number(localStorage.left2_1);
-            }
+            if (localStorage.test) { left2= Number (localStorage.left2_1) }
             if (left2 < 0)
                 left2 = 0;
-            if (localStorage.test) {
-                left2 = Number(localStorage.left2_2);
-                right2 = Number(localStorage.right2_1);
-            }
+            if (localStorage.test) { left2= Number (localStorage.left2_2); right2 = Number (localStorage.right2_1) }
             if (left2 > right2)
                 left2 = right2;
-            if (localStorage.test) {
-                left1 = Number(localStorage.left1_1);
-                left2 = Number(localStorage.left2_3);
-            }
+            if (localStorage.test) { left1= Number (localStorage.left1_1); left2 = Number (localStorage.left2_3) }
             if (left1 > left2) {
                 interval.style.width = (left1 - left2) + 'px';
                 interval.style.marginLeft = left2 + 'px';
@@ -298,7 +250,7 @@ export function discreteArray(interval_number, length) {
     return discret_arr;
 }
 export function resetBtnCoord(event) {
-    console.log('Это resetBtnCoord');
+    console.log('Это resetBtnCoord')
     let elem = event.target;
     const config = elem.parentNode.parentNode.querySelector('.zdslider-config');
     const ranger = elem.parentNode.parentNode.querySelector('.ranger');

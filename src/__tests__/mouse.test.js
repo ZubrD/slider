@@ -7,7 +7,7 @@
     import ReactDOM from 'react-dom';
     //  import { shallow } from 'enzyme';
     import { act } from "react-dom/test-utils";
-    import { mouseDownBtn_1, mouseDownBtn_2, mouseDownBtn_1_Single, mouseDownBtn_1_Double } from '../js/mouse.js'
+    import { mouseDownBtn_1, mouseDownBtn_2, mouseDownBtn_1_Single, mouseDownBtn_1_Double, resetBtnCoord } from '../js/mouse.js'
 
 
 test ('Проверка вызова mouseDownBtn_1_Double из функции mouseDownBtn_1() для двух бегунов (mouse.js)', () => {
@@ -28,6 +28,7 @@ test ('Проверка вызова mouseDownBtn_1_Double из функции m
     act(() => {
         elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
         doc.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+        doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
     expect(console.log).toHaveBeenCalledWith('Вызов из mouseDownBtn_1_Double');
@@ -58,6 +59,7 @@ test ('Проверка вызова mouseDownBtn_1_Single из функции m
     act(() => {
         elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
         doc.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+        doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     expect(console.log).toHaveBeenCalledWith('Вызов из mouseDownBtn_1_Single');
     console.log.mockRestore();
@@ -179,6 +181,11 @@ test ('Проверка вызова mouseDownBtn_2 (mouse.js)', () => {
 
     localStorage.setItem('test', 454545);
     localStorage.left2_1 = -100
+    localStorage.left2_2 = 100
+    localStorage.right2_1 = 50
+    localStorage.left1_1 = -100
+    localStorage.left1_2 = 100
+    localStorage.right1_1 = 50
 
     let doc = window.document.documentElement
 
@@ -188,5 +195,143 @@ test ('Проверка вызова mouseDownBtn_2 (mouse.js)', () => {
       });
     
     expect(console.log).toHaveBeenCalledWith('Вызов из mouseDownBtn_2');
+    console.log.mockRestore();
+});
+
+test ('Проверка вызова mouseDownBtn_2 (mouse.js), discrete_status == "yes" ', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.runner_number = 2
+
+    sliderInit()
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    let elem = document.body.querySelector('[data-type="btn-second"]')
+    elem.addEventListener('click', mouseDownBtn_2)
+    let config = document.body.querySelector('.zdslider-config')
+    config.dataset.discrete = 'yes'
+
+    localStorage.setItem('test', 454545);
+    localStorage.integ = 439
+    localStorage.num = 418.2857142857143
+    localStorage.range = 69.71428571428571
+    localStorage.num_1 = 0
+    localStorage.num_2 = 10
+    localStorage.left1_1 = 10
+    localStorage.left1_2 = 0
+
+    let doc = window.document.documentElement
+
+    act(() => {
+        elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+        doc.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+      });
+    
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseDownBtn_2');
+    console.log.mockRestore();
+});
+
+test ('Проверка вызова mouseDownBtn_2 (mouse.js), discrete_status == "no" ', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.runner_number = 2
+
+    sliderInit()
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    let elem = document.body.querySelector('[data-type="btn-second"]')
+    elem.addEventListener('click', mouseDownBtn_2)
+    let config = document.body.querySelector('.zdslider-config')
+    config.dataset.discrete = 'no'
+
+    localStorage.setItem('test', 454545);
+    localStorage.left1_1 = 10
+    localStorage.left2_1 = 0
+
+    let doc = window.document.documentElement
+
+    act(() => {
+        elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+        doc.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+      });
+    
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseDownBtn_2');
+    console.log.mockRestore();
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+test ('Проверка вызова mouseDownBtn_2 (mouse.js), discrete_status == "no" ', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+    configObj.runner_number = 2
+
+    sliderInit()
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    let elem = document.body.querySelector('[data-type="btn-second"]')
+    elem.addEventListener('click', mouseDownBtn_2)
+
+    let doc = window.document.documentElement
+
+    act(() => {
+        elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+        doc.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+        doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
+      });
+    
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseDownBtn_2');
+    console.log.mockRestore();
+});
+
+////////////////////////////////////////////////////////////////////////////////////
+
+test ('Проверка вызова resetBtnCoord (mouse.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+
+    sliderInit()
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    let elem = document.body.querySelector('.zdslider-panel__check-runners')
+    elem.addEventListener('click', resetBtnCoord)
+
+    act(() => {
+        elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      });
+    
+    expect(console.log).toHaveBeenCalledWith('Это resetBtnCoord');
+    console.log.mockRestore();
+});
+
+
+
+test ('Проверка вызова resetBtnCoord (mouse.js)', () => {
+    document.body.innerHTML = ''
+    let zdslider = document.createElement('div')
+    zdslider.classList.add('zdslider')
+    document.body.appendChild(zdslider)
+
+    sliderInit()
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+
+    let elem = document.body.querySelector('.zdslider-panel__check-runners')
+    elem.addEventListener('click', resetBtnCoord)
+    let config = document.body.querySelector('.zdslider-config')
+    config.dataset.orientation = 'vertical'
+
+    act(() => {
+        elem.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      });
+    
+    expect(console.log).toHaveBeenCalledWith('Это resetBtnCoord');
     console.log.mockRestore();
 });
