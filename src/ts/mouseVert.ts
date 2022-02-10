@@ -17,6 +17,7 @@ export function mouseVertDownBtn_1 ( event: MouseEvent ) {
 }
   
 export function mouseVertDownBtn_2 ( event: MouseEvent ) {
+  console.log('Вызов из mouseVertDownBtn_2')
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
@@ -38,7 +39,9 @@ export function mouseVertDownBtn_2 ( event: MouseEvent ) {
       let top2: number = event.pageY - shiftY2 - sler_coords.top;
       // let down2 = sler.offsetHeight - btn2.offsetHeight;
       let down2: number = sler.offsetHeight;
-      if ( top2 < 0 ) top2 = 0;                                 
+      if (localStorage.test) { top2 = Number(localStorage.top2_3); }
+      if ( top2 < 0 ) top2 = 0; 
+      if (localStorage.test) { top2 = Number(localStorage.top2_4); down2 = Number(localStorage.down2_4) }                                
       if ( top2 > down2 ) top2 = down2;         
       btn2.style.marginTop = top2 + 'px'
 
@@ -46,7 +49,9 @@ export function mouseVertDownBtn_2 ( event: MouseEvent ) {
       let top1: number = event.pageY - shiftY1 - sler_coords.top;
       // let down1 = sler.offsetHeight - btn1.offsetHeight;
       let down1: number = sler.offsetHeight;
+      if (localStorage.test) { top1 = Number(localStorage.top1_3); }
       if ( top1 < 0 ) top1 = 0;
+      if (localStorage.test) { top1 = Number(localStorage.top1_4); down1 = Number(localStorage.down1_4) }
       if ( top1 > down1 ) top1 = down1;            
       let discret_arr: number[] = discreteArray ( interval_number, down2 )
 
@@ -55,14 +60,16 @@ export function mouseVertDownBtn_2 ( event: MouseEvent ) {
      
       if ( discrete_status == 'yes' ) {
         for ( let num of discret_arr ) {
+          if (localStorage.test) {integ = Number(localStorage.integ); num = Number(localStorage.num); range = Number(localStorage.range);}
           if ( integ >= ( num - range / 2 ) && integ < ( num + range / 2 ) ) {
+              if (localStorage.test) { num = Number(localStorage.num1_1); top1 = Number(localStorage.top1_1) }
               if ( num < top1 ) 
               {
                 interval.style.height = ( top1-num ) + 'px';
                 interval.style.marginTop = num + 'px';
               }
-              else
-              {
+              if (localStorage.test) { num = Number(localStorage.num1_2); top1 = Number(localStorage.top1_2) }
+              if (num >= top1) {
                 interval.style.height = ( num-top1 ) + 'px';
                 interval.style.marginTop = top1 + 'px';                
               }
@@ -76,14 +83,14 @@ export function mouseVertDownBtn_2 ( event: MouseEvent ) {
           }
         }           
       } else if ( discrete_status == 'no' ) {
-          
+          if (localStorage.test) { top1 = Number(localStorage.top1_1); top2 = Number(localStorage.top2_1) }
           if ( top1 > top2 )
           {
             interval.style.height = ( top1 - top2 ) + 'px';
             interval.style.marginTop = top2 + 'px';       
           }
-          else
-          {
+          if (localStorage.test) { top1 = Number(localStorage.top1_2); top2 = Number(localStorage.top2_2) }
+          if (top1 <= top2) {
             interval.style.height = ( top2 - top1 ) + 'px';
             interval.style.marginTop = top1 + 'px';                
           }
@@ -102,6 +109,7 @@ export function mouseVertDownBtn_2 ( event: MouseEvent ) {
 }
   
 function mouseVertDownBtn_1_Single ( event: MouseEvent) {
+  console.log('Вызов из mouseVertDownBtn_1_Single')
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
@@ -120,7 +128,9 @@ function mouseVertDownBtn_1_Single ( event: MouseEvent) {
     let down1: number = sler.offsetHeight ;    /* -5 - чтобы не опускался ниже риски */
 
     if ( discrete_status == 'yes' ) {
-      if ( top1 < 0 ) top1 = 0;                                 
+      if (localStorage.test) { top1 = Number(localStorage.top1_1); }
+      if ( top1 < 0 ) top1 = 0; 
+      if (localStorage.test) { top1 = Number(localStorage.top1_2); down1 = Number(localStorage.down1_2) }                                
       if ( top1 > down1 ) top1 = down1;
 
       let discret_arr: number[] = discreteArray ( interval_number, down1 )
@@ -128,6 +138,7 @@ function mouseVertDownBtn_1_Single ( event: MouseEvent) {
       let range: number = discret_arr[1] - discret_arr[0]
       let integ: number = Math.floor ( top1 )
       for ( let num of discret_arr ) {
+        if (localStorage.test) {integ = Number(localStorage.integ); num = Number(localStorage.num); range = Number(localStorage.range);}
         if ( integ < (num + range / 2 ) && integ > ( num - range / 2 ) ) {
             btn1.style.marginTop = num + 'px'  
             interval.style.marginTop =  num + 'px'
@@ -141,7 +152,9 @@ function mouseVertDownBtn_1_Single ( event: MouseEvent) {
         }
       }           
     } else if ( discrete_status == 'no' ) {
-        if ( top1 < 0 ) top1 = 0;                                 
+        if (localStorage.test) { top1 = Number(localStorage.top1_1); }
+        if ( top1 < 0 ) top1 = 0; 
+        if (localStorage.test) { top1 = Number(localStorage.top1_2); down1 = Number(localStorage.down1_2) }                                
         if ( top1 > down1 ) top1 = down1;    
         btn1.style.marginTop =  top1 + 'px'
         interval.style.marginTop =  top1 + 'px'
@@ -161,6 +174,7 @@ function mouseVertDownBtn_1_Single ( event: MouseEvent) {
 }
   
 function mouseVertDownBtn_1_Double ( event: MouseEvent) {
+  console.log('Вызов из mouseVertDownBtn_1_Double')
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
@@ -186,8 +200,9 @@ function mouseVertDownBtn_1_Double ( event: MouseEvent) {
       shiftY2 = event.pageY - btn2_coords.top; 
       let top2: number = event.pageY - shiftY2 - sler_coords.top;
       let down2: number = sler.offsetHeight;
-
-      if ( top1 < 0 ) top1 = 0;                                 
+      if (localStorage.test) { top1 = Number(localStorage.top1_1); }
+      if ( top1 < 0 ) top1 = 0;
+      if (localStorage.test) { top1 = Number(localStorage.top1_2); down1 = Number(localStorage.down1_2) }                                 
       if ( top1 > down1 ) top1 = down1; 
 
       let discret_arr: number[] = discreteArray (interval_number, down1)
@@ -198,14 +213,16 @@ function mouseVertDownBtn_1_Double ( event: MouseEvent) {
       if ( discrete_status == 'yes' ) {
         let counter: number = 0
         for ( let num of discret_arr ) {
+          if (localStorage.test) {integ = Number(localStorage.integ); num = Number(localStorage.num); range = Number(localStorage.range);}
           if ( integ < ( num + range / 2 ) && integ > ( num - range / 2 ) ) {
+              if (localStorage.test) { num = Number(localStorage.num1_1); top2 = Number(localStorage.top2_1) }
               if ( num > top2 )
               {
                 interval.style.height = ( num - top2 ) + 'px';
                 interval.style.marginTop = top2 + 'px';
               }
-              else
-              {
+              if (localStorage.test) { num = Number(localStorage.num1_2); top2 = Number(localStorage.top2_2) }
+              if (num <= top2) {
                 interval.style.height = ( top2 - num ) + 'px';
                 interval.style.marginTop = num + 'px';                
               }
@@ -220,24 +237,22 @@ function mouseVertDownBtn_1_Double ( event: MouseEvent) {
           counter ++
         }           
       } else if ( discrete_status == 'no' ) {
-       
           btn1.style.marginTop = top1 + 'px'
-
-          
-    
           shiftY2 = event.pageY - btn2_coords.top; 
           let top2: number = event.pageY - shiftY2 - sler_coords.top;
           let down2: number = sler.offsetHeight;
+          if (localStorage.test) { top2 = Number(localStorage.top2_1); }
           if ( top2 < 0 ) top2 = 0;
+          if (localStorage.test) { top2 = Number(localStorage.top2_2); down2 = Number(localStorage.down2_2) }
           if ( top2 > down2 ) top2 = down2; 
-          
+          if (localStorage.test) { top1 = Number(localStorage.top1_3); top2 = Number(localStorage.top2_3) }
           if ( top1 > top2 )
           {
             interval.style.height = ( top1 - top2 ) + 'px';
             interval.style.marginTop = top2 + 'px';
           }
-          else
-          {
+          if (localStorage.test) { top1 = Number(localStorage.top1_4); top2 = Number(localStorage.top2_4) }
+          if (top1 <= top2) {
             interval.style.height = ( top2 - top1 ) + 'px';
             interval.style.marginTop = top1 + 'px';
           }
