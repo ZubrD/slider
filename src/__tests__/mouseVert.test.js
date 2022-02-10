@@ -108,14 +108,7 @@ test ('Проверка вызова mouseVertDownBtn_1_Single из функци
     localStorage.setItem('test', 454545);
     localStorage.top1_1 = -100
     localStorage.top1_2 = 100
-    // localStorage.top1_3 = 100
-    // localStorage.top1_4 = 0
-    // localStorage.top2_1 = -100
-    // localStorage.top2_2 = 100
-    // localStorage.top2_3 = 0
-    // localStorage.top2_4 = 1000
     localStorage.down1_2 = 0
-    // localStorage.down2_2 = 0
 
     let doc = window.document.documentElement
 
@@ -149,14 +142,7 @@ test ('Проверка вызова mouseVertDownBtn_1_Single из функци
     localStorage.setItem('test', 454545);
     localStorage.top1_1 = -100
     localStorage.top1_2 = 100
-    // localStorage.top1_3 = 100
-    // localStorage.top1_4 = 0
-    // localStorage.top2_1 = -100
-    // localStorage.top2_2 = 100
-    // localStorage.top2_3 = 0
-    // localStorage.top2_4 = 1000
     localStorage.down1_2 = 0
-    // localStorage.down2_2 = 0
     localStorage.integ = 58
     localStorage.num = 71.42857142857143
     localStorage.range = 71.42857142857143
@@ -241,14 +227,6 @@ test ('Проверка вызова mouseVertDownBtn_2 для двух бегу
     localStorage.num1_2 = 100
     localStorage.top1_1 = 100
     localStorage.top1_2 = 0
-    // localStorage.top1_3 = -100
-    // localStorage.top1_4 = 100
-    // localStorage.top2_1 = 0
-    // localStorage.top2_2 = 100
-    // localStorage.top2_3 = -100
-    // localStorage.top2_4 = 100
-    // localStorage.down1_4 = 0
-    // localStorage.down2_4 = 0
 
     let doc = window.document.documentElement
 
