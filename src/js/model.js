@@ -24,12 +24,6 @@ export class Ranger {
     appendTo(parent) {
         parent.appendChild(this.$el);
     }
-    setAttribute(attr, number) {
-        this.$el.setAttribute(attr, number);
-    }
-    append(child) {
-        this.$el.append(child);
-    }
 }
 export class Interval {
     constructor(orientation) {
@@ -44,12 +38,6 @@ export class Interval {
     }
     appendTo(parent) {
         parent.appendChild(this.$el);
-    }
-    setAttribute(attr, number) {
-        this.$el.setAttribute(attr, number);
-    }
-    append(child) {
-        this.$el.append(child);
     }
 }
 export class Button {
@@ -79,15 +67,15 @@ export class Button {
             if (type === 'btn-first') {
                 mouseDownBtn_1(event);
             }
-            else if (type === 'btn-second') {
+            if (type === 'btn-second') {
                 mouseDownBtn_2(event);
             }
         }
-        else if (orientation == 'vertical') {
+        if (orientation == 'vertical') {
             if (type === 'btn-first') {
                 mouseVertDownBtn_1(event);
             }
-            else if (type === 'btn-second') {
+            if (type === 'btn-second') {
                 mouseVertDownBtn_2(event);
             }
         }
@@ -113,9 +101,6 @@ export class Scale {
     appendChild(child) {
         this.$el.appendChild(child);
     }
-    setAttribute(attr, number) {
-        this.$el.setAttribute(attr, number);
-    }
 }
 export class ScaleSpan {
     constructor(orientation) {
@@ -130,12 +115,12 @@ export class ScaleSpan {
     appendTo(parent) {
         parent.appendChild(this.$el);
     }
-    appendChild(child) {
-        this.$el.appendChild(child);
-    }
-    setAttribute(attr, number) {
-        this.$el.setAttribute(attr, number);
-    }
+    // appendChild( child: HTMLElement ) {                 /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.appendChild ( child )
+    // }
+    // setAttribute( attr: string, number: string ) {              /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute ( attr, number )
+    // }
     inner_HTML(child) {
         this.$el.innerHTML = child;
     }
@@ -158,9 +143,6 @@ export class Division {
     appendChild(child) {
         this.$el.appendChild(child);
     }
-    setAttribute(attr, number) {
-        this.$el.setAttribute(attr, number);
-    }
     clickHandler(event) {
         clickMouse(event);
     }
@@ -181,12 +163,6 @@ export class DivisionSpan {
     }
     appendTo(parent) {
         parent.appendChild(this.$el);
-    }
-    appendChild(child) {
-        this.$el.appendChild(child);
-    }
-    setAttribute(attr, number) {
-        this.$el.setAttribute(attr, number);
     }
 }
 export class Panel {
@@ -276,9 +252,9 @@ export class Settings {
     appendTo(parent) {
         parent.appendChild(this.$el);
     }
-    appendChild(child) {
-        this.$el.appendChild(child);
-    }
+    // appendChild( child: HTMLElement ) {             /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.appendChild ( child )
+    // }
     setAttribute(attr, number) {
         this.$el.setAttribute(attr, number);
     }

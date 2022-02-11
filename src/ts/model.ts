@@ -20,12 +20,12 @@ export class Ranger {
     appendTo ( parent: HTMLElement ) {
         parent.appendChild ( this.$el )
     }
-    setAttribute ( attr: string, number: string ) {
-        this.$el.setAttribute ( attr, number )
-    }
-    append ( child: HTMLElement ) {
-        this.$el.append ( child )
-    }
+    // setAttribute ( attr: string, number: string ) {         /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute ( attr, number )
+    // }
+    // append ( child: HTMLElement ) {                         /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.append ( child )
+    // }
     
 }
 
@@ -44,12 +44,12 @@ export class Interval {
     appendTo ( parent: HTMLElement ) {
         parent.appendChild ( this.$el )
     }
-    setAttribute ( attr: string, number: string ) {
-        this.$el.setAttribute( attr, number )
-    }
-    append ( child: HTMLElement ) {
-        this.$el.append( child )
-    }
+    // setAttribute ( attr: string, number: string ) {         /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute( attr, number )
+    // }
+    // append ( child: HTMLElement ) {                         /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.append( child )
+    // }
 }
 
 export class Button {
@@ -85,13 +85,16 @@ export class Button {
         if ( orientation == 'horizontal') {
                 if ( type === 'btn-first' ) {
                     mouseDownBtn_1( event )
-                } else if (type === 'btn-second') {
+                }
+                if (type === 'btn-second') {
                     mouseDownBtn_2( event )
                 }        
-        } else if ( orientation == 'vertical' ) {
+        }
+        if ( orientation == 'vertical' ) {
                 if ( type === 'btn-first' ) {
                     mouseVertDownBtn_1( event )
-                } else if (type === 'btn-second') {
+                }
+                if (type === 'btn-second') {
                     mouseVertDownBtn_2( event )
                 }             
         }
@@ -116,9 +119,9 @@ export class Scale {
     appendChild( child: HTMLElement ) {
         this.$el.appendChild ( child )
     }
-    setAttribute( attr: string, number: string ) {
-        this.$el.setAttribute ( attr, number )
-    }
+    // setAttribute( attr: string, number: string ) {              /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute ( attr, number )
+    // }
 }
 
 export class ScaleSpan {
@@ -136,12 +139,12 @@ export class ScaleSpan {
     appendTo( parent: HTMLElement ) {
         parent.appendChild( this.$el )
     }
-    appendChild( child: HTMLElement ) {
-        this.$el.appendChild ( child )
-    }
-    setAttribute( attr: string, number: string ) {
-        this.$el.setAttribute ( attr, number )
-    }
+    // appendChild( child: HTMLElement ) {                 /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.appendChild ( child )
+    // }
+    // setAttribute( attr: string, number: string ) {              /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute ( attr, number )
+    // }
     inner_HTML( child: string ) {
         this.$el.innerHTML = child
     }
@@ -166,9 +169,9 @@ export class Division {
     appendChild( child: HTMLElement ) {
         this.$el.appendChild ( child )
     }
-    setAttribute( attr: string, number: string ) {
-        this.$el.setAttribute ( attr, number )
-    }
+    // setAttribute( attr: string, number: string ) {              /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute ( attr, number )
+    // }
 
     #setup() {
         this.clickHandler = this.clickHandler.bind( this )        /* Только для местных функций */
@@ -194,12 +197,12 @@ export class DivisionSpan {
     appendTo( parent: HTMLElement ) {
         parent.appendChild( this.$el )
     }
-    appendChild( child: HTMLElement ) {
-        this.$el.appendChild ( child )
-    }
-    setAttribute( attr: string, number: string ) {
-        this.$el.setAttribute ( attr, number )
-    }
+    // appendChild( child: HTMLElement ) {             /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.appendChild ( child )
+    // }
+    // setAttribute( attr: string, number: string ) {              /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.setAttribute ( attr, number )
+    // }
 }
 
 export class Panel {
@@ -330,9 +333,9 @@ export class Settings {
     appendTo( parent: HTMLElement ) {
         parent.appendChild( this.$el )
     }
-    appendChild( child: HTMLElement ) {
-        this.$el.appendChild ( child )
-    }
+    // appendChild( child: HTMLElement ) {             /* Убрал при тестировании, т.к. не пригодилось */
+    //     this.$el.appendChild ( child )
+    // }
     setAttribute( attr: string, number: string ) {
         this.$el.setAttribute ( attr, number )
     }

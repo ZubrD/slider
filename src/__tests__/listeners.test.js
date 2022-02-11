@@ -6,7 +6,6 @@ import { sliderInit } from '../js/script.js'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from "react-dom/test-utils";
-import { isExportDeclaration } from 'typescript';
 
  test ('Проверка переключателя бегунов в панели - отключение, allChecksListener (listeners.js)', () => {
     document.body.innerHTML = ''
