@@ -195,8 +195,9 @@ export class Panel {
         this.$step_number = document.createElement('input');
         this.$step_number.classList.add('zdslider-panel__step');
         this.$step_number.setAttribute('type', 'number');
+        this.$step_number.setAttribute('onkeydown', 'return false');
         this.$run_label = document.createElement('label');
-        this.$run_label.innerHTML = 'Бегуны';
+        this.$run_label.innerHTML = '1 Бегун';
         this.$discrete_label = document.createElement('label');
         this.$discrete_label.innerHTML = 'Дискретный';
         this.$tip_label = document.createElement('label');
