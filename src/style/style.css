@@ -9,6 +9,7 @@
   position: relative;
   margin-right: 300px;
   /* Потом убрать */
+  margin-left: 30px;
 }
 
 .zdslider-panel {
