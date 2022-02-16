@@ -3,5 +3,6 @@ check.html
 src/style/check.css
 src/style/check.scss
 src/style/check.css.map
+src/slider_horizontal.gif
 coverage/
 /node_modules

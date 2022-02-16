@@ -41,7 +41,7 @@ export let configObj = {
 
 ## Пример работы слайдера
 
-![Гифка](/src/slider_horizontal_optimized.gi)
+![Гифка](/src/slider_horizontal_optimized.gif)
 
 ## Тестирование
 
