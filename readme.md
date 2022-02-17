@@ -1,4 +1,4 @@
-# Zslider (вариация на тему range slider)
+# Zdslider (вариация на тему range slider)
 
 Это учебный проект в рамках практического курса в Metalamp
 
@@ -60,3 +60,7 @@ $ npx jest --coverage
 ## Создано с помощью
 
 Плагин разработан на Typescript в IDE Visual Studio Code
+
+## Диаграмма классов
+
+![Диаграмма классов](/Classes%20(UML).png)
