@@ -63,4 +63,4 @@ $ npx jest --coverage
 
 ## Диаграмма классов
 
-![Диаграмма классов](/Classes%20(UML).png)
+![Диаграмма классов](/Classes(UML).png)
