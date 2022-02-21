@@ -1,0 +1,26 @@
+@startuml 123
+left to right direction
+skinparam packageStyle rect
+actor Ego
+actor Benutzer
+actor Alter
+
+
+rectangle GSM-Netz {
+    Ego -- (Initiale Nummer vergeben)
+    Ego -- (Eigene Nummer ändern)
+    Ego -- (Andere Benutzer anrufen)
+    Benutzer -- (Namen zu Nummer eintragen)
+    Benutzer -- (Aktive Benutzer sehen)
+    Benutzer -- (Mehrere Benutzer benachrichtigen)
+    Benutzer -- (Mehrere_1 Benutzer benachrichtigen)
+
+    (Initiale Nummer vergeben) -- Alter
+    (Eigene Nummer ändern) -- Alter
+    (Andere Benutzer anrufen) -- Alter
+    (Namen zu Nummer eintragen) --Alter
+    (Aktive Benutzer sehen) -- Alter
+    (Mehrere Benutzer benachrichtigen) -- Alter
+    (Mehrere_1 Benutzer benachrichtigen) -- Alter
+}
+@enduml
