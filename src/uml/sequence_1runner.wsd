@@ -57,8 +57,8 @@ end note
 Слайдер -> Слайдер : getCoords()
 Пользователь -> Слайдер : Переместить бегунок
 Слайдер -> Слайдер: discreteArray()
-Слайдер -> Settings : btn1_coord (btn2_coord),\nbtn1_tip (btn2_tip)
+Слайдер -> Settings : btn1_coord,\nbtn1_tip
 Слайдер -> Слайдер : interval.style.width \ninterval.style.marginLeft
-Слайдер -> Слайдер  : btn1.style.marginLeft \n(btn2.style.marginLeft)
+Слайдер -> Слайдер  : btn1.style.marginLeft
 Пользователь -> Слайдер : Отпустить левую клавишу мышки
 @enduml
