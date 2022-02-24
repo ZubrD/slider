@@ -67,10 +67,14 @@ $ npx jest --coverage
 
 ## Диаграмма вариантов использования
 
-![Диаграмма ариантов использования](/src/uml/usecase.png)
+![Диаграмма ариантов использования](/out/src/uml/usecase/UseCaseDiagram.png)
 
 ## Диаграммы последовательности
 
 ### Диаграмма плавного (дискретного) перемещения бегунка
 
-![Плавное(дискретное)](/src/uml/sequence_smooth.png)
+![Плавное(дискретное)](/out/src/uml/sequence_smooth/sequence_smooth.png)
+
+### Диаграмма перемещения единственного бегунка на слайдере
+
+![Единственный бегунок на слайдере](/out/src/uml/sequence_1runner/sequence_1runner.png)
