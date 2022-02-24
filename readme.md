@@ -78,3 +78,7 @@ $ npx jest --coverage
 ### Диаграмма перемещения единственного бегунка на слайдере
 
 ![Единственный бегунок на слайдере](/out/src/uml/sequence_1runner/sequence_1runner.png)
+
+### Диаграмма перемещения двух бегунков на слайдере
+
+![Два бегунка на слайдере](/out/src/uml/sequence_2runners/sequence_2runners.png)
