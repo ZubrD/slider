@@ -83,6 +83,6 @@ $ npx jest --coverage
 
 ![Два бегунка на слайдере](/out/src/uml/sequence_2runners/sequence_2runners.png)
 
-### Диаграмма демонстрации текущего значения слайдера над бегунком
+### Диаграмма показа (скрытия) текущего значения слайдера над бегунком
 
-![показать надпись над бегунком](/out/src/uml/sequence_with_tip/sequence_with_tip.png)
+![показать (скрыть) надпись над бегунком](/out/src/uml/sequence_with_tip/sequence_with_tip.png)
