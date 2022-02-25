@@ -82,3 +82,7 @@ $ npx jest --coverage
 ### Диаграмма перемещения двух бегунков на слайдере
 
 ![Два бегунка на слайдере](/out/src/uml/sequence_2runners/sequence_2runners.png)
+
+### Диаграмма демонстрации текущего значения слайдера над бегунком
+
+![показать надпись над бегунком](/out/src/uml/sequence_with_tip/sequence_with_tip.png)
