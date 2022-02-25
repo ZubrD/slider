@@ -86,3 +86,7 @@ $ npx jest --coverage
 ### Диаграмма показа (скрытия) текущего значения слайдера над бегунком
 
 ![показать (скрыть) надпись над бегунком](/out/src/uml/sequence_with_tip/sequence_with_tip.png)
+
+## Диаграмма переключения вертикальной (горизонтальной) ориентации
+
+![переключить с горизонтали на вертикаль](/out/src/uml/sequence_orientation/sequence_orientation.png)
