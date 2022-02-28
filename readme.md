@@ -93,3 +93,6 @@ $ npx jest --coverage
 
 ## Диаграмма изменения минимального (максимального) значения слайдера
 ![Изменить минимум (максимум)](/out/src/uml/sequence_minmax/sequence_minmax.png)
+
+## Диаграмма изменения шага слайдера
+![Изменить шаг](/out/src/uml/sequence_step/sequence_step.png)
