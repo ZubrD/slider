@@ -90,3 +90,6 @@ $ npx jest --coverage
 ## Диаграмма переключения вертикальной (горизонтальной) ориентации
 
 ![переключить с горизонтали на вертикаль](/out/src/uml/sequence_orientation/sequence_orientation.png)
+
+## Диаграмма изменения минимального (максимального) значения слайдера
+![Изменить минимум (максимум)](/out/src/uml/sequence_minmax/sequence_minmax.png)
