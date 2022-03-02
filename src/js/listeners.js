@@ -105,23 +105,23 @@ export function changeStepListener(event) {
     let val = Number(elem.value);
     let current = Number(elem.dataset.current);
     let arr = elem.dataset.steps.split(',');
-    let arr_number = arr.map(parseFloat);
-    let current_index = arr_number.indexOf(current); /* Индекс текущего шага шкалы в массиве */
+    let arrNumber = arr.map(parseFloat);
+    let current_index = arrNumber.indexOf(current); /* Индекс текущего шага шкалы в массиве */
     if (localStorage.test) {
         current = Number(localStorage.current_1);
         val = Number(localStorage.val_1);
     }
     if (current < val) {
-        elem.dataset.current = String(arr_number[current_index - 1]);
-        elem.value = String(arr_number[current_index - 1]);
+        elem.dataset.current = String(arrNumber[current_index - 1]);
+        elem.value = String(arrNumber[current_index - 1]);
     }
     if (localStorage.test) {
         current = Number(localStorage.current_2);
         val = Number(localStorage.val_2);
     }
     if (current > val) {
-        elem.dataset.current = String(arr_number[current_index + 1]);
-        elem.value = String(arr_number[current_index + 1]);
+        elem.dataset.current = String(arrNumber[current_index + 1]);
+        elem.value = String(arrNumber[current_index + 1]);
     }
     let current_inst = config.dataset.inst;
     let step = Number(elem.value); /* val после изменения на значение из массива */

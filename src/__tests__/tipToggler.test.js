@@ -63,12 +63,12 @@ test ('Проверка функции forTip из модуля tipToggler.js', 
 
     let element = document.body.querySelector('.ranger__button');
 
-    expect ( forTip (element, 50 ) ).toBe ( 24 )
+    expect ( forTip (element, 50 ) ).toBe ( 26 )
 
     config.dataset.orientation = 'vertical'
     config.dataset.height = 500
 
-    expect ( forTip (element, 3 ) ).toBe ( 11 )
+    expect ( forTip (element, 3 ) ).toBe ( 13 )
 });
 
 test ('Проверка функции reValueTip из модуля tipToggler.js', () => {
