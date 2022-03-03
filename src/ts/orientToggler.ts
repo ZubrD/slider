@@ -1,86 +1,93 @@
-// import { hideTip } from './tipToggler.js'
 import { hideTip } from '../js/tipToggler.js'
 
-
-export function orientationToggler ( elem: HTMLElement, orientation: string ) {
-    let zdslider = elem.parentNode.parentNode.querySelector('.zdslider') as HTMLElement
-    let ranger: HTMLElement = zdslider.querySelector('.ranger')
-    let ranger__interval: HTMLElement = zdslider.querySelector('.ranger__interval')
-    let ranger_scale: HTMLElement = zdslider.querySelector('.ranger__scale')
-    let ranger_scale_division: HTMLElement = zdslider.querySelector('.ranger__scale-division')
-    let ranger_scale_division_spans = zdslider.querySelectorAll('.ranger__scale-division-span')
-    let ranger_buttons = zdslider.querySelectorAll('.ranger__button')
+export function orientationToggler (elem: HTMLElement, orientation: string) {
+    let zdslider = elem.parentNode.parentNode.querySelector('.zdslider') as HTMLElement;
+    let ranger: HTMLElement = zdslider.querySelector('.ranger');
+    let rangerInterval: HTMLElement = zdslider.querySelector('.ranger__interval');
+    let rangerScale: HTMLElement = zdslider.querySelector('.ranger__scale');
+    let rangerScaleDivision: HTMLElement = zdslider.querySelector('.ranger__scale-division');
+    let rangerScaleDivisionSpans = zdslider.querySelectorAll('.ranger__scale-division-span');
+    let rangerButtons = zdslider.querySelectorAll('.ranger__button');
     let config: HTMLElement = elem.parentNode.parentNode.querySelector('.zdslider-config');
-    hideTip ( elem )                           /* Сброс флага ярлыка */
 
-    if ( orientation == 'vertical' ) {
+    /* Сброс флага ярлыка */
+    hideTip ( elem )                           
 
-        zdslider.classList.add('zdslider-vert')
-        ranger.classList.add('ranger-vert')
-        ranger__interval.classList.add('ranger-vert__interval')
-        ranger_scale.classList.add('ranger-vert__scale')
-        ranger_scale_division.classList.add('ranger-vert__scale-division')
+    if (orientation === 'vertical') {
+        zdslider.classList.add('zdslider-vert');
+        ranger.classList.add('ranger-vert');
+        rangerInterval.classList.add('ranger-vert__interval');
+        rangerScale.classList.add('ranger-vert__scale');
+        rangerScaleDivision.classList.add('ranger-vert__scale-division');
 
-        ranger__interval.style.height = (ranger.offsetHeight) + 'px';   
-        ranger__interval.style.width = 5 + 'px'
-        ranger__interval.style.marginLeft = 0 + 'px'    
-        config.dataset.width = String ( ranger.offsetWidth )
-        config.dataset.height = String ( ranger.offsetHeight )
-        for ( let elem of ranger_scale_division_spans ) {
-            elem.classList.add('ranger-vert__scale-division-span')
-        }
-        
-        for ( let elem of ranger_buttons ) {
+        rangerInterval.style.height = (ranger.offsetHeight) + 'px';   
+        rangerInterval.style.width = 5 + 'px';
+        rangerInterval.style.marginLeft = 0 + 'px'; 
+        config.dataset.width = String (ranger.offsetWidth);
+        config.dataset.height = String (ranger.offsetHeight);
+
+        rangerScaleDivisionSpans.forEach((elem) => {
+          elem.classList.add('ranger-vert__scale-division-span');
+        })
+       
+        for (let elem of rangerButtons) {
             elem.classList.add('ranger-vert__button');
-            (elem as HTMLElement).dataset.tip = ''               /* Сброс значений ярлыков */
+
+            /* Сброс значений ярлыков */
+            (elem as HTMLElement).dataset.tip = '';               
     
-            if ( ranger_buttons.length == 1 ) {           /* Количество бегунов */
-                ( elem as HTMLElement ).style.marginTop = 0 + 'px';
-                ( elem as HTMLElement ).style.marginLeft = 0 + 'px'
-            } else if ( ranger_buttons.length == 2 ) {
-                if ( ( elem as HTMLElement ).dataset.type == 'btn-first' ) {
-                    ( elem as HTMLElement ).style.marginTop = ranger.offsetHeight + 'px';
-                    ( elem as HTMLElement ).style.marginLeft = 0 + 'px'
-                } else if ( ( elem as HTMLElement ).dataset.type == 'btn-second' ) {
-                    ( elem as HTMLElement ).style.marginTop = 0 + 'px';
-                    ( elem as HTMLElement ).style.marginLeft = 0 + 'px';
+            /* Количество бегунов */
+            if (rangerButtons.length === 1) {           
+                (elem as HTMLElement).style.marginTop = 0 + 'px';
+                (elem as HTMLElement).style.marginLeft = 0 + 'px';
+            } else if (rangerButtons.length === 2) {
+
+                if ((elem as HTMLElement).dataset.type === 'btn-first') {
+                    (elem as HTMLElement).style.marginTop = ranger.offsetHeight + 'px';
+                    (elem as HTMLElement).style.marginLeft = 0 + 'px';
+                } else if ((elem as HTMLElement).dataset.type === 'btn-second') {
+                    (elem as HTMLElement).style.marginTop = 0 + 'px';
+                    (elem as HTMLElement).style.marginLeft = 0 + 'px';
                 }
             }        
         }
-    } else if ( orientation == 'horizontal' ) {
-        zdslider.classList.remove('zdslider-vert')
-        ranger.classList.remove('ranger-vert')
-        ranger__interval.classList.remove('ranger-vert__interval')
-        ranger_scale.classList.remove('ranger-vert__scale')
-        ranger_scale_division.classList.remove('ranger-vert__scale-division')
+    } else if (orientation === 'horizontal') {
+        zdslider.classList.remove('zdslider-vert');
+        ranger.classList.remove('ranger-vert');
+        rangerInterval.classList.remove('ranger-vert__interval');
+        rangerScale.classList.remove('ranger-vert__scale');
+        rangerScaleDivision.classList.remove('ranger-vert__scale-division');
 
-        ranger__interval.style.width = ranger.offsetWidth + 'px';       /* Переопределение стиля интервала после определения класса */
-        ranger__interval.style.height = 5 + 'px'
-        ranger__interval.style.marginTop = 0 + 'px'
-        config.dataset.width = String ( ranger.offsetWidth )
-        config.dataset.height = String ( ranger.offsetHeight )
-        for (let elem of ranger_scale_division_spans) {
-            elem.classList.remove('ranger-vert__scale-division-span')
-        }
-        
-        for ( let elem of ranger_buttons) {
-            elem.classList.remove('ranger-vert__button');
-            elem.classList.remove('ranger-vert__button-tip');
-            ( elem as HTMLElement ).dataset.tip = ''           /* Сброс значений ярлыков. Новые значения из панели */
-    
-            if ( ranger_buttons.length == 1 ) {
-                ( elem as HTMLElement ).style.marginLeft = ( ranger.offsetWidth - ( elem as HTMLElement ).offsetWidth ) + 2 + 'px';
-                ( elem as HTMLElement ).style.marginTop = 0 + 'px'
-            } else if ( ranger_buttons.length == 2 ) {
-                if ( ( elem as HTMLElement ).dataset.type == 'btn-first' ) {
-                    ( elem as HTMLElement ).style.marginLeft = 0 + 'px';
-                    ( elem as HTMLElement ).style.marginTop = 0 + 'px';
-                } else if ( ( elem as HTMLElement ).dataset.type == 'btn-second' ) {
-                    ( elem as HTMLElement ).style.marginLeft = ( ranger.offsetWidth - ( elem as HTMLElement ).offsetWidth ) + 'px'; 
-                    ( elem as HTMLElement ).style.marginTop = 0 + 'px'
-                }
-            }
-        } 
+        /* Переопределение стиля интервала после определения класса */
+        rangerInterval.style.width = ranger.offsetWidth + 'px';       
+        rangerInterval.style.height = 5 + 'px';
+        rangerInterval.style.marginTop = 0 + 'px';
+        config.dataset.width = String (ranger.offsetWidth);
+        config.dataset.height = String (ranger.offsetHeight);
+
+        rangerScaleDivisionSpans.forEach((elem) => {
+          elem.classList.remove('ranger-vert__scale-division-span');
+        })
+
+        rangerButtons.forEach((elem) => {
+          elem.classList.remove('ranger-vert__button');
+          elem.classList.remove('ranger-vert__button-tip');
+          (elem as HTMLElement).dataset.tip = '';           
+
+          /* Сброс значений ярлыков. Новые значения из панели */
+          if (rangerButtons.length === 1) {
+              (elem as HTMLElement).style.marginLeft = (ranger.offsetWidth - (elem as HTMLElement).offsetWidth) + 2 + 'px';
+              (elem as HTMLElement).style.marginTop = 0 + 'px';
+          } else if (rangerButtons.length === 2) {
+
+              if ((elem as HTMLElement).dataset.type === 'btn-first') {
+                  (elem as HTMLElement).style.marginLeft = 0 + 'px';
+                  (elem as HTMLElement).style.marginTop = 0 + 'px';
+              } else if ((elem as HTMLElement).dataset.type === 'btn-second') {
+                  (elem as HTMLElement).style.marginLeft = (ranger.offsetWidth - (elem as HTMLElement).offsetWidth) + 'px'; 
+                  (elem as HTMLElement).style.marginTop = 0 + 'px';
+              }
+          }
+        })
     }
-
 }
