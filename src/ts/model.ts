@@ -1,7 +1,7 @@
-// import { mouseDownBtn_1, mouseDownBtn_2 } from './mouse.js'
-// import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from './mouseVert.js'
-// import { clickMouse } from './mouseClick.js'
-import { mouseDownBtn_1, mouseDownBtn_2 } from '../js/mouse.js'
+import {
+  mouseDownBtnFirst,
+  mouseDownBtnSecond,
+} from '../js/mouse.js'
 import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from '../js/mouseVert.js'
 import { clickMouse } from '../js/mouseClick.js'
 
@@ -84,10 +84,10 @@ export class Button {
         const { orientation } = config_dataset.dataset
         if ( orientation == 'horizontal') {
                 if ( type === 'btn-first' ) {
-                    mouseDownBtn_1( event )
+                    mouseDownBtnFirst( event )
                 }
                 if (type === 'btn-second') {
-                    mouseDownBtn_2( event )
+                    mouseDownBtnSecond( event )
                 }        
         }
         if ( orientation == 'vertical' ) {

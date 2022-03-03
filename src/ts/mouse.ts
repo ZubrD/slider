@@ -3,19 +3,19 @@
 import { getCoords, } from '../js/scale.js'
 import { forTip } from '../js/tipToggler.js'
 
-export function mouseDownBtn_1 ( event: MouseEvent ) {
+export function mouseDownBtnFirst ( event: MouseEvent ) {
     let elem = event.target as HTMLElement
     let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
     let runner_number: number = Number ( config.dataset.runners )
     if ( runner_number == 1 ) {
-      mouseDownBtn_1_Single ( event )       /* если один бегун */
+      mouseDownBtnFirstSingle ( event )       /* если один бегун */
     } else if ( runner_number == 2 ) {
-      mouseDownBtn_1_Double ( event )       /* первый бегун (левый) если бегунов два */
+      mouseDownBtnFirstDouble ( event )       /* первый бегун (левый) если бегунов два */
     }
   }
   
-export function mouseDownBtn_2 ( event: MouseEvent ) {
-  console.log('Вызов из mouseDownBtn_2'); /* Убирать нельзя - это для тестирования !!! */
+export function mouseDownBtnSecond ( event: MouseEvent ) {
+  console.log('Вызов из mouseDownBtnSecond'); /* Убирать нельзя - это для тестирования !!! */
   let elem = event.target as HTMLElement    /* Для надписи над бегуном */
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
@@ -103,8 +103,8 @@ export function mouseDownBtn_2 ( event: MouseEvent ) {
   };
 }
   
-export function mouseDownBtn_1_Single ( event: MouseEvent) {
-  console.log('Вызов из mouseDownBtn_1_Single'); /* Убирать нельзя - это для тестирования !!! */
+export function mouseDownBtnFirstSingle ( event: MouseEvent) {
+  console.log('Вызов из mouseDownBtnFirstSingle'); /* Убирать нельзя - это для тестирования !!! */
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )
@@ -164,8 +164,8 @@ export function mouseDownBtn_1_Single ( event: MouseEvent) {
   };  
 }
   
-export function mouseDownBtn_1_Double ( event: MouseEvent ) {
-  console.log('Вызов из mouseDownBtn_1_Double')   /* Убирать нельзя - это для тестирования !!! */
+export function mouseDownBtnFirstDouble ( event: MouseEvent ) {
+  console.log('Вызов из mouseDownBtnFirstDouble')   /* Убирать нельзя - это для тестирования !!! */
   let elem = event.target as HTMLElement
   let config: HTMLElement = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config')
   let sler_number: number = Number ( config.dataset.inst )

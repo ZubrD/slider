@@ -4,10 +4,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _Button_instances, _Button_setup, _Division_instances, _Division_setup, _Panel_instances, _Panel_setup;
-// import { mouseDownBtn_1, mouseDownBtn_2 } from './mouse.js'
-// import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from './mouseVert.js'
-// import { clickMouse } from './mouseClick.js'
-import { mouseDownBtn_1, mouseDownBtn_2 } from '../js/mouse.js';
+import { mouseDownBtnFirst, mouseDownBtnSecond, } from '../js/mouse.js';
 import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from '../js/mouseVert.js';
 import { clickMouse } from '../js/mouseClick.js';
 export class Ranger {
@@ -65,10 +62,10 @@ export class Button {
         const { orientation } = config_dataset.dataset;
         if (orientation == 'horizontal') {
             if (type === 'btn-first') {
-                mouseDownBtn_1(event);
+                mouseDownBtnFirst(event);
             }
             if (type === 'btn-second') {
-                mouseDownBtn_2(event);
+                mouseDownBtnSecond(event);
             }
         }
         if (orientation == 'vertical') {
