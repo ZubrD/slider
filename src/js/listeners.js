@@ -1,26 +1,26 @@
-// import { makeScale, reScale, modifyScaleInput } from './scale.js'
-// import { showTip, hideTip, reValueTip } from './tipToggler.js'
-// import { orientationToggler } from './orientToggler.js'
-// import { resetBtnCoord } from './mouse.js'
 import { makeScale, reScale, modifyScaleInput } from '../js/scale.js';
 import { oneRunner, twoRunners } from './runnerToggler.js';
 import { showTip, hideTip, reValueTip } from '../js/tipToggler.js';
 import { orientationToggler } from '../js/orientToggler.js';
 import { resetBtnCoord } from '../js/mouse.js';
+/* Переключение количества ползунков через панель */
 export function allChecksListener(event) {
-    let elem = event.target; /* HTMLInputElement - т.к. метода checked нет для HTMLElement */
+    /* HTMLInputElement - т.к. метода checked нет для HTMLElement */
+    let elem = event.target;
     let { run } = elem.dataset;
     let { discrete } = elem.dataset;
     let { tip } = elem.dataset;
     let { orient } = elem.dataset;
-    // let ranger = event.target.parentNode.parentNode.childNodes[1].firstChild
     let ranger = elem.parentNode.parentNode.querySelector('.ranger');
     let config = elem.parentNode.parentNode.querySelector('.zdslider-config');
-    let orientation = config.dataset.orientation; /*  Извлечение из конфига флага ориентации */
-    let instant = config.dataset.inst; /*  Извлечение из конфига номера экземпляра слайдера */
+    /* Извлечение из конфига флага ориентации */
+    let orientation = config.dataset.orientation;
+    /* Извлечение из конфига номера экземпляра слайдера */
+    let instant = config.dataset.inst;
     if (run && elem.checked) {
         oneRunner(elem);
-        hideTip(elem); /* Скрываю надписи */
+        /* Скрываю надписи */
+        hideTip(elem);
         resetBtnCoord(event);
     }
     else if (run && (!elem.checked)) {
@@ -28,28 +28,31 @@ export function allChecksListener(event) {
         hideTip(elem);
         resetBtnCoord(event);
     }
-    if (discrete && elem.checked) { /* Дискретный / плавный ход */
-        ranger.setAttribute('data-discrete', 'yes'); /* УБРАТЬ!!!!!!!!!!!!!! */
+    /* Дискретный / плавный ход */
+    if (discrete && elem.checked) {
         config.dataset.discrete = 'yes';
     }
     else if (discrete && !elem.checked) {
-        ranger.setAttribute('data-discrete', 'no'); /* УБРАТЬ!!!!!!!!!!!!!! */
         config.dataset.discrete = 'no';
     }
-    if (tip && elem.checked) { /* Подписи к бегунам */
+    /* Подписи к бегунам */
+    if (tip && elem.checked) {
         let element = event.target;
         showTip(element, orientation);
     }
     else if (tip && !elem.checked) {
         hideTip(elem, orientation);
     }
-    if (orient && elem.checked) { /* Смена ориентации */
-        config.dataset.orientation = 'vertical'; /* Передача в конфиг флага ориентации */
-        orientation = config.dataset.orientation; /*  Извлечение из конфига флага ориентации */
+    /* Смена ориентации */
+    if (orient && elem.checked) {
+        /* Передача в конфиг флага ориентации */
+        config.dataset.orientation = 'vertical';
+        /* Извлечение из конфига флага ориентации */
+        orientation = config.dataset.orientation;
         orientationToggler(elem, orientation);
         resetBtnCoord(event);
     }
-    else if (orient && (elem.checked == false)) {
+    else if (orient && (elem.checked === false)) {
         config.dataset.orientation = 'horizontal';
         orientation = config.dataset.orientation;
         orientationToggler(elem, orientation);
@@ -61,73 +64,87 @@ export function changeMinListener(event) {
     let config = elem.parentNode.parentNode.querySelector('.zdslider-config');
     let parent = elem.parentNode;
     let min = Number(elem.value);
-    let max_input = parent.querySelector('.zdslider-panel__max');
-    let max = Number(max_input.value);
-    let step = 1; /* Указал произвольный шаг */
-    let new_scale_arr = makeScale(min, max, step);
-    config.dataset.min = String(min); /* Передаю в конфиг */
+    let maxInput = parent.querySelector('.zdslider-panel__max');
+    let max = Number(maxInput.value);
+    /* Указал произвольный шаг */
+    let step = 1;
+    let newScaleArr = makeScale(min, max, step);
+    /* Передаю в конфиг */
+    config.dataset.min = String(min);
     config.dataset.max = String(max);
     reValueTip(elem);
-    let iteration = new_scale_arr[1];
-    let iterations_arr = new_scale_arr[2];
-    modifyScaleInput(parent, iteration, iterations_arr);
-    let current_inst = config.dataset.inst; /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
-    max_input.setAttribute('min', String(min)); /* Ограничитель, чтобы max не превышал min */
-    reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению min */
+    let iteration = newScaleArr[1];
+    let iterationsArr = newScaleArr[2];
+    modifyScaleInput(parent, iteration, iterationsArr);
+    /* ВНИМАНИЕ!!!! Здесь определил числовое значение как строку */
+    let currentInst = config.dataset.inst;
+    /* Ограничитель, чтобы max не превышал min */
+    maxInput.setAttribute('min', String(min));
+    /* Перестроение шкалы по новому значению min */
+    reScale(newScaleArr[0], currentInst);
 }
 export function changeMaxListener(event) {
     let elem = event.target;
     let config = elem.parentNode.parentNode.querySelector('.zdslider-config');
     let parent = elem.parentNode;
-    let min_input = parent.querySelector('.zdslider-panel__min');
-    let min = Number(min_input.value);
+    let minInput = parent.querySelector('.zdslider-panel__min');
+    let min = Number(minInput.value);
     let max = Number(elem.value);
-    let step = 1; /* Указал произвольный шаг */
-    let new_scale_arr = makeScale(min, max, step); /* получение массивов */
-    config.dataset.min = String(min); /* Передаю в конфиг */
+    /* Указал произвольный шаг */
+    let step = 1;
+    /* получение массивов */
+    let newScaleArr = makeScale(min, max, step);
+    /* Передаю в конфиг */
+    config.dataset.min = String(min);
     config.dataset.max = String(max);
     reValueTip(elem);
-    let iteration = new_scale_arr[1];
-    let iterations_arr = new_scale_arr[2];
-    modifyScaleInput(parent, iteration, iterations_arr);
-    let current_inst = config.dataset.inst;
-    min_input.setAttribute('max', String(max)); /* Ограничитель, чтобы min не превышал max */
-    reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению min */
+    let iteration = newScaleArr[1];
+    let iterationsArr = newScaleArr[2];
+    modifyScaleInput(parent, iteration, iterationsArr);
+    let currentInst = config.dataset.inst;
+    /* Ограничитель, чтобы min не превышал max */
+    minInput.setAttribute('max', String(max));
+    /* Перестроение шкалы по новому значению min */
+    reScale(newScaleArr[0], currentInst);
 }
 export function changeStepListener(event) {
     let elem = event.target;
     let config = elem.parentNode.parentNode.querySelector('.zdslider-config');
     let parent = elem.parentNode;
-    let min_input = parent.querySelector('.zdslider-panel__min');
-    let max_input = parent.querySelector('.zdslider-panel__max');
-    let min = Number(min_input.value);
-    let max = Number(max_input.value);
+    let minInput = parent.querySelector('.zdslider-panel__min');
+    let maxInput = parent.querySelector('.zdslider-panel__max');
+    let min = Number(minInput.value);
+    let max = Number(maxInput.value);
     let val = Number(elem.value);
     let current = Number(elem.dataset.current);
     let arr = elem.dataset.steps.split(',');
     let arrNumber = arr.map(parseFloat);
-    let current_index = arrNumber.indexOf(current); /* Индекс текущего шага шкалы в массиве */
+    /* Индекс текущего шага шкалы в массиве */
+    let currentIndex = arrNumber.indexOf(current);
     if (localStorage.test) {
         current = Number(localStorage.current_1);
         val = Number(localStorage.val_1);
     }
     if (current < val) {
-        elem.dataset.current = String(arrNumber[current_index - 1]);
-        elem.value = String(arrNumber[current_index - 1]);
+        elem.dataset.current = String(arrNumber[currentIndex - 1]);
+        elem.value = String(arrNumber[currentIndex - 1]);
     }
     if (localStorage.test) {
         current = Number(localStorage.current_2);
         val = Number(localStorage.val_2);
     }
     if (current > val) {
-        elem.dataset.current = String(arrNumber[current_index + 1]);
-        elem.value = String(arrNumber[current_index + 1]);
+        elem.dataset.current = String(arrNumber[currentIndex + 1]);
+        elem.value = String(arrNumber[currentIndex + 1]);
     }
-    let current_inst = config.dataset.inst;
-    let step = Number(elem.value); /* val после изменения на значение из массива */
-    let new_scale_arr = makeScale(min, max, step);
-    reScale(new_scale_arr[0], current_inst); /* Перестроение шкалы по новому значению шага */
+    let currentInst = config.dataset.inst;
+    /* val после изменения на значение из массива */
+    let step = Number(elem.value);
+    let newScaleArr = makeScale(min, max, step);
+    /* Перестроение шкалы по новому значению шага */
+    reScale(newScaleArr[0], currentInst);
 }
+/* Сдвиг бегунов при изменении размера окна */
 window.addEventListener('resize', function () {
     let config = document.body.querySelector('.zdslider-config');
     let ranger = document.body.querySelector('.ranger');
@@ -141,7 +158,6 @@ window.addEventListener('resize', function () {
         config.dataset.btn2_init_pos = String(ranger.offsetWidth - btn2.offsetWidth);
         btn1.style.marginLeft = 0 + 'px';
         btn2.style.marginLeft = config.dataset.btn2_init_pos + 'px';
-        // interval.style.marginLeft = config.dataset.btn1_init_pos + 'px'
         interval.style.marginLeft = 0 + 'px';
         interval.style.width = config.dataset.btn2_init_pos + 'px';
         console.log(btn1InitPos);
