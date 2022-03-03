@@ -3,6 +3,5 @@ export let configObj = {
     min: 12,
     max: 150,
     discrete: 'no',
-    // orientation: 'vertical'
-    orientation: 'horizontal'
+    orientation: 'horizontal',
 };
