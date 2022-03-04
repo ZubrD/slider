@@ -5,7 +5,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Button_instances, _Button_setup, _Division_instances, _Division_setup, _Panel_instances, _Panel_setup;
 import { mouseDownBtnFirst, mouseDownBtnSecond, } from '../js/mouse.js';
-import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from '../js/mouseVert.js';
+import { mouseVertDownBtnFirst, mouseVertDownBtnSecond } from '../js/mouseVert.js';
 import { clickMouse } from '../js/mouseClick.js';
 export class Ranger {
     constructor(orientation) {
@@ -70,10 +70,10 @@ export class Button {
         }
         if (orientation == 'vertical') {
             if (type === 'btn-first') {
-                mouseVertDownBtn_1(event);
+                mouseVertDownBtnFirst(event);
             }
             if (type === 'btn-second') {
-                mouseVertDownBtn_2(event);
+                mouseVertDownBtnSecond(event);
             }
         }
     }

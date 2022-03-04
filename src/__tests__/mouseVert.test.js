@@ -5,9 +5,9 @@
 import { configObj } from '../js/config.js'
 import { sliderInit } from '../js/script.js'
 import { act } from "react-dom/test-utils";
-import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from '../js/mouseVert.js'
+import { mouseVertDownBtnFirst, mouseVertDownBtnSecond } from '../js/mouseVert.js'
 
-test ('Проверка вызова mouseVertDownBtn_1_Double из функции mouseVertDownBtn_1() для двух бегунов (mouseVert.js)', () => {
+test ('Проверка вызова mouseVertDownBtnFirstDouble из функции mouseVertDownBtnFirst() для двух бегунов (mouseVert.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
@@ -19,7 +19,7 @@ test ('Проверка вызова mouseVertDownBtn_1_Double из функци
     jest.spyOn(console, 'log').mockImplementation(() => {});
 
     let elem = document.body.querySelector('[data-type="btn-first"]')
-    elem.addEventListener('click', mouseVertDownBtn_1)
+    elem.addEventListener('click', mouseVertDownBtnFirst)
 
     let config = document.body.querySelector('.zdslider-config')
     config.dataset.discrete = 'no'
@@ -44,11 +44,11 @@ test ('Проверка вызова mouseVertDownBtn_1_Double из функци
         doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
-    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtn_1_Double');
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtnFirstDouble');
     console.log.mockRestore();
 });
 
-test ('Проверка вызова mouseVertDownBtn_1_Double из функции mouseVertDownBtn_1() для двух бегунов (mouseVert.js)', () => {
+test ('Проверка вызова mouseVertDownBtnFirstDouble из функции mouseVertDownBtnFirst() для двух бегунов (mouseVert.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
@@ -60,7 +60,7 @@ test ('Проверка вызова mouseVertDownBtn_1_Double из функци
     jest.spyOn(console, 'log').mockImplementation(() => {});
 
     let elem = document.body.querySelector('[data-type="btn-first"]')
-    elem.addEventListener('click', mouseVertDownBtn_1)
+    elem.addEventListener('click', mouseVertDownBtnFirst)
 
     let config = document.body.querySelector('.zdslider-config')
     config.dataset.discrete = 'yes'
@@ -82,13 +82,13 @@ test ('Проверка вызова mouseVertDownBtn_1_Double из функци
         doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
-    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtn_1_Double');
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtnFirstDouble');
     console.log.mockRestore();
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-test ('Проверка вызова mouseVertDownBtn_1_Single из функции mouseVertDownBtn_1() для одного бегуна (mouseVert.js)', () => {
+test ('Проверка вызова mouseVertDownBtnFirstSingle из функции mouseVertDownBtnFirst() для одного бегуна (mouseVert.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
@@ -100,7 +100,7 @@ test ('Проверка вызова mouseVertDownBtn_1_Single из функци
     jest.spyOn(console, 'log').mockImplementation(() => {});
 
     let elem = document.body.querySelector('[data-type="btn-first"]')
-    elem.addEventListener('click', mouseVertDownBtn_1)
+    elem.addEventListener('click', mouseVertDownBtnFirst)
 
     let config = document.body.querySelector('.zdslider-config')
     config.dataset.discrete = 'no'
@@ -118,11 +118,11 @@ test ('Проверка вызова mouseVertDownBtn_1_Single из функци
         doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
-    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtn_1_Single');
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtnFirstSingle');
     console.log.mockRestore();
 });
 
-test ('Проверка вызова mouseVertDownBtn_1_Single из функции mouseVertDownBtn_1() для одного бегуна, discrete = "yes" (mouseVert.js)', () => {
+test ('Проверка вызова mouseVertDownBtnFirstSingle из функции mouseVertDownBtnFirst() для одного бегуна, discrete = "yes" (mouseVert.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
@@ -134,7 +134,7 @@ test ('Проверка вызова mouseVertDownBtn_1_Single из функци
     jest.spyOn(console, 'log').mockImplementation(() => {});
 
     let elem = document.body.querySelector('[data-type="btn-first"]')
-    elem.addEventListener('click', mouseVertDownBtn_1)
+    elem.addEventListener('click', mouseVertDownBtnFirst)
 
     let config = document.body.querySelector('.zdslider-config')
     config.dataset.discrete = 'yes'
@@ -155,13 +155,13 @@ test ('Проверка вызова mouseVertDownBtn_1_Single из функци
         doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
-    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtn_1_Single');
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtnFirstSingle');
     console.log.mockRestore();
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-test ('Проверка вызова mouseVertDownBtn_2 для двух бегунов, discrete = "no" (mouseVert.js)', () => {
+test ('Проверка вызова mouseVertDownBtnSecond для двух бегунов, discrete = "no" (mouseVert.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
@@ -173,7 +173,7 @@ test ('Проверка вызова mouseVertDownBtn_2 для двух бегу
     jest.spyOn(console, 'log').mockImplementation(() => {});
 
     let elem = document.body.querySelector('[data-type="btn-second"]')
-    elem.addEventListener('click', mouseVertDownBtn_2)
+    elem.addEventListener('click', mouseVertDownBtnSecond)
 
     let config = document.body.querySelector('.zdslider-config')
     config.dataset.discrete = 'no'
@@ -198,11 +198,11 @@ test ('Проверка вызова mouseVertDownBtn_2 для двух бегу
         doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
-    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtn_2');
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtnSecond');
     console.log.mockRestore();
 });
 
-test ('Проверка вызова mouseVertDownBtn_2 для двух бегунов, discrete = "yes" (mouseVert.js)', () => {
+test ('Проверка вызова mouseVertDownBtnSecond для двух бегунов, discrete = "yes" (mouseVert.js)', () => {
     document.body.innerHTML = ''
     let zdslider = document.createElement('div')
     zdslider.classList.add('zdslider')
@@ -214,7 +214,7 @@ test ('Проверка вызова mouseVertDownBtn_2 для двух бегу
     jest.spyOn(console, 'log').mockImplementation(() => {});
 
     let elem = document.body.querySelector('[data-type="btn-second"]')
-    elem.addEventListener('click', mouseVertDownBtn_2)
+    elem.addEventListener('click', mouseVertDownBtnSecond)
 
     let config = document.body.querySelector('.zdslider-config')
     config.dataset.discrete = 'yes'
@@ -236,6 +236,6 @@ test ('Проверка вызова mouseVertDownBtn_2 для двух бегу
         doc.dispatchEvent(new MouseEvent("mouseup", { bubbles: true }));
       });
     
-    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtn_2');
+    expect(console.log).toHaveBeenCalledWith('Вызов из mouseVertDownBtnSecond');
     console.log.mockRestore();
 });

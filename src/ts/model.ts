@@ -2,8 +2,12 @@ import {
   mouseDownBtnFirst,
   mouseDownBtnSecond,
 } from '../js/mouse.js'
-import { mouseVertDownBtn_1, mouseVertDownBtn_2 } from '../js/mouseVert.js'
-import { clickMouse } from '../js/mouseClick.js'
+import {
+  mouseVertDownBtnFirst,
+  mouseVertDownBtnSecond
+} from '../js/mouseVert.js'
+
+import {clickMouse} from '../js/mouseClick.js'
 
 export class Ranger {
     $el: HTMLElement
@@ -92,10 +96,10 @@ export class Button {
         }
         if ( orientation == 'vertical' ) {
                 if ( type === 'btn-first' ) {
-                    mouseVertDownBtn_1( event )
+                    mouseVertDownBtnFirst( event )
                 }
                 if (type === 'btn-second') {
-                    mouseVertDownBtn_2( event )
+                    mouseVertDownBtnSecond( event )
                 }             
         }
     }

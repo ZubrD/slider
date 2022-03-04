@@ -4,19 +4,19 @@
 import { getCoords } from '../js/scale.js';
 import { forTip } from '../js/tipToggler.js';
 import { discreteArray } from '../js/mouse.js';
-export function mouseVertDownBtn_1(event) {
+export function mouseVertDownBtnFirst(event) {
     let elem = event.target;
     let config = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
     let runner_number = Number(config.dataset.runners);
     if (runner_number == 1) {
-        mouseVertDownBtn_1_Single(event); /* если один бегун */
+        mouseVertDownBtnFirstSingle(event); /* если один бегун */
     }
     else if (runner_number == 2) {
-        mouseVertDownBtn_1_Double(event); /* первый бегун (левый) если бегунов два */
+        mouseVertDownBtnFirstDouble(event); /* первый бегун (левый) если бегунов два */
     }
 }
-export function mouseVertDownBtn_2(event) {
-    console.log('Вызов из mouseVertDownBtn_2');
+export function mouseVertDownBtnSecond(event) {
+    console.log('Вызов из mouseVertDownBtnSecond');
     let elem = event.target;
     let config = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
     let sler_number = Number(config.dataset.inst);
@@ -124,8 +124,8 @@ export function mouseVertDownBtn_2(event) {
         document.onmousemove = document.onmouseup = null;
     };
 }
-function mouseVertDownBtn_1_Single(event) {
-    console.log('Вызов из mouseVertDownBtn_1_Single');
+function mouseVertDownBtnFirstSingle(event) {
+    console.log('Вызов из mouseVertDownBtnFirstSingle');
     let elem = event.target;
     let config = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
     let sler_number = Number(config.dataset.inst);
@@ -198,8 +198,8 @@ function mouseVertDownBtn_1_Single(event) {
         document.onmousemove = document.onmouseup = null;
     };
 }
-function mouseVertDownBtn_1_Double(event) {
-    console.log('Вызов из mouseVertDownBtn_1_Double');
+function mouseVertDownBtnFirstDouble(event) {
+    console.log('Вызов из mouseVertDownBtnFirstDouble');
     let elem = event.target;
     let config = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
     let sler_number = Number(config.dataset.inst);
