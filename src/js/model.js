@@ -5,16 +5,16 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _Button_instances, _Button_setup, _Division_instances, _Division_setup, _Panel_instances, _Panel_setup;
 import { mouseDownBtnFirst, mouseDownBtnSecond, } from '../js/mouse.js';
-import { mouseVertDownBtnFirst, mouseVertDownBtnSecond } from '../js/mouseVert.js';
+import { mouseVertDownBtnFirst, mouseVertDownBtnSecond, } from '../js/mouseVert.js';
 import { clickMouse } from '../js/mouseClick.js';
 export class Ranger {
     constructor(orientation) {
         this.$el = document.createElement('div');
         this.$el.classList.add('ranger');
         this.$el.setAttribute('data-type', 'ranger');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert');
         }
     }
@@ -27,9 +27,9 @@ export class Interval {
         this.$el = document.createElement('div');
         this.$el.classList.add('ranger__interval');
         this.$el.setAttribute('data-type', 'interval');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert__interval');
         }
     }
@@ -42,9 +42,9 @@ export class Button {
         _Button_instances.add(this);
         this.$el = document.createElement('button');
         this.$el.classList.add('ranger__button');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert__button');
         }
         __classPrivateFieldGet(this, _Button_instances, "m", _Button_setup).call(this);
@@ -60,7 +60,7 @@ export class Button {
         const { type } = elem.dataset;
         let config_dataset = elem.parentNode.parentNode.parentNode.querySelector('.zdslider-config');
         const { orientation } = config_dataset.dataset;
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
             if (type === 'btn-first') {
                 mouseDownBtnFirst(event);
             }
@@ -68,7 +68,7 @@ export class Button {
                 mouseDownBtnSecond(event);
             }
         }
-        if (orientation == 'vertical') {
+        if (orientation === 'vertical') {
             if (type === 'btn-first') {
                 mouseVertDownBtnFirst(event);
             }
@@ -79,16 +79,17 @@ export class Button {
     }
 }
 _Button_instances = new WeakSet(), _Button_setup = function _Button_setup() {
-    this.clickHandler = this.clickHandler.bind(this); /* Только для местных функций */
+    /* Только для местных функций */
+    this.clickHandler = this.clickHandler.bind(this);
     this.$el.addEventListener('mousedown', this.clickHandler);
 };
 export class Scale {
     constructor(orientation) {
         this.$el = document.createElement('div');
         this.$el.classList.add('ranger__scale');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert__scale');
         }
     }
@@ -103,21 +104,15 @@ export class ScaleSpan {
     constructor(orientation) {
         this.$el = document.createElement('span');
         this.$el.classList.add('ranger__scale-span');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert__scale-span');
         }
     }
     appendTo(parent) {
         parent.appendChild(this.$el);
     }
-    // appendChild( child: HTMLElement ) {                 /* Убрал при тестировании, т.к. не пригодилось */
-    //     this.$el.appendChild ( child )
-    // }
-    // setAttribute( attr: string, number: string ) {              /* Убрал при тестировании, т.к. не пригодилось */
-    //     this.$el.setAttribute ( attr, number )
-    // }
     inner_HTML(child) {
         this.$el.innerHTML = child;
     }
@@ -127,9 +122,9 @@ export class Division {
         _Division_instances.add(this);
         this.$el = document.createElement('div');
         this.$el.classList.add('ranger__scale-division');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert__scale-division');
         }
         __classPrivateFieldGet(this, _Division_instances, "m", _Division_setup).call(this);
@@ -145,16 +140,17 @@ export class Division {
     }
 }
 _Division_instances = new WeakSet(), _Division_setup = function _Division_setup() {
-    this.clickHandler = this.clickHandler.bind(this); /* Только для местных функций */
+    /* Только для местных функций */
+    this.clickHandler = this.clickHandler.bind(this);
     this.$el.addEventListener('click', this.clickHandler);
 };
 export class DivisionSpan {
     constructor(orientation) {
         this.$el = document.createElement('span');
         this.$el.classList.add('ranger__scale-division-span');
-        if (orientation == 'horizontal') {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             this.$el.classList.add('ranger-vert__scale-division-span');
         }
     }
@@ -167,66 +163,66 @@ export class Panel {
         _Panel_instances.add(this);
         this.$panel = document.createElement('div');
         this.$panel.classList.add('zdslider-panel');
-        this.$run_checkbox = document.createElement('input');
-        this.$run_checkbox.classList.add('zdslider-panel__check-runners');
-        this.$run_checkbox.setAttribute('type', 'checkbox');
-        this.$run_checkbox.setAttribute('data-run', 'run');
-        this.$discrete_checkbox = document.createElement('input');
-        this.$discrete_checkbox.classList.add('zdslider-panel__check-discrete');
-        this.$discrete_checkbox.setAttribute('type', 'checkbox');
-        this.$discrete_checkbox.setAttribute('data-discrete', 'discrete');
-        this.$tip_checkbox = document.createElement('input');
-        this.$tip_checkbox.classList.add('zdslider-panel__check-tip');
-        this.$tip_checkbox.setAttribute('type', 'checkbox');
-        this.$tip_checkbox.setAttribute('data-tip', 'tip');
-        this.$orient_checkbox = document.createElement('input');
-        this.$orient_checkbox.classList.add('zdslider-panel__check-orient');
-        this.$orient_checkbox.setAttribute('type', 'checkbox');
-        this.$orient_checkbox.setAttribute('data-orient', 'orient');
-        this.$min_number = document.createElement('input');
-        this.$min_number.classList.add('zdslider-panel__min');
-        this.$min_number.setAttribute('type', 'number');
-        this.$max_number = document.createElement('input');
-        this.$max_number.classList.add('zdslider-panel__max');
-        this.$max_number.setAttribute('type', 'number');
-        this.$step_number = document.createElement('input');
-        this.$step_number.classList.add('zdslider-panel__step');
-        this.$step_number.setAttribute('type', 'number');
-        this.$step_number.setAttribute('onkeydown', 'return false');
-        this.$run_label = document.createElement('label');
-        this.$run_label.innerHTML = '1 Бегун';
-        this.$discrete_label = document.createElement('label');
-        this.$discrete_label.innerHTML = 'Дискретный';
-        this.$tip_label = document.createElement('label');
-        this.$tip_label.innerHTML = 'Ярлык';
-        this.$orient_label = document.createElement('label');
-        this.$orient_label.innerHTML = 'Вертикальный';
-        this.$min_lable = document.createElement('label');
-        this.$min_lable.innerHTML = 'Минимум';
-        this.$max_label = document.createElement('label');
-        this.$max_label.innerHTML = 'Максимум';
-        this.$step_label = document.createElement('label');
-        this.$step_label.innerHTML = 'Шаг';
-        this.$panel.appendChild(this.$run_checkbox);
-        this.$panel.appendChild(this.$run_label);
+        this.$runCheckbox = document.createElement('input');
+        this.$runCheckbox.classList.add('zdslider-panel__check-runners');
+        this.$runCheckbox.setAttribute('type', 'checkbox');
+        this.$runCheckbox.setAttribute('data-run', 'run');
+        this.$discreteCheckbox = document.createElement('input');
+        this.$discreteCheckbox.classList.add('zdslider-panel__check-discrete');
+        this.$discreteCheckbox.setAttribute('type', 'checkbox');
+        this.$discreteCheckbox.setAttribute('data-discrete', 'discrete');
+        this.$tipCheckbox = document.createElement('input');
+        this.$tipCheckbox.classList.add('zdslider-panel__check-tip');
+        this.$tipCheckbox.setAttribute('type', 'checkbox');
+        this.$tipCheckbox.setAttribute('data-tip', 'tip');
+        this.$orientCheckbox = document.createElement('input');
+        this.$orientCheckbox.classList.add('zdslider-panel__check-orient');
+        this.$orientCheckbox.setAttribute('type', 'checkbox');
+        this.$orientCheckbox.setAttribute('data-orient', 'orient');
+        this.$minNumber = document.createElement('input');
+        this.$minNumber.classList.add('zdslider-panel__min');
+        this.$minNumber.setAttribute('type', 'number');
+        this.$maxNumber = document.createElement('input');
+        this.$maxNumber.classList.add('zdslider-panel__max');
+        this.$maxNumber.setAttribute('type', 'number');
+        this.$stepNumber = document.createElement('input');
+        this.$stepNumber.classList.add('zdslider-panel__step');
+        this.$stepNumber.setAttribute('type', 'number');
+        this.$stepNumber.setAttribute('onkeydown', 'return false');
+        this.$runLabel = document.createElement('label');
+        this.$runLabel.innerHTML = '1 Бегун';
+        this.$discreteLabel = document.createElement('label');
+        this.$discreteLabel.innerHTML = 'Дискретный';
+        this.$tipLabel = document.createElement('label');
+        this.$tipLabel.innerHTML = 'Ярлык';
+        this.$orientLabel = document.createElement('label');
+        this.$orientLabel.innerHTML = 'Вертикальный';
+        this.$minLable = document.createElement('label');
+        this.$minLable.innerHTML = 'Минимум';
+        this.$maxLabel = document.createElement('label');
+        this.$maxLabel.innerHTML = 'Максимум';
+        this.$stepLabel = document.createElement('label');
+        this.$stepLabel.innerHTML = 'Шаг';
+        this.$panel.appendChild(this.$runCheckbox);
+        this.$panel.appendChild(this.$runLabel);
         this.$panel.appendChild(document.createElement('br'));
-        this.$panel.appendChild(this.$discrete_checkbox);
-        this.$panel.appendChild(this.$discrete_label);
+        this.$panel.appendChild(this.$discreteCheckbox);
+        this.$panel.appendChild(this.$discreteLabel);
         this.$panel.appendChild(document.createElement('br'));
-        this.$panel.appendChild(this.$tip_checkbox);
-        this.$panel.appendChild(this.$tip_label);
+        this.$panel.appendChild(this.$tipCheckbox);
+        this.$panel.appendChild(this.$tipLabel);
         this.$panel.appendChild(document.createElement('br'));
-        this.$panel.appendChild(this.$orient_checkbox);
-        this.$panel.appendChild(this.$orient_label);
+        this.$panel.appendChild(this.$orientCheckbox);
+        this.$panel.appendChild(this.$orientLabel);
         this.$panel.appendChild(document.createElement('br'));
-        this.$panel.appendChild(this.$min_number);
-        this.$panel.appendChild(this.$min_lable);
+        this.$panel.appendChild(this.$minNumber);
+        this.$panel.appendChild(this.$minLable);
         this.$panel.appendChild(document.createElement('br'));
-        this.$panel.appendChild(this.$max_number);
-        this.$panel.appendChild(this.$max_label);
+        this.$panel.appendChild(this.$maxNumber);
+        this.$panel.appendChild(this.$maxLabel);
         this.$panel.appendChild(document.createElement('br'));
-        this.$panel.appendChild(this.$step_number);
-        this.$panel.appendChild(this.$step_label);
+        this.$panel.appendChild(this.$stepNumber);
+        this.$panel.appendChild(this.$stepLabel);
         this.$panel.appendChild(document.createElement('br'));
         __classPrivateFieldGet(this, _Panel_instances, "m", _Panel_setup).call(this);
     }
@@ -239,7 +235,8 @@ export class Panel {
     }
 }
 _Panel_instances = new WeakSet(), _Panel_setup = function _Panel_setup() {
-    this.clickHandler = this.clickHandler.bind(this); /* Только для местных функций */
+    /* Только для местных функций */
+    this.clickHandler = this.clickHandler.bind(this);
     this.$panel.addEventListener('click', this.clickHandler);
 };
 export class Settings {
@@ -250,9 +247,6 @@ export class Settings {
     appendTo(parent) {
         parent.appendChild(this.$el);
     }
-    // appendChild( child: HTMLElement ) {             /* Убрал при тестировании, т.к. не пригодилось */
-    //     this.$el.appendChild ( child )
-    // }
     setAttribute(attr, number) {
         this.$el.setAttribute(attr, number);
     }
