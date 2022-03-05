@@ -128,19 +128,19 @@ export function reScale (scaleArr: number[], currentInst: number) {
   
 /* Изменение инпута переключения шага  */  
 export function modifyScaleInput (parent: HTMLElement, iteration: number, iterationsArr: number[]) {   
-    let confInputStep: HTMLInputElement = parent.querySelector('.zdslider-panel__step');
-    confInputStep.setAttribute ('data-steps', String(iterationsArr));
-    confInputStep.setAttribute ('data-iteration', String(iteration))
-    confInputStep.setAttribute ('data-current', String(iteration))
-    if (iterationsArr.length !== 0) {
-        confInputStep.disabled = false; 
-        confInputStep.setAttribute ('max', String(iterationsArr[0]));
-        confInputStep.setAttribute ('min', String(iterationsArr[iterationsArr.length - 1]));
-    } else {      
+  let confInputStep: HTMLInputElement = parent.querySelector('.zdslider-panel__step');
+  confInputStep.setAttribute ('data-steps', String(iterationsArr));
+  confInputStep.setAttribute ('data-iteration', String(iteration))
+  confInputStep.setAttribute ('data-current', String(iteration))
+  if (iterationsArr.length !== 0) {
+    confInputStep.disabled = false; 
+    confInputStep.setAttribute ('max', String(iterationsArr[0]));
+    confInputStep.setAttribute ('min', String(iterationsArr[iterationsArr.length - 1]));
+  } else {      
 
-        /* Если интервалов для шкалы нет, то делаю инпут неактивным */
-        confInputStep.disabled = true;
-    }
-    confInputStep.value = confInputStep.dataset.iteration;
+    /* Если интервалов для шкалы нет, то делаю инпут неактивным */
+    confInputStep.disabled = true;
+  }
+  confInputStep.value = confInputStep.dataset.iteration;
 }
   
