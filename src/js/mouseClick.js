@@ -1,13 +1,13 @@
-// import { getCoords, } from './scale.js'
-// import { forTip } from './tipToggler.js'
-import { getCoords, } from '../js/scale.js';
+import { getCoords } from '../js/scale.js';
 import { forTip } from '../js/tipToggler.js';
 export function clickMouse(event) {
+    /* TODO Убирать нельзя - это для тестирования !!! */
     console.log('Вызов из mouseClick');
     let elem = event.target;
     let division = elem.parentNode.parentNode.querySelector('.ranger__scale-division');
-    if (event.target == division) { /* Если клик на риску то будет ошибка */
-        /* Этот блок только если клик был на .ranger__scale-division */
+    /* FIXIT Если клик на риску то ничего не произойдёт */
+    /* Этот блок только если клик был на .ranger__scale-division */
+    if (event.target === division) {
         const config = elem.parentNode.parentNode.querySelector('.zdslider-config');
         const buttonsNumber = Number(config.dataset.runners);
         const orientation = config.dataset.orientation;
@@ -16,59 +16,74 @@ export function clickMouse(event) {
         const interval = elem.parentNode.querySelector('.ranger__interval');
         const target = elem.parentNode.querySelector('.ranger__button');
         let divisionLeft, divisionTop, numberForTip;
-        if (orientation == 'horizontal') {
-            let division_coord = getCoords(division);
-            let halfWidth = btn1.offsetWidth / 2; /* Половина ширины бегуна, чтобы выставить его по центру клика */
+        if (orientation === 'horizontal') {
+            let divisionCoord = getCoords(division);
+            /* Половина ширины бегуна, чтобы выставить его по центру клика */
+            let halfWidth = btn1.offsetWidth / 2;
             let clientX = event.clientX;
             let pageX = event.pageX;
+            /* Тестирование */
             if (localStorage.test) {
                 clientX = Number(localStorage.client_1);
                 pageX = Number(localStorage.page_1);
             }
-            if (clientX < pageX) { /* Если левый край слайдера выходит за пределы страницы при увеличении масштаба */
-                divisionLeft = event.pageX - event.clientX + division_coord.left;
+            /* Если левый край слайдера выходит за пределы страницы при увеличении масштаба */
+            if (clientX < pageX) {
+                divisionLeft = event.pageX - event.clientX + divisionCoord.left;
             }
+            /* Тестирование */
             if (localStorage.test) {
                 clientX = Number(localStorage.client_2);
                 pageX = Number(localStorage.page_2);
             }
             if (clientX >= pageX) {
-                divisionLeft = division_coord.left;
+                divisionLeft = divisionCoord.left;
             }
             let left = event.pageX - divisionLeft - halfWidth;
             let right = division.offsetWidth - btn1.offsetWidth;
+            /* Тестирование */
             if (localStorage.test) {
                 left = Number(localStorage.left_1);
             }
+            /* Чтобы бегун не выходил за границу слева */
             if (left < 0)
-                left = 0; /* Чтобы бегун не выходил за границу слева */
+                left = 0;
+            /* Тестирование */
             if (localStorage.test) {
                 left = Number(localStorage.left_2);
                 right = Number(localStorage.right_2);
             }
+            /* Чтобы бегун не выходил за границу справа */
             if (left > right)
-                left = right; /* Чтобы бегун не выходил за границу справа */
-            if (buttonsNumber == 1) {
+                left = right;
+            if (buttonsNumber === 1) {
                 btn1.style.marginLeft = left + 'px';
                 interval.style.width = left + 'px';
-                config.dataset.btn1_tip = forTip(target, left); /* Передача значения в конфиг */
-                btn1.dataset.tip = config.dataset.btn1_tip; /* Значение над бегуном */
+                /* Передача значения в конфиг */
+                config.dataset.btn1_tip = forTip(target, left);
+                /* Значение над бегуном */
+                btn1.dataset.tip = config.dataset.btn1_tip;
             }
-            else if (buttonsNumber == 2) {
+            else if (buttonsNumber === 2) {
                 let left1 = Number(config.dataset.btn1_coord);
                 let left2 = Number(config.dataset.btn2_coord);
                 let division_offsetWidth = division.offsetWidth;
+                /* Тестирование */
                 if (localStorage.test) {
                     left = Number(localStorage.left_3);
                     division_offsetWidth = Number(localStorage.division_3);
                 }
                 if (left < (division_offsetWidth / 2)) {
                     left1 = left;
-                    config.dataset.btn1_coord = String(left); /* Передача текущей координаты в конфиг */
+                    /* Передача текущей координаты в конфиг */
+                    config.dataset.btn1_coord = String(left);
                     btn1.style.marginLeft = left1 + 'px';
-                    config.dataset.btn1_tip = forTip(target, left); /* Передача значения в конфиг */
-                    btn1.dataset.tip = config.dataset.btn1_tip; /* Значение над бегуном */
+                    /* Передача значения в конфиг */
+                    config.dataset.btn1_tip = forTip(target, left);
+                    /* Значение над бегуном */
+                    btn1.dataset.tip = config.dataset.btn1_tip;
                 }
+                /* Тестирование */
                 if (localStorage.test) {
                     left = Number(localStorage.left_4);
                     division_offsetWidth = Number(localStorage.division_4);
@@ -77,24 +92,29 @@ export function clickMouse(event) {
                     left2 = left;
                     config.dataset.btn2_coord = String(left);
                     btn2.style.marginLeft = left2 + 'px';
-                    config.dataset.btn2_tip = forTip(target, left); /* Передача значения в конфиг */
-                    btn2.dataset.tip = config.dataset.btn2_tip; /* Значение над бегуном */
+                    /* Передача значения в конфиг */
+                    config.dataset.btn2_tip = forTip(target, left);
+                    /* Значение над бегуном */
+                    btn2.dataset.tip = config.dataset.btn2_tip;
                 }
                 interval.style.width = (left2 - left1) + 'px';
                 interval.style.marginLeft = left1 + 'px';
             }
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             let division_coord = getCoords(division);
             let clientY = event.clientY;
             let pageY = event.pageY;
+            /* Тестирование */
             if (localStorage.test) {
                 clientY = Number(localStorage.client_1);
                 pageY = Number(localStorage.page_1);
             }
-            if (clientY < pageY) { /* Если верхний край слайдера выходит за пределы страницы при увеличении масштаба */
+            /* Если верхний край слайдера выходит за пределы страницы при увеличении масштаба */
+            if (clientY < pageY) {
                 divisionTop = event.pageY - event.clientY + division_coord.top;
             }
+            /* Тестирование */
             if (localStorage.test) {
                 clientY = Number(localStorage.client_2);
                 pageY = Number(localStorage.page_2);
@@ -104,54 +124,68 @@ export function clickMouse(event) {
             }
             let top = event.pageY - divisionTop;
             let bottom = division.offsetHeight;
+            /* Тестирование */
             if (localStorage.test) {
                 top = Number(localStorage.top_1);
             }
+            /* Чтобы бегун не выходил за границу сверху */
             if (top < 0)
-                top = 0; /* Чтобы бегун не выходил за границу сверху */
+                top = 0;
+            /* Тестирование */
             if (localStorage.test) {
                 top = Number(localStorage.top_2);
                 bottom = Number(localStorage.bottom_2);
             }
+            /* Чтобы бегун не выходил за границу снизу */
             if (top > bottom)
-                top = bottom; /* Чтобы бегун не выходил за границу снизу */
-            if (buttonsNumber == 1) {
+                top = bottom;
+            if (buttonsNumber === 1) {
                 btn1.style.marginTop = top + 'px';
                 interval.style.marginTop = top + 'px';
                 interval.style.height = division.offsetHeight - top + 'px';
                 numberForTip = division.offsetHeight - top;
-                config.dataset.btn1_tip = forTip(target, numberForTip); /* Передача значения в конфиг */
-                btn1.dataset.tip = config.dataset.btn1_tip; /* Значение над бегуном */
+                /* Передача значения в конфиг */
+                config.dataset.btn1_tip = forTip(target, numberForTip);
+                /* Значение над бегуном */
+                btn1.dataset.tip = config.dataset.btn1_tip;
             }
-            else if (buttonsNumber == 2) {
+            else if (buttonsNumber === 2) {
                 let top1 = Number(config.dataset.btn1_coord);
                 let top2 = Number(config.dataset.btn2_coord);
-                let division_offsetHeight = division.offsetHeight;
+                let divisionOffsetHeight = division.offsetHeight;
+                /* Тестирование */
                 if (localStorage.test) {
                     top = Number(localStorage.top_3);
-                    division_offsetHeight = Number(localStorage.division_3);
+                    divisionOffsetHeight = Number(localStorage.division_3);
                 }
-                if (top > (division_offsetHeight / 2)) {
+                if (top > (divisionOffsetHeight / 2)) {
                     top1 = top;
-                    config.dataset.btn1_coord = String(division.offsetHeight - top); /* Передача текущей координаты в конфиг */
+                    /* Передача текущей координаты в конфиг */
+                    config.dataset.btn1_coord = String(division.offsetHeight - top);
                     btn1.style.marginTop = top1 + 'px';
                     numberForTip = division.offsetHeight - top;
-                    config.dataset.btn1_tip = forTip(target, numberForTip); /* Передача значения в конфиг */
-                    btn1.dataset.tip = config.dataset.btn1_tip; /* Значение над бегуном */
+                    /* Передача значения в конфиг */
+                    config.dataset.btn1_tip = forTip(target, numberForTip);
+                    /* Значение над бегуном */
+                    btn1.dataset.tip = config.dataset.btn1_tip;
                 }
+                /* Тестирование */
                 if (localStorage.test) {
                     top = Number(localStorage.top_4);
-                    division_offsetHeight = Number(localStorage.division_4);
+                    divisionOffsetHeight = Number(localStorage.division_4);
                 }
-                if (top < (division_offsetHeight / 2)) {
+                if (top < (divisionOffsetHeight / 2)) {
                     top2 = top;
                     config.dataset.btn2_coord = String(division.offsetHeight - top);
                     btn2.style.marginTop = top2 + 'px';
                     numberForTip = division.offsetHeight - top;
-                    config.dataset.btn2_tip = forTip(target, numberForTip); /* Передача значения в конфиг */
-                    btn2.dataset.tip = config.dataset.btn2_tip; /* Значение над бегуном */
+                    /* Передача значения в конфиг */
+                    config.dataset.btn2_tip = forTip(target, numberForTip);
+                    /* Значение над бегуном */
+                    btn2.dataset.tip = config.dataset.btn2_tip;
                 }
-                top1 = Number(config.dataset.btn1_coord); /* Проще и правильнее взять из модели */
+                /* Проще и правильнее взять из модели */
+                top1 = Number(config.dataset.btn1_coord);
                 top2 = Number(config.dataset.btn2_coord);
                 interval.style.height = (top2 - top1) + 'px';
                 interval.style.marginTop = division.offsetHeight - top2 + 'px';
