@@ -1,124 +1,146 @@
-// import { Scale, Division, DivisionSpan, ScaleSpan} from './model.js'
-import { Scale, Division, DivisionSpan, ScaleSpan} from '../js/model.js'
+import {
+  Scale,
+  Division,
+  DivisionSpan,
+  ScaleSpan} from '../js/model.js'
 
-export function getCoords( elem: HTMLElement ) {   /* Получение координат элементов слайдера */
+/* Получение координат элементов слайдера */  
+export function getCoords(elem: HTMLElement) {   
     let coords: DOMRect = elem.getBoundingClientRect();
     return {
         top: coords.top as number,
-        left: coords.left as number
+        left: coords.left as number,
     };
 }  
   
-  
-export function makeScale ( min: number, max: number, step: number ) {     /* Массив значений для шкалы по умолчанию */
-    let step_arr: number[] = []
-    let dividers_arr: number[] = []
-    let iteration_arr: number[] = []  /* Массив размера шага */
-    let iter: number = 0            /* Член массива размеров шага */
-    let maximus: number = 0
-    let iteration: number = 0
-    let item: number = 0
-    if ( step > 0) {
-        let range: number = max - min
-        for ( let i = 2; i < range/2 + 1; i ++ ){   /* Получаю массив делителей без остатка */
-        if ( range % i ) {
-            
+/* Массив значений для шкалы по умолчанию */  
+export function makeScale (min: number, max: number, step: number) {     
+  let stepArr: number[] = [];
+  let dividersArr: number[] = [];
+
+  /* Массив размера шага */
+  let iterationArr: number[] = [];  
+
+  /* Член массива размеров шага */
+  let iter: number = 0;            
+  let maximus: number = 0;
+  let iteration: number = 0;
+  let item: number = 0;
+  if (step > 0) {
+    let range: number = max - min
+
+    /* Получаю массив делителей без остатка */
+    for ( let i = 2; i < range/2 + 1; i ++ ){   
+      if (range % i) {
+          
+      } else {
+          dividersArr.push( i )
+      }
+    }
+
+    if ( dividersArr.length > 0 ) {
+
+      /* Определяю наибольшее количество интервалов меньше 10 */ 
+      for ( let el of dividersArr ) {              
+        if (el < 10) {
+          maximus = el;
+          iter = range / maximus;
+
+          /* Массив размеров шага шкалы */
+          iterationArr.push (iter);    
         } else {
-            dividers_arr.push( i )
-        }
-        }
-        // console.log('dividers_arr: ', dividers_arr)
-        if ( dividers_arr.length > 0 ) {
-            for ( let el of dividers_arr ) { /* Определяю наибольшее количество интервалов меньше 10 */              
-                if ( el < 10 ) {
-                    maximus = el
-                    iter = range / maximus
-                    iteration_arr.push ( iter )    /* Массив размеров шага шкалы */
-                } else {
-                    break
-                }               
-            }
-        } else {
-            step_arr = [ min, max ]
-            return [ step_arr, iteration, iteration_arr ]
-        }
-        if ( maximus == 0 ) {           /* Иначе iteration = Infinity */
-            step_arr = [ min, max ]
-            return [ step_arr, iteration, iteration_arr ]
-        }
-        // console.log('range: ', range)
-        // console.log('maximus: ', maximus)
-        iteration = range / maximus
-        if ( step > 1 ) {                           /* Переопределение - этот участок кода */
-            iteration = step                        /* применяется при изменении размера */
-            maximus = range / iteration             /* шага через панель */
-        }
-        // console.log('iteration: ', iteration)
-        // console.log('iteration_arr: ', iteration_arr)
-        item = min
-        step_arr.push ( min )
-        for ( let i = 0; i < maximus; i ++ ) {   /* Массив значений шкалы */
-        item = item + iteration
-        step_arr.push ( item )
-        }
+
+          /* Не применил forEach из-за break */
+          break
+        }               
+      }
     } else {
-        step_arr = [ min, max ]
+      stepArr = [min, max];
+      return [stepArr, iteration, iterationArr];
     }
-    return [ step_arr, iteration, iteration_arr ]
+
+    /* Иначе iteration = Infinity */
+    if ( maximus === 0 ) {           
+      stepArr = [min, max];
+      return [stepArr, iteration, iterationArr];
+    }
+
+    iteration = range / maximus;
+
+    /* Переопределение - этот участок кода применяется при изменении размера шага через панель */
+    if (step > 1) {                           
+        iteration = step;                        
+        maximus = range / iteration;             
+    }
+
+    item = min;
+    stepArr.push(min);
+
+    /* Массив значений шкалы */
+    for (let i = 0; i < maximus; i ++) {   
+      item = item + iteration;
+      stepArr.push(item);
+    }
+
+  } else {
+      stepArr = [min, max];
+  }
+
+  return [stepArr, iteration, iterationArr];
 }
   
   
-export function reScale ( scale_arr: number[], current_inst: number ) {
-    let parents = document.querySelectorAll('.zdslider')
+export function reScale (scaleArr: number[], currentInst: number) {
+  let parents = document.querySelectorAll('.zdslider')
 
-    for ( let parent of parents ) {
-        let config: HTMLElement = parent.parentNode.querySelector('.zdslider-config')
-        if ( Number ( config.dataset.inst ) == current_inst ) {
+  parents.forEach((parent) => {
+    let config: HTMLElement = parent.parentNode.querySelector('.zdslider-config');
+    if (Number(config.dataset.inst) == currentInst) {
+      let currentRanger: HTMLElement = parent.querySelector('.ranger');
+      let currentScale: HTMLElement = parent.querySelector('.ranger__scale');
+      let currentDivision: HTMLElement = parent.querySelector('.ranger__scale-division');
+      let orientation: string = config.dataset.orientation;
+      currentScale.remove();
+      currentDivision.remove();
+      
+      /* Для дискретного перемещения */
+      config.dataset.scale_length = String(scaleArr.length);                          
+      
+      let division = new Division(orientation);
+      division.appendTo(parent); 
 
-            let current_ranger: HTMLElement = parent.querySelector('.ranger')
-            let current_scale: HTMLElement = parent.querySelector('.ranger__scale')
-            let current_division: HTMLElement = parent.querySelector('.ranger__scale-division')
-            let orientation: string = config.dataset.orientation
-            current_scale.remove()
-            current_division.remove()
-            
-            config.dataset.scale_length = String ( scale_arr.length )                          /* Для дискретного перемещения */
-            // current_ranger.setAttribute( 'data-scale_length', scale_arr.length )    /* Для дискретного перемещения */
-            
-            let division = new Division ( orientation );
-            division.appendTo ( parent ); 
+      scaleArr.forEach((el) => {
+        let span = new DivisionSpan(orientation);
+        span.appendTo(division);        
+      })
 
-            for ( let el of scale_arr ) {
-                let span = new DivisionSpan ( orientation )
-                span.appendTo ( division )
-            }
+      let scale = new Scale(orientation);
+      scale.appendTo(parent);
 
-            let scale = new Scale ( orientation );
-            scale.appendTo ( parent );
-            
-            for ( let el of scale_arr ) {
-                let span = new ScaleSpan ( orientation )
-                span.appendTo ( scale )
-                span.inner_HTML ( el )
-            }
-        
-        }
-    }
+      scaleArr.forEach((el) => {
+        let span = new ScaleSpan(orientation);
+        span.appendTo(scale);
+        span.inner_HTML(el);        
+      })
+    }    
+  })
 }
   
-  
-export function modifyScaleInput ( parent: HTMLElement, iteration: number, iterations_arr: number[] ) {   /* Изменение инпута переключения шага  */
-    let conf_input_step: HTMLInputElement = parent.querySelector('.zdslider-panel__step')
-    conf_input_step.setAttribute ('data-steps', String ( iterations_arr ))
-    conf_input_step.setAttribute ('data-iteration', String ( iteration ))
-    conf_input_step.setAttribute ('data-current', String ( iteration ))
-    if ( iterations_arr.length != 0 ) {
-        conf_input_step.disabled = false 
-        conf_input_step.setAttribute ('max', String ( iterations_arr[0] ))
-        conf_input_step.setAttribute ('min', String ( iterations_arr[iterations_arr.length - 1] ))
-    } else {      /* Если интервалов для шкалы нет, то делаю инпут неактивным */
-        conf_input_step.disabled = true
+/* Изменение инпута переключения шага  */  
+export function modifyScaleInput (parent: HTMLElement, iteration: number, iterationsArr: number[]) {   
+    let confInputStep: HTMLInputElement = parent.querySelector('.zdslider-panel__step');
+    confInputStep.setAttribute ('data-steps', String(iterationsArr));
+    confInputStep.setAttribute ('data-iteration', String(iteration))
+    confInputStep.setAttribute ('data-current', String(iteration))
+    if (iterationsArr.length !== 0) {
+        confInputStep.disabled = false; 
+        confInputStep.setAttribute ('max', String(iterationsArr[0]));
+        confInputStep.setAttribute ('min', String(iterationsArr[iterationsArr.length - 1]));
+    } else {      
+
+        /* Если интервалов для шкалы нет, то делаю инпут неактивным */
+        confInputStep.disabled = true;
     }
-    conf_input_step.value = conf_input_step.dataset.iteration
+    confInputStep.value = confInputStep.dataset.iteration;
 }
   
