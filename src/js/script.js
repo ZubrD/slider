@@ -1,174 +1,175 @@
-// import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings } from './model.js'
-// import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from './listeners.js'
-// import { getCoords, makeScale } from './scale.js'
-// import { Config } from './config.js'
-import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings, Panel } from '../js/model.js';
+import { Ranger, Interval, Button, Scale, ScaleSpan, Division, DivisionSpan, Settings, Panel, } from '../js/model.js';
 import { changeMinListener, changeMaxListener, changeStepListener, allChecksListener } from '../js/listeners.js';
 import { getCoords, makeScale } from '../js/scale.js';
-import { configObj } from '../js/config.js';
+import { configObj, } from '../js/config.js';
 window.onload = sliderInit();
 export function sliderInit() {
-    // let config = new Config()
-    let runner_number = configObj.runner_number;
+    let runnerNumber = configObj.runner_number;
     let min = configObj.min;
     let max = configObj.max;
     let step = 1;
     let discrete = configObj.discrete;
     let orientation = configObj.orientation;
-    let scale_arrs = makeScale(min, max, step);
-    let scale_arr = scale_arrs[0]; /* Массив значений шкалы */
-    let iteration = scale_arrs[1];
-    let iterations_arr = scale_arrs[2];
+    let scaleArrs = makeScale(min, max, step);
+    /* Массив значений шкалы */
+    let scaleArr = scaleArrs[0];
+    let iteration = scaleArrs[1];
+    let iterationsArr = scaleArrs[2];
     let elements = document.querySelectorAll('.zdslider');
     if (elements.length != 0) {
-        setStructure(runner_number, min, max, discrete, orientation, scale_arr, iteration, iterations_arr); /* Создание структуры слайдера */
-        sliderPositioning(runner_number, orientation); /* Первоначальное размещение слайдера */
+        /* Создание структуры слайдера */
+        setStructure(runnerNumber, min, max, discrete, orientation, scaleArr, iteration, iterationsArr);
+        /* Первоначальное размещение слайдера */
+        sliderPositioning(runnerNumber, orientation);
     }
-    let number_of_sliders = document.querySelectorAll('.zdslider-panel');
-    for (let elem of number_of_sliders) {
-        elem.addEventListener('click', allChecksListener); /* Слушатель переключателей */
-    }
+    let numberOfSliders = document.querySelectorAll('.zdslider-panel');
+    numberOfSliders.forEach((elem) => {
+        /* Слушатель переключателей */
+        elem.addEventListener('click', allChecksListener);
+    });
 }
-export function setStructure(runners, min, max, discrete, orientation, scale_arr, iteration, iterations_arr) {
+/* Структура слайдера */
+export function setStructure(runners, min, max, discrete, orientation, scaleArr, iteration, iterationsArr) {
     let elements = document.querySelectorAll('.zdslider');
-    let counter = 1; /* Счётчик количества слайдеров для создания атрибутов */
-    let i = 0; /*  Счётчик цикла для опр-я номера ranger в массиве */
-    for (let elem of elements) {
-        if (orientation == 'horizontal') {
+    /* Счётчик количества слайдеров для создания атрибутов */
+    let counter = 1;
+    /*  Счётчик цикла для определенияя номера ranger в массиве */
+    let i = 0;
+    elements.forEach((elem) => {
+        if (orientation === 'horizontal') {
         }
-        else if (orientation == 'vertical') {
+        else if (orientation === 'vertical') {
             elem.classList.add('zdslider-vert');
         }
         let ranger = new Ranger(orientation);
         ranger.appendTo(elem);
-        // ranger.setAttribute('data-scale_length', scale_arr.length)  /* Для дискретного перемещения */
         let interval = new Interval(orientation);
-        let ranger_div = document.querySelectorAll('.ranger')[i];
-        interval.appendTo(ranger_div);
-        if (runners == 2) {
+        let rangerDiv = document.querySelectorAll('.ranger')[i];
+        interval.appendTo(rangerDiv);
+        if (runners === 2) {
             let button_1 = new Button(orientation);
             let button_2 = new Button(orientation);
             button_1.setAttribute('data-type', 'btn-first');
             button_2.setAttribute('data-type', 'btn-second');
-            button_1.appendTo(ranger_div);
-            button_2.appendTo(ranger_div);
+            button_1.appendTo(rangerDiv);
+            button_2.appendTo(rangerDiv);
         }
         else {
             let button_1 = new Button(orientation);
             button_1.setAttribute('data-type', 'btn-first');
-            button_1.appendTo(ranger_div);
+            button_1.appendTo(rangerDiv);
         }
         let division = new Division(orientation);
-        for (let el of scale_arr) {
+        scaleArr.forEach((el) => {
             let span = new DivisionSpan(orientation);
             span.appendTo(division);
-        }
+        });
         division.appendTo(elem);
         let scale = new Scale(orientation);
-        for (let el of scale_arr) {
+        scaleArr.forEach((el) => {
             let span = new ScaleSpan(orientation);
             span.appendTo(scale);
             span.inner_HTML(el);
-        }
+        });
         scale.appendTo(elem);
-        let settings = new Settings(); /* Слой для обмена данными между Моделью и Контроллером, */
+        /* Слой для обмена данными между Моделью и Контроллером, Моделью и Представлением */
+        let settings = new Settings();
         settings.setAttribute('data-inst', counter);
-        settings.setAttribute('data-runners', runners); /* Моделью и Представлением */
+        settings.setAttribute('data-runners', runners);
         settings.setAttribute('data-min', min);
         settings.setAttribute('data-max', max);
         settings.setAttribute('data-discrete', discrete);
         settings.setAttribute('data-orientation', orientation);
         settings.setAttribute('data-tip', 'no');
-        settings.setAttribute('data-scale_length', scale_arr.length); /* Для дискретного перемещения */
-        settings.setAttribute('data-btn1_coord', 0); /* Координаты первого бегуна */
-        settings.setAttribute('data-btn2_coord', ranger_div.offsetWidth); /* Координаты первого бегуна */
-        settings.setAttribute('data-width', String(ranger_div.offsetWidth));
-        settings.setAttribute('data-height', String(ranger_div.offsetHeight));
+        /* Для дискретного перемещения */
+        settings.setAttribute('data-scale_length', scaleArr.length);
+        /* Координаты первого бегуна */
+        settings.setAttribute('data-btn1_coord', 0);
+        /* Координаты второго бегуна */
+        settings.setAttribute('data-btn2_coord', rangerDiv.offsetWidth);
+        settings.setAttribute('data-width', String(rangerDiv.offsetWidth));
+        settings.setAttribute('data-height', String(rangerDiv.offsetHeight));
         let button_1_div = document.querySelectorAll('[data-type="btn-first"]')[i];
         settings.setAttribute('data-button_width', String(button_1_div.offsetWidth));
         settings.appendTo(elem.parentNode);
         let panel = new Panel();
         panel.appendTo(elem.parentNode);
-        let conf_input_min = document.querySelectorAll('.zdslider-panel__min')[i];
-        conf_input_min.setAttribute('data-min', String(min));
-        conf_input_min.setAttribute('data-max', String(max));
-        conf_input_min.value = String(min);
-        conf_input_min.addEventListener('change', changeMinListener);
-        let conf_input_max = document.querySelectorAll('.zdslider-panel__max')[i];
-        conf_input_max.setAttribute('data-min', String(min));
-        conf_input_max.setAttribute('data-max', String(max));
-        conf_input_max.value = String(max);
-        conf_input_max.addEventListener('change', changeMaxListener);
-        let conf_input_step = document.querySelectorAll('.zdslider-panel__step')[i];
-        conf_input_step.setAttribute('data-steps', String(iterations_arr));
-        conf_input_step.setAttribute('data-iteration', String(iteration));
-        conf_input_step.setAttribute('data-current', String(iteration));
-        if (iterations_arr.length != 0) {
-            conf_input_step.setAttribute('max', String(iterations_arr[0]));
-            conf_input_step.setAttribute('min', String(iterations_arr[iterations_arr.length - 1]));
+        let confInputMin = document.querySelectorAll('.zdslider-panel__min')[i];
+        confInputMin.setAttribute('data-min', String(min));
+        confInputMin.setAttribute('data-max', String(max));
+        confInputMin.value = String(min);
+        confInputMin.addEventListener('change', changeMinListener);
+        let confInputMax = document.querySelectorAll('.zdslider-panel__max')[i];
+        confInputMax.setAttribute('data-min', String(min));
+        confInputMax.setAttribute('data-max', String(max));
+        confInputMax.value = String(max);
+        confInputMax.addEventListener('change', changeMaxListener);
+        let confInputStep = document.querySelectorAll('.zdslider-panel__step')[i];
+        confInputStep.setAttribute('data-steps', String(iterationsArr));
+        confInputStep.setAttribute('data-iteration', String(iteration));
+        confInputStep.setAttribute('data-current', String(iteration));
+        if (iterationsArr.length !== 0) {
+            confInputStep.setAttribute('max', String(iterationsArr[0]));
+            confInputStep.setAttribute('min', String(iterationsArr[iterationsArr.length - 1]));
         }
-        else { /* Если интервалов для шкалы нет, то делаю инпут неактивным */
-            conf_input_step.disabled = true;
+        else {
+            /* Если интервалов для шкалы нет, то делаю инпут неактивным */
+            confInputStep.disabled = true;
         }
-        conf_input_step.value = conf_input_step.dataset.iteration;
-        conf_input_step.addEventListener('input', changeStepListener);
-        counter++;
-        i++;
-    }
+        confInputStep.value = confInputStep.dataset.iteration;
+        confInputStep.addEventListener('input', changeStepListener);
+        counter += 1;
+        i += 1;
+    });
 }
+/* Первоначальное размещение слайдера */
 export function sliderPositioning(runners, orientation) {
     let elements = document.querySelectorAll('.zdslider');
     let i = 0;
-    for (let elem of elements) {
+    elements.forEach((elem) => {
         let ranger = document.querySelectorAll('.ranger')[i];
         let interval = document.querySelectorAll('.ranger__interval')[i];
-        let button_1 = document.querySelectorAll('[data-type="btn-first"]')[i];
+        let button1 = document.querySelectorAll('[data-type="btn-first"]')[i];
         let config = document.querySelectorAll('.zdslider-config')[i];
-        if (orientation == 'horizontal') {
-            // interval.style.width = (ranger.offsetWidth) + 'px';
+        if (orientation === 'horizontal') {
             interval.style.width = (config.dataset.width) + 'px';
         }
-        else if (orientation == 'vertical') {
-            // interval.style.height = (ranger.offsetHeight) - 5 + 'px';   /* 5 - это ширина риски шкалы */
-            interval.style.height = Number(config.dataset.height) - 5 + 'px'; /* 5 - это ширина риски шкалы */
+        else if (orientation === 'vertical') {
+            /* 5 - это ширина риски шкалы */
+            interval.style.height = Number(config.dataset.height) - 5 + 'px';
         }
-        if (runners == 1) {
+        if (runners === 1) {
             if (orientation == 'horizontal') {
-                // button_1.style.marginLeft = (ranger.offsetWidth-button_1.offsetWidth) + 2 + 'px';
-                button_1.style.marginLeft = (Number(config.dataset.width) - Number(config.dataset.button_width)) + 2 + 'px';
+                button1.style.marginLeft = (Number(config.dataset.width) - Number(config.dataset.button_width)) + 2 + 'px';
                 initialButtonPosition(i, runners);
             }
             else if (orientation == 'vertical') {
-                button_1.style.marginTop = 0 + 'px';
+                button1.style.marginTop = 0 + 'px';
             }
         }
-        if (runners == 2) {
-            if (orientation == 'horizontal') {
-                button_1.style.marginLeft = '0px';
-                let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i];
-                // button_2.style.marginLeft = (ranger.offsetWidth-button_2.offsetWidth) + 'px'; 
-                button_2.style.marginLeft = (Number(config.dataset.width) - Number(config.dataset.button_width)) + 'px';
-                initialButtonPosition(i, runners); /* Исходные позиции бегунов сохраняю в конфиге */
+        if (runners === 2) {
+            if (orientation === 'horizontal') {
+                button1.style.marginLeft = '0px';
+                let button2 = document.querySelectorAll('[data-type="btn-second"]')[i];
+                button2.style.marginLeft = (Number(config.dataset.width) - Number(config.dataset.button_width)) + 'px';
+                /* Исходные позиции бегунов сохраняю в конфиге */
+                initialButtonPosition(i, runners);
             }
-            else if (orientation == 'vertical') {
-                // button_1.style.marginTop = ranger.offsetHeight + 'px';
-                button_1.style.marginTop = config.dataset.height + 'px';
-                let button_2 = document.querySelectorAll('[data-type="btn-second"]')[i];
-                button_2.style.marginTop = 0 + 'px';
+            else if (orientation === 'vertical') {
+                button1.style.marginTop = config.dataset.height + 'px';
+                let button2 = document.querySelectorAll('[data-type="btn-second"]')[i];
+                button2.style.marginTop = 0 + 'px';
             }
         }
-        i++;
-    }
+        i += 1;
+    });
 }
 export function initialButtonPosition(i, runners) {
     let config = document.querySelectorAll('.zdslider-config')[i];
-    // let ranger = document.querySelectorAll('.ranger')[i] as HTMLBRElement
     let btn1 = document.querySelectorAll('[data-type="btn-first"]')[i];
     let initBtn1Pos = getCoords(btn1);
     config.dataset.btn1_init_pos = String(initBtn1Pos.left);
-    // config.dataset.width = String ( ranger.offsetWidth )
-    // config.dataset.height = String ( ranger.offsetHeight )
-    if (runners == 2) {
+    if (runners === 2) {
         let btn2 = document.querySelectorAll('[data-type="btn-second"]')[i];
         let initBtn2Pos = getCoords(btn2);
         config.dataset.btn2_init_pos = initBtn2Pos.left;
