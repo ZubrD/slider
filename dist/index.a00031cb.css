@@ -1,0 +1,215 @@
+@charset "UTF-8";
+.zdslider {
+  max-width: 500px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  -ms-grid-row-align: center;
+  align-self: center;
+  position: relative;
+  margin-right: 300px;
+  /* Потом убрать */
+  margin-left: 30px;
+}
+.zdslider-panel {
+  width: 270px;
+  height: 150px;
+  border: 1px solid red;
+  -ms-grid-row-align: center;
+  align-self: center;
+  margin-left: 30px;
+}
+.zdslider-wrapper {
+  margin-bottom: 20px;
+}
+.ranger {
+  width: 100%;
+  height: 10px;
+  border-radius: 4px;
+  background-color: #ddd;
+  position: relative;
+}
+.ranger__button {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 25px;
+  cursor: move;
+  transform: translateY(-50%);
+  border: none;
+  background-color: #999;
+  z-index: 10;
+}
+.ranger__button::after {
+  display: none;
+  width: 30px;
+  height: 30px;
+  content: attr(data-tip);
+  box-sizing: border-box;
+  padding-top: 7px;
+  border: 1px solid green;
+  top: -35px;
+  left: -10px;
+  position: absolute;
+}
+.ranger__button-tip::after {
+  display: block;
+  width: 30px;
+  height: 30px;
+  content: attr(data-tip);
+  box-sizing: border-box;
+  padding-top: 7px;
+  border: 1px solid green;
+  top: -35px;
+  left: -10px;
+  position: absolute;
+}
+.ranger__interval {
+  position: absolute;
+  height: 5px;
+  width: 0px;
+  margin-top: 3px;
+  border: none;
+  background-color: #559933;
+}
+.ranger__scale {
+  margin-top: 10px;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.ranger__scale-span {
+  border: 1px solid gray;
+  position: relative;
+}
+.ranger__scale-division {
+  position: absolute;
+  margin-top: -14px;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.ranger__scale-division-span {
+  width: 2px;
+  height: 20px;
+  background-color: salmon;
+}
+.zdslider-vert {
+  margin-left: 70px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  align-self: center;
+  display: flex;
+}
+.zdslider-vert-config {
+  width: 200px;
+  height: 150px;
+  border: 1px solid red;
+  -ms-grid-row-align: center;
+  align-self: center;
+  margin-left: 30px;
+}
+.zdslider-vert-wrapper {
+  display: flex;
+  margin-bottom: 20px;
+}
+.ranger-vert {
+  width: 10px;
+  height: 500px;
+  border-radius: 4px;
+  background-color: #ddd;
+  position: relative;
+}
+.ranger-vert__button {
+  position: absolute;
+  top: 0;
+  left: -9px;
+  width: 25px;
+  height: 10px;
+  cursor: move;
+  transform: translateY(-50%);
+  border: none;
+  background-color: #999;
+  z-index: 10;
+}
+.ranger-vert__button::after {
+  display: none;
+  width: 30px;
+  height: 30px;
+  content: attr(data-tip);
+  box-sizing: border-box;
+  padding-top: 7px;
+  border: 1px solid green;
+  top: -35px;
+  left: -10px;
+  position: absolute;
+}
+.ranger-vert__button-tip::after {
+  display: block;
+  width: 30px;
+  height: 30px;
+  content: attr(data-tip);
+  box-sizing: border-box;
+  padding-top: 7px;
+  border: 1px solid green;
+  top: -10px;
+  left: -38px;
+  position: absolute;
+}
+.ranger-vert__interval {
+  position: absolute;
+  height: 0px;
+  width: 5px;
+  margin-top: 3px;
+  border: none;
+  background-color: #559933;
+}
+.ranger-vert__scale {
+  margin-top: 0px;
+  margin-left: 10px;
+  height: 500px;
+  width: 30px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+.ranger-vert__scale-span {
+  border: 1px solid gray;
+  position: relative;
+}
+.ranger-vert__scale-division {
+  position: absolute;
+  flex-direction: column-reverse;
+  margin-top: 0px;
+  margin-left: -5px;
+  height: 500px;
+  width: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.ranger-vert__scale-division-span {
+  width: 20px;
+  height: 2px;
+  background-color: salmon;
+}
+.block {
+  border: 1px dashed green;
+  max-width: 1100px;
+  height: 300px;
+  margin-right: 300px;
+}
+.subblock {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.square {
+  min-width: 100px;
+  height: 100%;
+  background-color: #69d0ff;
+  border: 1px solid black;
+}
+
+/*# sourceMappingURL=index.a00031cb.css.map */
